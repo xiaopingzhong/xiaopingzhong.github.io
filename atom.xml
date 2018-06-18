@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-17T11:24:00.055Z</updated>
+  <updated>2018-06-18T13:06:09.701Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,47 +17,20 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2018/06/17/%E8%AF%AD%E4%B9%89%E7%BD%91%E6%8A%80%E6%9C%AF%E6%A0%88%E7%9A%84%E7%90%86%E8%A7%A3/"/>
-    <id>http://yoursite.com/2018/06/17/语义网技术栈的理解/</id>
-    <published>2018-06-17T15:27:07.959Z</published>
-    <updated>2018-06-17T11:24:00.055Z</updated>
+    <title>标签测试</title>
+    <link href="http://yoursite.com/2018/06/18/%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%95/"/>
+    <id>http://yoursite.com/2018/06/18/标签测试/</id>
+    <published>2018-06-18T13:05:46.864Z</published>
+    <updated>2018-06-18T13:06:09.701Z</updated>
     
     <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;语义网技术栈的理解&quot;&gt;&lt;a href=&quot;#语义网技术栈的理解&quot; class=&quot;headerlink&quot; title=&quot;语义网技术栈的理解&quot;&gt;&lt;/a&gt;语义网技术栈的理解&lt;/h1&gt;&lt;p&gt;先上图&lt;/p&gt;
-&lt;p&gt;&lt;img
-        
-      
     
     </summary>
     
     
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2018/06/17/hello-world/"/>
-    <id>http://yoursite.com/2018/06/17/hello-world/</id>
-    <published>2018-06-17T13:39:11.989Z</published>
-    <updated>2018-06-18T05:11:46.722Z</updated>
+      <category term="Testing" scheme="http://yoursite.com/tags/Testing/"/>
     
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;KBQA的工作流程-基于检索的方法&quot;&gt;&lt;a href=&quot;#KBQA的工作流程-基于检索的方法&quot; class=&quot;headerlink&quot; title=&quot;KBQA的工作流程(基于检索的方法)&quot;&gt;&lt;/a&gt;KBQA的工作流程(基于检索的方法)&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
+      <category term="Another Tag" scheme="http://yoursite.com/tags/Another-Tag/"/>
     
   </entry>
   
