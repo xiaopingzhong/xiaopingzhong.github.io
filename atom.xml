@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>iVEGA</title>
+  
+  <subtitle>һ��Сȷ�ҵĵط�</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-06-17T11:24:00.055Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>zhongxiaoping</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/06/17/%E8%AF%AD%E4%B9%89%E7%BD%91%E6%8A%80%E6%9C%AF%E6%A0%88%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/06/17/语义网技术栈的理解/</id>
+    <published>2018-06-17T15:27:07.959Z</published>
+    <updated>2018-06-17T11:24:00.055Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;语义网技术栈的理解&quot;&gt;&lt;a href=&quot;#语义网技术栈的理解&quot; class=&quot;headerlink&quot; title=&quot;语义网技术栈的理解&quot;&gt;&lt;/a&gt;语义网技术栈的理解&lt;/h1&gt;&lt;p&gt;先上图&lt;/p&gt;
+&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/06/17/hello-world/"/>
+    <id>http://yoursite.com/2018/06/17/hello-world/</id>
+    <published>2018-06-17T13:39:11.989Z</published>
+    <updated>2018-06-17T13:39:11.990Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
