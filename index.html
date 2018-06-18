@@ -321,6 +321,275 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/标签测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iVEGA">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iVEGA">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/18/标签测试/" itemprop="url">标签测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T21:05:46+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/18/标签测试/" class="leancloud_visitors" data-flag-title="标签测试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,305字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="语义网技术栈的理解"><a href="#语义网技术栈的理解" class="headerlink" title="语义网技术栈的理解"></a>语义网技术栈的理解</h1><p>先上图</p>
+<p><img src="https://img-blog.csdn.net/20180615092543730?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Zic3hnaHZ1ZGs=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<h2 id="一-各层概念"><a href="#一-各层概念" class="headerlink" title="一.各层概念:"></a>一.各层概念:</h2><p>阐述之前,先说下资源的概念:</p>
+<p>​    可以是任意<strong>拥有URI(这是最重要的)</strong>的对象,人,物体,概念,文档,文件,音频.等等</p>
+<p>​    URI:统一资源标识符</p>
+<h3 id="1-1-URI与UNICODE"><a href="#1-1-URI与UNICODE" class="headerlink" title="1.1 URI与UNICODE"></a>1.1 URI与UNICODE</h3><p>UNICODE:规定了资源的编码形式;</p>
+<p>URI规定了每个资源的唯一标识符.</p>
+<h3 id="1-2XML"><a href="#1-2XML" class="headerlink" title="1.2XML"></a>1.2XML</h3><p>​    XML规定了资源的内容及其数据结构(XML tree,标签来描述),最重要的是没有语义的描述能力.(就是不知道资源之间的关系是怎样的).</p>
+<p>​    同时XML的标签可以人为定义,这就导致不能很好地被计算机处理,为了规范化标签,增强可处理性,所以推出了xml schema来规定所拥有的标签,形式为<a href="xs:schema" target="_blank" rel="noopener">xs:schema</a>&lt;/xs:schema&gt;</p>
+<p>​    但是由于标签的数量减少了,就很容易带来重复,这就引入了了命名空间的概念,xmlns (namespace–ns),在不同的命名空间下,同名的标签不受影响.形式为:xmlns:前缀=地址.具体代码如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">xs:schema</span> <span class="attr">xmlns:xs</span>=<span class="string">"http://www.w3.org/2001/XMLSchema"</span>&gt;</span> <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"note"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">xs:sequence</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"to"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"from"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"body"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">xs:sequence</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xs:element</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xs:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-3-RDF"><a href="#1-3-RDF" class="headerlink" title="1.3 RDF"></a>1.3 RDF</h3><p>RDF: 主要是用来描述资源之间的关系.采用SPO三元组 形式. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">subject predict object</span><br><span class="line">#subject 与object是节点,节点可以是资源或描述资源的属性值(不是属性),predict是关系:只要能够描述两个节点的关系都可以称之为关系/属性</span><br><span class="line">#(资源，属性，属性值/资源)</span><br></pre></td></tr></table></figure>
+<p>​    RDF资源描述框架,是一种图模型,数据模型,不是具体的数据类型.主要有三部分构成:</p>
+<h4 id="RDF-data-model"><a href="#RDF-data-model" class="headerlink" title="RDF  data model"></a>RDF  data model</h4><p>​    就是单纯描述资源的方式:SPO三元组形式,但是没有语义信息</p>
+<h4 id="RDF-schema"><a href="#RDF-schema" class="headerlink" title="RDF schema"></a>RDF schema</h4><p>​    在RDF data model上增加了语义信息,就是描述资源的关系,<strong>方式就是增加资源的属性及其资源所属的类的描述.</strong>具体方法如下:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">概念</th>
+<th style="text-align:center">语法形式</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Class(类)</td>
+<td style="text-align:center">C rdf:type rdfs:Class</td>
+<td style="text-align:center">C(资源)是一个RDF类</td>
+</tr>
+<tr>
+<td style="text-align:center">Property(类)</td>
+<td style="text-align:center">P rdf:type rdf:Property</td>
+<td style="text-align:center">P(资源)是一个RDF属性</td>
+</tr>
+<tr>
+<td style="text-align:center">type(属性)</td>
+<td style="text-align:center">I rdf:type C</td>
+<td style="text-align:center">I(资源)是C(类)的实例</td>
+</tr>
+<tr>
+<td style="text-align:center">subClassOf(属性)</td>
+<td style="text-align:center">C1 rdfs:subClassOf C2</td>
+<td style="text-align:center">C1 (类)是C2(类)的子类</td>
+</tr>
+<tr>
+<td style="text-align:center">subPropertyOf (属性)</td>
+<td style="text-align:center">P1 rdfs:subPropertyOf P2</td>
+<td style="text-align:center">P1(属性)是P2(属性)的子属性</td>
+</tr>
+<tr>
+<td style="text-align:center">domain (属性)</td>
+<td style="text-align:center">P rdfs:domain C</td>
+<td style="text-align:center">P(属性)的定义域是C(类)</td>
+</tr>
+<tr>
+<td style="text-align:center">range (属性)</td>
+<td style="text-align:center">P rdfs:range C</td>
+<td style="text-align:center">P(属性)的值域是C(类)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="RDF-sytanx"><a href="#RDF-sytanx" class="headerlink" title="RDF sytanx"></a>RDF sytanx</h4><p>  就是讲如何将RDF数据存入到计算机当中,也就是我们所说的RDF序列化方法,这就是RDF   sytanx的作用.主要有如下集中方式:</p>
+<ul>
+<li><p>JSON-LD:“JSON for Linking Data”，用键值对的方式来存储RDF数据,基于json基础扩展的一种语法,以键值对的形式来存储RDF</p>
+</li>
+<li><p>RDFA:将RDF数据嵌入到网页中</p>
+</li>
+<li><p>RDF/XML:用XML来存储RDF数据,但是由于XML格式冗长,阅读不方便不推荐</p>
+</li>
+<li><p>N-Triples，即用多个三元组来表示RDF数据集，是最直观的表示方法。在文件中，每一行表示一个三元组，方便机器解析和处理。开放领域知识图谱<a href="https://link.zhihu.com/?target=http%3A//wiki.dbpedia.org/" target="_blank" rel="noopener">DBpedia</a>通常是用这种格式来发布数据的。</p>
+</li>
+<li><p>Turtle, 应该是使用得最多的一种RDF序列化方式了。它比RDF/XML紧凑，且可读性比N-Triples好.</p>
+<p>turtle语法形式如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@prefix person: &lt;http://www.kg.com/person/&gt; .</span><br><span class="line">@prefix place: &lt;http://www.kg.com/place/&gt; .</span><br><span class="line">@prefix : &lt;http://www.kg.com/ontology/&gt; .</span><br><span class="line"></span><br><span class="line">person:1 :chineseName "罗纳尔多·路易斯·纳萨里奥·德·利马"^^string.</span><br><span class="line">person:1 :career "足球运动员"^^string.</span><br><span class="line">person:1 :fullName "Ronaldo Luís Nazário de Lima"^^string.</span><br><span class="line">person:1 :birthDate "1976-09-18"^^date.</span><br><span class="line">person:1 :height "180"^^int. </span><br><span class="line">person:1 :weight "98"^^int.</span><br><span class="line">person:1 :nationality "巴西"^^string. </span><br><span class="line">person:1 :hasBirthPlace place:10086.</span><br><span class="line">place:10086 :address "里约热内卢"^^string.</span><br><span class="line">place:10086 :coordinate "-22.908333, -43.196389"^^string.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-4-RDF-schema-与SPARQL"><a href="#1-4-RDF-schema-与SPARQL" class="headerlink" title="1.4.RDF schema 与SPARQL"></a>1.4.RDF schema 与SPARQL</h3><p> RDF schema:主要还是为了增强资源关系的描述能力(上面讲了),</p>
+<p>SPARQL是一个查询图,RDF是一个存储图,是查询RDF数据的语言.</p>
+<h3 id="1-5-OWL-RIF-SWRL"><a href="#1-5-OWL-RIF-SWRL" class="headerlink" title="1.5 OWL ,RIF/SWRL"></a>1.5 OWL ,RIF/SWRL</h3><p>​    OWL:在RDF schema的基础上,增加了对属性及其类的约束,也就是对资源的属性及其类增加了性质,这样能实现两个功能:分类,推理</p>
+<ul>
+<li>实现对概念的分类,因为根据属性及类的约束,容易确定概念的边界</li>
+</ul>
+<ul>
+<li>有利于RIF(规则交换)–实现推理,因为某些属性含有某些性质,例如:传递性.</li>
+</ul>
+<h3 id="1-6-Logic-Proof-Trust"><a href="#1-6-Logic-Proof-Trust" class="headerlink" title="1. 6 Logic + Proof + Trust"></a>1. 6 Logic + Proof + Trust</h3><p>分别对应逻辑层,验证层,信任层</p>
+<ul>
+<li>逻辑层:提供公理及其规则,实现逻辑操作.</li>
+</ul>
+<ul>
+<li>验证层:则是对推理结果进行验证</li>
+</ul>
+<ul>
+<li>信任层:根据验证层的结果和一些数字签名,建立信任</li>
+</ul>
+<h3 id="1-7-interaction"><a href="#1-7-interaction" class="headerlink" title="1.7 interaction"></a>1.7 interaction</h3><p>​    就是语义网的交互层,通过实现各种应用来进行交互</p>
+<h3 id="1-8-参考"><a href="#1-8-参考" class="headerlink" title="1.8 参考"></a>1.8 参考</h3><p><a href="https://blog.csdn.net/hohaizx/article/details/80043623" target="_blank" rel="noopener">https://blog.csdn.net/hohaizx/article/details/80043623</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/32122644" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32122644</a></p>
+<p><a href="http://blog.sina.com.cn/s/blog_541caaee0100jjmc.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_541caaee0100jjmc.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+   
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -371,7 +640,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -384,7 +653,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -469,7 +738,7 @@
     </span>
   <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共0字</span>
+  <span class="post-count">博客全站共2.6k字</span>
 </div>
   
 </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-18T13:06:09.701Z</updated>
+  <updated>2018-06-18T13:40:16.833Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>语义网技术栈的理解</title>
+    <link href="http://yoursite.com/2018/06/18/%E8%AF%AD%E4%B9%89%E7%BD%91%E6%8A%80%E6%9C%AF%E6%A0%88%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/06/18/语义网技术栈的理解/</id>
+    <published>2018-06-18T13:37:12.238Z</published>
+    <updated>2018-06-18T13:40:16.833Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;语义网技术栈的理解&quot;&gt;&lt;a href=&quot;#语义网技术栈的理解&quot; class=&quot;headerlink&quot; title=&quot;语义网技术栈的理解&quot;&gt;&lt;/a&gt;语义网技术栈的理解&lt;/h1&gt;&lt;p&gt;先上图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdn.net/20180615092543730?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Zic3hnaHZ1ZGs=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;一-各层概念&quot;&gt;&lt;a href=&quot;#一-各层概念&quot; class=&quot;headerlink&quot; title=&quot;一.各层概念:&quot;&gt;&lt;/a&gt;一.各层概念:&lt;/h2&gt;&lt;p&gt;阐述之前,先说下资源的概念:&lt;/p&gt;
+&lt;p&gt;​    可以是任意&lt;strong&gt;拥有URI(这是最重要的)&lt;/strong&gt;的对象,人,物体,概念,文档,文件,音频.等等&lt;/p&gt;
+&lt;p&gt;​    URI:统一资源标识符&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="知识图谱" scheme="http://yoursite.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+      <category term="综述" scheme="http://yoursite.com/tags/%E7%BB%BC%E8%BF%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>标签测试</title>
     <link href="http://yoursite.com/2018/06/18/%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%95/"/>
     <id>http://yoursite.com/2018/06/18/标签测试/</id>
     <published>2018-06-18T13:05:46.864Z</published>
-    <updated>2018-06-18T13:06:09.701Z</updated>
+    <updated>2018-06-18T13:36:32.082Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;语义网技术栈的理解&quot;&gt;&lt;a href=&quot;#语义网技术栈的理解&quot; class=&quot;headerlink&quot; title=&quot;语义网技术栈的理解&quot;&gt;&lt;/a&gt;语义网技术栈的理解&lt;/h1&gt;&lt;p&gt;先上图&lt;/p&gt;
+&lt;p&gt;&lt;img
+        
+      
     
     </summary>
     
