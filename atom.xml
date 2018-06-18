@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>iVEGA</title>
   
-  <subtitle>һ��Сȷ�ҵĵط�</subtitle>
+  <subtitle>A Little Lucky Place</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>zhongxiaoping</name>
+    <name>iVEGA</name>
     
   </author>
   
@@ -40,11 +40,11 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
+    <title></title>
     <link href="http://yoursite.com/2018/06/17/hello-world/"/>
     <id>http://yoursite.com/2018/06/17/hello-world/</id>
     <published>2018-06-17T13:39:11.989Z</published>
-    <updated>2018-06-17T13:39:11.990Z</updated>
+    <updated>2018-06-18T05:11:46.722Z</updated>
     
     <summary type="html">
     
@@ -52,7 +52,7 @@
       
         
         
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+          &lt;h1 id=&quot;KBQA的工作流程-基于检索的方法&quot;&gt;&lt;a href=&quot;#KBQA的工作流程-基于检索的方法&quot; class=&quot;headerlink&quot; title=&quot;KBQA的工作流程(基于检索的方法)&quot;&gt;&lt;/a&gt;KBQA的工作流程(基于检索的方法)&lt;/h1&gt;&lt;h2
         
       
     
