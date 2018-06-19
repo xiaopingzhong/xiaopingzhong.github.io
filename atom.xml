@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-19T03:35:52.497Z</updated>
+  <updated>2018-06-19T03:39:01.414Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>network&#39;</title>
-    <link href="http://yoursite.com/2018/06/19/network/"/>
-    <id>http://yoursite.com/2018/06/19/network/</id>
-    <published>2018-06-19T02:49:39.000Z</published>
-    <updated>2018-06-19T03:35:52.497Z</updated>
+    <title>语义网技术栈</title>
+    <link href="http://yoursite.com/2018/06/19/%E8%AF%AD%E4%B9%89%E7%BD%91%E6%8A%80%E6%9C%AF%E6%A0%88/"/>
+    <id>http://yoursite.com/2018/06/19/语义网技术栈/</id>
+    <published>2018-06-19T03:37:21.000Z</published>
+    <updated>2018-06-19T03:39:01.414Z</updated>
     
     <summary type="html">
     
@@ -36,7 +36,7 @@
     </summary>
     
     
-      <category term="-语义网技术栈 -综述" scheme="http://yoursite.com/tags/%E8%AF%AD%E4%B9%89%E7%BD%91%E6%8A%80%E6%9C%AF%E6%A0%88-%E7%BB%BC%E8%BF%B0/"/>
+      <category term="-语义网 -知识图谱" scheme="http://yoursite.com/tags/%E8%AF%AD%E4%B9%89%E7%BD%91-%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
   </entry>
   
