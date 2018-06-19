@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[语义网]]></title>
-    <url>%2F2018%2F06%2F19%2F%E8%AF%AD%E4%B9%89%E7%BD%91%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <title><![CDATA[语义网技术栈]]></title>
+    <url>%2F2018%2F06%2F19%2F%E8%AF%AD%E4%B9%89%E7%BD%91%E6%8A%80%E6%9C%AF%E6%A0%88%2F</url>
+    <content type="text"><![CDATA[技术栈示意图见下图 一.各层概念:阐述之前,先说下资源的概念: 可以是任意拥有URI(这是最重要的)的对象,人,物体,概念,文档,文件,音频.等等 URI:统一资源标识符 1.1 URI与UNICODE:1234567891011&lt;?xml version="1.0"?&gt;&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt; &lt;xs:element name="note"&gt; &lt;xs:complexType&gt; &lt;xs:sequence&gt; &lt;xs:element name="to" type="xs:string"/&gt; &lt;xs:element name="from" type="xs:string"/&gt; &lt;xs:element name="body" type="xs:string"/&gt; &lt;/xs:sequence&gt; &lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;/xs:schema&gt;]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
       <tags>
-        <tag>-语义网 -综述</tag>
+        <tag>语义网</tag>
+        <tag>综述</tag>
       </tags>
   </entry>
   <entry>
