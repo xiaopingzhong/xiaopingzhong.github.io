@@ -1,10 +1,10 @@
+
 language: node_js
 node_js: stable
 
 # S: Build Lifecycle
 install:
   - npm install
-
 
 #before_script:
  # - npm install -g gulp
@@ -24,7 +24,7 @@ after_script:
 
 branches:
   only:
-    - blog-source
+    - hexo
 env:
  global:
    - GH_REF: github.com/xiaopingzhong/xiaopingzhong.github.io.git
