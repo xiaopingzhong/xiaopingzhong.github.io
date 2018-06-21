@@ -26,4 +26,4 @@ branches:
     - hexo
 env:
  global:
- - GH_REF: git@github.com:xiaopingzhong/xiaopingzhong.github.io.git
+ - GH_REF: github.com:xiaopingzhong/xiaopingzhong.github.io.git
