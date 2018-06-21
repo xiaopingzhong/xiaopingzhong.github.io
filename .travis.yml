@@ -20,7 +20,7 @@ after_script:
   - git config user.email "zhongxiaoping@tju.edu.cn"
   - git add .
   - git commit -m "Update docs"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" hexo:hexo
 # E: Build LifeCycle
 
 branches:
