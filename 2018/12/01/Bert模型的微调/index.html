@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>Bert模型的微调 | iVEGA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="本文主要大概讲述了BERT模型的基本原理,BERT是超多参数和超大数据训练得到的预训练模型,因此模型复杂度比较高,并且可移植性比较好,因此就有了微调的环节,本文重点讲述微调的具体步骤,便于日后进行场景的转换.">
+<meta name="keywords" content="BERT,微调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bert模型的微调">
+<meta property="og:url" content="http://yoursite.com/2018/12/01/Bert模型的微调/index.html">
+<meta property="og:site_name" content="iVEGA">
+<meta property="og:description" content="本文主要大概讲述了BERT模型的基本原理,BERT是超多参数和超大数据训练得到的预训练模型,因此模型复杂度比较高,并且可移植性比较好,因此就有了微调的环节,本文重点讲述微调的具体步骤,便于日后进行场景的转换.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201133406.jpg">
+<meta property="og:updated_time" content="2018-12-01T07:10:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bert模型的微调">
+<meta name="twitter:description" content="本文主要大概讲述了BERT模型的基本原理,BERT是超多参数和超大数据训练得到的预训练模型,因此模型复杂度比较高,并且可移植性比较好,因此就有了微调的环节,本文重点讲述微调的具体步骤,便于日后进行场景的转换.">
+<meta name="twitter:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201133406.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="../../../../css/images/favicon.png">
+    
+    <link rel="stylesheet" href="../../../../libs/song-ke-fan/styles.css">
+    <link rel="stylesheet" href="../../../../libs/shui-yun/styles.css">
+    <link rel="stylesheet" href="../../../../libs/deng-xian/styles.css">
+    <link rel="stylesheet" href="../../../../libs/Microsoft-JhengHei/styles.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="../../../../libs/open-sans/styles.css">
+    <link rel="stylesheet" href="../../../../libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="../../../../css/style.css">
+
+    <script src="../../../../libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="../../../../libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="../../../../libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+
+
+</head>
+
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="../../../../index.html" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">iVEGA</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="../../../../.">首页</a>
+                
+                    <a class="main-nav-link" href="../../../../archives">归档</a>
+                
+                    <a class="main-nav-link" href="../../../../categories">分类</a>
+                
+                    <a class="main-nav-link" href="../../../../tags">标签</a>
+                
+                    <a class="main-nav-link" href="../../../../about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="../../../../css/images/avatar.png">
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '../../../../content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="../../../../js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="../../../../.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="../../../../css/images/avatar.png">
+            <h2 id="name">iVEGA</h2>
+            <h3 id="title">一个小确幸的地方</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>天津大学, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/xiaopingzhong/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                96
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                145
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/xiaopingzhong/" target="_blank" title="github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://weibo.com/u/5124024867" target="_blank" title="weibo">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://blog.csdn.net/fbsxghvudk" target="_blank" title="linux">
+                            <i class="fab fa-linux"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://mail.tju.edu.cn" target="_blank" title="angellist">
+                            <i class="fab fa-angellist"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Bert模型的微调" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201133406.jpg" class="article-banner">
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Bert模型的微调
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="">
+            <time datetime="2018-12-01T05:27:05.000Z" itemprop="datePublished">2018-12-01</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/深度学习/优化/">优化</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="../../../../tags/BERT/">BERT</a>, <a class="tag-link" href="../../../../tags/微调/">微调</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>　　本文主要大概讲述了BERT模型的基本原理,BERT是超多参数和超大数据训练得到的预训练模型,因此模型复杂度比较高,并且可移植性比较好,因此就有了微调的环节,本文重点讲述微调的具体步骤,便于日后进行场景的转换.<a id="more"></a></p>
+<hr>
+<!-- toc -->
+<hr>
+<h1 id="一-概述"><a href="#一-概述" class="headerlink" title="一.概述"></a>一.概述</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201110547.png" alt="BERT模型架构"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201110614.png" alt="BERT模型的输入部分"><br>　　今年是迁移学习进步比较大的一年，典型的代表就是BERT模型,BERT模型就是Bidirectional Encoder Representation from Transformers，即Transformer的双向编码,通过超大数据、巨大模型、和极大的计算开销训练而成.就是一个预训练,后期通过微调(Fine-Tuning)来适应不同的NLP任务,其主要思想就是通过双向编码来理解文本的语义(词与词之间的关系)–<strong>输入主要有三个部分</strong>:词语本身的表示,词的位置信息,还有一个词在句子中的表示,三个相加构成BERT模型的输入.之后通过双向编码(也就是同时利用当前位置前面的词和后面的词两部分信息),同时借助随机遮掩的方法,增加不确定,提高模型的复杂度,加上借助超大数据集,平衡数据和模型的关系,最终得到一个预训练的模型.其实就是得到了一个提取文本特征的编码器,这个其实就是迁移学习的典型体现:实现了较为复杂的特征提取,之后根据自己的需求,编写对应的具体的NLP任务(一般设置好数据格式和数据的读写即可),之后进行调试超参数,得到一个较高准确率的解码器,这个就是BERT模型微调的过程<br>　　因为BERT模型已经有训练好的中文模型,因此我们就没有必要再次进行预训练,因为耗时非常大,因此我们就可以根据这个预训练的模型进行微调,实现模型应用场景的迁移(也就是迁移学习的思想)<br>　　本文以分类任务的迁移进行说明.因此主要修改地方为:run_classifier.py</p>
+<h1 id="二-代码解析"><a href="#二-代码解析" class="headerlink" title="二.代码解析"></a>二.代码解析</h1><h2 id="2-1-主函数部分："><a href="#2-1-主函数部分：" class="headerlink" title="2.1 主函数部分："></a>2.1 主函数部分：</h2><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">  <span class="comment"># 模型的输入文件地址/目录,之后有专门的方法读取文件也就是Processor做的事情</span></span><br><span class="line">  <span class="keyword">flags</span>.mark_flag_as_required(<span class="string">"input_file"</span>)</span><br><span class="line">  <span class="comment"># 模型的配置文件的路径</span></span><br><span class="line">  <span class="keyword">flags</span>.mark_flag_as_required(<span class="string">"bert_config_file"</span>)</span><br><span class="line">  <span class="comment"># 模型的输出文件的路径</span></span><br><span class="line">  <span class="keyword">flags</span>.mark_flag_as_required(<span class="string">"output_dir"</span>)</span><br><span class="line">  <span class="comment"># 模型运行</span></span><br><span class="line">  tf.app.run()</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-任务名及其方法的映射"><a href="#2-2-任务名及其方法的映射" class="headerlink" title="2.2 任务名及其方法的映射"></a>2.2 任务名及其方法的映射</h2><p>　　以字典的形式完成映射<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 任务的名称与任务方法名</span></span><br><span class="line"> processors = &#123;</span><br><span class="line">     <span class="string">"cola"</span>: ColaProcessor,</span><br><span class="line">     <span class="string">"mnli"</span>: MnliProcessor,</span><br><span class="line">     <span class="string">"mrpc"</span>: MrpcProcessor,</span><br><span class="line">     <span class="string">"xnli"</span>: XnliProcessor,</span><br><span class="line">     ＃自定义的方法</span><br><span class="line">     <span class="string">"vega"</span>: <span class="keyword">MoveProcessor</span></span><br><span class="line"><span class="keyword"> </span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　不同的方法对应处理不同的数据集,这个要搞清楚.如MrpcProcessor这个方法是对MRPC训练集进行模型训练,验证,测试.</p>
+<h2 id="2-3-根据任务名进行方法获取"><a href="#2-3-根据任务名进行方法获取" class="headerlink" title="2.3 根据任务名进行方法获取"></a>2.3 根据任务名进行方法获取</h2><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># task_name <span class="keyword">is</span> used <span class="keyword">to</span> <span class="keyword">select</span> processor,<span class="keyword">And</span> the name <span class="keyword">is</span> lowercase</span><br><span class="line"> task_name = FLAGS.task_name.lower()</span><br><span class="line"> # <span class="keyword">if</span> task_name as a key don<span class="symbol">'t</span> match <span class="keyword">with</span> Processor which <span class="keyword">is</span> <span class="keyword">type</span> <span class="keyword">of</span> dict ,os will print <span class="literal">error</span></span><br><span class="line"> <span class="keyword">if</span> task_name <span class="keyword">not</span> <span class="keyword">in</span> processors:</span><br><span class="line">   raise ValueError(<span class="string">"Task not found: %s"</span> % (task_name))</span><br><span class="line"> # <span class="keyword">if</span> exist,we will get the processor which aims <span class="keyword">to</span> deal <span class="keyword">with</span> data</span><br><span class="line"> processor = processors[task_name]()</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-数据集的准备"><a href="#2-4-数据集的准备" class="headerlink" title="2.4 数据集的准备"></a>2.4 数据集的准备</h2><p>　　主要是有三个数据集：训练集，验证集，测试集，自定义数据集的格式需要和原有的数据集格式最好一直，这样能减轻开发的成本．便于照猫画虎．类别与句子用<code>\t</code>即tab键,隔开,具体如下：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201125219.png" alt="数据集的组成"><br>注意:<br>　　数据集的<strong>格式最好是utf-8(无BOM)格式存储</strong>,否则读取容易出问题.<br>　　各个阶段的数据量大小最好呈现为：７：２：１，逐步缩小（我的就不太标准）<br>（１）训练集train.tsv:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>	company1获得了什么奖</span><br><span class="line"><span class="number">1</span>	prize是哪个公司获得的</span><br><span class="line"><span class="number">3</span>	prize的证书上编号是多少</span><br><span class="line"><span class="number">3</span>	我想查看prize的证书编号</span><br><span class="line"><span class="number">2</span>	company1与company2的关系是怎样的</span><br><span class="line"><span class="number">0</span>	company1有哪些奖</span><br><span class="line"><span class="number">3</span>	我想知道prize的证书编号</span><br><span class="line"><span class="number">2</span>	company1与company2的联系</span><br><span class="line"><span class="number">1</span>	prize是授予给哪个公司的</span><br><span class="line"><span class="number">1</span>	prize是表彰给哪个公司的</span><br><span class="line"><span class="number">2</span>	company1与company2是什么关系</span><br><span class="line"><span class="number">3</span>	prize的证书编号是多少</span><br></pre></td></tr></table></figure></p>
+<p>（２）验证集dev.tsv:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>	company1与company2之间的关系</span><br><span class="line"><span class="number">3</span>	prize的编号是多少</span><br><span class="line"><span class="number">2</span>	company1与company2有怎样的联系</span><br><span class="line"><span class="number">1</span>	prize属于哪个公司</span><br><span class="line"><span class="number">1</span>	prize是颁发给哪个公司的</span><br><span class="line"><span class="number">1</span>	哪个公司获取的奖项是prize</span><br><span class="line"><span class="number">0</span>	company1荣获哪些奖</span><br><span class="line"><span class="number">3</span>	我想知道prize上的证书编号</span><br></pre></td></tr></table></figure></p>
+<p>（３）测试集test.tsv<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>	prize的奖项由哪个公司得到</span><br><span class="line"><span class="number">0</span>	有哪些奖是company1获得的</span><br><span class="line"><span class="number">2</span>	company1与company2是怎样的关系</span><br><span class="line"><span class="number">0</span>	company1获取了哪些奖</span><br><span class="line"><span class="number">3</span>	我想查看prize上的编号</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-5-任务方法的建立"><a href="#2-5-任务方法的建立" class="headerlink" title="2.5 任务方法的建立"></a>2.5 任务方法的建立</h2><p>　　方法的建立是根据数据集的情况来建立的,我的情况是:数据集的标签为４个；数据格式为：标签＋’\t’+句子；数据集有三个．自定义方法如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这个就是自定义的方法,针对自己的数据集设定的.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MoveProcessor</span><span class="params">(DataProcessor)</span>:</span></span><br><span class="line">  <span class="string">"""Processor for the move data set ."""</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_train_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"train.tsv"</span>)), <span class="string">"train"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_dev_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"dev.tsv"</span>)), <span class="string">"dev"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_test_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"test.tsv"</span>)), <span class="string">"test"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_labels</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>]</span><br><span class="line"></span><br><span class="line"> <span class="comment">#设置统一的读取转换格式,便于不同训练集的调用</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">_create_examples</span><span class="params">(self, lines, set_type)</span>:</span></span><br><span class="line">    <span class="string">"""Creates examples for the training and dev sets."""</span></span><br><span class="line">    examples = []</span><br><span class="line">    <span class="keyword">for</span> (i, line) <span class="keyword">in</span> enumerate(lines):</span><br><span class="line">      guid = <span class="string">"%s-%s"</span> % (set_type, i)</span><br><span class="line">      <span class="keyword">if</span> set_type == <span class="string">"test"</span>:</span><br><span class="line">        text_a = tokenization.convert_to_unicode(line[<span class="number">0</span>])</span><br><span class="line">        label = <span class="string">"0"</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        text_a = tokenization.convert_to_unicode(line[<span class="number">1</span>])</span><br><span class="line">        label = tokenization.convert_to_unicode(line[<span class="number">0</span>])</span><br><span class="line">      examples.append(</span><br><span class="line">          InputExample(guid=guid, text_a=text_a, text_b=<span class="keyword">None</span>, label=label))</span><br><span class="line">    <span class="keyword">return</span> examples</span><br></pre></td></tr></table></figure></p>
+<p>　　从上面的程序也可以看出processor的方法主要是进行数据的读取,基本方法就是使用<code>_create_examples()</code>奠定读取的方法.</p>
+<h1 id="三-运行参数的设置"><a href="#三-运行参数的设置" class="headerlink" title="三.运行参数的设置"></a>三.运行参数的设置</h1><p>　　由于本地上以命令行运行有些问题，需要在Google的colab中才能正常运行，本文同时讲解命令行的形式和本地的形式</p>
+<h3 id="3-1-命令行运行"><a href="#3-1-命令行运行" class="headerlink" title="3.1 命令行运行"></a>3.1 命令行运行</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!是代表在linux下运行</span></span><br><span class="line">!python run_classifier.py \</span><br><span class="line">    <span class="comment">#任务的名称</span></span><br><span class="line">	<span class="params">--task_name=vega</span> \</span><br><span class="line">	<span class="comment">#是否需要进行训练</span></span><br><span class="line">    <span class="params">--do_train=true</span> \</span><br><span class="line">    <span class="comment">#是否需要进行验证</span></span><br><span class="line">    <span class="params">--do_eval=true</span> \</span><br><span class="line">    <span class="comment">#是否需要进行测试,false时不会进行测试,true时则会优先使用已经存在的模型,</span></span><br><span class="line">    <span class="comment">#没模型的话,则会从头训练,直至模型保存.</span></span><br><span class="line">    <span class="params">--do_predict=false</span></span><br><span class="line">    <span class="comment">#数据文件的目录,训练之前需要将训练集,验证集,测试集的文件准备好</span></span><br><span class="line">    <span class="params">--data_dir=data</span> \</span><br><span class="line">    <span class="comment">#下面三个colab会调用谷歌自家保存的预训练模型,不需要自己上传,也可以自己上传(比较耗时)</span></span><br><span class="line">    <span class="params">--vocab_file=gs</span>:<span class="string">//cloud-tpu-checkpoints/bert/uncased_L-24_H-1024_A-16/vocab.txt</span> \</span><br><span class="line">    <span class="params">--bert_config_file=gs</span>:<span class="string">//cloud-tpu-checkpoints/bert/uncased_L-24_H-1024_A-16/bert_config.json</span> \</span><br><span class="line">    <span class="params">--init_checkpoint=gs</span>:<span class="string">//cloud-tpu-checkpoints/bert/uncased_L-24_H-1024_A-16/bert_model.ckpt</span> \</span><br><span class="line">    <span class="comment">#分词时一个词语的最大长度</span></span><br><span class="line">    <span class="params">--max_seq_length=16</span> \</span><br><span class="line">    <span class="comment">#批量训练的的大小每32个为一批</span></span><br><span class="line">    <span class="params">--train_batch_size=32</span> \</span><br><span class="line">    <span class="comment">#学习率(一般不动)</span></span><br><span class="line">    <span class="params">--learning_rate=2e-5</span> \</span><br><span class="line">    <span class="comment">#轮询的次数:8次</span></span><br><span class="line">    <span class="params">--num_train_epochs=8</span>.0 \</span><br><span class="line">    <span class="comment">#模型及其各个阶段的结果的保存目录</span></span><br><span class="line">    <span class="params">--output_dir=output</span> \</span><br></pre></td></tr></table></figure>
+<p>　　上面代码是在colab中的运行的方法,根据自己的需要进行修改,之后直接粘贴复制即可．</p>
+<h3 id="3-2-本地运行"><a href="#3-2-本地运行" class="headerlink" title="3.2 本地运行"></a>3.2 本地运行</h3><p>　　本地运行主要是在run_classifier.py中,修改的情况为:<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置常量.便于后期修改</span></span><br><span class="line">DATA_DIR=<span class="string">"E:/Project/bert/Before/data/"</span></span><br><span class="line">MODEL_DIR=<span class="string">"E:/Project/bert/Before/PreTrainingModel/"</span></span><br><span class="line">OUTPUT_DIR=<span class="string">"E:/Project/bert/Before/output/"</span></span><br><span class="line"><span class="comment">#参数修改(其实还有很多,找几个关键的参数修改即可)</span></span><br><span class="line"><span class="string">"data_dir"</span>, DATA_DIR,</span><br><span class="line"><span class="string">"bert_config_file"</span>,MODEL_DIR+<span class="string">"bert_config.json"</span>,</span><br><span class="line"><span class="string">"task_name"</span>, <span class="string">"vega"</span>,</span><br><span class="line"><span class="string">"vocab_file"</span>, MODEL_DIR+<span class="string">"vocab.txt"</span>,</span><br><span class="line"><span class="string">"init_checkpoint"</span>, MODEL_DIR+<span class="string">"bert_model.ckpt"</span>,</span><br><span class="line"><span class="string">"max_seq_length"</span>, 16,</span><br><span class="line"><span class="string">"do_train"</span>,True,</span><br><span class="line"><span class="string">"do_eval"</span>, True,</span><br><span class="line"><span class="string">"do_predict"</span>, True,</span><br><span class="line"><span class="string">"train_batch_size"</span>,32,</span><br><span class="line"><span class="string">"eval_batch_size"</span>,6, </span><br><span class="line"><span class="string">"predict_batch_size"</span>, 2, </span><br><span class="line"><span class="string">"learning_rate"</span>, 5e-5,</span><br><span class="line"><span class="string">"num_train_epochs"</span>, 8.0,</span><br><span class="line"><span class="string">"warmup_proportion"</span>, 0.1,</span><br></pre></td></tr></table></figure></p>
+<h1 id="四-运行结果"><a href="#四-运行结果" class="headerlink" title="四.运行结果"></a>四.运行结果</h1><h2 id="4-1-验证结果"><a href="#4-1-验证结果" class="headerlink" title="4.1 验证结果"></a>4.1 验证结果</h2><p>屏幕上也会输出验证结果情况:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201135011.png" alt="屏幕输出结果图"><br>　　验证结果保存在output目录的eval_results.txt,如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201131357.png" alt="验证结果图"></p>
+<h2 id="4-2-测试结果"><a href="#4-2-测试结果" class="headerlink" title="4.2 测试结果"></a>4.2 测试结果</h2><p>　　测试结果保存在output目录的test_results.tsv:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201131301.png" alt="测试结果"><br>　　上表中:每行代表每类的概率,如第一行则代表第二类的概率最大,为<code>0.30405113</code>,所以其对应的标签为2.以此类推</p>
+<h1 id="五-参数选择"><a href="#五-参数选择" class="headerlink" title="五.参数选择"></a>五.参数选择</h1><p>以下是本次调整的参数.<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"max_seq_length"</span>, <span class="number">16</span>,</span><br><span class="line"><span class="string">"train_batch_size"</span>,<span class="number">32</span>,</span><br><span class="line"><span class="string">"eval_batch_size"</span>,<span class="number">6</span>,</span><br><span class="line"><span class="string">"predict_batch_size"</span>, <span class="number">2</span>,</span><br><span class="line"><span class="string">"learning_rate"</span>, <span class="number">5e-5</span>,</span><br><span class="line"><span class="string">"num_train_epochs"</span>, <span class="number">8.0</span>,</span><br><span class="line"><span class="string">"warmup_proportion"</span>, <span class="number">0.1</span>,</span><br><span class="line"><span class="string">"save_checkpoints_steps"</span>, <span class="number">1000</span>,</span><br><span class="line"><span class="string">"iterations_per_loop"</span>, <span class="number">1000</span>,</span><br></pre></td></tr></table></figure></p>
+<h1 id="六-参考文献"><a href="#六-参考文献" class="headerlink" title="六.参考文献:"></a>六.参考文献:</h1><p>　　❋<a href="https://news.cnblogs.com/mv?id=610293" target="_blank" rel="noopener">谷歌最强NLP模型BERT解读</a><br>　　❋<a href="https://blog.csdn.net/yangfengling1023/article/details/84025313" target="_blank" rel="noopener">BERT的理解</a><br>　　❋<a href="https://blog.csdn.net/u014108004/article/details/84142035" target="_blank" rel="noopener">BERT模型fine-tuning代码解析（一）</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="../使用colab平台进行训练/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    使用colab平台进行训练
+                
+            </div>
+        </a>
+    
+    
+        <a href="../../../11/29/Pytorch基本使用(三)/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Pytorch基本使用(三)</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../11/python基础知识（一）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211194632.jpg)" alt="python基础知识（一）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/python/基础知识/">基础知识</a></p>
+                            <p class="item-title"><a href="../../11/python基础知识（一）/" class="title">python基础知识（一）</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:35:11.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../11/ALLENNLP安装/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211194557.jpg)" alt="AllenNLP安装" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/环境搭建/">环境搭建</a></p>
+                            <p class="item-title"><a href="../../11/ALLENNLP安装/" class="title">AllenNLP安装</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:32:17.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../11/NLP基础理论系列之词嵌入技术（一）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211192025.jpg)" alt="NLP基础理论系列之词嵌入技术（一）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/基础系列/">基础系列</a></p>
+                            <p class="item-title"><a href="../../11/NLP基础理论系列之词嵌入技术（一）/" class="title">NLP基础理论系列之词嵌入技术（一）</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:18:24.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../使用colab平台进行训练/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201135254.jpg)" alt="使用colab平台进行训练" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/深度学习/优化/">优化</a></p>
+                            <p class="item-title"><a href="../使用colab平台进行训练/" class="title">使用colab平台进行训练</a></p>
+                            <p class="item-date"><time datetime="2018-12-01T05:54:06.000Z" itemprop="datePublished">2018-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201133406.jpg)" alt="Bert模型的微调" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/深度学习/优化/">优化</a></p>
+                            <p class="item-title"><a href="" class="title">Bert模型的微调</a></p>
+                            <p class="item-date"><time datetime="2018-12-01T05:27:05.000Z" itemprop="datePublished">2018-12-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/">IDEA</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/">Maven</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/Pom/">Pom</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/">NLP</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/交互/">交互</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/名词辨析/">名词辨析</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/基础系列/">基础系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/实体识别/">实体识别</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/词性标注/">词性标注</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/语义解析/">语义解析</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/">Neo4j</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/Spring-boot/">Spring-boot</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/">UML</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/时序图/">时序图</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/">janusgraph</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/">java</a><span class="category-list-count">30</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/I-O流/">I/O流</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/乱码/">乱码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/数据类型/">数据类型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/泛型/">泛型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/注解/">注解</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/知识点/">知识点</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/编码/">编码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/集合/">集合</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">linux</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/知识点/">知识点</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/">maven</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/pom/">pom</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/">navicat</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/导出/">导出</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/">python</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/基础知识/">基础知识</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/">windows</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/环境变量/">环境变量</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/博客建站/">博客建站</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/重庆/">重庆</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/">命令行</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/mysql/">mysql</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/">工具</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/IDEA/">IDEA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/小问题/">小问题</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/">快捷方式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/Navicat/">Navicat</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/">每周报告</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/2018/">2018</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/">深度学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/LSTM/">LSTM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/优化/">优化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/基础/">基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/概念/">概念</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/">知识图谱</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/异常问题/">异常问题</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/知识点/">知识点</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/综述/">综述</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/软件安装/">软件安装</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/">项目实战</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/数据建模/">数据建模</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/">计算机网络</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/">随笔</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/开发心得/">开发心得</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/认识/">认识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/读后感/">读后感</a><span class="category-list-count">2</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ANSI/">ANSI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AllenNLP/">AllenNLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AsList/">AsList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/BERT/">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Bean/">Bean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Colab/">Colab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Collection/">Collection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/CrudRepository/">CrudRepository</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/D2RQ/">D2RQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Documented/">Documented</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Guava/">Guava</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/HANLP/">HANLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/I-O流体系结构/">I/O流体系结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IDEA/">IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IOC/">IOC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Inherited/">Inherited</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/InputStreamReader/">InputStreamReader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/JPA/">JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/LSTM/">LSTM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Map/">Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelAndView/">ModelAndView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelMap/">ModelMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Navicat/">Navicat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Neo4j/">Neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Numpy/">Numpy</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/OGM/">OGM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ORM/">ORM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/POJO/">POJO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pom/">Pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pytorch/">Pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/RNN/">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SDN/">SDN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SGD/">SGD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Spring-boot/">Spring-boot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Tensor/">Tensor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Torch/">Torch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/UML/">UML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/fuseki/">fuseki</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/icarus主题/">icarus主题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph/">janusgraph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph-hbase-hadoop/">janusgraph,hbase,hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/jar包/">jar包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/model/">model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat/">navicat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat异常问题/">navicat异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/neo4j/">neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/parseInt/">parseInt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/pom/">pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/readLine/">readLine()</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/restful/">restful</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/sourceTree/">sourceTree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/">spark</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spring-boot/">spring-boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/thymeleaf/">thymeleaf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/torch函数/">torch函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/windows/">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word-embeding/">word embeding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word2vec/">word2vec</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/xshell/">xshell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/三层架构/">三层架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/云服务器/">云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/人文/">人文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键字/">关键字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键词抽取/">关键词抽取</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分类/">分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分词/">分词</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/初始化/">初始化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/删除/">删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/反射/">反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/变量/">变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/可视化界面/">可视化界面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/命令行/">命令行</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/域名/">域名</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/套接字/">套接字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/学习率/">学习率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/实例化/">实例化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/容器/">容器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象数组/">对象数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象类型/">对象类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/导出/">导出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/小问题/">小问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工作流程/">工作流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工具/">工具</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/异常问题/">异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/微调/">微调</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/快捷键/">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/抽象类/">抽象类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据建模/">数据建模</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据长度/">数据长度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/时序图/">时序图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/栈内存/">栈内存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/模型构建/">模型构建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/泛型/">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解/">注解</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解注入/">注解注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/激励函数/">激励函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/目录结构/">目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/相似度/">相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识图谱/">知识图谱</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识点/">知识点</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/神经网络/">神经网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/综述/">综述</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/编码/">编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/自定义词典/">自定义词典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/艺术/">艺术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/认识/">认识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/设计思想/">设计思想</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词向量/">词向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性标注/">词性标注</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性纠正/">词性纠正</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词汇表/">词汇表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义网/">语义网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义解析/">语义解析</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/读后感/">读后感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/超参数/">超参数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/返回问题/">返回问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/迭代器输出/">迭代器输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/通配符/">通配符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置/">配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置注入/">配置注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句分类/">问句分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句向量/">问句向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句还原/">问句还原</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合关系/">集合关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合工具类/">集合工具类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合形式/">集合形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合类型/">集合类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合转换/">集合转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合输出/">集合输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/非法字符/">非法字符</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="../../../../tags/ANSI/" style="font-size: 10px;">ANSI</a> <a href="../../../../tags/AOP/" style="font-size: 10px;">AOP</a> <a href="../../../../tags/AllenNLP/" style="font-size: 10px;">AllenNLP</a> <a href="../../../../tags/AsList/" style="font-size: 10px;">AsList</a> <a href="../../../../tags/BERT/" style="font-size: 10px;">BERT</a> <a href="../../../../tags/Bean/" style="font-size: 10px;">Bean</a> <a href="../../../../tags/Colab/" style="font-size: 10px;">Colab</a> <a href="../../../../tags/Collection/" style="font-size: 10px;">Collection</a> <a href="../../../../tags/CrudRepository/" style="font-size: 10px;">CrudRepository</a> <a href="../../../../tags/D2RQ/" style="font-size: 10px;">D2RQ</a> <a href="../../../../tags/Docker/" style="font-size: 10px;">Docker</a> <a href="../../../../tags/Documented/" style="font-size: 10px;">Documented</a> <a href="../../../../tags/Guava/" style="font-size: 10px;">Guava</a> <a href="../../../../tags/HANLP/" style="font-size: 10px;">HANLP</a> <a href="../../../../tags/I-O流体系结构/" style="font-size: 10px;">I/O流体系结构</a> <a href="../../../../tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="../../../../tags/IOC/" style="font-size: 10px;">IOC</a> <a href="../../../../tags/Inherited/" style="font-size: 10px;">Inherited</a> <a href="../../../../tags/InputStreamReader/" style="font-size: 10px;">InputStreamReader</a> <a href="../../../../tags/JPA/" style="font-size: 10px;">JPA</a> <a href="../../../../tags/LSTM/" style="font-size: 10px;">LSTM</a> <a href="../../../../tags/MVC/" style="font-size: 10px;">MVC</a> <a href="../../../../tags/Map/" style="font-size: 10px;">Map</a> <a href="../../../../tags/Maven/" style="font-size: 10px;">Maven</a> <a href="../../../../tags/ModelAndView/" style="font-size: 10px;">ModelAndView</a> <a href="../../../../tags/ModelMap/" style="font-size: 10px;">ModelMap</a> <a href="../../../../tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="../../../../tags/Neo4j/" style="font-size: 10px;">Neo4j</a> <a href="../../../../tags/Numpy/" style="font-size: 15px;">Numpy</a> <a href="../../../../tags/OGM/" style="font-size: 10px;">OGM</a> <a href="../../../../tags/ORM/" style="font-size: 10px;">ORM</a> <a href="../../../../tags/POJO/" style="font-size: 10px;">POJO</a> <a href="../../../../tags/Pom/" style="font-size: 10px;">Pom</a> <a href="../../../../tags/Pytorch/" style="font-size: 10px;">Pytorch</a> <a href="../../../../tags/RNN/" style="font-size: 10px;">RNN</a> <a href="../../../../tags/SDN/" style="font-size: 10px;">SDN</a> <a href="../../../../tags/SGD/" style="font-size: 10px;">SGD</a> <a href="../../../../tags/Spring-boot/" style="font-size: 15px;">Spring-boot</a> <a href="../../../../tags/Tensor/" style="font-size: 10px;">Tensor</a> <a href="../../../../tags/Torch/" style="font-size: 10px;">Torch</a> <a href="../../../../tags/UML/" style="font-size: 10px;">UML</a> <a href="../../../../tags/fuseki/" style="font-size: 10px;">fuseki</a> <a href="../../../../tags/git/" style="font-size: 15px;">git</a> <a href="../../../../tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="../../../../tags/icarus主题/" style="font-size: 10px;">icarus主题</a> <a href="../../../../tags/janusgraph/" style="font-size: 10px;">janusgraph</a> <a href="../../../../tags/janusgraph-hbase-hadoop/" style="font-size: 10px;">janusgraph,hbase,hadoop</a> <a href="../../../../tags/jar包/" style="font-size: 10px;">jar包</a> <a href="../../../../tags/java/" style="font-size: 15px;">java</a> <a href="../../../../tags/maven/" style="font-size: 15px;">maven</a> <a href="../../../../tags/model/" style="font-size: 10px;">model</a> <a href="../../../../tags/navicat/" style="font-size: 15px;">navicat</a> <a href="../../../../tags/navicat异常问题/" style="font-size: 10px;">navicat异常问题</a> <a href="../../../../tags/neo4j/" style="font-size: 10px;">neo4j</a> <a href="../../../../tags/parseInt/" style="font-size: 10px;">parseInt</a> <a href="../../../../tags/pom/" style="font-size: 10px;">pom</a> <a href="../../../../tags/python/" style="font-size: 10px;">python</a> <a href="../../../../tags/readLine/" style="font-size: 10px;">readLine()</a> <a href="../../../../tags/restful/" style="font-size: 10px;">restful</a> <a href="../../../../tags/socket/" style="font-size: 10px;">socket</a> <a href="../../../../tags/sourceTree/" style="font-size: 10px;">sourceTree</a> <a href="../../../../tags/spark/" style="font-size: 20px;">spark</a> <a href="../../../../tags/spring-boot/" style="font-size: 10px;">spring-boot</a> <a href="../../../../tags/thymeleaf/" style="font-size: 10px;">thymeleaf</a> <a href="../../../../tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="../../../../tags/torch函数/" style="font-size: 10px;">torch函数</a> <a href="../../../../tags/windows/" style="font-size: 10px;">windows</a> <a href="../../../../tags/word-embeding/" style="font-size: 10px;">word embeding</a> <a href="../../../../tags/word2vec/" style="font-size: 15px;">word2vec</a> <a href="../../../../tags/xshell/" style="font-size: 10px;">xshell</a> <a href="../../../../tags/三层架构/" style="font-size: 10px;">三层架构</a> <a href="../../../../tags/云服务器/" style="font-size: 10px;">云服务器</a> <a href="../../../../tags/人文/" style="font-size: 10px;">人文</a> <a href="../../../../tags/关键字/" style="font-size: 10px;">关键字</a> <a href="../../../../tags/关键词抽取/" style="font-size: 10px;">关键词抽取</a> <a href="../../../../tags/分类/" style="font-size: 10px;">分类</a> <a href="../../../../tags/分词/" style="font-size: 10px;">分词</a> <a href="../../../../tags/初始化/" style="font-size: 10px;">初始化</a> <a href="../../../../tags/删除/" style="font-size: 10px;">删除</a> <a href="../../../../tags/博客/" style="font-size: 10px;">博客</a> <a href="../../../../tags/反射/" style="font-size: 10px;">反射</a> <a href="../../../../tags/变量/" style="font-size: 10px;">变量</a> <a href="../../../../tags/可视化界面/" style="font-size: 10px;">可视化界面</a> <a href="../../../../tags/命令行/" style="font-size: 15px;">命令行</a> <a href="../../../../tags/域名/" style="font-size: 10px;">域名</a> <a href="../../../../tags/套接字/" style="font-size: 10px;">套接字</a> <a href="../../../../tags/学习率/" style="font-size: 10px;">学习率</a> <a href="../../../../tags/实例化/" style="font-size: 15px;">实例化</a> <a href="../../../../tags/容器/" style="font-size: 10px;">容器</a> <a href="../../../../tags/对象数组/" style="font-size: 10px;">对象数组</a> <a href="../../../../tags/对象类型/" style="font-size: 10px;">对象类型</a> <a href="../../../../tags/导出/" style="font-size: 10px;">导出</a> <a href="../../../../tags/小问题/" style="font-size: 15px;">小问题</a> <a href="../../../../tags/工作流程/" style="font-size: 10px;">工作流程</a> <a href="../../../../tags/工具/" style="font-size: 20px;">工具</a> <a href="../../../../tags/异常问题/" style="font-size: 10px;">异常问题</a> <a href="../../../../tags/微调/" style="font-size: 10px;">微调</a> <a href="../../../../tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="../../../../tags/抽象类/" style="font-size: 10px;">抽象类</a> <a href="../../../../tags/接口/" style="font-size: 10px;">接口</a> <a href="../../../../tags/数据建模/" style="font-size: 10px;">数据建模</a> <a href="../../../../tags/数据长度/" style="font-size: 10px;">数据长度</a> <a href="../../../../tags/时序图/" style="font-size: 10px;">时序图</a> <a href="../../../../tags/栈内存/" style="font-size: 10px;">栈内存</a> <a href="../../../../tags/模型构建/" style="font-size: 10px;">模型构建</a> <a href="../../../../tags/泛型/" style="font-size: 10px;">泛型</a> <a href="../../../../tags/注解/" style="font-size: 15px;">注解</a> <a href="../../../../tags/注解注入/" style="font-size: 10px;">注解注入</a> <a href="../../../../tags/测试/" style="font-size: 10px;">测试</a> <a href="../../../../tags/激励函数/" style="font-size: 10px;">激励函数</a> <a href="../../../../tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="../../../../tags/目录结构/" style="font-size: 10px;">目录结构</a> <a href="../../../../tags/相似度/" style="font-size: 10px;">相似度</a> <a href="../../../../tags/知识图谱/" style="font-size: 15px;">知识图谱</a> <a href="../../../../tags/知识点/" style="font-size: 15px;">知识点</a> <a href="../../../../tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="../../../../tags/综述/" style="font-size: 20px;">综述</a> <a href="../../../../tags/编码/" style="font-size: 10px;">编码</a> <a href="../../../../tags/自定义词典/" style="font-size: 10px;">自定义词典</a> <a href="../../../../tags/艺术/" style="font-size: 10px;">艺术</a> <a href="../../../../tags/认识/" style="font-size: 10px;">认识</a> <a href="../../../../tags/设计思想/" style="font-size: 10px;">设计思想</a> <a href="../../../../tags/词向量/" style="font-size: 10px;">词向量</a> <a href="../../../../tags/词性标注/" style="font-size: 15px;">词性标注</a> <a href="../../../../tags/词性纠正/" style="font-size: 10px;">词性纠正</a> <a href="../../../../tags/词汇表/" style="font-size: 10px;">词汇表</a> <a href="../../../../tags/语义网/" style="font-size: 10px;">语义网</a> <a href="../../../../tags/语义解析/" style="font-size: 15px;">语义解析</a> <a href="../../../../tags/读后感/" style="font-size: 10px;">读后感</a> <a href="../../../../tags/超参数/" style="font-size: 10px;">超参数</a> <a href="../../../../tags/返回问题/" style="font-size: 10px;">返回问题</a> <a href="../../../../tags/迭代器输出/" style="font-size: 10px;">迭代器输出</a> <a href="../../../../tags/通配符/" style="font-size: 10px;">通配符</a> <a href="../../../../tags/配置/" style="font-size: 15px;">配置</a> <a href="../../../../tags/配置注入/" style="font-size: 10px;">配置注入</a> <a href="../../../../tags/问句分类/" style="font-size: 10px;">问句分类</a> <a href="../../../../tags/问句向量/" style="font-size: 10px;">问句向量</a> <a href="../../../../tags/问句还原/" style="font-size: 10px;">问句还原</a> <a href="../../../../tags/集合关系/" style="font-size: 10px;">集合关系</a> <a href="../../../../tags/集合工具类/" style="font-size: 10px;">集合工具类</a> <a href="../../../../tags/集合形式/" style="font-size: 10px;">集合形式</a> <a href="../../../../tags/集合类型/" style="font-size: 10px;">集合类型</a> <a href="../../../../tags/集合转换/" style="font-size: 10px;">集合转换</a> <a href="../../../../tags/集合输出/" style="font-size: 10px;">集合输出</a> <a href="../../../../tags/非法字符/" style="font-size: 10px;">非法字符</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://xueshu.baidu.com/">百度学术</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.appinn.com/category/windows/">小众软件</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+     <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 不负韶华不负己<br>
+        </div>
+    </div>
+
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("06/18/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+</footer>
+        
+
+
+    
+        <script src="../../../../libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="../../../../libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="../../../../js/main.js"></script>
+
+    </div>
+</body>
+</html>

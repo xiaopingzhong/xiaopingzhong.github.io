@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>janusgraph之环境搭建(一) | iVEGA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="本文是janusgraph的第一篇,总得来说,遇到的坑是在是很多,但好在一一解决,主要是涉及:JAVA，HBASE，SOLR，HADOOP，JANUSGRAPH的安装,涉及到的知识点比较多,因此篇幅较长,当作总结,便于以后回忆.">
+<meta name="keywords" content="janusgraph,hbase,hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="janusgraph之环境搭建(一)">
+<meta property="og:url" content="http://yoursite.com/2018/07/06/janusgraph之环境搭建(一)/index.html">
+<meta property="og:site_name" content="iVEGA">
+<meta property="og:description" content="本文是janusgraph的第一篇,总得来说,遇到的坑是在是很多,但好在一一解决,主要是涉及:JAVA，HBASE，SOLR，HADOOP，JANUSGRAPH的安装,涉及到的知识点比较多,因此篇幅较长,当作总结,便于以后回忆.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102945.png">
+<meta property="og:updated_time" content="2018-11-13T02:29:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="janusgraph之环境搭建(一)">
+<meta name="twitter:description" content="本文是janusgraph的第一篇,总得来说,遇到的坑是在是很多,但好在一一解决,主要是涉及:JAVA，HBASE，SOLR，HADOOP，JANUSGRAPH的安装,涉及到的知识点比较多,因此篇幅较长,当作总结,便于以后回忆.">
+<meta name="twitter:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102945.png">
+    
+
+    
+
+    
+        <link rel="icon" href="../../../../css/images/favicon.png">
+    
+    <link rel="stylesheet" href="../../../../libs/song-ke-fan/styles.css">
+    <link rel="stylesheet" href="../../../../libs/shui-yun/styles.css">
+    <link rel="stylesheet" href="../../../../libs/deng-xian/styles.css">
+    <link rel="stylesheet" href="../../../../libs/Microsoft-JhengHei/styles.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="../../../../libs/open-sans/styles.css">
+    <link rel="stylesheet" href="../../../../libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="../../../../css/style.css">
+
+    <script src="../../../../libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="../../../../libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="../../../../libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+
+
+</head>
+
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="../../../../index.html" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">iVEGA</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="../../../../.">首页</a>
+                
+                    <a class="main-nav-link" href="../../../../archives">归档</a>
+                
+                    <a class="main-nav-link" href="../../../../categories">分类</a>
+                
+                    <a class="main-nav-link" href="../../../../tags">标签</a>
+                
+                    <a class="main-nav-link" href="../../../../about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="../../../../css/images/avatar.png">
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '../../../../content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="../../../../js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="../../../../.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="../../../../css/images/avatar.png">
+            <h2 id="name">iVEGA</h2>
+            <h3 id="title">一个小确幸的地方</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>天津大学, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/xiaopingzhong/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                96
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                145
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/xiaopingzhong/" target="_blank" title="github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://weibo.com/u/5124024867" target="_blank" title="weibo">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://blog.csdn.net/fbsxghvudk" target="_blank" title="linux">
+                            <i class="fab fa-linux"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://mail.tju.edu.cn" target="_blank" title="angellist">
+                            <i class="fab fa-angellist"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-janusgraph之环境搭建(一)" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102945.png" class="article-banner">
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            janusgraph之环境搭建(一)
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="">
+            <time datetime="2018-07-06T07:50:13.000Z" itemprop="datePublished">2018-07-06</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="../../../../categories/janusgraph/">janusgraph</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/janusgraph/环境搭建/">环境搭建</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="../../../../tags/janusgraph-hbase-hadoop/">janusgraph,hbase,hadoop</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p> 　　本文是janusgraph的第一篇,总得来说,遇到的坑是在是很多,但好在一一解决,主要是涉及:JAVA，HBASE，SOLR，HADOOP，JANUSGRAPH的安装,涉及到的知识点比较多,因此篇幅较长,当作总结,便于以后回忆.<a id="more"></a></p>
+<hr>
+<!-- toc -->
+<hr>
+<h1 id="一-编辑软件安装"><a href="#一-编辑软件安装" class="headerlink" title="一.编辑软件安装"></a>一.编辑软件安装</h1><h2 id="1-1-vim编辑器"><a href="#1-1-vim编辑器" class="headerlink" title="1.1 vim编辑器"></a>1.1 vim编辑器</h2><p>1.安装<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#参数y代表用yes回答安装过程中的所有问题</span></span><br><span class="line">yum -y <span class="keyword">install</span> vim*</span><br></pre></td></tr></table></figure></p>
+<p>2.配置<br>在键盘上输入:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim <span class="regexp">/etc/</span>vimrc</span><br></pre></td></tr></table></figure></p>
+<p>来打开对应的配置文件,进入编辑模式<br>之后在vimrc文件当中末尾增加:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">nu</span>           #<span class="comment">"在左侧显示行号</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span>    #<span class="comment">"tab 长度设置为 4</span></span><br><span class="line"><span class="keyword">set</span> nobackup     #<span class="comment">"覆盖文件时不备份</span></span><br><span class="line"><span class="keyword">set</span> ruler        #<span class="comment">"在右下角显示光标位置的状态行</span></span><br><span class="line"><span class="keyword">set</span> autoindent   #<span class="comment">"自动缩进</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-2-安装解压缩"><a href="#1-2-安装解压缩" class="headerlink" title="1.2 安装解压缩"></a>1.2 安装解压缩</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#tar.gz解压,系统本身就有,tar是打包,gz是以gzip方式压缩</span></span><br><span class="line">yum -y <span class="keyword">install</span> unzip</span><br></pre></td></tr></table></figure>
+<h1 id="二-用户添加"><a href="#二-用户添加" class="headerlink" title="二.用户添加"></a>二.用户添加</h1><p>1.添加用户<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#	-m就是建立用户的登录目录</span></span><br><span class="line"><span class="meta"># -s就是指定用户所使用的命令行.这里指的是/bin/bash</span></span><br><span class="line"><span class="meta">#下面这句话的含义就是 添加一个名为hhjs的用户,该用户所在的目录是/home/hhjs,其中所能使用的命令行就是/bin/bash.</span></span><br><span class="line">useradd -m hhjs -s /bin/bash</span><br><span class="line">passwd hhjs</span><br></pre></td></tr></table></figure></p>
+<p>在shell界面上:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_17_centos ~]# useradd -m hhjs -s /bin/bash</span><br><span class="line"><span class="comment">#这行的输入就是就是需要为新用户hhjd设置一个新的密码</span></span><br><span class="line">[root@VM_0_17_centos ~]# passwd hhjs</span><br><span class="line">Changing password <span class="keyword">for</span><span class="built_in"> user </span>hhjs.</span><br><span class="line">New password: </span><br><span class="line"><span class="comment">#因为密码是8个8,所以就会提示,正读与倒读都一样.</span></span><br><span class="line">BAD PASSWORD: The password is a palindrome</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure></p>
+<p>在xftp5当中查看可以得知:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084841.jpg" alt="hhjd用户所在的目录"><br>注意事项:<br>　　上述的只是一个例子,最终的还是以hhjs这个用户为准.<br>2.权限设置<br>　　进入超级用户的配置文件:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>sudoers</span><br></pre></td></tr></table></figure></p>
+<p>　　之后在root ALL=(ALL) ALL之后添加一个:<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这行就相当于为hhjs赋予了超级权限的管理员角色.</span></span><br><span class="line"><span class="attribute">hhjs</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="三-ssh配置本地免密登录"><a href="#三-ssh配置本地免密登录" class="headerlink" title="三.ssh配置本地免密登录"></a>三.ssh配置本地免密登录</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.生成.shh文件.或者直接在root目录下mkdir .shh</span></span><br><span class="line">localhost ssh</span><br><span class="line"><span class="comment">#本地登录并且退出,就是为了生成.shh隐藏文件夹</span></span><br><span class="line"><span class="keyword">exit</span>()</span><br><span class="line">cd ~<span class="regexp">/.ssh/</span></span><br><span class="line"><span class="comment">#2.生成密钥,RSA(Rivest-Shamir-Adleman)密码系统</span></span><br><span class="line">ssh-keygen -t rsa   t--&gt;type密钥类型    <span class="comment"># 不断回车即可</span></span><br><span class="line"><span class="comment">#3.添加密钥到授权文件</span></span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys  </span><br><span class="line"><span class="comment">#chmod:change model--&gt;改变类型.</span></span><br><span class="line"><span class="comment">#一般是设置当前用户对某个文件夹/文件的权限.</span></span><br><span class="line"><span class="comment">#4.修改授权文件的权限</span></span><br><span class="line">chmod <span class="number">600</span> .<span class="regexp">/authorized_keys</span></span><br></pre></td></tr></table></figure>
+<p>截图如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084842.jpg" alt="ssh配置本地免密登录"></p>
+<h1 id="四-vim使用"><a href="#四-vim使用" class="headerlink" title="四.vim使用"></a>四.vim使用</h1><p>　vim主要有三种模式(主要是总结自己在学习当中用到的 情况,可能不全但是常用.)</p>
+<h2 id="4-1-命令模式"><a href="#4-1-命令模式" class="headerlink" title="4.1 命令模式"></a>4.1 命令模式</h2><p>主要是使用esc键进行进入:<br>　　(1)gg:返回首行;<br>　　(2)G:返回尾行<br>　　(3)行号gg/G:跳转到指定行<br>　　(4)dd:删除当前行<br>　　(5)u:撤销当前操作<br>　　(6)ctrl+f:下翻一屏<br>　　(7)ctrl+b:上翻一屏<br>　　(8)复制/粘贴:<br>　先使用yy,复制当前行,之后跳转到指定行,输入:P(前插入)/或者p(后插入)<br>　　(9)行首:0<br>　　(10)行尾:’(shift+4),美元的符号<br>　　(11) ctrl+s锁定<br>　　(12) ctrl+q 解锁<br>　　(13)命令模式下输入?+字符串就是查找功能,小n就是下一个,N就是上一个</p>
+<h2 id="4-2-末行模式"><a href="#4-2-末行模式" class="headerlink" title="4.2 末行模式"></a>4.2 末行模式</h2><p>主要是使用:进入<br>　　(1):x/:wq —&gt;保存并退出,记住hi小写x.否则就是加密的快捷键了<br>　　(2):q—&gt;不保存退出<br>　　(3):wq!—&gt;当:wq不管用的时候,出现readonly 　　option is set （add！to override）这种提示就使用这种方式,平常不推荐.</p>
+<h2 id="4-3-插入模式"><a href="#4-3-插入模式" class="headerlink" title="4.3 插入模式"></a>4.3 插入模式</h2><p>　　主要是用i或者insert按键</p>
+<h2 id="4-4-vim异常问题"><a href="#4-4-vim异常问题" class="headerlink" title="4.4 vim异常问题"></a>4.4 vim异常问题</h2><p>当打开Vi编辑器时出现以下的提示时不要着急<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">E325: ATTENTION</span><br><span class="line">Found a swap file by the name <span class="string">"/etc/.profile.swp"</span></span><br><span class="line">owned by: root  dated: Wed Jul 14 10:01:10 2010</span><br><span class="line">file name: /etc/profile</span><br><span class="line">modified: <span class="literal">YES</span></span><br></pre></td></tr></table></figure></p>
+<p>方法：<br>　　(1)ls -a 列举所有的内容<br>　　(2)rm对应的.swp文件。</p>
+<h1 id="五-shell"><a href="#五-shell" class="headerlink" title="五.shell"></a>五.shell</h1><h2 id="5-1-概念"><a href="#5-1-概念" class="headerlink" title="5.1 概念"></a>5.1 概念</h2><p>　　shell就是一个命令行的解释器,支持不同种类的命令行,如sh,bash,是用户和内核的桥梁.通过shell,用户键盘输入的命令行.经过shell解释,将会传递给内核,然后内核将执行结果返回给shell,shell通过图形化界面将结果显示给用户,周而复始.</p>
+<h2 id="5-2-图形界面与命令行"><a href="#5-2-图形界面与命令行" class="headerlink" title="5.2 图形界面与命令行"></a>5.2 图形界面与命令行</h2><p>　　本质上都是为了让用户控制内核,从而控制计算机,因为内核最终控制着计算机的的硬件.但是图形界面只会让简单的事情更简单,但是对于复杂的操作,需要几步,但是对于命令行往往少很多.所以命令行针对是复杂情景下的操作.</p>
+<h2 id="5-3-shell脚本-script"><a href="#5-3-shell脚本-script" class="headerlink" title="5.3 shell脚本(script)"></a>5.3 shell脚本(script)</h2><p>　　主要是针对于一般重复性的操作,将其打包成一组命令行,增加可复用性,节省时间.因为shell是解释型语言,不需要什么专门的编译器,直接调用系统就可以.<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看linux下的shell所支持的命令行种类</span></span><br><span class="line">[root@VM_0_17_centos janusgraph]#  vim   /etc/shells</span><br><span class="line"><span class="builtin-name">Error</span> detected <span class="keyword">while</span> processing /etc/vimrc:</span><br><span class="line">line   64:</span><br><span class="line">W18: Invalid character <span class="keyword">in</span><span class="built_in"> group </span>name</span><br><span class="line">Press ENTER <span class="keyword">or</span><span class="built_in"> type </span>command <span class="keyword">to</span> continue</span><br><span class="line">  1 /bin/sh</span><br><span class="line">  2 /bin/bash       #bash是sh的增强版</span><br><span class="line">  3 /sbin/nologin</span><br><span class="line">  4 /usr/bin/sh</span><br><span class="line">  5 /usr/bin/bash</span><br><span class="line">  6 /usr/sbin/nologin</span><br><span class="line">  7 /bin/tcsh</span><br><span class="line">  8 /bin/csh</span><br></pre></td></tr></table></figure></p>
+<h1 id="六-linux补充"><a href="#六-linux补充" class="headerlink" title="六.linux补充"></a>六.linux补充</h1><p>1.cd -  :<br>　　　返回上一次目录<br>2.jps:<br>　　jps(Java Virtual Machine Process Status Tool)是JDK1.5提供的一个显示当前所有java进程pid的命令<br>3.tar zxvf zhcon-0.2.5.tar.gz<br>　　这些都是tar的参数。.tar.gz是一个压缩包，.tar只是打包而没有压缩，注意这点。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">z</span>：通过<span class="selector-tag">gzip</span>支持压缩或解压缩。还有其他的压缩或解压缩方式，比如<span class="selector-tag">j</span>表示<span class="selector-tag">bzip2</span>的方式。</span><br><span class="line"><span class="selector-tag">x</span>：解压缩。<span class="selector-tag">c</span>是压缩。</span><br><span class="line"><span class="selector-tag">v</span>：在压缩或解压缩过程中显示正在处理的文件名</span><br><span class="line"><span class="selector-tag">f</span>：<span class="selector-tag">f</span>后面必须跟上要处理的文件名。也就是说你不能写成这样 <span class="selector-tag">tar</span> <span class="selector-tag">-zxfv</span> <span class="selector-tag">zhcon-0</span><span class="selector-class">.2</span><span class="selector-class">.5</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure></p>
+<p>4.solr create -c my_core 其中-c全称为config<br>5.chown：<br>　　主要是设置<strong>文件夹/文件的所有权</strong><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">chown</span> <span class="selector-tag">-r</span> <span class="selector-tag">hhjs</span><span class="selector-pseudo">:hhjs1</span> <span class="selector-tag">hbase</span></span><br></pre></td></tr></table></figure></p>
+<p>　　含义:hbase这个文件夹及其子文件夹(-r的缘故)的属主是hhjs,而这个属主又是属于hhjs1这个用户组的.因此不单单可以改变访问权限(使用权),并且还拥有这个HBASE文件夹(拥有权).<br>6.chmod:<br>　　主要是修改某个用户对某个文件/文件夹的操作权限(使用权).形式为:<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod <span class="string">[who]</span> <span class="string">[opt]</span> <span class="string">[mode]</span> 文件/目录名</span><br></pre></td></tr></table></figure></p>
+<p>(1)[who]参数说明:<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">其中who表示对象:</span><br><span class="line">u：表示文件所有者 </span><br><span class="line">g：表示同组用户 </span><br><span class="line">o：表示其它用户 </span><br><span class="line"><span class="keyword">a</span>：表示所有用户</span><br></pre></td></tr></table></figure></p>
+<p>(2)[opt]参数说明<br><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">其中opt代表权限的增删操作</span><br><span class="line">+：添加某个权限 </span><br><span class="line">-：取消某个权限 </span><br><span class="line">=：赋予给定的权限，并取消原有的权限</span><br></pre></td></tr></table></figure></p>
+<p>(3)[mode]参数说明<br><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r：可读 </span><br><span class="line">w：可写 </span><br><span class="line"><span class="keyword">x</span>：可执行</span><br></pre></td></tr></table></figure></p>
+<p>例子:<br>   <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#为当前用户的同组用户<span class="selector-tag">a</span>.txt增加读写权限</span><br><span class="line">chmod g+rw <span class="selector-tag">a</span>.txt</span><br></pre></td></tr></table></figure></p>
+<h1 id="七-java安装"><a href="#七-java安装" class="headerlink" title="七.java安装"></a>七.java安装</h1><p>1.Centos中yum方式安装java<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看是否已经安装</span></span><br><span class="line">yum <span class="keyword">list</span> installed |grep java</span><br><span class="line"><span class="comment">#查看java的版本</span></span><br><span class="line">yum -y <span class="keyword">list</span> java*</span><br><span class="line"><span class="comment">#选择需要安装的java版本</span></span><br><span class="line">yum -y <span class="keyword">install</span> java-<span class="number">1.8</span>.<span class="number">0</span>-openjdk*</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084845.jpg" alt="centos在线安装java"><br>　　安装好了之后,那么就需要进行设置环境变量.因此在需要先找到java的安装目录.<br>2.查询java安装目录:<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#三步走</span></span><br><span class="line">which java  <span class="params">(定位到java的真正安装目录)</span> </span><br><span class="line"><span class="keyword">ls</span> -lrt  <span class="string">/usr/bin/java</span></span><br><span class="line"><span class="keyword">ls</span> -lrt <span class="string">/etc/alternatives/java</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084847.jpg" alt="找到java的安装目录"></p>
+<p>3.设置环境变量:<br>　　跳转到环境变量设置文件:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/<span class="keyword">profile</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084848.jpg" alt="编辑环境变量配置文件"><br>在该配置文件的末行输入如下内容:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JRE_HOME</span>=<span class="variable">$JAVA_HOME</span>/jre</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CLASSPATH</span>=<span class="variable">$JAVA_HOME</span>/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$JAVA_HOME</span>/bin:$JRE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<p>4.在.bashrc文件中配置JAVA_HOME<br>　　–＞为了之后的hadoop,在文件的首行添加:~/~<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/lib/jvm/java-<span class="number">1.8</span>.0-openjdk-<span class="number">1.8</span>.0.171-<span class="number">8.b10</span>.el7_5.x86_64</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084849.jpg" alt=".bashrc文件中配置JAVA_HOME"></p>
+<h1 id="八-hadoop"><a href="#八-hadoop" class="headerlink" title="八.hadoop"></a>八.hadoop</h1><h2 id="8-1-安装设置"><a href="#8-1-安装设置" class="headerlink" title="8.1 安装设置"></a>8.1 安装设置</h2><p>1.上传对应的安装包到云服务器上,本文是通过xftp软件进行上传.文件名为:hadoop-2.7.6.tar.gz,截图如下<br>2.之后进行如下操作<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#2.1解压安装包</span></span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> hhjs]<span class="meta"># sudo tar -zxf hadoop-2.7.6.tar.gz</span></span><br><span class="line"><span class="meta">#2.安装包重命名</span></span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> hhjs]<span class="meta"># sudo mv hadoop-2.7.6 hadoop</span></span><br><span class="line"><span class="meta">#3.设置当前用户对其的权限</span></span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> hhjs]<span class="meta"># sudo chown -R hhjs:hhjs hadoop</span></span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> hhjs]<span class="meta"># cd hadoop</span></span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> hadoop]<span class="meta"># cd bin</span></span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> bin]<span class="meta"># ls</span></span><br><span class="line">container-executor  hadoop.cmd  hdfs.cmd  mapred.cmd  test-container-executor  yarn.cmd</span><br><span class="line">hadoop              hdfs        mapred    rcc         yarn</span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> bin]<span class="meta"># cd ..</span></span><br><span class="line"><span class="meta">#4.进入安装目录查看版本号</span></span><br><span class="line">[root<span class="symbol">@VM_0_17_centos</span> hadoop]<span class="meta"># bin/hadoop version</span></span><br><span class="line">Hadoop <span class="number">2.7</span><span class="number">.6</span></span><br><span class="line">Subversion https://shv<span class="symbol">@git</span>-wip-us.apache.org/repos/asf/hadoop.git -r <span class="number">085099</span>c66cf28be31604560c376fa282e69282b8</span><br><span class="line">Compiled by kshvachk on <span class="number">2018</span><span class="number">-04</span><span class="number">-18</span>T01:<span class="number">33</span>Z</span><br><span class="line">Compiled <span class="keyword">with</span> protoc <span class="number">2.5</span><span class="number">.0</span></span><br><span class="line">From source <span class="keyword">with</span> checksum <span class="number">71e2695531</span>cb3360ab74598755d036</span><br><span class="line">This command was <span class="built_in">run</span> using /home/hhjs/hadoop/share/hadoop/common/hadoop-common<span class="number">-2.7</span><span class="number">.6</span>.jar</span><br></pre></td></tr></table></figure></p>
+<h2 id="8-2-伪分布式设置"><a href="#8-2-伪分布式设置" class="headerlink" title="8.2 伪分布式设置"></a>8.2 伪分布式设置</h2><h3 id="8-2-1-环境变量设置"><a href="#8-2-1-环境变量设置" class="headerlink" title="8.2.1 环境变量设置:"></a>8.2.1 环境变量设置:</h3><p>　　首先进行hadoopd环境变量的设置,在~/.bashrc文件下,需要用ls -a才可以看见<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_HOME</span>=/home/hhjs/hadoop</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_INSTALL</span>=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_MAPRED_HOME</span>=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_COMMON_HOME</span>=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_HDFS_HOME</span>=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">YARN_HOME</span>=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_COMMON_LIB_NATIVE_DIR</span>=<span class="variable">$HADOOP_HOME</span>/lib/native</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$HADOOP_HOME/sbin:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure></p>
+<p>输入如下命令,该文件立即生效:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<p>最后可以如下命令进行测试:<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@VM_0_17_centos</span> ~]<span class="meta"># echo $HADOOP_HOME</span></span><br><span class="line"><span class="meta">#说明是hadoop的安装目录</span></span><br><span class="line">/home/hhjs/hadoop</span><br></pre></td></tr></table></figure></p>
+<h3 id="8-2-2-伪分布式设置"><a href="#8-2-2-伪分布式设置" class="headerlink" title="8.2.2 伪分布式设置"></a>8.2.2 伪分布式设置</h3><p>主要配置的文件有两个:<br>　/home/hhjs/hadoop/etc/hadoop/下的core-site.xml与hdfs-site.xml,都是在文件中的configuration块,即<configuration></configuration>当中添加.<br>1.配置core-site.xml文件<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line"><span class="params">&lt;name&gt;</span>hadoop.tmp.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line"><span class="params">&lt;value&gt;</span>file:<span class="meta-keyword">/home/</span>hhjs<span class="meta-keyword">/hadoop/</span>tmp<span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;description&gt;</span>Abase for other temporary directories.<span class="params">&lt;/description&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line"><span class="params">&lt;name&gt;</span>fs.defaultFS<span class="params">&lt;/name&gt;</span></span><br><span class="line"> <span class="params">&lt;value&gt;</span>hdfs:<span class="comment">//localhost:9000&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.配置hdfs-site.xml<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line"><span class="params">&lt;name&gt;</span>dfs.replication<span class="params">&lt;/name&gt;</span></span><br><span class="line"><span class="params">&lt;value&gt;</span><span class="number">1</span><span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line"><span class="params">&lt;name&gt;</span>dfs.namenode.name.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line"><span class="params">&lt;value&gt;</span>file:<span class="meta-keyword">/home/</span>hhjs<span class="meta-keyword">/hadoop/</span>tmp<span class="meta-keyword">/dfs/</span>name<span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line"><span class="params">&lt;name&gt;</span>dfs.datanode.data.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line"><span class="params">&lt;value&gt;</span>file:<span class="meta-keyword">/home/</span>hhje<span class="meta-keyword">/hadoop/</span>tmp<span class="meta-keyword">/dfs/</span>data<span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="8-2-3-启动"><a href="#8-2-3-启动" class="headerlink" title="8.2.3 启动"></a>8.2.3 启动</h3><p>1.NameNode的格式化<br>　　首次启动hadoop,需要执行NameNode的格式化,具体在/home/hhjs/hadoop/目录下执行:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bin/hdfs </span>namenode -format</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084850.jpg" alt="NameNode的格式化"><br>2.启动NaneNode 和 DataNode 守护进程,也在/home/hhjs/hadoop/目录下执行<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/<span class="literal">start</span>-dfs.sh</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84853.jpg" alt="NaneNode 和 DataNode守护进程"><br>3.启动jps:<br>　　jps全称为:java process status<br>　　在/home/hhje/hadoop/目录下执行,输入<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">jps</span></span><br></pre></td></tr></table></figure></p>
+<p>得到java进程情况<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084854.jpg" alt="java进程情况"></p>
+<h1 id="九-hbase1-3-1"><a href="#九-hbase1-3-1" class="headerlink" title="九.hbase1.3.1"></a>九.hbase1.3.1</h1><h2 id="9-1-概念"><a href="#9-1-概念" class="headerlink" title="9.1 概念"></a>9.1 概念</h2><p>　　HADOOP是一个数据仓库,一般是静态的,而HDFS作为文件的存储格式(HADOOP file system),不能满足实时读写,因此在HDFS之上建立了HBASE数据库(数据库是动态的,DataBase on Hadoop),来满足实时读写</p>
+<h2 id="9-2-spark-hadoop-hbase-HDFS"><a href="#9-2-spark-hadoop-hbase-HDFS" class="headerlink" title="9.2 spark,hadoop,hbase,HDFS"></a>9.2 spark,hadoop,hbase,HDFS</h2><p>　　spark:处理计算数据;–(操作数据)<br>　　hadoop:管理资源(计算,存储)–管理数据的存储与操作.<br>　　HDFS:分布式文件系统,类似window上的资源管理器—存储数据<br>　　HBASE:分布式数据库,主要存储非结构化数据,键值形式存储.类似在window资源管理器上的Oracle数据库.–存储数据<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084855.jpg" alt="hadoop生态系统"></p>
+<h2 id="9-3-准备"><a href="#9-3-准备" class="headerlink" title="9.3 准备"></a>9.3 准备</h2><p>　　从官网上下载:hbase-1.3.1.tar.gz,上传到云服务器进行解压 ,之后将lib目录下有关hadoop-2.5.1的jar全部替换成hadoop-2.7.6的jar包,除了hadoop-client不能在hadoop的安装包中找到,其余都可以,hadoop-client-2.5.1可以删除.</p>
+<h2 id="9-4-解压缩"><a href="#9-4-解压缩" class="headerlink" title="9.4 解压缩"></a>9.4 解压缩</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">tar</span> <span class="selector-tag">-zxf</span> <span class="selector-tag">hbase-1</span><span class="selector-class">.3</span><span class="selector-class">.1-bin</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084857.jpg" alt="解压hbase-1.3.1-bin.tar.gz"><br>　　先在云端删除原先hadoop的jar包(14项),将对应的hadoop-2.7.6的jar包(除了hadoop-client都可以在hadoop安装包找到)上传到云端:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084858.jpg" alt="对应hadoop-2.7.6的jar包"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084859.jpg" alt="上传hadoop-2.7.6的jar包"><br>再次打包.输入:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zcvf</span> <span class="selector-tag">hbase-1</span><span class="selector-class">.3</span><span class="selector-class">.1</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span> <span class="selector-tag">hbase-1</span><span class="selector-class">.3</span><span class="selector-class">.1</span></span><br></pre></td></tr></table></figure></p>
+<p>生成hbase-1.3.1.tar.gz,删除原先的上传的hbase-1.3.1-bin.tar<br>结果为:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084900.jpg" alt="重新打包"></p>
+<h2 id="9-5-重命名"><a href="#9-5-重命名" class="headerlink" title="9.5 重命名"></a>9.5 重命名</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#当前目录下</span><br><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">mv</span> <span class="selector-tag">hbase-1</span><span class="selector-class">.3</span><span class="selector-class">.1</span> <span class="selector-tag">hbase</span></span><br></pre></td></tr></table></figure>
+<h2 id="9-6-权限设置"><a href="#9-6-权限设置" class="headerlink" title="9.6 权限设置"></a>9.6 权限设置</h2><p>文件权限(在hhjs目录下):<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#可以参考linux基本命令那章.</span></span><br><span class="line"><span class="keyword">chown</span> -R hhjs:hhjs hbase</span><br><span class="line"><span class="keyword">chmod</span> -R <span class="number">775</span> hbase</span><br></pre></td></tr></table></figure></p>
+<p>解释如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084902.jpg" alt="文件权限"></p>
+<h2 id="9-7-环境配置"><a href="#9-7-环境配置" class="headerlink" title="9.7 环境配置"></a>9.7 环境配置</h2><h3 id="9-7-1-环境变量设置"><a href="#9-7-1-环境变量设置" class="headerlink" title="9.7.1 环境变量设置"></a>9.7.1 环境变量设置</h3><p>在<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/<span class="keyword">profile</span></span><br></pre></td></tr></table></figure></p>
+<p>行末下,添加hbase的环境变量<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_HOME</span>=/home/hhjs/hbase</span><br></pre></td></tr></table></figure></p>
+<p>保存退出之后,输入<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span> <span class="regexp">/etc/</span>profile</span><br></pre></td></tr></table></figure></p>
+<p>立即生效</p>
+<h3 id="9-7-2-环境设置"><a href="#9-7-2-环境设置" class="headerlink" title="9.7.2 环境设置"></a>9.7.2 环境设置</h3><p>1.配置hbase/conf/hbase-env.sh<br>　　其中hbase所指为HBASE的安装目录<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_LOG_DIR</span>=<span class="variable">$&#123;HBASE_HOME&#125;</span>/logs</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_MANAGES_ZK</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084903.jpg" alt="hbase-env.sh内容"><br>2.配置hbase/conf/hbase-site.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--注意上述路径需要与hadoop中core-site.xml中配置的fs.default.name路径相同--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--zookeeper的法定人数也即机器数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>localhost<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>zookeeper.znode.parent<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--指定zookeeper的相对目录--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>3.启动HBASE:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bin/<span class="keyword">start</span>-hbase.sh          <span class="comment">#启动hbase</span></span><br><span class="line"><span class="keyword">bin</span>/<span class="keyword">stop</span>-hbase.sh           <span class="comment">#停止hbase</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084905.jpg" alt="mark"><br>4,查看hbase数据:<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在hhjs目录下</span></span><br><span class="line">hbase/bin/hbase <span class="keyword">shell</span><span class="bash"></span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084906.jpg" alt="hbase数据"><br>4.测试查看java进程<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084907.jpg" alt="查看java进程"></p>
+<h2 id="9-8-hbase异常问题"><a href="#9-8-hbase异常问题" class="headerlink" title="9.8 hbase异常问题"></a>9.8 hbase异常问题</h2><p>1.stop-habse.sh关不了<br>　　先输入：hbase-daemon.sh stop master<br>　　再输入：stop-hbase.sh就可以关闭HBase集群了<br>截图如下:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084909.jpg" alt="停止成功"><br>2.hbase启动时regionserver running as process 20009. Stop it first.<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#hbase/conf/</span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--注意上述路径需要与hadoop中core-site.xml中配置的fs.default.name路径相同--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--要用HDFS为Hbase提供存储空间，定义hbase.rootdir参数时HDFS文件系统的主机名和端口号必须与Hadoop的配置文件core-site.xml中fs.default.name参数的配置一致--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>修改之后截图:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084910.jpg" alt="启动成功"></p>
+<h1 id="十-solr安装"><a href="#十-solr安装" class="headerlink" title="十.solr安装"></a>十.solr安装</h1><p>1.安装包上传至云服务器,同时解压,并重命名为solr<br>2.启动:<br>　　在solr安装目录输入:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bin/solr </span>start</span><br></pre></td></tr></table></figure></p>
+<p>如果出现下图问题:权限不足,<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084911.jpg" alt="solr启动权限不足"><br>那么就使用:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/solr <span class="keyword">start</span> -<span class="keyword">force</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084913.jpg" alt="启动成功"><br>3.配置站点规则.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84914.jpg" alt="配置安全组"><br>或者<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084915.jpg" alt="配置安全组"><br>之后新建规则:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084916.jpg" alt="新建安全组"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084917.jpg" alt="立即设置规则"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084918.jpg" alt="添加规则"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084922.jpg" alt="设置对应的站点规则"><br>隔几分钟后:<br>登录<a href="http://193.112.89.252:8983/solr/index.html" target="_blank" rel="noopener">http://193.112.89.252:8983/solr/index.html</a>,<br>就可以了.结果如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84923.jpg" alt="无cloud的结果"><br>没有cloud的结果,其登录方式是:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bin/solr </span>start</span><br></pre></td></tr></table></figure></p>
+<p>有cloud的登录结果:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084924.jpg" alt="有cloud的结果"><br>其启动solr方式(有cloud)<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bin/solr </span>start -<span class="keyword">cloud </span>-z <span class="number">193</span>.<span class="number">112</span>.<span class="number">89</span>.<span class="number">252</span>:<span class="number">2181</span> -force</span><br></pre></td></tr></table></figure></p>
+<p>注意:如果输入这样:<br>　　bin/solr start -cloud <font color="red"><strong>-m 16g</strong></font> -z 193.112.89.252:2181 -force<br>就会出现:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#内存不足</span></span><br><span class="line">[root@VM_0_17_centos solr]# bin/solr start -cloud -m 16g -z 193.112.89.252:2181 -force</span><br><span class="line">Waiting up <span class="keyword">to</span> 180 seconds <span class="keyword">to</span> see Solr running on<span class="built_in"> port </span>8983 [\]  Still <span class="keyword">not</span> seeing Solr listening on 8983 after 180 seconds!</span><br><span class="line">tail: cannot open ‘/home/hhjs/solr/server/logs/solr.log’ <span class="keyword">for</span> reading: <span class="literal">No</span> such file <span class="keyword">or</span> dir</span><br></pre></td></tr></table></figure></p>
+<h2 id="10-1-solr关闭-启动-重启服务"><a href="#10-1-solr关闭-启动-重启服务" class="headerlink" title="10.1 solr关闭,启动,重启服务:"></a>10.1 solr关闭,启动,重启服务:</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin/solr <span class="keyword">stop</span> -all</span><br><span class="line"><span class="keyword">bin</span>/solr <span class="keyword">start</span> -cloud -z <span class="number">193.112</span><span class="number">.89</span><span class="number">.252</span>:<span class="number">2181</span> -<span class="keyword">force</span>(远程启动)</span><br><span class="line"><span class="keyword">bin</span>/solr restart -cloud -z <span class="number">193.112</span><span class="number">.89</span><span class="number">.252</span>:<span class="number">2181</span> -<span class="keyword">force</span></span><br></pre></td></tr></table></figure>
+<p>参数说明:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">　　-z:使用自定义ZooKeeper<span class="built_in"> connection </span>string启动Solr。该选项只能在-c选项，即SolrCloud模式下使用。如果该选项未提供，Solr将启动内置ZooKeeper实例</span><br><span class="line">　　-c参数表明是以Cloud的方式启动服务，</span><br><span class="line">　　-p指定SolrNode端口，</span><br><span class="line">　　-s指定core的目录（相当于SOLR_HOME），会在该目录下寻找solr.xml文件。</span><br></pre></td></tr></table></figure></p>
+<h1 id="十一-搭建-janusGraph"><a href="#十一-搭建-janusGraph" class="headerlink" title="十一.搭建 janusGraph"></a>十一.搭建 janusGraph</h1><h2 id="11-1-解压"><a href="#11-1-解压" class="headerlink" title="11.1 解压"></a>11.1 解压</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">unzip</span> <span class="selector-tag">janusgraph-0</span><span class="selector-class">.2</span><span class="selector-class">.0-hadoop2</span><span class="selector-class">.zip</span></span><br></pre></td></tr></table></figure>
+<h2 id="11-2-重命名"><a href="#11-2-重命名" class="headerlink" title="11.2 重命名"></a>11.2 重命名</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">janusgraph-0</span><span class="selector-class">.2</span><span class="selector-class">.0-hadoop2</span> <span class="selector-tag">janusgraph</span></span><br></pre></td></tr></table></figure>
+<h2 id="11-3-复制文件"><a href="#11-3-复制文件" class="headerlink" title="11.3 复制文件"></a>11.3 复制文件</h2><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 总共有两个文件需要修改</span></span><br><span class="line">cp conf/janusgraph-hbase-solr.properties conf/gremlin-<span class="keyword">server</span>/janusgraph-hbase-solr-<span class="keyword">server</span>.properties</span><br><span class="line">cp conf/gremlin-<span class="keyword">server</span>/gremlin-<span class="keyword">server</span>.yaml conf/gremlin-<span class="keyword">server</span>/janusgraph-gremlin-<span class="keyword">server</span>.yaml</span><br></pre></td></tr></table></figure>
+<h2 id="11-4-修改文件"><a href="#11-4-修改文件" class="headerlink" title="11.4 修改文件"></a>11.4 修改文件</h2><p>最好用记事本进行添加<br>1.修改janusgraph-hbase-solr-server.properties<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim conf/gremlin-<span class="keyword">server</span>/janusgraph-hbase-solr-<span class="keyword">server</span>.properties</span><br><span class="line"><span class="meta">#或者用记事本打开,使用xftp软件</span></span><br></pre></td></tr></table></figure></p>
+<p>将该文的全部内容先注释,末尾添加<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">gremlin.graph=org<span class="selector-class">.janusgraph</span><span class="selector-class">.core</span><span class="selector-class">.JanusGraphFactory</span></span><br><span class="line">storage.backend=hbase</span><br><span class="line">#hbase的zookeeper地址</span><br><span class="line">storage.hostname=<span class="number">193.112</span>.<span class="number">89.252</span></span><br><span class="line">storage<span class="selector-class">.hbase</span><span class="selector-class">.table</span>=search</span><br><span class="line">#hbase的表名，默认值为janusgraph</span><br><span class="line">storage<span class="selector-class">.hbase</span><span class="selector-class">.table</span>=janusgraph</span><br><span class="line">index<span class="selector-class">.search</span><span class="selector-class">.backend</span>=solr</span><br><span class="line">index<span class="selector-class">.search</span><span class="selector-class">.solr</span><span class="selector-class">.mode</span>=cloud</span><br><span class="line">index<span class="selector-class">.search</span><span class="selector-class">.solr</span><span class="selector-class">.zookeeper-url</span>=<span class="number">193.112</span>.<span class="number">89.252</span>:<span class="number">2181</span></span><br><span class="line"><span class="selector-id">#index</span><span class="selector-class">.x</span><span class="selector-class">.solr</span><span class="selector-class">.configset</span>的值需要与solr建表指定的配置文件名保持一致 </span><br><span class="line">index<span class="selector-class">.search</span><span class="selector-class">.solr</span><span class="selector-class">.configset</span>=janusgraph</span><br></pre></td></tr></table></figure></p>
+<p>2.修改janusgraph-gremlin-server.yaml<br>　　将文中的graph{}那项改为<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">graphs</span>: &#123;</span><br><span class="line">  <span class="attribute">graph</span>: conf/gremlin-server/janusgraph-hbase-solr-server.properties</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>即可,点击保存.</p>
+<h2 id="11-5-创建solr-connection"><a href="#11-5-创建solr-connection" class="headerlink" title="11.5 创建solr connection"></a>11.5 创建solr connection</h2><h3 id="11-5-1-上传solr配置文件"><a href="#11-5-1-上传solr配置文件" class="headerlink" title="11.5.1 上传solr配置文件"></a>11.5.1 上传solr配置文件</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/home/</span>hhjs<span class="regexp">/solr/</span>server<span class="regexp">/scripts/</span>cloud-scripts<span class="regexp">/zkcli.sh   -cmd upconfig -z 193.112.89.252:2181  -d /</span>home<span class="regexp">/hhjs/</span>janusgraph<span class="regexp">/conf/</span>solr -n janusgraph</span><br></pre></td></tr></table></figure>
+<p>其中:<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-z: solr的zookeeper地址</span></span><br><span class="line"><span class="deletion">-d: 本地配置文件路径</span></span><br><span class="line"><span class="deletion">-n：zookeeper上的配置文件名</span></span><br></pre></td></tr></table></figure></p>
+<p>上传结果如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084925.jpg" alt="上传solr配置文件"></p>
+<h3 id="11-5-2-创建collecion"><a href="#11-5-2-创建collecion" class="headerlink" title="11.5.2 创建collecion"></a>11.5.2 创建collecion</h3><p>在浏览器中输入:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">193.112</span>.<span class="number">89.252</span>:<span class="number">8983</span><span class="regexp">/solr/</span>admin<span class="regexp">/collections?action=CREATE&amp;name=janusgraph&amp;numShards=1&amp;replicationFactor=1&amp;maxShardsPerNode=1&amp;property.dataDir=/</span>data<span class="regexp">/solr/g</span>raph&amp;collection.configName=janusgraph&amp;createNodeSet=<span class="number">193.112</span>.<span class="number">89.252</span>:<span class="number">8983</span>_solr</span><br></pre></td></tr></table></figure></p>
+<p>解释:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">numShards</span>=1为janusgraph表使用1个分片；</span><br><span class="line"><span class="attribute">replicationFactor</span>=1为graph表每个分片不设定副本；</span><br><span class="line"><span class="attribute">maxShardsPerNode</span>=1为janusgraph表一个节点上的最大分片数为1；</span><br><span class="line">property.<span class="attribute">dataDir</span>=/data/solr/graph为索引数据存放目录；</span><br><span class="line">collection.<span class="attribute">configName</span>=schema为graph使用的配置文件目录为 janusgraph；</span><br><span class="line"><span class="attribute">createNodeSet</span>=193.112.89.252:8983_solr</span><br></pre></td></tr></table></figure></p>
+<p>得到:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084928.jpg" alt="新建collection的响应"><br>solr界面刷新之后可以看到:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84929.jpg" alt="名为janusgraph的collection"></p>
+<h2 id="11-6-启动JanusGraph-Server-服务器"><a href="#11-6-启动JanusGraph-Server-服务器" class="headerlink" title="11.6 启动JanusGraph Server(服务器)"></a>11.6 启动JanusGraph Server(服务器)</h2><p>　启动之前最好先启动hadoop,solr,hbase,否则会报错.<br>　进入janusgraph对应的安装目录:<br>  输入<br>  <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/gremlin-<span class="keyword">server</span>.sh conf/gremlin-<span class="keyword">server</span>/janusgraph-gremlin-<span class="keyword">server</span>.yaml</span><br></pre></td></tr></table></figure></p>
+<p>  可以得到结果:<br>    <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084930.jpg" alt="JanusGraph Server成功启动"><br>关闭server的命令为<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/janusgraph<span class="selector-class">.sh</span> stop</span><br></pre></td></tr></table></figure></p>
+<p>  注意该命令会关闭所有名为GremlinServer的进程</p>
+<h2 id="11-7-启动janusGraph-client-客户端"><a href="#11-7-启动janusGraph-client-客户端" class="headerlink" title="11.7 启动janusGraph client(客户端)"></a>11.7 启动janusGraph client(客户端)</h2><p>　这个主要是为了能够远程访问,janusGraph服务器,通过在浏览器输入在remote.yaml中设置好的ip地址与监听端口,实现远程访问.具体做法如下:<br>1.编辑janusgrap安装目录下的conf/remote.yaml文件<br>　　为了设置地址与监听端口<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hosts:</span> <span class="string">[193.112.89.252]</span></span><br><span class="line"><span class="attr">port:</span> <span class="number">1981</span></span><br><span class="line"><span class="attr">serializer:</span> <span class="string">&#123;</span> <span class="attr">className:</span> <span class="string">org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,</span> <span class="attr">config:</span> <span class="string">&#123;</span> <span class="attr">serializeResultToString:</span> <span class="literal">true</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084931.jpg" alt="设置地址与监听端口"><br>假如有多个云服务器,通过类似<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ./<span class="keyword">conf</span>/remote.yaml ./<span class="keyword">conf</span>/remote-<span class="keyword">local</span>.yaml</span><br></pre></td></tr></table></figure></p>
+<p>  得到多个远程文件,通过类似设置ip地址与端口,访问的时候:插入对应的访问名,例如:<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">remote connect tinkerpop.server conf/remote-local.yaml</span></span><br></pre></td></tr></table></figure></p>
+<p>就可以.<br>2.进入gremlin命令行,具体做法如下:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gremlin&gt; :remote connect tinkerpop.server <span class="keyword">conf</span>/remote.yaml</span><br><span class="line">==&gt;Configured <span class="number">193.112</span>.<span class="number">89.252</span>/<span class="number">193.112</span>.<span class="number">89.252</span>:<span class="number">1981</span></span><br><span class="line">gremlin&gt; :remote console</span><br><span class="line">==&gt;All scripts will now <span class="keyword">be</span> sent <span class="keyword">to</span> Gremlin Server - [<span class="number">193.112</span>.<span class="number">89.252</span>/<span class="number">193.112</span>.<span class="number">89.252</span>:<span class="number">1981</span>] - <span class="built_in">type</span> <span class="string">':remote console'</span> <span class="keyword">to</span> <span class="keyword">return</span> <span class="keyword">to</span> local <span class="keyword">mode</span></span><br></pre></td></tr></table></figure></p>
+<p>代码中:<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Configured <span class="number">193.112</span><span class="meta">.89</span><span class="meta">.252</span>/<span class="number">193.112</span><span class="meta">.89</span><span class="meta">.252</span>:<span class="number">1981</span></span><br></pre></td></tr></table></figure></p>
+<p>说明已经配置好了.<br>还有<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:remote <span class="built_in">console</span></span><br></pre></td></tr></table></figure></p>
+<p>是用来测试的.</p>
+<h1 id="十二-参考文献"><a href="#十二-参考文献" class="headerlink" title="十二.参考文献"></a>十二.参考文献</h1><p>[1]<a href="https://blog.csdn.net/waitfxfx/article/details/80674966" target="_blank" rel="noopener">https://blog.csdn.net/waitfxfx/article/details/80674966</a><br>[2]<a href="https://blog.csdn.net/oitebody/article/details/80696339" target="_blank" rel="noopener">https://blog.csdn.net/oitebody/article/details/80696339</a><br>[3]<a href="https://docs.janusgraph.org/latest/" target="_blank" rel="noopener">https://docs.janusgraph.org/latest/</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="../../07/janusGraph之配置与数据模型(二)/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    janusGraph之配置与数据模型(二)
+                
+            </div>
+        </a>
+    
+    
+        <a href="../../03/事来则应,事去则静,英雄无言,凭色声威/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">事来则应,事去则静,英雄无言,凭色声威</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/11/python基础知识（一）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211194632.jpg)" alt="python基础知识（一）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/python/基础知识/">基础知识</a></p>
+                            <p class="item-title"><a href="../../../12/11/python基础知识（一）/" class="title">python基础知识（一）</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:35:11.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/11/ALLENNLP安装/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211194557.jpg)" alt="AllenNLP安装" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/环境搭建/">环境搭建</a></p>
+                            <p class="item-title"><a href="../../../12/11/ALLENNLP安装/" class="title">AllenNLP安装</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:32:17.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/11/NLP基础理论系列之词嵌入技术（一）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211192025.jpg)" alt="NLP基础理论系列之词嵌入技术（一）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/基础系列/">基础系列</a></p>
+                            <p class="item-title"><a href="../../../12/11/NLP基础理论系列之词嵌入技术（一）/" class="title">NLP基础理论系列之词嵌入技术（一）</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:18:24.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/01/使用colab平台进行训练/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201135254.jpg)" alt="使用colab平台进行训练" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/深度学习/优化/">优化</a></p>
+                            <p class="item-title"><a href="../../../12/01/使用colab平台进行训练/" class="title">使用colab平台进行训练</a></p>
+                            <p class="item-date"><time datetime="2018-12-01T05:54:06.000Z" itemprop="datePublished">2018-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/01/Bert模型的微调/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201133406.jpg)" alt="Bert模型的微调" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/深度学习/优化/">优化</a></p>
+                            <p class="item-title"><a href="../../../12/01/Bert模型的微调/" class="title">Bert模型的微调</a></p>
+                            <p class="item-date"><time datetime="2018-12-01T05:27:05.000Z" itemprop="datePublished">2018-12-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/">IDEA</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/">Maven</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/Pom/">Pom</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/">NLP</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/交互/">交互</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/名词辨析/">名词辨析</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/基础系列/">基础系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/实体识别/">实体识别</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/词性标注/">词性标注</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/语义解析/">语义解析</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/">Neo4j</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/Spring-boot/">Spring-boot</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/">UML</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/时序图/">时序图</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/">janusgraph</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/">java</a><span class="category-list-count">30</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/I-O流/">I/O流</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/乱码/">乱码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/数据类型/">数据类型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/泛型/">泛型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/注解/">注解</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/知识点/">知识点</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/编码/">编码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/集合/">集合</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">linux</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/知识点/">知识点</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/">maven</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/pom/">pom</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/">navicat</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/导出/">导出</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/">python</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/基础知识/">基础知识</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/">windows</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/环境变量/">环境变量</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/博客建站/">博客建站</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/重庆/">重庆</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/">命令行</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/mysql/">mysql</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/">工具</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/IDEA/">IDEA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/小问题/">小问题</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/">快捷方式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/Navicat/">Navicat</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/">每周报告</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/2018/">2018</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/">深度学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/LSTM/">LSTM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/优化/">优化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/基础/">基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/概念/">概念</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/">知识图谱</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/异常问题/">异常问题</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/知识点/">知识点</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/综述/">综述</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/软件安装/">软件安装</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/">项目实战</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/数据建模/">数据建模</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/">计算机网络</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/">随笔</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/开发心得/">开发心得</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/认识/">认识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/读后感/">读后感</a><span class="category-list-count">2</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ANSI/">ANSI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AllenNLP/">AllenNLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AsList/">AsList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/BERT/">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Bean/">Bean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Colab/">Colab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Collection/">Collection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/CrudRepository/">CrudRepository</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/D2RQ/">D2RQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Documented/">Documented</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Guava/">Guava</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/HANLP/">HANLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/I-O流体系结构/">I/O流体系结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IDEA/">IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IOC/">IOC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Inherited/">Inherited</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/InputStreamReader/">InputStreamReader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/JPA/">JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/LSTM/">LSTM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Map/">Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelAndView/">ModelAndView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelMap/">ModelMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Navicat/">Navicat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Neo4j/">Neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Numpy/">Numpy</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/OGM/">OGM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ORM/">ORM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/POJO/">POJO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pom/">Pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pytorch/">Pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/RNN/">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SDN/">SDN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SGD/">SGD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Spring-boot/">Spring-boot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Tensor/">Tensor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Torch/">Torch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/UML/">UML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/fuseki/">fuseki</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/icarus主题/">icarus主题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph/">janusgraph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph-hbase-hadoop/">janusgraph,hbase,hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/jar包/">jar包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/model/">model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat/">navicat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat异常问题/">navicat异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/neo4j/">neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/parseInt/">parseInt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/pom/">pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/readLine/">readLine()</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/restful/">restful</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/sourceTree/">sourceTree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/">spark</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spring-boot/">spring-boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/thymeleaf/">thymeleaf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/torch函数/">torch函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/windows/">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word-embeding/">word embeding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word2vec/">word2vec</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/xshell/">xshell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/三层架构/">三层架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/云服务器/">云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/人文/">人文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键字/">关键字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键词抽取/">关键词抽取</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分类/">分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分词/">分词</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/初始化/">初始化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/删除/">删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/反射/">反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/变量/">变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/可视化界面/">可视化界面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/命令行/">命令行</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/域名/">域名</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/套接字/">套接字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/学习率/">学习率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/实例化/">实例化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/容器/">容器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象数组/">对象数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象类型/">对象类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/导出/">导出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/小问题/">小问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工作流程/">工作流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工具/">工具</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/异常问题/">异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/微调/">微调</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/快捷键/">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/抽象类/">抽象类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据建模/">数据建模</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据长度/">数据长度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/时序图/">时序图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/栈内存/">栈内存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/模型构建/">模型构建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/泛型/">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解/">注解</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解注入/">注解注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/激励函数/">激励函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/目录结构/">目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/相似度/">相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识图谱/">知识图谱</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识点/">知识点</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/神经网络/">神经网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/综述/">综述</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/编码/">编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/自定义词典/">自定义词典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/艺术/">艺术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/认识/">认识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/设计思想/">设计思想</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词向量/">词向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性标注/">词性标注</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性纠正/">词性纠正</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词汇表/">词汇表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义网/">语义网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义解析/">语义解析</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/读后感/">读后感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/超参数/">超参数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/返回问题/">返回问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/迭代器输出/">迭代器输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/通配符/">通配符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置/">配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置注入/">配置注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句分类/">问句分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句向量/">问句向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句还原/">问句还原</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合关系/">集合关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合工具类/">集合工具类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合形式/">集合形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合类型/">集合类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合转换/">集合转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合输出/">集合输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/非法字符/">非法字符</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="../../../../tags/ANSI/" style="font-size: 10px;">ANSI</a> <a href="../../../../tags/AOP/" style="font-size: 10px;">AOP</a> <a href="../../../../tags/AllenNLP/" style="font-size: 10px;">AllenNLP</a> <a href="../../../../tags/AsList/" style="font-size: 10px;">AsList</a> <a href="../../../../tags/BERT/" style="font-size: 10px;">BERT</a> <a href="../../../../tags/Bean/" style="font-size: 10px;">Bean</a> <a href="../../../../tags/Colab/" style="font-size: 10px;">Colab</a> <a href="../../../../tags/Collection/" style="font-size: 10px;">Collection</a> <a href="../../../../tags/CrudRepository/" style="font-size: 10px;">CrudRepository</a> <a href="../../../../tags/D2RQ/" style="font-size: 10px;">D2RQ</a> <a href="../../../../tags/Docker/" style="font-size: 10px;">Docker</a> <a href="../../../../tags/Documented/" style="font-size: 10px;">Documented</a> <a href="../../../../tags/Guava/" style="font-size: 10px;">Guava</a> <a href="../../../../tags/HANLP/" style="font-size: 10px;">HANLP</a> <a href="../../../../tags/I-O流体系结构/" style="font-size: 10px;">I/O流体系结构</a> <a href="../../../../tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="../../../../tags/IOC/" style="font-size: 10px;">IOC</a> <a href="../../../../tags/Inherited/" style="font-size: 10px;">Inherited</a> <a href="../../../../tags/InputStreamReader/" style="font-size: 10px;">InputStreamReader</a> <a href="../../../../tags/JPA/" style="font-size: 10px;">JPA</a> <a href="../../../../tags/LSTM/" style="font-size: 10px;">LSTM</a> <a href="../../../../tags/MVC/" style="font-size: 10px;">MVC</a> <a href="../../../../tags/Map/" style="font-size: 10px;">Map</a> <a href="../../../../tags/Maven/" style="font-size: 10px;">Maven</a> <a href="../../../../tags/ModelAndView/" style="font-size: 10px;">ModelAndView</a> <a href="../../../../tags/ModelMap/" style="font-size: 10px;">ModelMap</a> <a href="../../../../tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="../../../../tags/Neo4j/" style="font-size: 10px;">Neo4j</a> <a href="../../../../tags/Numpy/" style="font-size: 15px;">Numpy</a> <a href="../../../../tags/OGM/" style="font-size: 10px;">OGM</a> <a href="../../../../tags/ORM/" style="font-size: 10px;">ORM</a> <a href="../../../../tags/POJO/" style="font-size: 10px;">POJO</a> <a href="../../../../tags/Pom/" style="font-size: 10px;">Pom</a> <a href="../../../../tags/Pytorch/" style="font-size: 10px;">Pytorch</a> <a href="../../../../tags/RNN/" style="font-size: 10px;">RNN</a> <a href="../../../../tags/SDN/" style="font-size: 10px;">SDN</a> <a href="../../../../tags/SGD/" style="font-size: 10px;">SGD</a> <a href="../../../../tags/Spring-boot/" style="font-size: 15px;">Spring-boot</a> <a href="../../../../tags/Tensor/" style="font-size: 10px;">Tensor</a> <a href="../../../../tags/Torch/" style="font-size: 10px;">Torch</a> <a href="../../../../tags/UML/" style="font-size: 10px;">UML</a> <a href="../../../../tags/fuseki/" style="font-size: 10px;">fuseki</a> <a href="../../../../tags/git/" style="font-size: 15px;">git</a> <a href="../../../../tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="../../../../tags/icarus主题/" style="font-size: 10px;">icarus主题</a> <a href="../../../../tags/janusgraph/" style="font-size: 10px;">janusgraph</a> <a href="../../../../tags/janusgraph-hbase-hadoop/" style="font-size: 10px;">janusgraph,hbase,hadoop</a> <a href="../../../../tags/jar包/" style="font-size: 10px;">jar包</a> <a href="../../../../tags/java/" style="font-size: 15px;">java</a> <a href="../../../../tags/maven/" style="font-size: 15px;">maven</a> <a href="../../../../tags/model/" style="font-size: 10px;">model</a> <a href="../../../../tags/navicat/" style="font-size: 15px;">navicat</a> <a href="../../../../tags/navicat异常问题/" style="font-size: 10px;">navicat异常问题</a> <a href="../../../../tags/neo4j/" style="font-size: 10px;">neo4j</a> <a href="../../../../tags/parseInt/" style="font-size: 10px;">parseInt</a> <a href="../../../../tags/pom/" style="font-size: 10px;">pom</a> <a href="../../../../tags/python/" style="font-size: 10px;">python</a> <a href="../../../../tags/readLine/" style="font-size: 10px;">readLine()</a> <a href="../../../../tags/restful/" style="font-size: 10px;">restful</a> <a href="../../../../tags/socket/" style="font-size: 10px;">socket</a> <a href="../../../../tags/sourceTree/" style="font-size: 10px;">sourceTree</a> <a href="../../../../tags/spark/" style="font-size: 20px;">spark</a> <a href="../../../../tags/spring-boot/" style="font-size: 10px;">spring-boot</a> <a href="../../../../tags/thymeleaf/" style="font-size: 10px;">thymeleaf</a> <a href="../../../../tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="../../../../tags/torch函数/" style="font-size: 10px;">torch函数</a> <a href="../../../../tags/windows/" style="font-size: 10px;">windows</a> <a href="../../../../tags/word-embeding/" style="font-size: 10px;">word embeding</a> <a href="../../../../tags/word2vec/" style="font-size: 15px;">word2vec</a> <a href="../../../../tags/xshell/" style="font-size: 10px;">xshell</a> <a href="../../../../tags/三层架构/" style="font-size: 10px;">三层架构</a> <a href="../../../../tags/云服务器/" style="font-size: 10px;">云服务器</a> <a href="../../../../tags/人文/" style="font-size: 10px;">人文</a> <a href="../../../../tags/关键字/" style="font-size: 10px;">关键字</a> <a href="../../../../tags/关键词抽取/" style="font-size: 10px;">关键词抽取</a> <a href="../../../../tags/分类/" style="font-size: 10px;">分类</a> <a href="../../../../tags/分词/" style="font-size: 10px;">分词</a> <a href="../../../../tags/初始化/" style="font-size: 10px;">初始化</a> <a href="../../../../tags/删除/" style="font-size: 10px;">删除</a> <a href="../../../../tags/博客/" style="font-size: 10px;">博客</a> <a href="../../../../tags/反射/" style="font-size: 10px;">反射</a> <a href="../../../../tags/变量/" style="font-size: 10px;">变量</a> <a href="../../../../tags/可视化界面/" style="font-size: 10px;">可视化界面</a> <a href="../../../../tags/命令行/" style="font-size: 15px;">命令行</a> <a href="../../../../tags/域名/" style="font-size: 10px;">域名</a> <a href="../../../../tags/套接字/" style="font-size: 10px;">套接字</a> <a href="../../../../tags/学习率/" style="font-size: 10px;">学习率</a> <a href="../../../../tags/实例化/" style="font-size: 15px;">实例化</a> <a href="../../../../tags/容器/" style="font-size: 10px;">容器</a> <a href="../../../../tags/对象数组/" style="font-size: 10px;">对象数组</a> <a href="../../../../tags/对象类型/" style="font-size: 10px;">对象类型</a> <a href="../../../../tags/导出/" style="font-size: 10px;">导出</a> <a href="../../../../tags/小问题/" style="font-size: 15px;">小问题</a> <a href="../../../../tags/工作流程/" style="font-size: 10px;">工作流程</a> <a href="../../../../tags/工具/" style="font-size: 20px;">工具</a> <a href="../../../../tags/异常问题/" style="font-size: 10px;">异常问题</a> <a href="../../../../tags/微调/" style="font-size: 10px;">微调</a> <a href="../../../../tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="../../../../tags/抽象类/" style="font-size: 10px;">抽象类</a> <a href="../../../../tags/接口/" style="font-size: 10px;">接口</a> <a href="../../../../tags/数据建模/" style="font-size: 10px;">数据建模</a> <a href="../../../../tags/数据长度/" style="font-size: 10px;">数据长度</a> <a href="../../../../tags/时序图/" style="font-size: 10px;">时序图</a> <a href="../../../../tags/栈内存/" style="font-size: 10px;">栈内存</a> <a href="../../../../tags/模型构建/" style="font-size: 10px;">模型构建</a> <a href="../../../../tags/泛型/" style="font-size: 10px;">泛型</a> <a href="../../../../tags/注解/" style="font-size: 15px;">注解</a> <a href="../../../../tags/注解注入/" style="font-size: 10px;">注解注入</a> <a href="../../../../tags/测试/" style="font-size: 10px;">测试</a> <a href="../../../../tags/激励函数/" style="font-size: 10px;">激励函数</a> <a href="../../../../tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="../../../../tags/目录结构/" style="font-size: 10px;">目录结构</a> <a href="../../../../tags/相似度/" style="font-size: 10px;">相似度</a> <a href="../../../../tags/知识图谱/" style="font-size: 15px;">知识图谱</a> <a href="../../../../tags/知识点/" style="font-size: 15px;">知识点</a> <a href="../../../../tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="../../../../tags/综述/" style="font-size: 20px;">综述</a> <a href="../../../../tags/编码/" style="font-size: 10px;">编码</a> <a href="../../../../tags/自定义词典/" style="font-size: 10px;">自定义词典</a> <a href="../../../../tags/艺术/" style="font-size: 10px;">艺术</a> <a href="../../../../tags/认识/" style="font-size: 10px;">认识</a> <a href="../../../../tags/设计思想/" style="font-size: 10px;">设计思想</a> <a href="../../../../tags/词向量/" style="font-size: 10px;">词向量</a> <a href="../../../../tags/词性标注/" style="font-size: 15px;">词性标注</a> <a href="../../../../tags/词性纠正/" style="font-size: 10px;">词性纠正</a> <a href="../../../../tags/词汇表/" style="font-size: 10px;">词汇表</a> <a href="../../../../tags/语义网/" style="font-size: 10px;">语义网</a> <a href="../../../../tags/语义解析/" style="font-size: 15px;">语义解析</a> <a href="../../../../tags/读后感/" style="font-size: 10px;">读后感</a> <a href="../../../../tags/超参数/" style="font-size: 10px;">超参数</a> <a href="../../../../tags/返回问题/" style="font-size: 10px;">返回问题</a> <a href="../../../../tags/迭代器输出/" style="font-size: 10px;">迭代器输出</a> <a href="../../../../tags/通配符/" style="font-size: 10px;">通配符</a> <a href="../../../../tags/配置/" style="font-size: 15px;">配置</a> <a href="../../../../tags/配置注入/" style="font-size: 10px;">配置注入</a> <a href="../../../../tags/问句分类/" style="font-size: 10px;">问句分类</a> <a href="../../../../tags/问句向量/" style="font-size: 10px;">问句向量</a> <a href="../../../../tags/问句还原/" style="font-size: 10px;">问句还原</a> <a href="../../../../tags/集合关系/" style="font-size: 10px;">集合关系</a> <a href="../../../../tags/集合工具类/" style="font-size: 10px;">集合工具类</a> <a href="../../../../tags/集合形式/" style="font-size: 10px;">集合形式</a> <a href="../../../../tags/集合类型/" style="font-size: 10px;">集合类型</a> <a href="../../../../tags/集合转换/" style="font-size: 10px;">集合转换</a> <a href="../../../../tags/集合输出/" style="font-size: 10px;">集合输出</a> <a href="../../../../tags/非法字符/" style="font-size: 10px;">非法字符</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://xueshu.baidu.com/">百度学术</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.appinn.com/category/windows/">小众软件</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+     <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 不负韶华不负己<br>
+        </div>
+    </div>
+
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("06/18/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+</footer>
+        
+
+
+    
+        <script src="../../../../libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="../../../../libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="../../../../js/main.js"></script>
+
+    </div>
+</body>
+</html>

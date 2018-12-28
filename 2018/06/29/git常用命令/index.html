@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>git常用命令 | iVEGA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="本文主要是一个git的精简教程,包括git的产生原因,git数据库的类型,重点讲述了git的工作流程,并且以此进行展开,之后讲述了git的储藏(bash),分支功能,标签功能,最后的话,还进行了git的一些配置,可以设置不同级别的配置.">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git常用命令">
+<meta property="og:url" content="http://yoursite.com/2018/06/29/git常用命令/index.html">
+<meta property="og:site_name" content="iVEGA">
+<meta property="og:description" content="本文主要是一个git的精简教程,包括git的产生原因,git数据库的类型,重点讲述了git的工作流程,并且以此进行展开,之后讲述了git的储藏(bash),分支功能,标签功能,最后的话,还进行了git的一些配置,可以设置不同级别的配置.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102159.png">
+<meta property="og:updated_time" content="2018-11-13T02:22:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git常用命令">
+<meta name="twitter:description" content="本文主要是一个git的精简教程,包括git的产生原因,git数据库的类型,重点讲述了git的工作流程,并且以此进行展开,之后讲述了git的储藏(bash),分支功能,标签功能,最后的话,还进行了git的一些配置,可以设置不同级别的配置.">
+<meta name="twitter:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102159.png">
+    
+
+    
+
+    
+        <link rel="icon" href="../../../../css/images/favicon.png">
+    
+    <link rel="stylesheet" href="../../../../libs/song-ke-fan/styles.css">
+    <link rel="stylesheet" href="../../../../libs/shui-yun/styles.css">
+    <link rel="stylesheet" href="../../../../libs/deng-xian/styles.css">
+    <link rel="stylesheet" href="../../../../libs/Microsoft-JhengHei/styles.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="../../../../libs/open-sans/styles.css">
+    <link rel="stylesheet" href="../../../../libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="../../../../css/style.css">
+
+    <script src="../../../../libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="../../../../libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="../../../../libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+
+
+</head>
+
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="../../../../index.html" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">iVEGA</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="../../../../.">首页</a>
+                
+                    <a class="main-nav-link" href="../../../../archives">归档</a>
+                
+                    <a class="main-nav-link" href="../../../../categories">分类</a>
+                
+                    <a class="main-nav-link" href="../../../../tags">标签</a>
+                
+                    <a class="main-nav-link" href="../../../../about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="../../../../css/images/avatar.png">
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '../../../../content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="../../../../js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="../../../../.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="../../../../css/images/avatar.png">
+            <h2 id="name">iVEGA</h2>
+            <h3 id="title">一个小确幸的地方</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>天津大学, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/xiaopingzhong/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                96
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                145
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/xiaopingzhong/" target="_blank" title="github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://weibo.com/u/5124024867" target="_blank" title="weibo">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://blog.csdn.net/fbsxghvudk" target="_blank" title="linux">
+                            <i class="fab fa-linux"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://mail.tju.edu.cn" target="_blank" title="angellist">
+                            <i class="fab fa-angellist"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-git常用命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102159.png" class="article-banner">
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            git常用命令
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="">
+            <time datetime="2018-06-29T09:02:50.000Z" itemprop="datePublished">2018-06-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="../../../../categories/linux/">linux</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/linux/知识点/">知识点</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="../../../../tags/git/">git</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>　　本文主要是一个git的精简教程,包括git的产生原因,git数据库的类型,重点讲述了git的工作流程,并且以此进行展开,之后讲述了git的储藏(bash),分支功能,标签功能,最后的话,还进行了git的一些配置,可以设置不同级别的配置.<a id="more"></a></p>
+<hr>
+<!-- toc -->
+<hr>
+<h1 id="一-概述"><a href="#一-概述" class="headerlink" title="一.概述"></a>一.概述</h1><h2 id="1-1-原因"><a href="#1-1-原因" class="headerlink" title="1.1 原因:"></a>1.1 原因:</h2><p>　　为了解决版本控制问题(包含多人编辑同一文件,有时修改的部分是相同,这就会导致在多次提交的时候(每提交一次就是一个版本),出现版本冲突),所以也就是应用而生了很多版本控制工具:VSS、CVS、SVN、Git等,其中当属git应用最广泛,Git是一个分布式版本管理系统,优点是远程仓库与本地仓库是相互独立,在没有联网的情况,本地仓库可以独立工作,为了解决以上版本控制存在问题.<br>　　但是所有版本控制系统智能n只能跟踪文本文件的内容改动,对于非文本文件,只能知道文件的添加信息(大小,时间,类型),具体的内容不知道.</p>
+<h2 id="1-2-git数据库"><a href="#1-2-git数据库" class="headerlink" title="1.2 git数据库"></a>1.2 git数据库</h2><p>　　Git的数据库(Repository) 分为远程数据库和本地数据库的两种。</p>
+<ul>
+<li>远程数据库: 配有专用的服务器，为了多人共享而建立的数据库。</li>
+<li>本地数据库: 为了方便用户个人使用，在自己的机器上配置的数据库。<br>　　平时用的话,只需要使用本地数据库/仓库就可以,远程数据库更多的是为了分享与团队成员协作.<br>　　创建远程数据库方法:登录github官网,注册用户,之后进入个人主页创建一个仓库即可<br>　　创建本地数据库的方法有两种：一种是创建全新的数据库，另一种是复制远程数据库<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084730.jpg" alt="远程仓库-本地仓库-工作区"><h1 id="二-git工作流程"><a href="#二-git工作流程" class="headerlink" title="二.git工作流程"></a>二.git工作流程</h1>先上图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084731.jpg" alt="git的工作流程"></li>
+</ul>
+<h2 id="2-1-git-add"><a href="#2-1-git-add" class="headerlink" title="2.1 git add"></a>2.1 git add</h2><p>1.形式:git add 文件名<br>2.作用:将指定文件添加到版本库的暂存区,<strong>可以连续添加多次.</strong></p>
+<h2 id="2-2-git-commit"><a href="#2-2-git-commit" class="headerlink" title="2.2 git commit"></a>2.2 git commit</h2><p>1.形式:git commit -m ‘提交信息’<br>2.作用:将暂存区的文件<strong>一次性</strong>提交到版本库的分支。在提交的时候可能会出现,需要配置如下信息.<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--local user.name username</span><br><span class="line">git<span class="built_in"> config </span>--local user.email</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-3-git-push"><a href="#2-3-git-push" class="headerlink" title="2.3 git push"></a>2.3 git push</h2><p>先上图:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084732.jpg" alt="push推送"><br>形式:<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> 本地分支:远程分支</span><br></pre></td></tr></table></figure></p>
+<p>　　由于在发送之前需要先tracking(绑定),主要是绑定仓库,分支.一般关联仓库之后,会进行仓库的关联.节省一些操作时需要输入的参数。</p>
+<h3 id="2-3-1-关联仓库"><a href="#2-3-1-关联仓库" class="headerlink" title="2.3.1 关联仓库"></a>2.3.1 关联仓库</h3><p>形式:<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种添加远程数据仓库(从字面意思理解)</span></span><br><span class="line">git remote <span class="keyword">add</span><span class="bash"> origin git@github.com:xiaopingzhong/xiaopingzhong.git</span></span><br><span class="line"><span class="bash"><span class="comment"># 先克隆远程数据库,之后切换到克隆出来的数据仓库目录.可以不用关联了,然后直接git push origin</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-3-2-关联分支"><a href="#2-3-2-关联分支" class="headerlink" title="2.3.2 关联分支"></a>2.3.2 关联分支</h3><p>先声明:<br>　　一般远程库设为origin,那么至于origin代表的是默认的远程仓库,下图就是代表xiaopingzhong.github.io.git这个远程仓库,实际上可以在.git/config中进行修改.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084733.jpg" alt="origin的含义"><br>总共有三种方法:<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#第一种:单纯关联,一般远程库设为origin,那么至于origin代表的是默认的远程仓库,可以在.git/config中进行修改.</span><br><span class="line">git branch --set-upstream [本地分支名] [远程库]/[远程分支]</span><br><span class="line">#或者</span><br><span class="line">git branch --set-upstream-to [远程库]/[远程分支] [本地分支]</span><br><span class="line">#第二种:在推送的时候进行关联,其中[远程分支]的[远程库] 之前已经有origin,进行声明了.</span><br><span class="line">git push -u origin [本地分支名] [远程分支名]</span><br><span class="line">#为什么需要-u,就是为了说明该分支在其他仓库也有.所以一开始关联的时候需要使用-u.</span><br><span class="line">#假如是分支与仓库是一对一的关系,可以不用-u.(保险期间统一使用-u)</span><br></pre></td></tr></table></figure></p>
+<p>一般关联之后,以后提交分支的时候,只需要:<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin <span class="string">[远程库]</span> <span class="string">[远程分支]</span></span><br></pre></td></tr></table></figure></p>
+<p>   push的推送方式:是simple,就是只会会默认推送当前分支.</p>
+<h2 id="2-4-git-fetch"><a href="#2-4-git-fetch" class="headerlink" title="2.4 git fetch"></a>2.4 git fetch</h2><p>形式:<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch <span class="string">[远程仓库名/主机名]</span> <span class="string">[分支名]</span></span><br></pre></td></tr></table></figure></p>
+<p>　　其中git fetch默认是获取当前仓库的当前分支的最新状态到本地.否则根据需要,获取不同仓库及其分支.</p>
+<h2 id="2-5-git-reset"><a href="#2-5-git-reset" class="headerlink" title="2.5 git reset"></a>2.5 git reset</h2><h3 id="2-5-1-版本回退"><a href="#2-5-1-版本回退" class="headerlink" title="2.5.1 版本回退"></a>2.5.1 版本回退</h3><p>1.形式:<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　git reset [<span class="params">--hard/soft/mixed</span>] HEAD的不同形式<span class="string">/commit</span> id<span class="params">(版本号)</span></span><br></pre></td></tr></table></figure></p>
+<p>2.参数说明:用例子说明<br>3.例子:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后退一个版本,头指针也会指向相应的版本,但该版本只是退回到版本库的暂存区,工作区也会保留该版本.</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--soft HEAD~1</span></span><br><span class="line"><span class="comment">#后退一个版本,头指针也会指向相应的版本,但暂存区不会保留该版本,但是工作区会保留该版本(mixed是默认回退方式)</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--mixed HEAD~1</span></span><br><span class="line"><span class="comment">#后退一个版本,头指针也会指向相应的版本,但暂存区不会保留该版本,工作区不会保留该版本总结:回退程度:hard&gt;mixed</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD~1</span></span><br></pre></td></tr></table></figure></p>
+<p>　　Git的版本回退速度非常快，因为Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向append GPL：其中commit id.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084734.jpg" alt="版本回退"><br>　　查看之前的版本:git log–适用于:要回退到哪个版本.<br>　　查看之后的版本:git relog–适用于:要回到未来的哪个版本.</p>
+<h3 id="2-5-2-撤销修改"><a href="#2-5-2-撤销修改" class="headerlink" title="2.5.2 撤销修改:"></a>2.5.2 撤销修改:</h3><p>有两种方式:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将文件从暂存区回退到工作区,说明没有提交,文件的修改还有.</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="keyword">HEAD</span> &lt;<span class="keyword">file</span>&gt;</span><br><span class="line"><span class="comment">#将工作区的文件的修改进行撤销,实际上就是用版本库的文件替换工作区的文件</span></span><br><span class="line">git checkout <span class="comment">--filename</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-5-3-删除文件"><a href="#2-5-3-删除文件" class="headerlink" title="2.5.3 删除文件"></a>2.5.3 删除文件</h3><p>(1)工作区删除<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从工作区当中删除,</span></span><br><span class="line"><span class="attribute">rm</span> filename  <span class="comment">#git checkout --filename(可以恢复)</span></span><br></pre></td></tr></table></figure></p>
+<p>(2)版本库删除<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> rm filename </span><br><span class="line">git commit -m <span class="string">'删除说明'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="2-6-git-merge-与-git-rebase"><a href="#2-6-git-merge-与-git-rebase" class="headerlink" title="2.6 git merge 与 git rebase"></a>2.6 git merge 与 git rebase</h2><p>两者区别,请看下图:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084736.jpg" alt="分支分叉"><br>merge合并：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84737.jpg" alt="merge合并"><br>rebase合并：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084738.jpg" alt="1-1 rebase"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084739.jpg" alt="1-2 rebase"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084740.jpg" alt="1-3 rebase"><br>1.异同:<br>(1)相同点:<br>　　当合并时没有冲突的话,都不产生新的提交点,也就是fast-forward的合并方式.如果git merge提交硬要产生一个新提交点那么就用如下方式:<br> <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">merge</span> <span class="comment">--no-ff</span></span><br></pre></td></tr></table></figure></p>
+<p> 用图片表示就是:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084747.jpg" alt="git merge /--no-ff"><br> 补充:[non] fast-forward<br> non fast-forward:代表合并会生成新的提交点,fast-forward则是不会.例如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084748.jpg" alt="non fast-forward"><br> (2)不同点:<br> 　　当合并产生冲突的时候:如下图:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084749.jpg" alt="合并冲突"><br>  　　其中==分割线上方是本地数据库的内容, 下方是远程数据库的编辑内容。<br>　　git merge 在解决冲突合并之后,再次合并的时候,会自动产生一个新的提交点,试想,如果以后合并的次数多了,那么解决冲突的点就会多起来,就会让分支结构比较复杂,不利于查看.(这是针对个人来说,针对公司的话,有利于维护).<br>　　git rebase.在解决冲突之后,不会产生一个新的提交点,而是在合并过程中,进行冲突的解决与增量的修改,形成呢个一个线性序列的提交点.两者的形式如下:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">merge</span></span><br><span class="line"><span class="comment">#冲突解决之后再次提交</span></span><br><span class="line">git <span class="keyword">add</span> .</span><br><span class="line">git <span class="keyword">commit</span> - m <span class="string">"说明"</span></span><br><span class="line"> <span class="comment">--------------------------------</span></span><br><span class="line">git rebase</span><br><span class="line"><span class="comment">#冲突解决之后再次提交</span></span><br><span class="line">git <span class="keyword">add</span> .</span><br><span class="line">git rebase <span class="comment">--continue</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="2-7-git-pull与git-fetch"><a href="#2-7-git-pull与git-fetch" class="headerlink" title="2.7 git pull与git fetch"></a>2.7 git pull与git fetch</h2><h3 id="2-7-1-git-fetch"><a href="#2-7-1-git-fetch" class="headerlink" title="2.7.1 git fetch"></a>2.7.1 git fetch</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084753.jpg" alt="FETCH_HEAD"><br>　　从上图可以得知,fetch_head文件主要是用来存储,所关联的远程库及其相应的最新分支的commit id,至于显示多个个分支,具体要看git fetch的四种具体形式:<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#将更新所有的远程库的所有分支的最新版本下载到本地,并用fetch_head这个文件进行记录</span></span><br><span class="line">git fetch</span><br><span class="line"><span class="meta">#更新指定远程库名的所有分支的最新版本下载到本地,也用fetch_head这个文件进行记录</span></span><br><span class="line">git fetch 远程库名</span><br><span class="line"><span class="meta">#更新特定远程库的特定分支名的最新版本下载到本地,fetch_head这个文件进行记录</span></span><br><span class="line">git fetch 远程库名 远程分支名</span><br><span class="line"><span class="meta">#更新特定远程库的特定分支名的最新版本,同时创建一个本地分支来保存它,也fetch_head这个文件进行记录</span></span><br><span class="line">git fetch 远程库名 远程分支名:本地分支名</span><br></pre></td></tr></table></figure></p>
+<p>总结:<br>　　其实git fetch的四种方式就是一步步细化要求.</p>
+<h3 id="2-7-2-git-pull"><a href="#2-7-2-git-pull" class="headerlink" title="2.7.2 git pull"></a>2.7.2 git pull</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084754.jpg" alt="pull下载"><br>git pull= git fetch + git merge,见下图:<br>形式:<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#取回特定远程库的某个分支(也可以是该仓库的所有分支即整个仓库)的更新(git pull),之后与对应的本地分支进行合并(git merge).</span></span><br><span class="line"><span class="meta">#如果下载的是整个仓库,那么本地仓库也就会与远程仓库进行合并,同时工作区都会合并,所以谨慎使用</span></span><br><span class="line">git pull 远程库名 远程分支名:本地分支名</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-8-其他git常用"><a href="#2-8-其他git常用" class="headerlink" title="2.8 其他git常用"></a>2.8 其他git常用</h2><p>(1)git init，初始化，表示即将对当前文件夹进行版本控制。<br>(2)git status，查看Git当前状态，如：那些文件被修改过、那些文件还未提交到版本库等。<br>(3)git add 文件名，将指定文件添加到版本库的暂存状态。可以连续添加多次<br>(4)git log，查看提交记录，即：历史版本记录</p>
+<h2 id="2-9-工作区-版本库-远程库"><a href="#2-9-工作区-版本库-远程库" class="headerlink" title="2.9 工作区,版本库,远程库"></a>2.9 工作区,版本库,远程库</h2><p>1.工作区:就是.git所在目录,如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84755.jpg" alt="工作区"><br>2.版本库/本地仓库:工作区下的一个.git文件夹,叫做git版本库.为了避免不必要的异常,最好使用全英文路径名.<br>版本库的内容:<br>　　(1)stage暂存区，还有<br>　　(2)Git为我们自动创建的第一个分支master<br>　　(3)指向master的指针HEAD。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084756.jpg" alt="版本库内容"><br>文件添加两步走:<br>　　git add(添加到暂存区) –&gt;git commit(添加到版本库)<br>3.远程库:<br>  　　就是github的数据库/仓库</p>
+<h1 id="三-储藏"><a href="#三-储藏" class="headerlink" title="三.储藏"></a>三.储藏</h1><h2 id="3-1-概念"><a href="#3-1-概念" class="headerlink" title="3.1 概念"></a>3.1 概念</h2><p>　　当前的工作未完成,由于需要修改其他分支上的代码/或者修改本分支上的其他紧急工作,不想马上提交到分支上去,可以将当前的工作提交到git栈当中,相当于一个暂存区.保存一个对应的工作状态.git栈可以保存多个工作状态.但是可能在修复本分支bug的代码,可能与所提交的工作状态的代码有重合部分,容易发生冲突.解决办法:找到冲突文件，手动修改冲突并提交.</p>
+<h2 id="3-2-常用命令"><a href="#3-2-常用命令" class="headerlink" title="3.2 常用命令"></a>3.2 常用命令</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git stash   <span class="comment">#将当前工作区所有修改过的内容存储(工作状态)到git栈中</span></span><br><span class="line">git stash list  <span class="comment">#查看git栈中的所有记录</span></span><br><span class="line">git stash clear   <span class="comment">#清空git栈的所有工作状态记录</span></span><br><span class="line"><span class="comment">#恢复指定工作状态到工作区的同时,在git栈当中删除对应的工作状态记录.</span></span><br><span class="line"><span class="comment">#没有指定编号num的话,形式为git stash pop,默认恢复栈顶的工作状态记录.---既取出,又删除（可能有冲突）</span></span><br><span class="line">git stash <span class="keyword">pop</span> stash@&#123;num&#125;</span><br><span class="line"><span class="comment">#恢复指定工作状态到工作区的同时,在git栈当中则保留对应的工作状态记录</span></span><br><span class="line"><span class="comment">#没有指定编号num,形式为git bash apply,默认恢复栈顶的工作状态记录----只取出,不删除,</span></span><br><span class="line">git stash apply stash@&#123;num&#125;</span><br><span class="line"><span class="comment">#删除指定的工作记录,没有指定编号num,形式为git stash drop 默认是删除栈顶的第一个工作状态记录.</span></span><br><span class="line">git stash drop stash@&#123;num&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="四-分支"><a href="#四-分支" class="headerlink" title="四.分支"></a>四.分支</h1><h2 id="4-1-概念"><a href="#4-1-概念" class="headerlink" title="4.1 概念"></a>4.1 概念</h2><p>　　因为git是分布式版本管理系统,所以也就有远程与本地也自然而然是一个相对的概念.所以远程分支与本地分支也是一个相对概念.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084757.jpg" alt="分支"><br>　　分支就是对同一个软件(数据库)的多个发行版本(多个分支)的进行维护<br>　　HEAD指向的是当前分支的最新的一次提交点。没有切换分支的时候,通常默认指向master分支的最后一次更新。通过移动HEAD，就可以变更使用的分支。</p>
+<h2 id="4-2-分支类型"><a href="#4-2-分支类型" class="headerlink" title="4.2 分支类型"></a>4.2 分支类型</h2><h3 id="4-2-1-两种分支类型-粗分"><a href="#4-2-1-两种分支类型-粗分" class="headerlink" title="4.2.1 两种分支类型(粗分):"></a>4.2.1 两种分支类型(粗分):</h3><p>　　Merge分支(合并分支):作为发行版本的主分支,可以由多个topic与单个merge分支合并<br>　　topic分支(特性分支):是为了开发新功能或修复Bug等任务而建立的分支.从merge分支分叉.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084758.jpg" alt="两种分支"></p>
+<h3 id="4-2-2-四种分支类型-细分"><a href="#4-2-2-四种分支类型-细分" class="headerlink" title="4.2.2 四种分支类型(细分)"></a>4.2.2 四种分支类型(细分)</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084800.jpg" alt="分支类型"><br>1.主分支:<br>　master分支:主要用来发布正式版本的;(正绿色箭头)–对应上面的<br>　develp分支:主要是用来日常开发的(黄色箭头)</p>
+<p>2.release分支:<br>　就是当从evelp分支分叉出的(就是开发的差不多了,可以形成一个新版本了),然后提先合并到master分支,之后合并到develop分支.分支明智,命名采用release-*的形式 (暗绿色箭头)<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个预发布分支：</span></span><br><span class="line">git checkout -<span class="keyword">b </span>release-1.<span class="number">2</span> develop</span><br></pre></td></tr></table></figure></p>
+<p>3.featrue分支:<br>　也是从develop分叉出来的,用来进行功能的增加,之后合并到develop分支当中.(紫色箭头)<br>4.hotfix分支:<br>　其实就是bug修复分支,因为正式版本发行后肯定会出现一些bug,所以需要从master分支当中分叉出来,之后进行bug修复,修复成功之后,合并到master分支与develop分支.(粉红色箭头)</p>
+<h2 id="4-3-分支合并流程"><a href="#4-3-分支合并流程" class="headerlink" title="4.3 分支合并流程"></a>4.3 分支合并流程</h2><p>　　默认分支只有一个master分支,现在手工创建的dev分支上进行编码,编好之后,与master分支进行合并.具体实现方法就是:<br>如下图:所示</p>
+<div align="center"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84801.jpg" alt="图1---head指向master分支"><br></div>
+
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084801.jpg" alt="图2---创建并切换到dev分支(head指向dev分支)"><br>上图代码:<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="keyword">b </span>dev  <span class="comment">#创建并切换分支</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084803.jpg" alt="图3---修改代码之后,提交到dev分支,dev分支更新"><br>上图代码:<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#git <span class="built_in">push</span> <span class="built_in">origin</span> 本地分支名(需要先创建):远程分支名</span><br><span class="line">#只写git <span class="built_in">push</span> <span class="built_in">origin</span> dev,说明本地分支与远程分支名称相同</span><br><span class="line">#第一次只能使用<span class="built_in">push</span>,之后才可以使用pull</span><br><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> dev:dev</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084804.jpg" alt="图4---先切换回master分支,之后dev主动合并到master分支上"><br>上图代码:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先切换到master分支</span></span><br><span class="line">git checkout <span class="literal">master</span></span><br><span class="line"><span class="comment">#之后dev主动合并到master分支上</span></span><br><span class="line">git merge dev</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084805.jpg" alt="图5---删除dev分支"><br>上图:删除dev分支<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上图:删除dev分支</span></span><br><span class="line">git <span class="keyword">branch </span>-d dev</span><br></pre></td></tr></table></figure></p>
+<p>上述是一个开发的一个流程</p>
+<h2 id="4-4-常用命令："><a href="#4-4-常用命令：" class="headerlink" title="4.4 常用命令："></a>4.4 常用命令：</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">branch </span>分支名称           创建分支</span><br><span class="line">git checkout 分支名称         切换分支</span><br><span class="line">git <span class="keyword">branch </span>-m 分支名称        创建并切换到指定分支</span><br><span class="line">git checkout -<span class="keyword">b </span>分支名称      创建并切换到指定分支</span><br><span class="line">git <span class="keyword">branch </span>                   查看所有分支</span><br><span class="line">git <span class="keyword">branch </span>-d 分支名称         删除分支</span><br><span class="line">git merge 指定分支名称         将指定分支合并到当前分支</span><br><span class="line">git <span class="keyword">branch </span>-r <span class="comment">#查看远程分支</span></span><br><span class="line">git <span class="keyword">branch </span>-a <span class="comment">#查看所有分支，本地和远程</span></span><br><span class="line">git remote <span class="keyword">show </span>[remote-name] <span class="comment">#查看远程仓库信息</span></span><br><span class="line"><span class="comment">#其中git remote show [remote-name]展示的信息包括：</span></span><br><span class="line"><span class="comment">#会列出远程仓库的 URL 与跟踪分支的信息</span></span><br><span class="line"><span class="comment">#列出了当你在特定的分支上执行 git push 会自动地推送到哪一个远程分支</span></span><br><span class="line"><span class="comment">#列出了哪些远程分支不在你的本地</span></span><br><span class="line"><span class="comment">#哪些远程分支已经从服务器上移除了</span></span><br><span class="line"><span class="comment">#执行 git pull 时哪些分支会自动合并</span></span><br></pre></td></tr></table></figure>
+<h1 id="五-标签"><a href="#五-标签" class="headerlink" title="五.标签"></a>五.标签</h1><h2 id="5-1-概念"><a href="#5-1-概念" class="headerlink" title="5.1 概念"></a>5.1 概念</h2><p>　　Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（分支可以移动，标签不能移动/改变），所以，创建和删除标签都是瞬间完成的。</p>
+<h2 id="5-2-目的"><a href="#5-2-目的" class="headerlink" title="5.2 目的"></a>5.2 目的</h2><p> 　　由于版本号(commit ID很复杂),为了方便记忆,使用标签,与commit ID绑在一起,便于记忆.</p>
+<h2 id="5-3-例子"><a href="#5-3-例子" class="headerlink" title="5.3 例子"></a>5.3 例子</h2><p>　　创建带有说明的标签(附注的标签,所以会有annotation.省略为a)，用-a指定标签名，-m指定说明文字：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line">git <span class="keyword">tag</span> <span class="title">-a</span> v0.<span class="number">1</span> -m <span class="string">"the first version"</span> <span class="number">8</span>f3b</span><br></pre></td></tr></table></figure></p>
+<p>用命令git show <tagname>可以看到说明文字：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">E</span>:\<span class="selector-tag">Hexo</span>\<span class="selector-tag">ivega</span>&gt;<span class="selector-tag">git</span> <span class="selector-tag">show</span> <span class="selector-tag">v1</span><span class="selector-class">.0</span></span><br><span class="line"><span class="selector-tag">commit</span> 8<span class="selector-tag">f3baab0173846c0d1a031518d684461dbcd82e4</span> (<span class="selector-tag">HEAD</span> <span class="selector-tag">-</span>&gt; <span class="selector-tag">master</span>, <span class="selector-tag">tag</span>: <span class="selector-tag">v1</span><span class="selector-class">.0</span>)</span><br><span class="line"><span class="selector-tag">Author</span>: <span class="selector-tag">xiaozhongping</span> &lt;<span class="selector-tag">zhongxiaoping</span>@<span class="keyword">tju</span>.<span class="keyword">edu</span>.<span class="keyword">cn</span>&gt;</span><br><span class="line">Date:   Fri Jun 29 11:26:24 2018 +0800</span><br><span class="line">    <span class="selector-tag">the</span> <span class="selector-tag">first</span> <span class="selector-tag">version</span></span><br></pre></td></tr></table></figure></tagname></p>
+<p>注意：<br>　　标签总是和某个commit挂钩。如果这个commit既出现在多个分支上，那么在这多个分支上都可以看到这个标签。</p>
+<h2 id="5-4-常用标签命令"><a href="#5-4-常用标签命令" class="headerlink" title="5.4 常用标签命令"></a>5.4 常用标签命令</h2><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">tag</span> <span class="title">&lt;tagname</span>&gt;用于新建一个标签，默认为HEAD,就是目前head指向的分支，也可以绑定对应的commit id；</span><br><span class="line">git <span class="keyword">tag</span> <span class="title">-a</span> <span class="tag">&lt;tagname&gt;</span> -m <span class="string">"说明"</span>可以指定标签信息；</span><br><span class="line">git <span class="keyword">tag</span> <span class="title">-l</span> 可以查看所有标签。</span><br><span class="line">git push origin <span class="tag">&lt;tagname&gt;</span> 可以推送一个本地标签；</span><br><span class="line">git push origin --tags 可以推送全部未推送过的本地标签；</span><br><span class="line">git <span class="keyword">tag</span> <span class="title">-d</span> <span class="tag">&lt;tagname&gt;</span> 可以删除一个本地标签；</span><br><span class="line">git push origin :refs/tags/<span class="tag">&lt;tagname&gt;</span> 可以删除一个远程标签(删除远程之前需要先删除本地的标签)</span><br></pre></td></tr></table></figure>
+<h1 id="六-git配置"><a href="#六-git配置" class="headerlink" title="六.git配置"></a>六.git配置</h1><p>1.形式:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>[option] 属性名 属性值</span><br></pre></td></tr></table></figure></p>
+<p>2.option参数说明<br>　git配置级别(就是该配置的有效范围)有三个,分别是:<br>　　–system(系统级别):对应文件:暂时找不到.<br>　　–global(用户级别):文件地址”C:\Users\Administrator.gitconfig”<br>   <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084806.jpg" alt="global配置文件"><br>　　–local(当前仓库/项目):文件地址:”E:\Hexo\ivega.deploy_git.git\config”<br>   <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084807.jpg" alt="local级别配置文件"><br>   范围:system&gt;global&gt;local<br>   优先级:local&gt;global&gt;system(范围越大,优先级反倒越小)</p>
+<h2 id="6-1-用户名-密码配置-编辑器-推送方式"><a href="#6-1-用户名-密码配置-编辑器-推送方式" class="headerlink" title="6.1 用户名.密码配置,编辑器,推送方式"></a>6.1 用户名.密码配置,编辑器,推送方式</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">"xxxxx"</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email xxxxx </span><br><span class="line"><span class="comment">#设置git日志的默认编辑器为vim</span></span><br><span class="line">git<span class="built_in"> config </span>--globale core.editor <span class="string">"vim"</span> </span><br><span class="line"><span class="comment">#设置git的使用方式为simple</span></span><br><span class="line">git condif --global push.default <span class="string">"simple"</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-2-忽略特殊文件"><a href="#6-2-忽略特殊文件" class="headerlink" title="6.2 忽略特殊文件"></a>6.2 忽略特殊文件</h2><p>　　在工作区创建一个.gitignore文件,在提交的时候用来来忽略某些不太总要的过程文件.例如编译时的中间文件.配置模版可以在<a href="https://github.com/github/gitignore" target="_blank" rel="noopener">https://github.com/github/gitignore</a><br>例如：下载一个关于java的忽略提交文件:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084809.jpg" alt="java.gitignore"></p>
+<h2 id="6-3-配置别名"><a href="#6-3-配置别名" class="headerlink" title="6.3 配置别名"></a>6.3 配置别名</h2><p>形式:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把status简称st</span></span><br><span class="line">git<span class="built_in"> config </span>--global alias.st status</span><br><span class="line"><span class="comment">#配置git日志的配色</span></span><br><span class="line">git<span class="built_in"> config </span>--global alias.lg <span class="string">"log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="七-ps"><a href="#七-ps" class="headerlink" title="七.ps"></a>七.ps</h1><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">E:\Hexo\ivega&gt;git commit -m'the first version'</span><br><span class="line">#说明是匹配的问题,因此需要使用"",而不是单引号.这点需要特别注意.</span><br><span class="line"><span class="keyword">error: </span>pathspec 'first' did not match any file(s) known to git.</span><br><span class="line"><span class="keyword">error: </span>pathspec 'version'' did not match any file(s) known to git.</span><br></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="../../../07/01/sourceTree安装及使用/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    sourceTree安装及使用
+                
+            </div>
+        </a>
+    
+    
+        <a href="../../27/linux目录结构解析/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">linux目录结构解析</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/11/python基础知识（一）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211194632.jpg)" alt="python基础知识（一）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/python/基础知识/">基础知识</a></p>
+                            <p class="item-title"><a href="../../../12/11/python基础知识（一）/" class="title">python基础知识（一）</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:35:11.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/11/ALLENNLP安装/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211194557.jpg)" alt="AllenNLP安装" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/环境搭建/">环境搭建</a></p>
+                            <p class="item-title"><a href="../../../12/11/ALLENNLP安装/" class="title">AllenNLP安装</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:32:17.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/11/NLP基础理论系列之词嵌入技术（一）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://raw.githubusercontent.com/xiaopingzhong/pictureBed/master/20181211192025.jpg)" alt="NLP基础理论系列之词嵌入技术（一）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/基础系列/">基础系列</a></p>
+                            <p class="item-title"><a href="../../../12/11/NLP基础理论系列之词嵌入技术（一）/" class="title">NLP基础理论系列之词嵌入技术（一）</a></p>
+                            <p class="item-date"><time datetime="2018-12-11T11:18:24.000Z" itemprop="datePublished">2018-12-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/01/使用colab平台进行训练/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201135254.jpg)" alt="使用colab平台进行训练" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/深度学习/优化/">优化</a></p>
+                            <p class="item-title"><a href="../../../12/01/使用colab平台进行训练/" class="title">使用colab平台进行训练</a></p>
+                            <p class="item-date"><time datetime="2018-12-01T05:54:06.000Z" itemprop="datePublished">2018-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../12/01/Bert模型的微调/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181201133406.jpg)" alt="Bert模型的微调" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/深度学习/优化/">优化</a></p>
+                            <p class="item-title"><a href="../../../12/01/Bert模型的微调/" class="title">Bert模型的微调</a></p>
+                            <p class="item-date"><time datetime="2018-12-01T05:27:05.000Z" itemprop="datePublished">2018-12-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/">IDEA</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/">Maven</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/Pom/">Pom</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/">NLP</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/交互/">交互</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/名词辨析/">名词辨析</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/基础系列/">基础系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/实体识别/">实体识别</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/词性标注/">词性标注</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/语义解析/">语义解析</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/">Neo4j</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/Spring-boot/">Spring-boot</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/">UML</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/时序图/">时序图</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/">janusgraph</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/">java</a><span class="category-list-count">30</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/I-O流/">I/O流</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/乱码/">乱码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/数据类型/">数据类型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/泛型/">泛型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/注解/">注解</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/知识点/">知识点</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/编码/">编码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/集合/">集合</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">linux</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/知识点/">知识点</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/">maven</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/pom/">pom</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/">navicat</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/导出/">导出</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/">python</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/基础知识/">基础知识</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/">windows</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/环境变量/">环境变量</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/博客建站/">博客建站</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/重庆/">重庆</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/">命令行</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/mysql/">mysql</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/">工具</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/IDEA/">IDEA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/小问题/">小问题</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/">快捷方式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/Navicat/">Navicat</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/">每周报告</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/2018/">2018</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/">深度学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/LSTM/">LSTM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/优化/">优化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/基础/">基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/概念/">概念</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/">知识图谱</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/异常问题/">异常问题</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/知识点/">知识点</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/综述/">综述</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/软件安装/">软件安装</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/">项目实战</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/数据建模/">数据建模</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/">计算机网络</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/">随笔</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/开发心得/">开发心得</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/认识/">认识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/读后感/">读后感</a><span class="category-list-count">2</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ANSI/">ANSI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AllenNLP/">AllenNLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AsList/">AsList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/BERT/">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Bean/">Bean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Colab/">Colab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Collection/">Collection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/CrudRepository/">CrudRepository</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/D2RQ/">D2RQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Documented/">Documented</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Guava/">Guava</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/HANLP/">HANLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/I-O流体系结构/">I/O流体系结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IDEA/">IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IOC/">IOC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Inherited/">Inherited</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/InputStreamReader/">InputStreamReader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/JPA/">JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/LSTM/">LSTM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Map/">Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelAndView/">ModelAndView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelMap/">ModelMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Navicat/">Navicat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Neo4j/">Neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Numpy/">Numpy</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/OGM/">OGM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ORM/">ORM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/POJO/">POJO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pom/">Pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pytorch/">Pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/RNN/">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SDN/">SDN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SGD/">SGD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Spring-boot/">Spring-boot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Tensor/">Tensor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Torch/">Torch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/UML/">UML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/fuseki/">fuseki</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/icarus主题/">icarus主题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph/">janusgraph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph-hbase-hadoop/">janusgraph,hbase,hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/jar包/">jar包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/model/">model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat/">navicat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat异常问题/">navicat异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/neo4j/">neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/parseInt/">parseInt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/pom/">pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/readLine/">readLine()</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/restful/">restful</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/sourceTree/">sourceTree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/">spark</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spring-boot/">spring-boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/thymeleaf/">thymeleaf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/torch函数/">torch函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/windows/">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word-embeding/">word embeding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word2vec/">word2vec</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/xshell/">xshell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/三层架构/">三层架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/云服务器/">云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/人文/">人文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键字/">关键字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键词抽取/">关键词抽取</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分类/">分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分词/">分词</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/初始化/">初始化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/删除/">删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/反射/">反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/变量/">变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/可视化界面/">可视化界面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/命令行/">命令行</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/域名/">域名</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/套接字/">套接字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/学习率/">学习率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/实例化/">实例化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/容器/">容器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象数组/">对象数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象类型/">对象类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/导出/">导出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/小问题/">小问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工作流程/">工作流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工具/">工具</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/异常问题/">异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/微调/">微调</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/快捷键/">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/抽象类/">抽象类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据建模/">数据建模</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据长度/">数据长度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/时序图/">时序图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/栈内存/">栈内存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/模型构建/">模型构建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/泛型/">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解/">注解</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解注入/">注解注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/激励函数/">激励函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/目录结构/">目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/相似度/">相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识图谱/">知识图谱</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识点/">知识点</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/神经网络/">神经网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/综述/">综述</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/编码/">编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/自定义词典/">自定义词典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/艺术/">艺术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/认识/">认识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/设计思想/">设计思想</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词向量/">词向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性标注/">词性标注</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性纠正/">词性纠正</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词汇表/">词汇表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义网/">语义网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义解析/">语义解析</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/读后感/">读后感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/超参数/">超参数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/返回问题/">返回问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/迭代器输出/">迭代器输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/通配符/">通配符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置/">配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置注入/">配置注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句分类/">问句分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句向量/">问句向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句还原/">问句还原</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合关系/">集合关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合工具类/">集合工具类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合形式/">集合形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合类型/">集合类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合转换/">集合转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合输出/">集合输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/非法字符/">非法字符</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="../../../../tags/ANSI/" style="font-size: 10px;">ANSI</a> <a href="../../../../tags/AOP/" style="font-size: 10px;">AOP</a> <a href="../../../../tags/AllenNLP/" style="font-size: 10px;">AllenNLP</a> <a href="../../../../tags/AsList/" style="font-size: 10px;">AsList</a> <a href="../../../../tags/BERT/" style="font-size: 10px;">BERT</a> <a href="../../../../tags/Bean/" style="font-size: 10px;">Bean</a> <a href="../../../../tags/Colab/" style="font-size: 10px;">Colab</a> <a href="../../../../tags/Collection/" style="font-size: 10px;">Collection</a> <a href="../../../../tags/CrudRepository/" style="font-size: 10px;">CrudRepository</a> <a href="../../../../tags/D2RQ/" style="font-size: 10px;">D2RQ</a> <a href="../../../../tags/Docker/" style="font-size: 10px;">Docker</a> <a href="../../../../tags/Documented/" style="font-size: 10px;">Documented</a> <a href="../../../../tags/Guava/" style="font-size: 10px;">Guava</a> <a href="../../../../tags/HANLP/" style="font-size: 10px;">HANLP</a> <a href="../../../../tags/I-O流体系结构/" style="font-size: 10px;">I/O流体系结构</a> <a href="../../../../tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="../../../../tags/IOC/" style="font-size: 10px;">IOC</a> <a href="../../../../tags/Inherited/" style="font-size: 10px;">Inherited</a> <a href="../../../../tags/InputStreamReader/" style="font-size: 10px;">InputStreamReader</a> <a href="../../../../tags/JPA/" style="font-size: 10px;">JPA</a> <a href="../../../../tags/LSTM/" style="font-size: 10px;">LSTM</a> <a href="../../../../tags/MVC/" style="font-size: 10px;">MVC</a> <a href="../../../../tags/Map/" style="font-size: 10px;">Map</a> <a href="../../../../tags/Maven/" style="font-size: 10px;">Maven</a> <a href="../../../../tags/ModelAndView/" style="font-size: 10px;">ModelAndView</a> <a href="../../../../tags/ModelMap/" style="font-size: 10px;">ModelMap</a> <a href="../../../../tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="../../../../tags/Neo4j/" style="font-size: 10px;">Neo4j</a> <a href="../../../../tags/Numpy/" style="font-size: 15px;">Numpy</a> <a href="../../../../tags/OGM/" style="font-size: 10px;">OGM</a> <a href="../../../../tags/ORM/" style="font-size: 10px;">ORM</a> <a href="../../../../tags/POJO/" style="font-size: 10px;">POJO</a> <a href="../../../../tags/Pom/" style="font-size: 10px;">Pom</a> <a href="../../../../tags/Pytorch/" style="font-size: 10px;">Pytorch</a> <a href="../../../../tags/RNN/" style="font-size: 10px;">RNN</a> <a href="../../../../tags/SDN/" style="font-size: 10px;">SDN</a> <a href="../../../../tags/SGD/" style="font-size: 10px;">SGD</a> <a href="../../../../tags/Spring-boot/" style="font-size: 15px;">Spring-boot</a> <a href="../../../../tags/Tensor/" style="font-size: 10px;">Tensor</a> <a href="../../../../tags/Torch/" style="font-size: 10px;">Torch</a> <a href="../../../../tags/UML/" style="font-size: 10px;">UML</a> <a href="../../../../tags/fuseki/" style="font-size: 10px;">fuseki</a> <a href="../../../../tags/git/" style="font-size: 15px;">git</a> <a href="../../../../tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="../../../../tags/icarus主题/" style="font-size: 10px;">icarus主题</a> <a href="../../../../tags/janusgraph/" style="font-size: 10px;">janusgraph</a> <a href="../../../../tags/janusgraph-hbase-hadoop/" style="font-size: 10px;">janusgraph,hbase,hadoop</a> <a href="../../../../tags/jar包/" style="font-size: 10px;">jar包</a> <a href="../../../../tags/java/" style="font-size: 15px;">java</a> <a href="../../../../tags/maven/" style="font-size: 15px;">maven</a> <a href="../../../../tags/model/" style="font-size: 10px;">model</a> <a href="../../../../tags/navicat/" style="font-size: 15px;">navicat</a> <a href="../../../../tags/navicat异常问题/" style="font-size: 10px;">navicat异常问题</a> <a href="../../../../tags/neo4j/" style="font-size: 10px;">neo4j</a> <a href="../../../../tags/parseInt/" style="font-size: 10px;">parseInt</a> <a href="../../../../tags/pom/" style="font-size: 10px;">pom</a> <a href="../../../../tags/python/" style="font-size: 10px;">python</a> <a href="../../../../tags/readLine/" style="font-size: 10px;">readLine()</a> <a href="../../../../tags/restful/" style="font-size: 10px;">restful</a> <a href="../../../../tags/socket/" style="font-size: 10px;">socket</a> <a href="../../../../tags/sourceTree/" style="font-size: 10px;">sourceTree</a> <a href="../../../../tags/spark/" style="font-size: 20px;">spark</a> <a href="../../../../tags/spring-boot/" style="font-size: 10px;">spring-boot</a> <a href="../../../../tags/thymeleaf/" style="font-size: 10px;">thymeleaf</a> <a href="../../../../tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="../../../../tags/torch函数/" style="font-size: 10px;">torch函数</a> <a href="../../../../tags/windows/" style="font-size: 10px;">windows</a> <a href="../../../../tags/word-embeding/" style="font-size: 10px;">word embeding</a> <a href="../../../../tags/word2vec/" style="font-size: 15px;">word2vec</a> <a href="../../../../tags/xshell/" style="font-size: 10px;">xshell</a> <a href="../../../../tags/三层架构/" style="font-size: 10px;">三层架构</a> <a href="../../../../tags/云服务器/" style="font-size: 10px;">云服务器</a> <a href="../../../../tags/人文/" style="font-size: 10px;">人文</a> <a href="../../../../tags/关键字/" style="font-size: 10px;">关键字</a> <a href="../../../../tags/关键词抽取/" style="font-size: 10px;">关键词抽取</a> <a href="../../../../tags/分类/" style="font-size: 10px;">分类</a> <a href="../../../../tags/分词/" style="font-size: 10px;">分词</a> <a href="../../../../tags/初始化/" style="font-size: 10px;">初始化</a> <a href="../../../../tags/删除/" style="font-size: 10px;">删除</a> <a href="../../../../tags/博客/" style="font-size: 10px;">博客</a> <a href="../../../../tags/反射/" style="font-size: 10px;">反射</a> <a href="../../../../tags/变量/" style="font-size: 10px;">变量</a> <a href="../../../../tags/可视化界面/" style="font-size: 10px;">可视化界面</a> <a href="../../../../tags/命令行/" style="font-size: 15px;">命令行</a> <a href="../../../../tags/域名/" style="font-size: 10px;">域名</a> <a href="../../../../tags/套接字/" style="font-size: 10px;">套接字</a> <a href="../../../../tags/学习率/" style="font-size: 10px;">学习率</a> <a href="../../../../tags/实例化/" style="font-size: 15px;">实例化</a> <a href="../../../../tags/容器/" style="font-size: 10px;">容器</a> <a href="../../../../tags/对象数组/" style="font-size: 10px;">对象数组</a> <a href="../../../../tags/对象类型/" style="font-size: 10px;">对象类型</a> <a href="../../../../tags/导出/" style="font-size: 10px;">导出</a> <a href="../../../../tags/小问题/" style="font-size: 15px;">小问题</a> <a href="../../../../tags/工作流程/" style="font-size: 10px;">工作流程</a> <a href="../../../../tags/工具/" style="font-size: 20px;">工具</a> <a href="../../../../tags/异常问题/" style="font-size: 10px;">异常问题</a> <a href="../../../../tags/微调/" style="font-size: 10px;">微调</a> <a href="../../../../tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="../../../../tags/抽象类/" style="font-size: 10px;">抽象类</a> <a href="../../../../tags/接口/" style="font-size: 10px;">接口</a> <a href="../../../../tags/数据建模/" style="font-size: 10px;">数据建模</a> <a href="../../../../tags/数据长度/" style="font-size: 10px;">数据长度</a> <a href="../../../../tags/时序图/" style="font-size: 10px;">时序图</a> <a href="../../../../tags/栈内存/" style="font-size: 10px;">栈内存</a> <a href="../../../../tags/模型构建/" style="font-size: 10px;">模型构建</a> <a href="../../../../tags/泛型/" style="font-size: 10px;">泛型</a> <a href="../../../../tags/注解/" style="font-size: 15px;">注解</a> <a href="../../../../tags/注解注入/" style="font-size: 10px;">注解注入</a> <a href="../../../../tags/测试/" style="font-size: 10px;">测试</a> <a href="../../../../tags/激励函数/" style="font-size: 10px;">激励函数</a> <a href="../../../../tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="../../../../tags/目录结构/" style="font-size: 10px;">目录结构</a> <a href="../../../../tags/相似度/" style="font-size: 10px;">相似度</a> <a href="../../../../tags/知识图谱/" style="font-size: 15px;">知识图谱</a> <a href="../../../../tags/知识点/" style="font-size: 15px;">知识点</a> <a href="../../../../tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="../../../../tags/综述/" style="font-size: 20px;">综述</a> <a href="../../../../tags/编码/" style="font-size: 10px;">编码</a> <a href="../../../../tags/自定义词典/" style="font-size: 10px;">自定义词典</a> <a href="../../../../tags/艺术/" style="font-size: 10px;">艺术</a> <a href="../../../../tags/认识/" style="font-size: 10px;">认识</a> <a href="../../../../tags/设计思想/" style="font-size: 10px;">设计思想</a> <a href="../../../../tags/词向量/" style="font-size: 10px;">词向量</a> <a href="../../../../tags/词性标注/" style="font-size: 15px;">词性标注</a> <a href="../../../../tags/词性纠正/" style="font-size: 10px;">词性纠正</a> <a href="../../../../tags/词汇表/" style="font-size: 10px;">词汇表</a> <a href="../../../../tags/语义网/" style="font-size: 10px;">语义网</a> <a href="../../../../tags/语义解析/" style="font-size: 15px;">语义解析</a> <a href="../../../../tags/读后感/" style="font-size: 10px;">读后感</a> <a href="../../../../tags/超参数/" style="font-size: 10px;">超参数</a> <a href="../../../../tags/返回问题/" style="font-size: 10px;">返回问题</a> <a href="../../../../tags/迭代器输出/" style="font-size: 10px;">迭代器输出</a> <a href="../../../../tags/通配符/" style="font-size: 10px;">通配符</a> <a href="../../../../tags/配置/" style="font-size: 15px;">配置</a> <a href="../../../../tags/配置注入/" style="font-size: 10px;">配置注入</a> <a href="../../../../tags/问句分类/" style="font-size: 10px;">问句分类</a> <a href="../../../../tags/问句向量/" style="font-size: 10px;">问句向量</a> <a href="../../../../tags/问句还原/" style="font-size: 10px;">问句还原</a> <a href="../../../../tags/集合关系/" style="font-size: 10px;">集合关系</a> <a href="../../../../tags/集合工具类/" style="font-size: 10px;">集合工具类</a> <a href="../../../../tags/集合形式/" style="font-size: 10px;">集合形式</a> <a href="../../../../tags/集合类型/" style="font-size: 10px;">集合类型</a> <a href="../../../../tags/集合转换/" style="font-size: 10px;">集合转换</a> <a href="../../../../tags/集合输出/" style="font-size: 10px;">集合输出</a> <a href="../../../../tags/非法字符/" style="font-size: 10px;">非法字符</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://xueshu.baidu.com/">百度学术</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.appinn.com/category/windows/">小众软件</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+     <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 不负韶华不负己<br>
+        </div>
+    </div>
+
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("06/18/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+</footer>
+        
+
+
+    
+        <script src="../../../../libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="../../../../libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="../../../../js/main.js"></script>
+
+    </div>
+</body>
+</html>
