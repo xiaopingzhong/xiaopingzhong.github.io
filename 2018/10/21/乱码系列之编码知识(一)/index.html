@@ -267,16 +267,28 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　项目开发当中，乱码是常有的事情，特别是在进行文件读取的时候经常出现乱码，因此，解决好乱码问题之前，先看下有关编码的知识．<a id="more"></a></p>
+            <p>项目开发当中，乱码是常有的事情，特别是在进行文件读取的时候经常出现乱码，因此，解决好乱码问题之前，先看下有关编码的知识．<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-ascii-bian-ma">一.ASCII编码</a></li>
+<li><a href="#er-unicode-biao-zhun">二.Unicode标准</a></li>
+<li><a href="#san-utf-8">三.UTF-8</a></li>
+<li><a href="#si-utf-16">四.UTF-16</a></li>
+<li><a href="#wu-bom">五.BOM</a></li>
+<li><a href="#liu-can-kao-wen-xian">六.参考文献</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-ASCII编码"><a href="#一-ASCII编码" class="headerlink" title="一.ASCII编码"></a>一.ASCII编码</h1><p>　　ASCII编码:主要是英文字符;0-127:常见字符集,128-255:之后增加的字符–扩展字符集;<br>ANSI编码集:主要是对ASCII码的扩展,其中0-127:常见字符集与ASCII码相同;之后根据不同国家对其的修改不同而不同,因此,ANSI编码是众多国家对ASCII码的扩展字符编码集合,是一个总称;中国的GB2312字符编码就是属于ANSI编码集.</p>
-<h1 id="二-Unicode标准"><a href="#二-Unicode标准" class="headerlink" title="二.Unicode标准"></a>二.Unicode标准</h1><p>　　Unicode标准:就是为了解决:由于各国对ASCII码的无序修改导致,不同国家之间的字符编码转换困难,推出的一套集成全部国家字符的编码标准,因为是重新建立一套的标准,除了0-127:常见字符集是一样,其余与其他国家的字符编码是完全不一样,没有继承,兼容,导致各国热情不高;</p>
-<h1 id="三-UTF-8"><a href="#三-UTF-8" class="headerlink" title="三.UTF-8"></a>三.UTF-8</h1><p>　　UTF-8:Unicode为了兼容各国字符,导致每个字符所占的字节数都为2个,但是有些字符就不需要这么多字节,0-127:英文常见字符集只需要1个字节,其实由于硬盘容量较大,对硬盘方面影响较少,但是对于数据传输,影响就很明显,因此,就开发了一个基于可变字节长(根据是否是常见英文字符设置不同的字节)的字符编码–<code>utf-8</code>–一开始专门用来进行数据传输.utf:unicode translation format–unicode标准的转换格式或者理解为数据传输格式,8代表,英文常见字符集的时候,只用一个字节(8位)保存,其余则用两个字节保存.<br>  说明:Unicode则是编码的标准,utf-8,utf-16,utf-32是一种实现Unicode编码标准的存储格式,与GB2312之类的字符编码一样.</p>
-<h1 id="四-UTF-16"><a href="#四-UTF-16" class="headerlink" title="四.UTF-16"></a>四.UTF-16</h1><p>　　UTF-16:都用两个字节保存,因此对所有字符的支持力度最好(utf-32优点浪费内存了),所以作为Unicode标准的默认编码,因此在内存中使用,用来更好地支持字符显示.与此同时,utf-8字符编码则是在<strong>数据传输,硬盘存储(省内存)</strong>用的比较多.</p>
-<h1 id="五-BOM"><a href="#五-BOM" class="headerlink" title="五.BOM"></a>五.BOM</h1><p>　　BOM:BOM——Byte Order Mark，就是字节序标记,使用BOM来标记文本文件的编码方式,utf-8带bom的文件:当系统读取该文件的bom,就知道以utf-8字符编码格式读取;但是带BOM的utf-8编码的文件是以:<code>\ufeff</code>开头,就会导致很多编码问题的存在,因此在开发的过程之中,最好是用不带Bom的utf8</p>
-<h1 id="六-参考文献"><a href="#六-参考文献" class="headerlink" title="六.参考文献"></a>六.参考文献</h1><p>　❋<a href="https://blog.csdn.net/ldanduo/article/details/8203532?utm_source=blogxgwz0" target="_blank" rel="noopener">编码格式简介</a></p>
+<h1><span id="yi-ascii-bian-ma">一.ASCII编码</span></h1><p>　　ASCII编码:主要是英文字符;0-127:常见字符集,128-255:之后增加的字符–扩展字符集;<br>ANSI编码集:主要是对ASCII码的扩展,其中0-127:常见字符集与ASCII码相同;之后根据不同国家对其的修改不同而不同,因此,ANSI编码是众多国家对ASCII码的扩展字符编码集合,是一个总称;中国的GB2312字符编码就是属于ANSI编码集.</p>
+<h1><span id="er-unicode-biao-zhun">二.Unicode标准</span></h1><p>　　Unicode标准:就是为了解决:由于各国对ASCII码的无序修改导致,不同国家之间的字符编码转换困难,推出的一套集成全部国家字符的编码标准,因为是重新建立一套的标准,除了0-127:常见字符集是一样,其余与其他国家的字符编码是完全不一样,没有继承,兼容,导致各国热情不高;</p>
+<h1><span id="san-utf-8">三.UTF-8</span></h1><p>　　UTF-8:Unicode为了兼容各国字符,导致每个字符所占的字节数都为2个,但是有些字符就不需要这么多字节,0-127:英文常见字符集只需要1个字节,其实由于硬盘容量较大,对硬盘方面影响较少,但是对于数据传输,影响就很明显,因此,就开发了一个基于可变字节长(根据是否是常见英文字符设置不同的字节)的字符编码–<code>utf-8</code>–一开始专门用来进行数据传输.utf:unicode translation format–unicode标准的转换格式或者理解为数据传输格式,8代表,英文常见字符集的时候,只用一个字节(8位)保存,其余则用两个字节保存.<br>  说明:Unicode则是编码的标准,utf-8,utf-16,utf-32是一种实现Unicode编码标准的存储格式,与GB2312之类的字符编码一样.</p>
+<h1><span id="si-utf-16">四.UTF-16</span></h1><p>　　UTF-16:都用两个字节保存,因此对所有字符的支持力度最好(utf-32优点浪费内存了),所以作为Unicode标准的默认编码,因此在内存中使用,用来更好地支持字符显示.与此同时,utf-8字符编码则是在<strong>数据传输,硬盘存储(省内存)</strong>用的比较多.</p>
+<h1><span id="wu-bom">五.BOM</span></h1><p>　　BOM:BOM——Byte Order Mark，就是字节序标记,使用BOM来标记文本文件的编码方式,utf-8带bom的文件:当系统读取该文件的bom,就知道以utf-8字符编码格式读取;但是带BOM的utf-8编码的文件是以:<code>\ufeff</code>开头,就会导致很多编码问题的存在,因此在开发的过程之中,最好是用不带Bom的utf8</p>
+<h1><span id="liu-can-kao-wen-xian">六.参考文献</span></h1><p>　❋<a href="https://blog.csdn.net/ldanduo/article/details/8203532?utm_source=blogxgwz0" target="_blank" rel="noopener">编码格式简介</a></p>
 
         
         </div>
@@ -496,7 +508,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

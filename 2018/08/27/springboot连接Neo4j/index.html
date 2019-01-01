@@ -267,20 +267,32 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲述的是Springboot与Neo4j的集成,涉及到的知识点有cypher语句,Springboot框架,Neo4j的注解,http测试等等,遇到的坎比较多,但好在一一解决,述写此文仅作后续复习。<a id="more"></a></p>
+            <p>本文主要讲述的是Springboot与Neo4j的集成,涉及到的知识点有cypher语句,Springboot框架,Neo4j的注解,http测试等等,遇到的坎比较多,但好在一一解决,述写此文仅作后续复习。<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-neo4j-de-xie-ru-cao-zuo">一.Neo4j的写入操作</a></li>
+<li><a href="#er-spring-xiang-mu-de-kuai-su-jian-li">二.Spring项目的快速建立</a></li>
+<li><a href="#san-xiang-mu-dai-ma-jie-shao">三.项目代码介绍</a></li>
+<li><a href="#si-http-ce-shi">四.http测试</a></li>
+<li><a href="#wu-cha-xun-jie-guo">五.查询结果</a></li>
+<li><a href="#liu-zhu-yi-shi-xiang">六.注意事项</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-Neo4j的写入操作"><a href="#一-Neo4j的写入操作" class="headerlink" title="一.Neo4j的写入操作"></a>一.Neo4j的写入操作</h1><p>　　首先使用cypher语句进行节点(Person类型的节点)及其属性的插入,为后来在springboot中建立节点实体类(Person类)提供依据,具体的cypher语句形式为:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Create</span> (<span class="selector-tag">n</span><span class="selector-pseudo">:Person</span>&#123;<span class="attribute">name</span>:<span class="string">"zxp"</span>,phone:<span class="string">"10086"</span>,sex:<span class="string">"男"</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<h1><span id="yi-neo4j-de-xie-ru-cao-zuo">一.Neo4j的写入操作</span></h1><p>　　首先使用cypher语句进行节点(Person类型的节点)及其属性的插入,为后来在springboot中建立节点实体类(Person类)提供依据,具体的cypher语句形式为:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Create</span> (<span class="selector-tag">n</span><span class="selector-pseudo">:Person</span>&#123;<span class="attribute">name</span>:<span class="string">"zxp"</span>,phone:<span class="string">"10086"</span>,sex:<span class="string">"男"</span>&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>结果形式为:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085258.jpg" alt="节点插入成功"></p>
-<h1 id="二-Spring项目的快速建立"><a href="#二-Spring项目的快速建立" class="headerlink" title="二.Spring项目的快速建立"></a>二.Spring项目的快速建立</h1><p>　　本项目使用Springboot框架实现Neo4j的集成,先使用IDEA进行spring项目的构建,其中构建步骤可以参考<br><a href="https://blog.csdn.net/lom9357bye/article/details/69677120" target="_blank" rel="noopener">使用IDEA创建SpringBoot项目</a>,其中添加的依赖为:web与Neo4j.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085259.jpg" alt="依赖添加"></p>
-<h1 id="三-项目代码介绍"><a href="#三-项目代码介绍" class="headerlink" title="三.项目代码介绍"></a>三.项目代码介绍</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085300.jpg" alt="项目结构图"></p>
+<h1><span id="er-spring-xiang-mu-de-kuai-su-jian-li">二.Spring项目的快速建立</span></h1><p>　　本项目使用Springboot框架实现Neo4j的集成,先使用IDEA进行spring项目的构建,其中构建步骤可以参考<br><a href="https://blog.csdn.net/lom9357bye/article/details/69677120" target="_blank" rel="noopener">使用IDEA创建SpringBoot项目</a>,其中添加的依赖为:web与Neo4j.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085259.jpg" alt="依赖添加"></p>
+<h1><span id="san-xiang-mu-dai-ma-jie-shao">三.项目代码介绍</span></h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085300.jpg" alt="项目结构图"></p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085301.jpg" alt="项目代码介绍"></p>
-<h1 id="四-http测试"><a href="#四-http测试" class="headerlink" title="四.http测试"></a>四.http测试</h1><p>主要采用Restful接口进行测试,在IDEA中的Tool选项,具体情况如图所示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085302.jpg" alt="http测试"><br>注意查询的地址就是:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span><span class="regexp">/p/</span>zxp</span><br></pre></td></tr></table></figure></p>
+<h1><span id="si-http-ce-shi">四.http测试</span></h1><p>主要采用Restful接口进行测试,在IDEA中的Tool选项,具体情况如图所示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085302.jpg" alt="http测试"><br>注意查询的地址就是:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span><span class="regexp">/p/</span>zxp</span><br></pre></td></tr></table></figure></p>
 <p>不是<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">7474</span><span class="regexp">/p/</span>zxp</span><br></pre></td></tr></table></figure></p>
 <p>这个要记住,对应上图的Restful接口测试。</p>
-<h1 id="五-查询结果"><a href="#五-查询结果" class="headerlink" title="五.查询结果"></a>五.查询结果</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085304.jpg" alt="运行结果"></p>
-<h1 id="六-注意事项"><a href="#六-注意事项" class="headerlink" title="六.注意事项"></a>六.注意事项</h1><p>　　在资源配置文件:application.properties中,配置为如下形式:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#uri地址一定要写成这样,以管理者权限进行访问</span><br><span class="line">spring<span class="selector-class">.data</span><span class="selector-class">.neo4j</span><span class="selector-class">.uri</span>=http:<span class="comment">//neo4j:zxpp@localhost:7474</span></span><br><span class="line">spring<span class="selector-class">.data</span><span class="selector-class">.neo4j</span><span class="selector-class">.username</span>=neo4j</span><br><span class="line">spring<span class="selector-class">.activemq</span><span class="selector-class">.password</span>=zxpp</span><br></pre></td></tr></table></figure></p>
+<h1><span id="wu-cha-xun-jie-guo">五.查询结果</span></h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085304.jpg" alt="运行结果"></p>
+<h1><span id="liu-zhu-yi-shi-xiang">六.注意事项</span></h1><p>　　在资源配置文件:application.properties中,配置为如下形式:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#uri地址一定要写成这样,以管理者权限进行访问</span><br><span class="line">spring<span class="selector-class">.data</span><span class="selector-class">.neo4j</span><span class="selector-class">.uri</span>=http:<span class="comment">//neo4j:zxpp@localhost:7474</span></span><br><span class="line">spring<span class="selector-class">.data</span><span class="selector-class">.neo4j</span><span class="selector-class">.username</span>=neo4j</span><br><span class="line">spring<span class="selector-class">.activemq</span><span class="selector-class">.password</span>=zxpp</span><br></pre></td></tr></table></figure></p>
 <p>　　其中<code>spring.data.neo4j.uri=http://localhost:7474</code><br>会造成权限不够访问失败,出现如下信息:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"timestamp"</span>:<span class="string">"2018-08-27T12:27:56.677+0000"</span>,</span><br><span class="line"><span class="attr">"status"</span>:<span class="number">500</span>,</span><br><span class="line"><span class="attr">"error"</span>:<span class="string">"Internal Server Error"</span>,</span><br><span class="line"><span class="attr">"message"</span>:<span class="string">"http://localhost:7474/db/data/transaction/commit; nested exception is org.neo4j.ogm.exception.ConnectionException: http://localhost:7474/db/data/transaction/commit"</span>,<span class="attr">"path"</span>:<span class="string">"/p/zxp"</span>&#125;</span><br></pre></td></tr></table></figure></p>
 <p>截图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085305.jpg" alt="访问失败"></p>
 
@@ -502,7 +514,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

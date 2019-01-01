@@ -261,9 +261,54 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本周主要学习了开源QA:YODA-QA,了解它的运行原理,架构流程,之后了解它的代码结构及其代码模块.<a id="more"></a></p>
+            <p>本周主要学习了开源QA:YODA-QA,了解它的运行原理,架构流程,之后了解它的代码结构及其代码模块.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#infobox">infobox</a></li>
+<li><a href="#shi-ti-lian-jie">[实体链接]</a></li>
+<li><a href="#nosql">NOSQL</a><ul>
+<li><a href="#gai-nian">概念</a></li>
+<li><a href="#tu-shu-ju-ku">图数据库</a><ul>
+<li><a href="#yuan-yin-2">[原因][^2]</a></li>
+<li><a href="#neo4j-you-que-dian-1">[neo4j优缺点][^1]</a></li>
+<li><a href="#janusgraph">JanusGraph</a><ul>
+<li><a href="#cap-ding-li">Cap定理</a></li>
+<li><a href="#janusgraph-jia-gou-tu-3">[janusGraph架构图][^3]</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#kai-yuan-qa">开源QA</a><ul>
+<li><a href="#chong-lei-7">[种类][^7]</a><ul>
+<li><a href="#yoda-qa-5">[yoda-QA][^5]</a><ul>
+<li><a href="#wen-ti-fen-xi-he-xin-bu-fen">问题分析(核心部分)</a></li>
+<li><a href="#da-an-sheng-cheng">答案生成</a><ul>
+<li><a href="#jie-gou-hua-wen-ben">结构化文本</a></li>
+<li><a href="#fei-jie-gou-hua-wen-ben">非结构化文本:</a></li>
+</ul>
+</li>
+<li><a href="#da-an-fen-xi">答案分析</a></li>
+<li><a href="#da-an-he-cheng-answer-merge">答案合成( Answer Merge)</a></li>
+<li><a href="#da-an-ping-fen-answer-score">答案评分( Answer Score)</a></li>
+<li><a href="#dai-ma-jie-gou">代码结构</a></li>
+<li><a href="#dai-ma-mo-kuai">代码模块</a></li>
+</ul>
+</li>
+<li><a href="#openephyra-java-kai-yuan">OpenEphyra（Java开源）</a></li>
+<li><a href="#open-qa-java-kai-yuan">open-QA（Java开源）</a></li>
+<li><a href="#watsonsim-java-kai-yuan">Watsonsim（Java开源）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
 <p>　　YODA-QA的工作流程主要有五个部分组成:<br>  问题分析:主要是对问题进行词性,句法标注,从而实现分词,最终得到NER(实体命名识别);之后得到基于要素的QA特征:线索,焦点,LAT<br>  答案生成:通过根据问题分析得到的QA特征对数据源的数据进行比较,也就是相似度的计算,其中非结构化数据:有两方面:</p>
 <ul>
@@ -271,10 +316,10 @@
 <li>或者直接进行每篇文章标题(只要是标题就可以),然后提取出相应的QA特征,之后与问题的QA特征进行比对,使用评分的方式来实现排序,得到排名靠前的几篇文章.之后进行全文搜索,将每个段落作为每个独立的部分,然后根据问题的线索在每个段落的出现频率,作为评分的标准,最后得到排名前几的段落,其余文章也是在这样.然后进行信息提取,提取相应QA特征,然后进行信息分析得到该阶段的候选答案.</li>
 <li>之后进行答案分析:也就是为各个候选答案确定所对应的问题类型,LAT,所以这阶段主要是修改LAT.</li>
 <li>答案合并:合并相同候选答案的文本,减少数据量,一定吃程度有利于减少过拟合,减少异常答案的出现.</li>
-<li>候选答案的评分排序.<h1 id="infobox"><a href="#infobox" class="headerlink" title="infobox"></a>infobox</h1><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85552.png" alt=""></li>
+<li>候选答案的评分排序.<h1><span id="infobox">infobox</span></h1><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85552.png" alt=""></li>
 </ul>
 <p>　　如下图所示，是维基百科关于“清华大学”的词条内容。可以看到，在右侧有一个列表，标注了与清华有关的各类重要信息，如校训、创建时间、校庆日、学校类型、校长，等等。在维基百科中，这个列表被称为信息框（infobox），是由编辑者们共同编辑而成。信息框中的结构化信息是知识图谱的直接数据来源。</p>
-<h1 id="实体链接"><a href="#实体链接" class="headerlink" title="[实体链接]"></a>[实体链接]</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085552.png" alt=""></p>
+<h1><span id="shi-ti-lian-jie">[实体链接]</span></h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085552.png" alt=""></p>
 <p>　　[手段][^9]是通过将自然语言中的文本不知识库中的条目进行链接<br>　　其实就是求从句子提取出的实体指称项与候选实体间的链接关系. 例如:<br>　　在一个句子当中,含有乔布斯及其苹果这两个实体,也叫实体指称项,假设乔布斯没有歧义问题,但苹果这个实体指称项有歧义问题,因为它有多个候选实体(可能是水果,公司,电影的含义),如何找出最符合该情景下的候选实体,也就是一个实体链接的问题.“苹果”和“乔布斯”通过命名实体消歧确定为“苹果(公司)”。实体链接可以利用上下文相似度、文本主题一致性实现，主要有两类方法：</p>
 <ol>
 <li><p>实体链接方法——统计方法 通过知识库和大规模语料+深度学习模型实现。</p>
@@ -283,7 +328,7 @@
 </li>
 </ol>
 <p>　　计算最大似然链接结果的算法(通过算出实体指称项与各个候选实体的概率,之后排序,找到最大概率的候选实体,并使其与实体指称项进行链接)<br>　　那么在知识图谱上的实体链接问题定义为：其输入包括一个源知识图谱和一个目标知识图谱。其输出为一个实体链接对集合，表示从源图谱中链接到目标图谱中的实体对(实体指称项与最大概率的候选实体)。</p>
-<h1 id="NOSQL"><a href="#NOSQL" class="headerlink" title="NOSQL"></a>NOSQL</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>关于NoSQL有两种解释：一种是Non<br>SQL，表示NoSQL与传统的关系数据库有本质上的不同；另一种是Not only<br>SQL，表示NoSQL不仅仅能像普通（关系）数据库一样存储结构化数据，也可以存储非结构化数据。在数据规模很大的场景下，NoSQL通常是更好的选择，因为它易于横向拓展和分布式部署，相比传统关系数据库更加灵活。<br>通常NoSQL有以下四种：</p>
+<h1><span id="nosql">NOSQL</span></h1><h2><span id="gai-nian">概念</span></h2><p>关于NoSQL有两种解释：一种是Non<br>SQL，表示NoSQL与传统的关系数据库有本质上的不同；另一种是Not only<br>SQL，表示NoSQL不仅仅能像普通（关系）数据库一样存储结构化数据，也可以存储非结构化数据。在数据规模很大的场景下，NoSQL通常是更好的选择，因为它易于横向拓展和分布式部署，相比传统关系数据库更加灵活。<br>通常NoSQL有以下四种：</p>
 <ul>
 <li><p>KV数据库，存储key-value数据，如Redis、MemcacheDB等–数据模型比较简单的情况下,便于读写.</p>
 </li>
@@ -294,14 +339,14 @@
 <li><p>图数据库（graph database），如Neo4j、JanusGraph等</p>
 </li>
 </ul>
-<h2 id="图数据库"><a href="#图数据库" class="headerlink" title="图数据库"></a>图数据库</h2><h3 id="原因-2"><a href="#原因-2" class="headerlink" title="[原因][^2]"></a>[原因][^2]</h3><p>　　1.因为传统数据库的一条记录,记录众多属性及其属性值,对于查询某种关系非常不方便;特别当数据量越多的时候,劣势愈加明显.</p>
+<h2><span id="tu-shu-ju-ku">图数据库</span></h2><h3><span id="yuan-yin-2">[原因][^2]</span></h3><p>　　1.因为传统数据库的一条记录,记录众多属性及其属性值,对于查询某种关系非常不方便;特别当数据量越多的时候,劣势愈加明显.</p>
 <p>　　2.图形数据库:节点/边的类别及属性,都是分开存储的,都用指针进行联系,极大有助于提高查询速度.</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085553.png" alt=""></p>
 <p>　　3.人们需求不一样传统数据库存储的是数据,追求完整性,图形数据库存储的是关系,追求精准性,所以当追求精准性的时候,图形数据库的优势就开始显现.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085554.png" alt=""><br>　　图数据库就是用“图”的方式来存储数据。比如官方文档中的例子：在上图中我们可以发现元素有：节点（Vertex）、有向边（Edge），属性（Property）。节点表示实体，边表示关系，属性定义了实体和关系中的相关信息。这跟ER图很像，关系数据库<strong>也可以表示为ER图</strong>，但是在关系数据库中，是无法沿着边进行访问的，只能通过链式进行遍历和计算。而在图数据库中，存储的是真实的图，可以沿着图的路径进行遍历和计算。举个例子，比如要找途中Hercules的父亲的父亲，在关系数据库中，需要先根据Herclues这一行的father列定位到他的父亲，再访问他的父亲通过同样的方法定位到父亲的父亲，需要两次索引定位；而在图数据库中可以直接沿着father边找到对应的人。（在关系数据库存在外键的时候，可以避免join操作，效率更高）</p>
-<h3 id="neo4j优缺点-1"><a href="#neo4j优缺点-1" class="headerlink" title="[neo4j优缺点][^1]"></a>[neo4j优缺点][^1]</h3><p>(1)优点</p>
+<h3><span id="neo4j-you-que-dian-1">[neo4j优缺点][^1]</span></h3><p>(1)优点</p>
 <p>　　学习资源多:作为较早的一批图形数据库之一，文档和各种技术博客较多。<br>　　安装过程较为简单 稳定性较好,市场份额大.<br>(2)缺点<br>　　Neo4j只适合适合存储”修改较少，查询较多，没有超大节点“的图数据<br>　　图数据结构导致写入性能差，实时性读写跟不上，大数据量导入麻烦，官方提供的loadcsv模式性能也不够理想，neo4j-import倒是不错，但是只能用于数据库初始化局限太大。<br>　　不能进行分布式存储，想要提高性能和容量只能加大单个机器的硬盘<br>　　企业版闭源且费用昂贵，社区版免费开源，但是企业级项目实用性不强.</p>
-<h3 id="JanusGraph"><a href="#JanusGraph" class="headerlink" title="JanusGraph"></a>JanusGraph</h3><p>　　JanusGraph是Titan的一个fork。Titan项目创建于2012年，于2016年停止维护，是一个方便拓展的图数据库，支持HBase、Cassandra等作为后端（BerkleyDB不提了），ES、Lucene等做全文索引，以TinkerPop作为图的查询和计算框架。2017年，JanusGraph项目fork了Titan，到目前已经推出了0.2.0版本。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085557.png" alt=""></p>
-<h4 id="Cap定理"><a href="#Cap定理" class="headerlink" title="Cap定理"></a>Cap定理</h4><p>JanusGraph的CAP<br>CAP定理说的是：一个分布式计算机系统无法同时满足以下三点（定义摘自Wikipedia）：</p>
+<h3><span id="janusgraph">JanusGraph</span></h3><p>　　JanusGraph是Titan的一个fork。Titan项目创建于2012年，于2016年停止维护，是一个方便拓展的图数据库，支持HBase、Cassandra等作为后端（BerkleyDB不提了），ES、Lucene等做全文索引，以TinkerPop作为图的查询和计算框架。2017年，JanusGraph项目fork了Titan，到目前已经推出了0.2.0版本。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085557.png" alt=""></p>
+<h4><span id="cap-ding-li">Cap定理</span></h4><p>JanusGraph的CAP<br>CAP定理说的是：一个分布式计算机系统无法同时满足以下三点（定义摘自Wikipedia）：</p>
 <ul>
 <li><p>一致性（Consistency) ，所有节点访问同一份最新的数据副本</p>
 </li>
@@ -310,39 +355,39 @@
 <li><p>分区容错性（Partition<br>tolerance），以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。<br>关于JanusGraph在CAP理论上的侧重，是要看底层存储的。如果底层是Cassandra，那么就是偏向于AP（Cassandra是最终一致性的）；如果底层是HBase，就是偏向于CP（强一致性）；BerkleyDB单机不存在这个问题。</p>
 </li>
 </ul>
-<h4 id="janusGraph架构图-3"><a href="#janusGraph架构图-3" class="headerlink" title="[janusGraph架构图][^3]"></a>[janusGraph架构图][^3]</h4><p>　　JanusGraph是一个图数据库引擎. JanusGraph集中在图的序列化,图的数据模型和高效的查询. 此外JanusGraph依赖hadoop来做图的统计和批量图操作.<br>JanusGraph为数据存储,索引和客户端访问实现了粗粒度的模块接口.JanusGraph的模块架构能和和许多存储,索引,客户端技术集成. 可以简便的扩展新的功能.<br>其中与janusGraph的交互方式有两种:本地交互/远程交互.具体情况如下:<br>　　(1)<strong>内嵌在本地应用的JanusGraph图形数据库</strong>,运行Gremlin查询,JanusGraph缓存和事务处理和应用在同一个JVM上.具体实现方式就是调用JanusGraph的接口,然后进行对janusGraph里面的数据进行查询—-OLAP<br>　　(2)通过提交Gremlin查询, <strong>和本地或者远程的JanusGraph实例交互</strong>,由于JanusGraph原生支持Gremlin Server 组件(TinkerPopstack)—就是一个图计算框架.就可以直接在janusGraph的数据当中进行查询.不管是哪种交互都是通过Gremlin查询语言进行的,后台存储主要使用的是Apache　HBASE,Apache　Cassandra,Oracle Berkeley DB,索引有Elasticsearch,Apache Solr,Apache Lucene, 加快查询和复杂查询.<br>janusGraph的内部结构: </p>
+<h4><span id="janusgraph-jia-gou-tu-3">[janusGraph架构图][^3]</span></h4><p>　　JanusGraph是一个图数据库引擎. JanusGraph集中在图的序列化,图的数据模型和高效的查询. 此外JanusGraph依赖hadoop来做图的统计和批量图操作.<br>JanusGraph为数据存储,索引和客户端访问实现了粗粒度的模块接口.JanusGraph的模块架构能和和许多存储,索引,客户端技术集成. 可以简便的扩展新的功能.<br>其中与janusGraph的交互方式有两种:本地交互/远程交互.具体情况如下:<br>　　(1)<strong>内嵌在本地应用的JanusGraph图形数据库</strong>,运行Gremlin查询,JanusGraph缓存和事务处理和应用在同一个JVM上.具体实现方式就是调用JanusGraph的接口,然后进行对janusGraph里面的数据进行查询—-OLAP<br>　　(2)通过提交Gremlin查询, <strong>和本地或者远程的JanusGraph实例交互</strong>,由于JanusGraph原生支持Gremlin Server 组件(TinkerPopstack)—就是一个图计算框架.就可以直接在janusGraph的数据当中进行查询.不管是哪种交互都是通过Gremlin查询语言进行的,后台存储主要使用的是Apache　HBASE,Apache　Cassandra,Oracle Berkeley DB,索引有Elasticsearch,Apache Solr,Apache Lucene, 加快查询和复杂查询.<br>janusGraph的内部结构: </p>
 <ul>
 <li>底层是存储和索引层</li>
 <li>第二层就是数据库层</li>
 <li>第三层就是为了保护数据的安全而提供的一个数据访问的接口层,便于与Gremlin查询进行交互.</li>
 <li>第四层就是查询层.<br>(3)补充:OLTP主要是事务处理方面的(操作数据)，而OLAP主要是用于数据分析(分析数据作决策)。<br>一般的数据库通常都是OLTP，因为主要用于在线记录数据，离线进行数据分析</li>
 </ul>
-<h1 id="开源QA"><a href="#开源QA" class="headerlink" title="开源QA"></a>开源QA</h1><h2 id="种类-7"><a href="#种类-7" class="headerlink" title="[种类][^7]"></a>[种类][^7]</h2><h3 id="yoda-QA-5"><a href="#yoda-QA-5" class="headerlink" title="[yoda-QA][^5]"></a>[yoda-QA][^5]</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85558.png" alt=""><br>　　其中apache的UMIA还提供了一个语义搜索接口,但是ibm的DEEP-QA的UIMA保留了这个搜索功能<br>　　YodaQA采用基于UIMA的流水线架构(UIMA就是对非结构化数据/结构化数据作了一个规范化处理,基本单元就是CAS对象)，实行插件化管理，根据需要预先加载相关组件。将整个问答过程划分为若干阶段，每个阶段对应若干插件，将这些插件安装在流水线架构上，完成智能问答过程.YodaQA是一个开源的事实型问答系统，他能够利用即时的信息抽取从数据库和非结构化的文本语料中抽取答案.具体框架：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085602.png" alt=""><br>总共有五个过程：<br>　　问题分析–>候选答案产生–>候选候选答案分析–>候选答案合并–>各个候选答案评分.</p>
-<h4 id="问题分析-核心部分"><a href="#问题分析-核心部分" class="headerlink" title="问题分析(核心部分)"></a>问题分析(核心部分)</h4><p>问题分析：生成词性标注（POS）标签和依存句法分析结果，识别出命名实体；生成若干QA特征：线索、焦点、LAT特征。(从问题文本当中抽取出自然语言特征,并生成基于要素的QA特征)</p>
+<h1><span id="kai-yuan-qa">开源QA</span></h1><h2><span id="chong-lei-7">[种类][^7]</span></h2><h3><span id="yoda-qa-5">[yoda-QA][^5]</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85558.png" alt=""><br>　　其中apache的UMIA还提供了一个语义搜索接口,但是ibm的DEEP-QA的UIMA保留了这个搜索功能<br>　　YodaQA采用基于UIMA的流水线架构(UIMA就是对非结构化数据/结构化数据作了一个规范化处理,基本单元就是CAS对象)，实行插件化管理，根据需要预先加载相关组件。将整个问答过程划分为若干阶段，每个阶段对应若干插件，将这些插件安装在流水线架构上，完成智能问答过程.YodaQA是一个开源的事实型问答系统，他能够利用即时的信息抽取从数据库和非结构化的文本语料中抽取答案.具体框架：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085602.png" alt=""><br>总共有五个过程：<br>　　问题分析–>候选答案产生–>候选候选答案分析–>候选答案合并–>各个候选答案评分.</p>
+<h4><span id="wen-ti-fen-xi-he-xin-bu-fen">问题分析(核心部分)</span></h4><p>问题分析：生成词性标注（POS）标签和依存句法分析结果，识别出命名实体；生成若干QA特征：线索、焦点、LAT特征。(从问题文本当中抽取出自然语言特征,并生成基于要素的QA特征)</p>
 <ol>
 <li>线索（Clue）：问题内容的中心词，用于查询候选答案。可以是多种成分，如名词短语、名词标记、选择动词、命名实体、问题句主题等，不同成分对应的权重存在差异。如果线索对应于enwiki文章题目或者重定向别名，那么它的权重会被提升。</li>
 <li>焦点（Focus）：问题句子的中心点，指示被查询对象。基于依存句法分析的结果，使用简单启发式规则抽取6个要素，按照规定格式构成焦点。</li>
 <li>LAT（Lexical Answer<br>Type，词汇答案类型）：描述和问题相匹配的答案类型，它不是预先定义的类别，可以是任意英语名词。</li>
 <li>生成LAT方法：将单词映射为名词（从“where”到“location”），将副词归一化（从“hot”到“temperature”）</li>
 </ol>
-<h4 id="答案生成"><a href="#答案生成" class="headerlink" title="答案生成"></a>答案生成</h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085603.png" alt=""><br>　　根据问题生成的QA特征(线索,LAT,焦点)，在知识库进行主搜索，具体运行模式如下图:<br>其生成答案的来源有:</p>
-<h5 id="结构化文本"><a href="#结构化文本" class="headerlink" title="结构化文本"></a>结构化文本</h5><p>　　搜索结构化数据(RDF三元组),DBpedia,freebase是RDF三元组的知识库,将每个问题的线索作为主语,LAT作为谓语,之后得到三元组的宾语作为候选答案.搜索范围是DBpedia本体和属性命名空间,Freebase的RDF转储库当中.</p>
-<h5 id="非结构化文本"><a href="#非结构化文本" class="headerlink" title="非结构化文本:"></a>非结构化文本:</h5><p>(1)搜索文档</p>
+<h4><span id="da-an-sheng-cheng">答案生成</span></h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085603.png" alt=""><br>　　根据问题生成的QA特征(线索,LAT,焦点)，在知识库进行主搜索，具体运行模式如下图:<br>其生成答案的来源有:</p>
+<h5><span id="jie-gou-hua-wen-ben">结构化文本</span></h5><p>　　搜索结构化数据(RDF三元组),DBpedia,freebase是RDF三元组的知识库,将每个问题的线索作为主语,LAT作为谓语,之后得到三元组的宾语作为候选答案.搜索范围是DBpedia本体和属性命名空间,Freebase的RDF转储库当中.</p>
+<h5><span id="fei-jie-gou-hua-wen-ben">非结构化文本:</span></h5><p>(1)搜索文档</p>
 <p>　　对文章正文进行全文的线索搜索,之后选择排名前20<br>的文章,并将他们的标题作为候选答案(看上图).</p>
 <p>(2)标题分析</p>
 <p>　　对非结构化文本的标题进行处理:</p>
 <p>　　先分析各个文章的标题,得到各个文章的对应的QA特征(焦点,线索,LAT),之后搜索得到跟问题分析最贴合的几篇文章,然后对这几篇文章进行全文分析:</p>
 <p>(3)全文分析/标题分析+信息提取:</p>
 <p>　　主要是按段落来进行分析—(默认原则,把每段第一句看成是一个中心句),之后对每段进行QA特征的提取.(标题也会进行信息提取<br>　　根据线索在每段出现的次数进行权重的设置,从而进行相应的评分,之后对每篇文章的段落评分前三的段落,作为QA特征的提取<br>(4)信息分析<br>　　将提取后的信息(组织出来的核心句子)进行分析,通过执行了NLP流水线得到几个候选答案.具体方法就是:<br>　　将所有的命名实体,与名词短语都转换为一个个候选答案,此外,对于主语是问题的LAT的句子,其宾语需要转换为一个个候选答案.(针对英文的句法)<br>　　上述过程就是将不同数据来源的答案整合成一堆的候选答案</p>
-<h4 id="答案分析"><a href="#答案分析" class="headerlink" title="答案分析"></a>答案分析</h4><p>　　生成各种基于细节分析的答案特征,最终的是问题的类型及其约束.<br>  为每个候选答案生成很多特性(例如),目的是为了对问题类型的匹配,具体方法是:对候选答案的类型进行强制转换,检查其是否和问题的LAT相匹配,根据中这个方式来进行候选问题的LAT修正.LAT修正方法如下:</p>
+<h4><span id="da-an-fen-xi">答案分析</span></h4><p>　　生成各种基于细节分析的答案特征,最终的是问题的类型及其约束.<br>  为每个候选答案生成很多特性(例如),目的是为了对问题类型的匹配,具体方法是:对候选答案的类型进行强制转换,检查其是否和问题的LAT相匹配,根据中这个方式来进行候选问题的LAT修正.LAT修正方法如下:</p>
 <p>　　A:通过<strong>命名实体识别触发器模型</strong>生成答案的LAT,可以识别日期、地点、金额、组织、百分比、人名和时间等类型</p>
 <p>　　B:将答案量化为表示LAT的数字,通过统计分析修正LAT</p>
 <p>　　C:在 WordNet和实例对中查找得到的答案焦点(句法树根节点)被用于生成LATs</p>
 <p>　　D:在DBpedia中查找到的答案焦点,其本体被用于生成LATSE:来自结构化知识库的答案,其属性名被视为LAT为了实现问题和答案LATS之间的类型强制转,通常需要使用WordNet的上位关系分析。例如:科学家”被归纳到“人”长度”被归纳到“数量词.</p>
-<h4 id="答案合成-Answer-Merge"><a href="#答案合成-Answer-Merge" class="headerlink" title="答案合成( Answer Merge)"></a>答案合成( Answer Merge)</h4><p>　　合并相同文本对应的候选答案,为了避免过拟合,否则就会造成过于罕见(在问题中比例小于1%,在答案中小于0.1%)的特征出现。</p>
-<h4 id="答案评分-Answer-Score"><a href="#答案评分-Answer-Score" class="headerlink" title="答案评分( Answer Score)"></a>答案评分( Answer Score)</h4><p>　　使用机器学习分类器对答案进行评分。每个特征要生成若干二元附加特征,表示特征是否被生成、答案集合是否被归一化(答案中所有特征值均值是0、方差是1)使用LR分类器,将特征向量转换为[0,1]间的分值。使用L2正则化目标函数,按照标准训练数据,可以得到权重向量。为了在准确率和召回率之间达到平衡,正向答案(在答案总数占有比例p=0.03，因为毕竟是少数的)需要进行加权,公式是0.5/p</p>
-<h4 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085604.png" alt="代码界面"></p>
-<h4 id="代码模块"><a href="#代码模块" class="headerlink" title="代码模块"></a>代码模块</h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085605.png" alt="代码模块结构图"></p>
+<h4><span id="da-an-he-cheng-answer-merge">答案合成( Answer Merge)</span></h4><p>　　合并相同文本对应的候选答案,为了避免过拟合,否则就会造成过于罕见(在问题中比例小于1%,在答案中小于0.1%)的特征出现。</p>
+<h4><span id="da-an-ping-fen-answer-score">答案评分( Answer Score)</span></h4><p>　　使用机器学习分类器对答案进行评分。每个特征要生成若干二元附加特征,表示特征是否被生成、答案集合是否被归一化(答案中所有特征值均值是0、方差是1)使用LR分类器,将特征向量转换为[0,1]间的分值。使用L2正则化目标函数,按照标准训练数据,可以得到权重向量。为了在准确率和召回率之间达到平衡,正向答案(在答案总数占有比例p=0.03，因为毕竟是少数的)需要进行加权,公式是0.5/p</p>
+<h4><span id="dai-ma-jie-gou">代码结构</span></h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085604.png" alt="代码界面"></p>
+<h4><span id="dai-ma-mo-kuai">代码模块</span></h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085605.png" alt="代码模块结构图"></p>
 <ol>
 <li><p>cz. brmlab. yodaqa. model:<br>YodaQA中常用数据类型,包括:问题、候选答案、LAT、查询结果、答案命中列表等。(由于UIMA编译机制,将会将问题转换成规范化格式,统称是CAS对象,在不同的阶段,为了便于描述,需要将CAS对象细化)</p>
 </li>
@@ -357,9 +402,9 @@
 <li><p>cz. brmlab. yodaqa.<br>pipeline:管理流水线不同阶段上的模块,将多个模块综合在一起,形成问答系统所需要的特定功能</p>
 </li>
 </ol>
-<h3 id="OpenEphyra（Java开源）"><a href="#OpenEphyra（Java开源）" class="headerlink" title="OpenEphyra（Java开源）"></a>OpenEphyra（Java开源）</h3><p>基于Java开发的模块化、可扩展的问答系统、安装简单。从Web和其他来源检索自然语言问题的答案。</p>
-<h3 id="open-QA（Java开源）"><a href="#open-QA（Java开源）" class="headerlink" title="open-QA（Java开源）"></a>open-QA（Java开源）</h3><p>OpenQA是一个开放源码的问题回答框架，它统一了来自多个领域专家的方法。openQA的目的是提供一个共同的平台，通过简单的集成和度量不同的方法来促进进步.</p>
-<h3 id="Watsonsim（Java开源）"><a href="#Watsonsim（Java开源）" class="headerlink" title="Watsonsim（Java开源）"></a>Watsonsim（Java开源）</h3><p>开放式问答系统。Watsonsim的工作原理是对问题、候选答案及其支持段落进行一系列操作。在很多方面，它类似于IBM的沃森(Watson)和Petr的YodaQA。它与OpenCog或Wolfram Alpha等基于更多逻辑的系统没有太大的相似之处。</p>
+<h3><span id="openephyra-java-kai-yuan">OpenEphyra（Java开源）</span></h3><p>基于Java开发的模块化、可扩展的问答系统、安装简单。从Web和其他来源检索自然语言问题的答案。</p>
+<h3><span id="open-qa-java-kai-yuan">open-QA（Java开源）</span></h3><p>OpenQA是一个开放源码的问题回答框架，它统一了来自多个领域专家的方法。openQA的目的是提供一个共同的平台，通过简单的集成和度量不同的方法来促进进步.</p>
+<h3><span id="watsonsim-java-kai-yuan">Watsonsim（Java开源）</span></h3><p>开放式问答系统。Watsonsim的工作原理是对问题、候选答案及其支持段落进行一系列操作。在很多方面，它类似于IBM的沃森(Watson)和Petr的YodaQA。它与OpenCog或Wolfram Alpha等基于更多逻辑的系统没有太大的相似之处。</p>
 
         
         </div>
@@ -579,7 +624,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

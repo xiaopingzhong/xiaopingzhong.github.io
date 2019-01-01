@@ -267,12 +267,26 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本节是根据本人在开发当中涉及到的一些常用知识点(各集合形式)进行介绍,针对性较强,遗漏部分会在后期的文章中进行说明.<a id="more"></a></p>
+            <p>本节是根据本人在开发当中涉及到的一些常用知识点(各集合形式)进行介绍,针对性较强,遗漏部分会在后期的文章中进行说明.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-list-lie-biao-de-xing-shi">一.List/列表的形式–[]:</a><ul>
+<li><a href="#2-1-zu-cheng-bu-fen">2.1 组成部分</a></li>
+<li><a href="#2-2-arraylist-yu-linkedlist">2.2 ArrayList与LinkedList</a></li>
+</ul>
+</li>
+<li><a href="#er-array-shu-zu-de-xing-shi">二.Array/数组的形式–{}</a></li>
+<li><a href="#san-map-xing-shi">三.Map形式</a></li>
+<li><a href="#si-set-xing-shi">四.set形式</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-List-列表的形式–"><a href="#一-List-列表的形式–" class="headerlink" title="一.List/列表的形式–[]:"></a>一.List/列表的形式–[]:</h2><h3 id="2-1-组成部分"><a href="#2-1-组成部分" class="headerlink" title="2.1 组成部分"></a>2.1 组成部分</h3><p>实现类:<br>　　ArrayList ,LinkedList,Vectord.都是List接口的实现类.<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; str=[<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="string">''</span><span class="number">1997'</span>, <span class="string">'2000'</span>];</span><br><span class="line">Linked list : [D, A, E, B, C, F, G]</span><br><span class="line">向量vector:[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>]之类的,还有<span class="keyword">double</span>[],<span class="keyword">int</span>[]之类的</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-2-ArrayList与LinkedList"><a href="#2-2-ArrayList与LinkedList" class="headerlink" title="2.2 ArrayList与LinkedList"></a>2.2 ArrayList与LinkedList</h3><table>
+<h2><span id="yi-list-lie-biao-de-xing-shi">一.List/列表的形式–[]:</span></h2><h3><span id="2-1-zu-cheng-bu-fen">2.1 组成部分</span></h3><p>实现类:<br>　　ArrayList ,LinkedList,Vectord.都是List接口的实现类.<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; str=[<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="string">''</span><span class="number">1997'</span>, <span class="string">'2000'</span>];</span><br><span class="line">Linked list : [D, A, E, B, C, F, G]</span><br><span class="line">向量vector:[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>]之类的,还有<span class="keyword">double</span>[],<span class="keyword">int</span>[]之类的</span><br></pre></td></tr></table></figure></p>
+<h3><span id="2-2-arraylist-yu-linkedlist">2.2 ArrayList与LinkedList</span></h3><table>
 <thead>
 <tr>
 <th></th>
@@ -319,10 +333,10 @@
 </tbody>
 </table>
 <p>注:<br>　　正因为 ArrayList与LinkedList都有各自的优缺点,所以后面出现了一种新的集合-Map,结合了两种集合的优点.<br>　　Vector:虽然是线程安全,多数方法都被synchronized修饰的List实现；但现在用到比较少.</p>
-<h2 id="二-Array-数组的形式–"><a href="#二-Array-数组的形式–" class="headerlink" title="二.Array/数组的形式–{}"></a>二.Array/数组的形式–{}</h2><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String<span class="string">[]</span> strings=&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="三-Map形式"><a href="#三-Map形式" class="headerlink" title="三.Map形式"></a>三.Map形式</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attribute">key1</span>=value, <span class="attribute">key2</span>=value&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="er-array-shu-zu-de-xing-shi">二.Array/数组的形式–{}</span></h2><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String<span class="string">[]</span> strings=&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h2><span id="san-map-xing-shi">三.Map形式</span></h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attribute">key1</span>=value, <span class="attribute">key2</span>=value&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>实现类:LinkedHashMap是有序的,HashMap是无序的 </strong></p>
-<h2 id="四-set形式"><a href="#四-set形式" class="headerlink" title="四.set形式"></a>四.set形式</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">list</span> = [<span class="number">0</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line"><span class="comment">//不重复</span></span><br><span class="line">set = [<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line">map = &#123;a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="si-set-xing-shi">四.set形式</span></h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">list</span> = [<span class="number">0</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line"><span class="comment">//不重复</span></span><br><span class="line">set = [<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line">map = &#123;a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>实现类:sortSet是有序的,HashSet是无序的</strong><br>　　其中set集合可以设置为有序–使用sortSet类对象存储:这里的“有序”，“无序”指的是存放元素是是否会记住元素存放的顺序，并非对元素进行“排序”.</p>
 
         
@@ -543,7 +557,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

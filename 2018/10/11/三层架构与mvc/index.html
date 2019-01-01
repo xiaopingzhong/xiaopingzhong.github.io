@@ -267,19 +267,44 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　一般项目开发会遵循三层架构:数据层,业务层,表示层,其中:表示层是与前台进行连接;业务层是实业务的操作逻辑;数据层/DAO层则是对数据的操作-CRUD.各层要尽量做到低耦合,减少层之间的数据传递.最后还重点讲述了MVC与三层结构的区别.<a id="more"></a></p>
+            <p>一般项目开发会遵循三层架构:数据层,业务层,表示层,其中:表示层是与前台进行连接;业务层是实业务的操作逻辑;数据层/DAO层则是对数据的操作-CRUD.各层要尽量做到低耦合,减少层之间的数据传递.最后还重点讲述了MVC与三层结构的区别.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-shu-ju-ceng">一.数据层</a><ul>
+<li><a href="#1-1-model-ceng">1.1 model层</a></li>
+<li><a href="#1-2-dao-ceng">1.2 Dao层</a></li>
+</ul>
+</li>
+<li><a href="#er-service-ye-wu-ceng">二.service/业务层</a></li>
+<li><a href="#san-action-jie-mian-ceng">三.action/界面层</a><ul>
+<li><a href="#3-1-ye-wu-de-guan-li-diao-du">3.1 业务的管理、调度</a></li>
+<li><a href="#3-2-ye-mian-tiao-zhuan">3.2 页面跳转</a></li>
+<li><a href="#3-3-ye-mian-chuan-zhi">3.3 页面传值</a></li>
+</ul>
+</li>
+<li><a href="#si-san-ceng-jia-gou-yu-mvc">四.三层架构与MVC</a><ul>
+<li><a href="#4-1-bu-tong-dian">4.1 不同点</a></li>
+<li><a href="#4-2-xiang-tong-dian-ji-qi-lian-xi">4.2 相同点及其联系:</a></li>
+<li><a href="#4-3-mvc-mo-shi">4.3 MVC模式</a></li>
+</ul>
+</li>
+<li><a href="#wu-can-kao-wen-xian">五.参考文献</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
 <p>　　java三层架构: 界面层(UI层/action层),业务层(service层),数据层(model层+数据访问层),说明：model层是描述的是对应数据表的实体类。具体来看下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085348.jpg" alt="三层结构图"><br>注:<br>　　❋　PO 持久对象，数据；<br>　　❋　BO 业务对象，封装对象、复杂对象 ，里面可能包含多个类；<br>　　❋　DTO 传输对象，前端调用时传输 ；<br>　　❋　VO 表现对象，前端界面展示。<br>　　上述四者都是POJO对象.<br>　　❋　DAO:数据访问对象,进行数据库增删改查的。</p>
-<h1 id="一-数据层"><a href="#一-数据层" class="headerlink" title="一.数据层"></a>一.数据层</h1><h2 id="1-1-model层"><a href="#1-1-model层" class="headerlink" title="1.1 model层"></a>1.1 model层</h2><p>　　modle层就是对应的数据库表的实体类(如User类)。</p>
-<h2 id="1-2-Dao层"><a href="#1-2-Dao层" class="headerlink" title="1.2 Dao层"></a>1.2 Dao层</h2><p>　　Dao层，一般可以再分为<strong><em>Dao接口和</em></strong>DaoImpl实现类，如userDao接口和userDaoImpl实现类,接口负责定义数据库curd的操作方法，实现类负责具体的实现，即实现Dao接口定义的方法。</p>
-<h1 id="二-service-业务层"><a href="#二-service-业务层" class="headerlink" title="二.service/业务层"></a>二.service/业务层</h1><p>　　作用：业务的具体实现。<br>　　调用dao从数据库取需要的数据，然后加工处理成需要的格式(BO对象)，在这里可以编写自己需要的代码（比如简单的判断），也可以再细分为Service接口和ServiceImpl实现类。</p>
-<h1 id="三-action-界面层"><a href="#三-action-界面层" class="headerlink" title="三.action/界面层"></a>三.action/界面层</h1><p>　　三大功能：业务管理、调度；页面和程序之间传输数据；页面跳转.</p>
-<h2 id="3-1-业务的管理、调度"><a href="#3-1-业务的管理、调度" class="headerlink" title="3.1 业务的管理、调度"></a>3.1 业务的管理、调度</h2><p>　　根据前后台传递过来的值,判断调用什么业务逻辑方法，然后把业务逻辑方法的返回值再传递给用户，你就可以把他当作一个快递分检站 .</p>
-<h2 id="3-2-页面跳转"><a href="#3-2-页面跳转" class="headerlink" title="3.2 页面跳转"></a>3.2 页面跳转</h2><p>　　有时候可以通过返回值的形式,跳转到指定的页面，</p>
-<h2 id="3-3-页面传值"><a href="#3-3-页面传值" class="headerlink" title="3.3 页面传值"></a>3.3 页面传值</h2><p>　　当然也能接受页面传递的请求数据，也可以做些计算处理、前端输入合法性检验(前端可修改网页绕过前端合法性检验，需在后台加一层)。<br>　　引申到项目结构则可以表示为:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xxx:代表公司名称</span><br><span class="line">yyy：代表项目名称</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.dao</span>　　　　　　　dao层接口</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.dao</span><span class="selector-class">.impl</span>　　　 　dao层实现</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.service</span>　　　　 service层接口</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.service</span><span class="selector-class">.impl</span>　　service层实现--业务具体实现　　　　　　</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.action</span>　　　　　web层--业务调度,页面传值,页面跳转</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.util</span>　　　　　　工具包</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.domain</span>　　　　　javabean</span><br></pre></td></tr></table></figure></p>
-<h1 id="四-三层架构与MVC"><a href="#四-三层架构与MVC" class="headerlink" title="四.三层架构与MVC"></a>四.三层架构与MVC</h1><h2 id="4-1-不同点"><a href="#4-1-不同点" class="headerlink" title="4.1 不同点"></a>4.1 不同点</h2><table>
+<h1><span id="yi-shu-ju-ceng">一.数据层</span></h1><h2><span id="1-1-model-ceng">1.1 model层</span></h2><p>　　modle层就是对应的数据库表的实体类(如User类)。</p>
+<h2><span id="1-2-dao-ceng">1.2 Dao层</span></h2><p>　　Dao层，一般可以再分为<strong><em>Dao接口和</em></strong>DaoImpl实现类，如userDao接口和userDaoImpl实现类,接口负责定义数据库curd的操作方法，实现类负责具体的实现，即实现Dao接口定义的方法。</p>
+<h1><span id="er-service-ye-wu-ceng">二.service/业务层</span></h1><p>　　作用：业务的具体实现。<br>　　调用dao从数据库取需要的数据，然后加工处理成需要的格式(BO对象)，在这里可以编写自己需要的代码（比如简单的判断），也可以再细分为Service接口和ServiceImpl实现类。</p>
+<h1><span id="san-action-jie-mian-ceng">三.action/界面层</span></h1><p>　　三大功能：业务管理、调度；页面和程序之间传输数据；页面跳转.</p>
+<h2><span id="3-1-ye-wu-de-guan-li-diao-du">3.1 业务的管理、调度</span></h2><p>　　根据前后台传递过来的值,判断调用什么业务逻辑方法，然后把业务逻辑方法的返回值再传递给用户，你就可以把他当作一个快递分检站 .</p>
+<h2><span id="3-2-ye-mian-tiao-zhuan">3.2 页面跳转</span></h2><p>　　有时候可以通过返回值的形式,跳转到指定的页面，</p>
+<h2><span id="3-3-ye-mian-chuan-zhi">3.3 页面传值</span></h2><p>　　当然也能接受页面传递的请求数据，也可以做些计算处理、前端输入合法性检验(前端可修改网页绕过前端合法性检验，需在后台加一层)。<br>　　引申到项目结构则可以表示为:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xxx:代表公司名称</span><br><span class="line">yyy：代表项目名称</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.dao</span>　　　　　　　dao层接口</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.dao</span><span class="selector-class">.impl</span>　　　 　dao层实现</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.service</span>　　　　 service层接口</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.service</span><span class="selector-class">.impl</span>　　service层实现--业务具体实现　　　　　　</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.action</span>　　　　　web层--业务调度,页面传值,页面跳转</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.util</span>　　　　　　工具包</span><br><span class="line">com<span class="selector-class">.xxx</span><span class="selector-class">.yyy</span><span class="selector-class">.domain</span>　　　　　javabean</span><br></pre></td></tr></table></figure></p>
+<h1><span id="si-san-ceng-jia-gou-yu-mvc">四.三层架构与MVC</span></h1><h2><span id="4-1-bu-tong-dian">4.1 不同点</span></h2><table>
 <thead>
 <tr>
 <th style="text-align:center"></th>
@@ -315,7 +340,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="4-2-相同点及其联系"><a href="#4-2-相同点及其联系" class="headerlink" title="4.2 相同点及其联系:"></a>4.2 相同点及其联系:</h2><table>
+<h2><span id="4-2-xiang-tong-dian-ji-qi-lian-xi">4.2 相同点及其联系:</span></h2><table>
 <thead>
 <tr>
 <th>都是侧重于高内聚,低耦合.</th>
@@ -328,8 +353,8 @@
 </tbody>
 </table>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85349.jpg" alt="三层架构与MVC"></p>
-<h2 id="4-3-MVC模式"><a href="#4-3-MVC模式" class="headerlink" title="4.3 MVC模式"></a>4.3 MVC模式</h2><p>​    View提交请求数据给Controller，Controller返回数据用于渲染View，两者之间以Model(VO- ViewModel)的形式进行通信.示意图如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085349.jpg" alt="mvc模式示意图"></p>
-<h1 id="五-参考文献"><a href="#五-参考文献" class="headerlink" title="五.参考文献"></a>五.参考文献</h1><p>　　❋ <a href="https://blog.csdn.net/dubai_/article/details/78641548" target="_blank" rel="noopener">javaWeb之三层架构</a><br>　　❋ <a href="https://www.cnblogs.com/fhuafeng/p/4955354.html" target="_blank" rel="noopener">Web项目的三层架构和MVC架构异同</a><br>　　❋ <a href="https://blog.csdn.net/aphysia/article/details/80038506" target="_blank" rel="noopener">三层架构，MVC，与ssm的系统架构关系</a></p>
+<h2><span id="4-3-mvc-mo-shi">4.3 MVC模式</span></h2><p>​    View提交请求数据给Controller，Controller返回数据用于渲染View，两者之间以Model(VO- ViewModel)的形式进行通信.示意图如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085349.jpg" alt="mvc模式示意图"></p>
+<h1><span id="wu-can-kao-wen-xian">五.参考文献</span></h1><p>　　❋ <a href="https://blog.csdn.net/dubai_/article/details/78641548" target="_blank" rel="noopener">javaWeb之三层架构</a><br>　　❋ <a href="https://www.cnblogs.com/fhuafeng/p/4955354.html" target="_blank" rel="noopener">Web项目的三层架构和MVC架构异同</a><br>　　❋ <a href="https://blog.csdn.net/aphysia/article/details/80038506" target="_blank" rel="noopener">三层架构，MVC，与ssm的系统架构关系</a></p>
 
         
         </div>
@@ -549,7 +574,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

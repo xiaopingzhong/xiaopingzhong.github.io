@@ -267,174 +267,182 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　该篇是知识图谱的大综述片,文章目录主要分成7个模块,分别是:知识建模,知识获取,知识融合,知识计算,知识应用,最后引入一个质量评估.构成了知识图谱的主要构建流程,每个关键部分都给出相应的构建工具,对于开发知识图谱,有极大的提升.<a id="more"></a></p>
+            <p>该篇是知识图谱的大综述片,文章目录主要分成7个模块,分别是:知识建模,知识获取,知识融合,知识计算,知识应用,最后引入一个质量评估.构成了知识图谱的主要构建流程,每个关键部分都给出相应的构建工具,对于开发知识图谱,有极大的提升.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
-<hr>
-<h2 id="一-通用知识图谱VS行业知识图谱"><a href="#一-通用知识图谱VS行业知识图谱" class="headerlink" title="一.通用知识图谱VS行业知识图谱"></a>一.通用知识图谱VS行业知识图谱</h2><h3 id="1-1-区别"><a href="#1-1-区别" class="headerlink" title="1.1 区别"></a>1.1 区别</h3><table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">通用知识图谱</th>
-<th style="text-align:center">行业知识图谱</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">广度/深度</td>
-<td style="text-align:center">广度</td>
-<td style="text-align:center">深度</td>
-</tr>
-<tr>
-<td style="text-align:center">知识类型/来源</td>
-<td style="text-align:center">常识性知识, 百科知识，语言学知识</td>
-<td style="text-align:center">专业性知识（内部数据、互联网数据、第三方数据）</td>
-</tr>
-<tr>
-<td style="text-align:center">精度</td>
-<td style="text-align:center">低</td>
-<td style="text-align:center">高</td>
-</tr>
-<tr>
-<td style="text-align:center">面向群体</td>
-<td style="text-align:center">普通用户</td>
-<td style="text-align:center">专业用户</td>
-</tr>
-<tr>
-<td style="text-align:center">代表</td>
-<td style="text-align:center">谷歌大脑</td>
-<td style="text-align:center">中医药知识图谱</td>
-</tr>
-<tr>
-<td style="text-align:center">类型</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">数据类型多:结构化、半结构化、非结构化数据，且后两者越来越多</td>
-</tr>
-<tr>
-<td style="text-align:center">模式</td>
-<td style="text-align:center">数据模型固定</td>
-<td style="text-align:center">数据模式的不确定性:模式在数据出现之后才能确定；数据模式随数据增长不断演变</td>
-</tr>
-<tr>
-<td style="text-align:center">数据量</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">数据量大：在大数据背景下，行业应用的数据的数量通常都以亿级别计算，通常在TB、PB级别甚至更多</td>
-</tr>
-<tr>
-<td style="text-align:center">获取难度</td>
-<td style="text-align:center">公共数据</td>
-<td style="text-align:center">私有数据</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1-2-领域知识图谱"><a href="#1-2-领域知识图谱" class="headerlink" title="1.2 领域知识图谱"></a>1.2 领域知识图谱</h3><h4 id="1-2-1-挑战"><a href="#1-2-1-挑战" class="headerlink" title="1.2.1 挑战"></a>1.2.1 挑战</h4><p>1.多源异构数据难以融合</p>
-<p>2.数据模式动态变迁困难</p>
-<p>3.非结构化数据计算机难以理解</p>
-<p>4.分散的数据难以统一消费利用</p>
-<h4 id="1-2-2-解决方案"><a href="#1-2-2-解决方案" class="headerlink" title="1.2.2 解决方案"></a>1.2.2 解决方案</h4><p>　　• 挑战1：使用知识图谱（本体）对各种类型的数据进行抽象建模，基于可动态变化<br>的“概念—实体—属性—关系”数据模型，实现各类数据的统一建模。<br>　　• 挑战2：使用可支持数据模式动态变化的知识图谱的数据存储，实现对大数据及数<br>据模式动态变化的支持。<br>　　• 挑战3：利用信息抽取技术，对非结构化数据及半结构化数据进行抽取和转换，形<br>成知识图谱形式的知识。<br>　　• 挑战4：在知识融合的基础上，基于语义检索、智能问答、图计算、推理、可<br>视化等技术，提供统一的数据检索、分析和利用平台。</p>
-<h3 id="1-3-联系"><a href="#1-3-联系" class="headerlink" title="1.3 联系"></a>1.3 联系</h3><ul>
-<li>通用知识图谱为行业知识图谱提供基础/体系,细化,则是需要搜寻相应的行业知识</li>
-<li>行业知识图谱能够通过融合到通用知识图谱当中</li>
-</ul>
-<h2 id="二-关键技术"><a href="#二-关键技术" class="headerlink" title="二.关键技术"></a>二.关键技术</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085534.png" alt="知识图谱流程图"><br>　或者这张图(好好感觉)<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085535.png" alt="知识图谱关键技术图"></p>
-<h3 id="2-1-知识建模"><a href="#2-1-知识建模" class="headerlink" title="2.1 知识建模"></a>2.1 知识建模</h3><p>　就是建立图谱的数据模式,就是对整个知识图谱的结构进行定义,构建</p>
 <ul>
-<li>自顶向下的方法：专家手工编辑形成数据模式</li>
-<li><p>自底向上的方法：</p>
-<ul>
-<li>基于行业现有的标准进行转换</li>
+<li><a href="#yi-tong-yong-zhi-shi-tu-pu-vs-xing-ye-zhi-shi-tu-pu">一.通用知识图谱VS行业知识图谱</a><ul>
+<li><a href="#1-1-qu-bie">1.1 区别</a></li>
+<li><a href="#1-2-ling-yu-zhi-shi-tu-pu">1.2 领域知识图谱</a><ul>
+<li><a href="#1-2-1-tiao-zhan">1.2.1 挑战</a></li>
+<li><a href="#1-2-2-jie-jue-fang-an">1.2.2 解决方案</a></li>
 </ul>
 </li>
-<li><p>从现有的高质量行业数据源（如业务系统数据库表）中进行映射 </p>
+<li><a href="#1-3-lian-xi">1.3 联系</a></li>
+</ul>
+</li>
+<li><a href="#er-guan-jian-ji-zhu">二.关键技术</a><ul>
+<li><a href="#2-1-zhi-shi-jian-mo">2.1 知识建模</a><ul>
+<li><a href="#2-1-1-ju-ti-fang-fa">2.1.1 具体方法</a><ul>
+<li><a href="#1-shi-ti-chou-qu-yu-he-bing">(1)实体抽取与合并</a></li>
+<li><a href="#2-shu-xing-ying-she-yu-gui-bing">(2) 属性映射与归并</a></li>
+<li><a href="#3-guan-xi-chou-qu">(3) 关系抽取</a></li>
+<li><a href="#4-shi-ti-lian-jie">(4) 实体链接</a></li>
+<li><a href="#5-dong-tai-shi-jian-miao-shu">(5) 动态事件描述</a></li>
+</ul>
+</li>
+<li><a href="#2-1-2-gong-ju">2.1.2 工具</a></li>
+<li><a href="#2-1-3-guan-jian-ji-zhu-ji-qi-nan-dian">2.1.3 关键技术及其难点</a></li>
+</ul>
+</li>
+<li><a href="#2-2-zhi-shi-huo-qu">2.2 知识获取</a><ul>
+<li><a href="#2-2-1-gai-nian">2.2.1 概念</a></li>
+<li><a href="#2-2-2-da-gang">2.2.2 大纲</a></li>
+<li><a href="#2-2-3-jie-gou-hua-shu-ju">2.2.3结构化数据</a><ul>
+<li><a href="#2-2-3-1-shi-ti-shi-bie">2.2.3.1 实体识别</a><ul>
+<li><a href="#1-ji-yu-gui-ze-yu-ci-dian-de-shi-bie">(1)基于规则与词典的识别</a></li>
+<li><a href="#2-ji-yu-tong-ji-xue-xi-de-fang-fa">(2)基于统计学习的方法</a></li>
+<li><a href="#3-ji-yu-shen-du-xue-xi-de-fang-fa">(3)基于深度学习的方法</a></li>
+</ul>
+</li>
+<li><a href="#4-chang-yong-de-shi-ti-shi-bie-gong-ju-ji-fang-fa">(4) 常用的实体识别工具及方法</a></li>
+</ul>
+</li>
+<li><a href="#2-2-4-guan-xi-wen-ben-xin-xi-chou-qu">2.2.4 关系／文本信息抽取</a><ul>
+<li><a href="#2-2-4-1-jie-jue-fang-an">2.2.4.1<strong>解决方案</strong></a><ul>
+<li><a href="#1-openie-cong-wan-wei-wang-zhong-chou-qu-guan-xi-er-yuan-zu">(1)OpenIE：从万维网中抽取关系二元组</a></li>
+<li><a href="#2-deepdive-guan-xi-chou-qu-gong-ju">(2)DeepDive：关系抽取工具</a></li>
+<li><a href="#3-distant-supervision-yuan-cheng-jian-du-xue-xi">(3)Distant Supervision：远程监督学习</a></li>
+<li><a href="#5-ratel-yu-yan">(5)Ratel语言</a></li>
+<li><a href="#6-zong-jie">(6)总结</a></li>
+</ul>
+</li>
+<li><a href="#2-2-4-2-shi-jian-chou-qu">2.2.4.2 事件抽取</a><ul>
+<li><a href="#1-fang-fa">(1)方法</a></li>
+<li><a href="#2-shi-jian-ding-yi">(2)事件定义：</a></li>
+</ul>
+</li>
+<li><a href="#2-2-4-3-shi-li-zhi-shi-tu-pu">2.2.4.3事理知识图谱</a></li>
+<li><a href="#2-2-4-4-zong-jie">2.2.4.4 总结</a></li>
+</ul>
+</li>
+<li><a href="#2-2-5-jie-gou-hua-shu-ju">2.2.5 结构化数据</a></li>
+<li><a href="#2-2-6-gong-ju">2.2.6 工具</a><ul>
+<li><a href="#1-d2r">(1)D2R</a></li>
+<li><a href="#2-bao-zhuang-qi">(2)包装器</a></li>
+<li><a href="#3-wen-ben-xin-xi-chou-qu">(3)文本信息抽取</a></li>
+</ul>
+</li>
+<li><a href="#2-2-7-nan-dian">2.2.7 难点</a></li>
+</ul>
+</li>
+<li><a href="#2-3-zhi-shi-rong-he">2.3 知识融合</a><ul>
+<li><a href="#2-3-1-rong-he-nei-rong">2.3.1 融合内容</a><ul>
+<li><a href="#2-3-1-1-shu-ju-ceng-rong-he-li-zi">2.3.1.1 数据层融合例子</a></li>
+</ul>
+</li>
+<li><a href="#2-3-2-zhi-shi-rong-he-guan-jian-ji-zhu-yu-nan-dian">2.3.2 知识融合关键技术与难点</a></li>
+</ul>
+</li>
+<li><a href="#2-4-zhi-shi-cun-chu">2.4 知识存储</a><ul>
+<li><a href="#2-4-1-ji-ben-shu-ju-cun-chu">2.4.1 基本数据存储</a></li>
+<li><a href="#2-4-2-cun-chu-fang-shi">2.4.2 存储方式</a><ul>
+<li><a href="#1-janusgraph">1. JanusGraph</a></li>
+<li><a href="#2-rdf">2. RDF</a><ul>
+<li><a href="#2-1-rdf-ding-yi">2.1 RDF定义</a></li>
+<li><a href="#2-2-ji-ben-yuan-su">2.2 基本元素</a></li>
+<li><a href="#2-3-san-yuan-zu">2.3 三元组</a></li>
+</ul>
 </li>
 </ul>
-<h4 id="2-1-1-具体方法"><a href="#2-1-1-具体方法" class="headerlink" title="2.1.1 具体方法"></a>2.1.1 具体方法</h4><h5 id="1-实体抽取与合并"><a href="#1-实体抽取与合并" class="headerlink" title="(1)实体抽取与合并"></a>(1)实体抽取与合并</h5><p>​　　以实体为主体目标，实现对不同来源的数据进行映射与合并。（实体抽取与合并）</p>
-<h5 id="2-属性映射与归并"><a href="#2-属性映射与归并" class="headerlink" title="(2) 属性映射与归并"></a>(2) 属性映射与归并</h5><p>​　　利用属性来表示不同数据源中针对实体的描述，形成对实体的全方位描述(就是合并不同源的属性)。（属性映射与归并）</p>
-<h5 id="3-关系抽取"><a href="#3-关系抽取" class="headerlink" title="(3) 关系抽取"></a>(3) 关系抽取</h5><p>​　　利用关系来描述各类抽象建模成实体的数据之间的关联关系，从而支持关联分析。（关系抽取,不合并,但是会链接）</p>
-<h5 id="4-实体链接"><a href="#4-实体链接" class="headerlink" title="(4) 实体链接"></a>(4) 实体链接</h5><p>​　　通过实体链接技术，实现围绕实体的多种类型数据的关联存储。（实体链接）</p>
-<h5 id="5-动态事件描述"><a href="#5-动态事件描述" class="headerlink" title="(5) 动态事件描述"></a>(5) 动态事件描述</h5><p>​    　　使用事件机制描述客观世界中动态发展，体现事件与实体间的关联；并利用时序描述事件的发展状况。（动态事件描述）</p>
-<h4 id="2-1-2-工具"><a href="#2-1-2-工具" class="headerlink" title="2.1.2 工具"></a>2.1.2 工具</h4><p>   　　主要是采用protege进行本体建模,但是建模工具,才用原生建模,建模速度效率低.对数据的处理量不是很好,容易内存外溢.同时protege支持网页版.有共享开发的功能.客户端是单机构建.</p>
-<h4 id="2-1-3-关键技术及其难点"><a href="#2-1-3-关键技术及其难点" class="headerlink" title="2.1.3 关键技术及其难点"></a>2.1.3 关键技术及其难点</h4><ul>
-<li>多人在线协同编辑，并且实时更新</li>
+</li>
+<li><a href="#2-4-3-zhi-shi-cun-chu-guan-jian-ji-zhu-yu-nan-dian">2.4.3 知识存储关键技术与难点</a></li>
 </ul>
-<ul>
-<li>能够导入集成使用现有的（结构化）知识</li>
+</li>
+<li><a href="#2-5-zhi-shi-ji-suan">2.5 知识计算</a><ul>
+<li><a href="#2-5-1-ji-suan-fang-shi">2.5.1 计算方式</a></li>
+<li><a href="#2-5-2-tu-wa-jue-ji-suan">2.5.2 图挖掘计算</a><ul>
+<li><a href="#2-mu-de">(2)目的</a></li>
+<li><a href="#3-te-dian">(3)特点</a></li>
+<li><a href="#4-shi-xian-fang-shi">(4)实现方式</a></li>
+<li><a href="#5-dian-xing-kuang-jia">(5)典型框架</a></li>
 </ul>
-<ul>
-<li>支持大数据量</li>
+</li>
+<li><a href="#2-5-3-ben-ti-tui-li">2.5.3 本体推理</a><ul>
+<li><a href="#ben-ti-de-wu-yuan-zu-biao-shi">本体的五元组表示</a></li>
+<li><a href="#3-ben-ti-zhi-shi-tui-li-gong-ju-rdfox">(3)本体知识推理工具——RDFox</a></li>
 </ul>
-<ul>
-<li>能够支撑事件、时序等复杂知识表达</li>
+</li>
+<li><a href="#2-5-4-ji-yu-gui-ze-de-tui-li">2.5.4基于规则的推理</a><ul>
+<li><a href="#1-ji-yu-gui-ze-tui-li-gong-ju-drools">(1)基于规则推理工具——Drools</a></li>
 </ul>
-<ul>
-<li>可以与自动算法进行结合，避免全人工操作 </li>
+</li>
+<li><a href="#2-5-5-bu-chong">2.5.5补充</a><ul>
+<li><a href="#1-ji-yu-fu-hao-de-zhi-shi-biao-shi">(1) 基于符号的知识表示</a><ul>
+<li><a href="#1-1-fang-fa">(1.1)方法</a></li>
+<li><a href="#1-2-you-que-dian">(1.2)优缺点</a></li>
 </ul>
-<h3 id="2-2-知识获取"><a href="#2-2-知识获取" class="headerlink" title="2.2 知识获取"></a>2.2 知识获取</h3><h4 id="2-2-1-概念"><a href="#2-2-1-概念" class="headerlink" title="2.2.1 概念"></a>2.2.1 概念</h4><p>从原始数据中提取对业务有用的知识<br>·原始数据<br>　　·结构化、半结构化、非结构化<br>·有用的知识<br>　　·实体、关系、事件<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085538.png" alt=""></p>
-<h4 id="2-2-2-大纲"><a href="#2-2-2-大纲" class="headerlink" title="2.2.2 大纲"></a>2.2.2 大纲</h4><p>•非结构化数据<br>　　• 实体识别（识别实体）<br>　　• 关系抽取（识别两个实体之间的关系）<br>　　• 事件抽取（识别事件中的一组实体间的关系）－－＞（三者就像是不断递进的过程）<br>• <strong>结构化</strong>数据<br>　　• <strong>映射</strong>机制<br>• 半结构化数据<br>　　• 包装器</p>
-<h4 id="2-2-3结构化数据"><a href="#2-2-3结构化数据" class="headerlink" title="2.2.3结构化数据"></a>2.2.3结构化数据</h4><h5 id="2-2-3-1-实体识别"><a href="#2-2-3-1-实体识别" class="headerlink" title="2.2.3.1 实体识别"></a>2.2.3.1 实体识别</h5><p>实体识别就是在一个非结构化文本当中找出实体(主语,宾语),然后标注其类型及其位置.</p>
-<h6 id="1-基于规则与词典的识别"><a href="#1-基于规则与词典的识别" class="headerlink" title="(1)基于规则与词典的识别"></a>(1)基于规则与词典的识别</h6><p>　·专家知识编写</p>
-<p>　工具：正则表达式，上下文无关文法．</p>
-<p>　困难：规则覆盖率低，规则冲突</p>
-<h6 id="2-基于统计学习的方法"><a href="#2-基于统计学习的方法" class="headerlink" title="(2)基于统计学习的方法"></a>(2)基于统计学习的方法</h6><p>　前提：大量的标注数据<br>　思想：利用单词的词性、上下文信息等特征进行预测<br>　序列标注算法：HMM, CRF<br>　工具包：StanfordNLP，CRF++，CRFSuite</p>
-<h6 id="3-基于深度学习的方法"><a href="#3-基于深度学习的方法" class="headerlink" title="(3)基于深度学习的方法"></a>(3)基于深度学习的方法</h6><p>　　·深层特征挖掘</p>
-<p>　思路：利用深度学习生成更复杂的特征</p>
-<h5 id="4-常用的实体识别工具及方法"><a href="#4-常用的实体识别工具及方法" class="headerlink" title="(4) 常用的实体识别工具及方法"></a>(4) 常用的实体识别工具及方法</h5><p>１．机器实体识别</p>
-<p>　　• NLTK<br>　　• Spacy<br>　　• StanfordNLP<br>　　• HanNLP<br>　　• Tensorflow<br>　　• PyTorch<br>２． 人工实体识别<br>　　• 众包机制</p>
-<h4 id="2-2-4-关系／文本信息抽取"><a href="#2-2-4-关系／文本信息抽取" class="headerlink" title="2.2.4 关系／文本信息抽取"></a>2.2.4 关系／文本信息抽取</h4><table>
-<thead>
-<tr>
-<th style="text-align:center">closeIE（面向特定领域抽取信息）</th>
-<th style="text-align:center">openIE（面向特定领域抽取信息）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">基于面向特定领域,深度,精度高</td>
-<td style="text-align:center">面向开放领域,基于广度,精度较低，基于语言学模式或者常识进行</td>
-</tr>
-<tr>
-<td style="text-align:center">为了做到高精度,那么需要先定义好需要抽取关系类型</td>
-<td style="text-align:center">关系类型不用事先预设好</td>
-</tr>
-<tr>
-<td style="text-align:center">规模较小</td>
-<td style="text-align:center">规模较大</td>
-</tr>
-</tbody>
-</table>
-<h5 id="2-2-4-1解决方案"><a href="#2-2-4-1解决方案" class="headerlink" title="2.2.4.1解决方案"></a>2.2.4.1<strong>解决方案</strong></h5><p>·OpenIE<br>·规则引擎<br>　　·SystemT：IBM Watson套件使用的组件<br>　　·ANNIE (JAPE)：GATE中目前使用一套规则引擎<br>　　·UIMA Ruta<br>　　·Ratel<br>　　·正则表达式：TokensRegex<br>·机器学习模型<br>　　·DeepDive</p>
-<h6 id="1-OpenIE：从万维网中抽取关系二元组"><a href="#1-OpenIE：从万维网中抽取关系二元组" class="headerlink" title="(1)OpenIE：从万维网中抽取关系二元组"></a>(1)OpenIE：从万维网中抽取关系二元组</h6><p>• OpenIE的典型代表工具有ReVerb、TextRunner，英文为主<br>• OpenIE工具准确率比较低，在垂直领域知识图谱构建中实用性不高。<br>• 适合做信息的粗粒度筛选，然后在此基础上应用其它的信息抽取方法。</p>
-<h6 id="2-DeepDive：关系抽取工具"><a href="#2-DeepDive：关系抽取工具" class="headerlink" title="(2)DeepDive：关系抽取工具"></a>(2)DeepDive：关系抽取工具</h6><p>•DeepDive用于提取实体之间的复杂关系，并对涉及这些实体的事实进行推断。<br>• 用户只需要关心特征本身，而不是算法<br>• 允许用户使用规则来提升结果的质量，也考虑用户反馈来提高预测的准确度<br>• 性质<br>　　• Stanford的研究项目<br>• 状态<br>　　• 维护状态，新功能已不在开发</p>
-<h6 id="3-Distant-Supervision：远程监督学习"><a href="#3-Distant-Supervision：远程监督学习" class="headerlink" title="(3)Distant Supervision：远程监督学习"></a>(3)Distant Supervision：远程监督学习</h6><p>　　Distant Supervision利用知识库与非结构化文本对齐来自动构建大量训练数据，<br>进而减少模型对人工标注数据的依赖，增强模型跨领域适应能力。<br>• 两个实体如果在知识库中存在某种关系，则包含该两个实体的非结构化句子<br>均能表示出这种关系。<br><strong>(１)．例子</strong><br>　　• Steve Jobs, Apple在 Freebase中存在founder的关系，<br>　　• Steve Jobs was the co-founder and CEO of Apple and formerly Pixar. 可以作为一个训练正例来训练模型。</p>
-<p><strong>(２)．优势</strong><br>·Distant Supervision方法减少了模型对人工标注数据的依赖</p>
-<p><strong>(３)．不足</strong><br>·假设过强，引入大量的噪声数据。<br>·如 “Steven Jobs passed away the day before Apple unveiled iPhone 4s in late 2011”<br>·数据构造过程依赖于 NER 等 NLP 工具，中间过程出错会造成错误传播问题。</p>
-<p><strong>(４)．方法</strong><br>·引入先验知识作为限制；<br>·利用图模型对数据样例打分，滤除置信度较低的句子；<br>·利用多示例学习方法对测试包打标签；<br>·采用attention机制对不同置信度的句子赋予不同的权值。</p>
-<h6 id="5-Ratel语言"><a href="#5-Ratel语言" class="headerlink" title="(5)Ratel语言"></a>(5)Ratel语言</h6><p>• <strong>高效的机器学习与规则结合的文本挖掘系统</strong><br>• 具有一套完整的声明式语言（DSL）<br>• 具有基于Eclipse的IDE开发环境，支持语法检查、结果查看与规则溯源、规则<br>执行时间统计。<br>• <strong>可接入分词、词性识别、命名实体识别、分类、关键词抽取等机器学习模型</strong>。</p>
-<p>Ratel集成开发环境在ruta(基于规则的文本注释)中:<a href="http://uima.apache.org/ruta.html" target="_blank" rel="noopener">http://uima.apache.org/ruta.html</a></p>
-<h6 id="6-总结"><a href="#6-总结" class="headerlink" title="(6)总结"></a>(6)总结</h6><p>目前还没有统一的实现各类信息抽取的现成工具。</p>
-<p> •分词 实体识别工具：</p>
-<p>　　对现有工具进行集成，依据抽取任务使用不同的工具:进行NLP分词、命名实体识别:<br>　　• NLPIR、LTP、FudanNLP、Stanford NLP……<br>• 关系抽取工具：<br>　　• 规则系统 Ratel<br>　　• DeepDive 对于行业抽取任务，需要针对性的方法来完成<br>　　• 通常基于已有的结构化知识进行远程监督学习</p>
-<h5 id="2-2-4-2-事件抽取"><a href="#2-2-4-2-事件抽取" class="headerlink" title="2.2.4.2 事件抽取"></a>2.2.4.2 事件抽取</h5><p>事件抽取可以分为预定义事件抽取和开放域事件<br>抽取<br>　　• 领域知识图谱中主要为预定义事件抽取</p>
-<h6 id="1-方法"><a href="#1-方法" class="headerlink" title="(1)方法"></a>(1)方法</h6><p>• 采用模式匹配方法，包括三个步骤：<br>　　• 准备事件触发词表</p>
-<div align="center"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085540.png" alt=""><br></div>
+</li>
+<li><a href="#2-ji-yu-fen-bu-shi-de-zhi-shi-tui-li">(2) 基于分布式的知识推理</a><ul>
+<li><a href="#2-1-ji-yu-zhang-liang-de-mo-xing">(2.1)基于张量的模型</a></li>
+<li><a href="#2-2-ji-yu-fan-yi-de-mo-xing-transe">(2.2)基于翻译的模型：TRANSE</a></li>
+<li><a href="#2-3-ji-yu-shen-jing-wang-luo-de-mo-xing">(2.3)基于神经网络的模型</a></li>
+<li><a href="#you-que-dian">优缺点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-5-6-guan-jian-ji-zhu-yu-nan-dian">2.5.6 关键技术与难点</a><ul>
+<li><a href="#tu-wa-jue-ji-suan">图挖掘计算</a></li>
+<li><a href="#ben-ti-tui-li-yu-gui-ze-tui-li">本体推理与规则推理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-6-zhi-shi-ying-yong">2.6 知识应用</a><ul>
+<li><a href="#2-6-1-yu-yi-sou-suo">2.6.1 语义搜索</a></li>
+<li><a href="#2-6-2-zhi-neng-wen-da">2.6.2 智能问答</a><ul>
+<li><a href="#nan-dian">难点</a></li>
+<li><a href="#1-ji-yu-xin-xi-jian-suo-de-fang-fa">(1)基于信息检索的方法</a></li>
+<li><a href="#2-ji-yu-yu-yi-jie-xi-de-fang-fa">(2)基于语义解析的方法</a></li>
+<li><a href="#3-ji-yu-gui-ze-de-zhuan-jia-xi-tong-fang-fa">(3)基于规则的专家系统方法</a></li>
+<li><a href="#4-ji-yu-shen-du-xue-xi-de-fang-fa">(4)基于深度学习的方法</a></li>
+<li><a href="#5-zui-jia-shi-jian-fang-fa">(5)最佳实践方法</a></li>
+<li><a href="#ji-yu-yu-yi-jie-xi-de-zi-dong-wen-da">基于语义解析的自动问答</a></li>
+</ul>
+</li>
+<li><a href="#2-6-3-ke-shi-hua-gong-ju">2.6.3 可视化工具</a></li>
+</ul>
+</li>
+<li><a href="#2-7-zhi-liang-ping-gu">2.7 质量评估</a><ul>
+<li><a href="#2-7-1-ke-xing-fang-an">2.7.1可行方案</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+</div><br><em> </em> *<br><br>## 一.通用知识图谱VS行业知识图谱<br><br>### 1.1 区别<br><br>|               |           通用知识图谱           |                         行业知识图谱                         |<br>| :———–: | :——————————: | :———————————————————-: |<br>|   广度/深度   |               广度               |                             深度                             |<br>| 知识类型/来源 | 常识性知识, 百科知识，语言学知识 |        专业性知识（内部数据、互联网数据、第三方数据）        |<br>|     精度      |                低                |                              高                              |<br>|   面向群体    |             普通用户             |                           专业用户                           |<br>|     代表      |             谷歌大脑             |                        中医药知识图谱                        |<br>|     类型      |                                  | 数据类型多:结构化、半结构化、非结构化数据，且后两者越来越多  |<br>|     模式      |           数据模型固定           | 数据模式的不确定性:模式在数据出现之后才能确定；数据模式随数据增长不断演变 |<br>|    数据量     |                                  | 数据量大：在大数据背景下，行业应用的数据的数量通常都以亿级别计算，通常在TB、PB级别甚至更多 |<br>|   获取难度    |             公共数据             |                           私有数据                           |<br><br>### 1.2 领域知识图谱<br><br>#### 1.2.1 挑战<br><br>1.多源异构数据难以融合<br><br>2.数据模式动态变迁困难<br><br>3.非结构化数据计算机难以理解<br><br>4.分散的数据难以统一消费利用<br><br>#### 1.2.2 解决方案<br><br>　　• 挑战1：使用知识图谱（本体）对各种类型的数据进行抽象建模，基于可动态变化<br>的“概念—实体—属性—关系”数据模型，实现各类数据的统一建模。<br>　　• 挑战2：使用可支持数据模式动态变化的知识图谱的数据存储，实现对大数据及数<br>据模式动态变化的支持。<br>　　• 挑战3：利用信息抽取技术，对非结构化数据及半结构化数据进行抽取和转换，形<br>成知识图谱形式的知识。<br>　　• 挑战4：在知识融合的基础上，基于语义检索、智能问答、图计算、推理、可<br>视化等技术，提供统一的数据检索、分析和利用平台。<br><br>### 1.3 联系<br><br>- 通用知识图谱为行业知识图谱提供基础/体系,细化,则是需要搜寻相应的行业知识<br>- 行业知识图谱能够通过融合到通用知识图谱当中<br><br>## 二.关键技术<br><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085534.png" alt="知识图谱流程图"><br>　或者这张图(好好感觉)<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085535.png" alt="知识图谱关键技术图"><br>### 2.1 知识建模<br><br>　就是建立图谱的数据模式,就是对整个知识图谱的结构进行定义,构建<br><br>- 自顶向下的方法：专家手工编辑形成数据模式<br>- 自底向上的方法：<br>  - 基于行业现有的标准进行转换<br><br>- 从现有的高质量行业数据源（如业务系统数据库表）中进行映射<br><br>#### 2.1.1 具体方法<br><br>##### (1)实体抽取与合并<br><br>​　　以实体为主体目标，实现对不同来源的数据进行映射与合并。（实体抽取与合并）<br><br>##### (2) 属性映射与归并<br><br>​　　利用属性来表示不同数据源中针对实体的描述，形成对实体的全方位描述(就是合并不同源的属性)。（属性映射与归并）<br><br>##### (3) 关系抽取<br><br>​　　利用关系来描述各类抽象建模成实体的数据之间的关联关系，从而支持关联分析。（关系抽取,不合并,但是会链接）<br><br>##### (4) 实体链接<br><br>​　　通过实体链接技术，实现围绕实体的多种类型数据的关联存储。（实体链接）<br><br>##### (5) 动态事件描述<br><br>​    　　使用事件机制描述客观世界中动态发展，体现事件与实体间的关联；并利用时序描述事件的发展状况。（动态事件描述）<br><br>#### 2.1.2 工具<br>   　　主要是采用protege进行本体建模,但是建模工具,才用原生建模,建模速度效率低.对数据的处理量不是很好,容易内存外溢.同时protege支持网页版.有共享开发的功能.客户端是单机构建.<br><br>#### 2.1.3 关键技术及其难点<br><br>- 多人在线协同编辑，并且实时更新<br><br><br>- 能够导入集成使用现有的（结构化）知识<br><br><br><br>- 支持大数据量<br><br><br><br>- 能够支撑事件、时序等复杂知识表达<br><br><br><br>- 可以与自动算法进行结合，避免全人工操作<br><br>### 2.2 知识获取<br><br>#### 2.2.1 概念<br><br>从原始数据中提取对业务有用的知识<br>·原始数据<br>　　·结构化、半结构化、非结构化<br>·有用的知识<br>　　·实体、关系、事件<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085538.png" alt=""><br><br>#### 2.2.2 大纲<br><br>•非结构化数据<br>　　• 实体识别（识别实体）<br>　　• 关系抽取（识别两个实体之间的关系）<br>　　• 事件抽取（识别事件中的一组实体间的关系）－－＞（三者就像是不断递进的过程）<br>• <strong>结构化</strong>数据<br>　　• <strong>映射</strong>机制<br>• 半结构化数据<br>　　• 包装器<br><br>#### 2.2.3结构化数据<br><br>##### 2.2.3.1 实体识别<br><br>实体识别就是在一个非结构化文本当中找出实体(主语,宾语),然后标注其类型及其位置.<br><br>###### (1)基于规则与词典的识别<br><br>　·专家知识编写<br><br>　工具：正则表达式，上下文无关文法．<br><br>　困难：规则覆盖率低，规则冲突<br><br>###### (2)基于统计学习的方法<br><br>　前提：大量的标注数据<br>　思想：利用单词的词性、上下文信息等特征进行预测<br>　序列标注算法：HMM, CRF<br>　工具包：StanfordNLP，CRF++，CRFSuite<br><br>###### (3)基于深度学习的方法<br><br>　　·深层特征挖掘<br><br>　思路：利用深度学习生成更复杂的特征<br><br>##### (4) 常用的实体识别工具及方法<br><br>１．机器实体识别<br><br>　　• NLTK<br>　　• Spacy<br>　　• StanfordNLP<br>　　• HanNLP<br>　　• Tensorflow<br>　　• PyTorch<br>２． 人工实体识别<br>　　• 众包机制<br><br>#### 2.2.4 关系／文本信息抽取<br><br>|         closeIE（面向特定领域抽取信息）         |               openIE（面向特定领域抽取信息）               |<br>| :———————————————: | :——————————————————–: |<br>|          基于面向特定领域,深度,精度高           | 面向开放领域,基于广度,精度较低，基于语言学模式或者常识进行 |<br>| 为了做到高精度,那么需要先定义好需要抽取关系类型 |                   关系类型不用事先预设好                   |<br>|                    规模较小                     |                          规模较大                          |<br><br>##### 2.2.4.1<strong>解决方案</strong><br><br>·OpenIE<br>·规则引擎<br>　　·SystemT：IBM Watson套件使用的组件<br>　　·ANNIE (JAPE)：GATE中目前使用一套规则引擎<br>　　·UIMA Ruta<br>　　·Ratel<br>　　·正则表达式：TokensRegex<br>·机器学习模型<br>　　·DeepDive<br><br>###### (1)OpenIE：从万维网中抽取关系二元组<br><br>• OpenIE的典型代表工具有ReVerb、TextRunner，英文为主<br>• OpenIE工具准确率比较低，在垂直领域知识图谱构建中实用性不高。<br>• 适合做信息的粗粒度筛选，然后在此基础上应用其它的信息抽取方法。<br><br>###### (2)DeepDive：关系抽取工具<br><br>•DeepDive用于提取实体之间的复杂关系，并对涉及这些实体的事实进行推断。<br>• 用户只需要关心特征本身，而不是算法<br>• 允许用户使用规则来提升结果的质量，也考虑用户反馈来提高预测的准确度<br>• 性质<br>　　• Stanford的研究项目<br>• 状态<br>　　• 维护状态，新功能已不在开发<br><br>###### (3)Distant Supervision：远程监督学习<br><br>　　Distant Supervision利用知识库与非结构化文本对齐来自动构建大量训练数据，<br>进而减少模型对人工标注数据的依赖，增强模型跨领域适应能力。<br>• 两个实体如果在知识库中存在某种关系，则包含该两个实体的非结构化句子<br>均能表示出这种关系。<br><strong>(１)．例子</strong><br>　　• Steve Jobs, Apple在 Freebase中存在founder的关系，<br>　　• Steve Jobs was the co-founder and CEO of Apple and formerly Pixar. 可以作为一个训练正例来训练模型。<br><br><strong>(２)．优势</strong><br>·Distant Supervision方法减少了模型对人工标注数据的依赖<br><br><strong>(３)．不足</strong><br>·假设过强，引入大量的噪声数据。<br>·如 “Steven Jobs passed away the day before Apple unveiled iPhone 4s in late 2011”<br>·数据构造过程依赖于 NER 等 NLP 工具，中间过程出错会造成错误传播问题。<br><br><strong>(４)．方法</strong><br>·引入先验知识作为限制；<br>·利用图模型对数据样例打分，滤除置信度较低的句子；<br>·利用多示例学习方法对测试包打标签；<br>·采用attention机制对不同置信度的句子赋予不同的权值。<br><br>###### (5)Ratel语言<br><br>• <strong>高效的机器学习与规则结合的文本挖掘系统</strong><br>• 具有一套完整的声明式语言（DSL）<br>• 具有基于Eclipse的IDE开发环境，支持语法检查、结果查看与规则溯源、规则<br>执行时间统计。<br>• <strong>可接入分词、词性识别、命名实体识别、分类、关键词抽取等机器学习模型</strong>。<br><br>Ratel集成开发环境在ruta(基于规则的文本注释)中:<a href="http://uima.apache.org/ruta.html" target="_blank" rel="noopener">http://uima.apache.org/ruta.html</a><br><br>###### (6)总结<br><br>目前还没有统一的实现各类信息抽取的现成工具。<br><br> •分词 实体识别工具：<br><br>　　对现有工具进行集成，依据抽取任务使用不同的工具:进行NLP分词、命名实体识别:<br>　　• NLPIR、LTP、FudanNLP、Stanford NLP……<br>• 关系抽取工具：<br>　　• 规则系统 Ratel<br>　　• DeepDive 对于行业抽取任务，需要针对性的方法来完成<br>　　• 通常基于已有的结构化知识进行远程监督学习<br><br>##### 2.2.4.2 事件抽取<br><br>事件抽取可以分为预定义事件抽取和开放域事件<br>抽取<br>　　• 领域知识图谱中主要为预定义事件抽取<br><br>###### (1)方法<br><br>• 采用模式匹配方法，包括三个步骤：<br>　　• 准备事件触发词表<br><div align="center"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085540.png" alt=""><br></div>
 
 <p>　　• 候选事件抽取：寻找含有触发词的句子<br>　　• 事件元素识别：根据事件模版抽取相应的元素</p>
-<h6 id="2-事件定义："><a href="#2-事件定义：" class="headerlink" title="(2)事件定义："></a>(2)事件定义：</h6><p>事件包括：触发器、事件类型、事件参数、参数角色</p>
+<h6><span id="2-shi-jian-ding-yi">(2)事件定义：</span></h6><p>事件包括：触发器、事件类型、事件参数、参数角色</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85541.png" alt=""></p>
-<h5 id="2-2-4-3事理知识图谱"><a href="#2-2-4-3事理知识图谱" class="headerlink" title="2.2.4.3事理知识图谱"></a>2.2.4.3事理知识图谱</h5><p>　　事理图谱（Event Evolutionary Graph）是一个描述事件之间顺承、因果关系的事理演化逻辑有向图。</p>
+<h5><span id="2-2-4-3-shi-li-zhi-shi-tu-pu">2.2.4.3事理知识图谱</span></h5><p>　　事理图谱（Event Evolutionary Graph）是一个描述事件之间顺承、因果关系的事理演化逻辑有向图。</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085541.png" alt=""></p>
-<h5 id="2-2-4-4-总结"><a href="#2-2-4-4-总结" class="headerlink" title="2.2.4.4  总结"></a>2.2.4.4  总结</h5><p>• 实体识别<br>　• 基于规则和词典的方法<br>　• 基于统计学习<br>　• 基于深度学习<br>• 关系抽取<br>　• 规则引擎: Ratel<br>　• 远程监督<br>• 事件抽取<br>　• 预定义事件模板<br>　• 触发词 -&gt; 事件类型 -&gt; 参数识别 -&gt; 参数角色识别</p>
-<h4 id="2-2-5-结构化数据"><a href="#2-2-5-结构化数据" class="headerlink" title="2.2.5  结构化数据"></a>2.2.5  结构化数据</h4><p>采用top-down的构建思路：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085542.png" alt=""></p>
+<h5><span id="2-2-4-4-zong-jie">2.2.4.4  总结</span></h5><p>• 实体识别<br>　• 基于规则和词典的方法<br>　• 基于统计学习<br>　• 基于深度学习<br>• 关系抽取<br>　• 规则引擎: Ratel<br>　• 远程监督<br>• 事件抽取<br>　• 预定义事件模板<br>　• 触发词 -&gt; 事件类型 -&gt; 参数识别 -&gt; 参数角色识别</p>
+<h4><span id="2-2-5-jie-gou-hua-shu-ju">2.2.5  结构化数据</span></h4><p>采用top-down的构建思路：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085542.png" alt=""></p>
 <p>一种解决方案：<br>　　• 数据模式整理<br>　　• 数据治理<br>　　• 数据映射<br>　　• 校验规则</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085543.png" alt=""></p>
-<h4 id="2-2-6-工具"><a href="#2-2-6-工具" class="headerlink" title="2.2.6  工具"></a>2.2.6  工具</h4><p>​    知识获取主要是从三个方面来进行说明的,依据是不同的处理对象:</p>
-<h5 id="1-D2R"><a href="#1-D2R" class="headerlink" title="(1)D2R"></a>(1)D2R</h5><p>　　结构化数据采用D2R技术-&gt;具体工具就是D2RQ,将关系数据库的数据转换成虚拟的RDF数据集,通过映射机制,之后上传到D2RQ 的服务器中,之后采用SPARQL语言进行查询.数据多的话,查询速度就会很慢</p>
-<h5 id="2-包装器"><a href="#2-包装器" class="headerlink" title="(2)包装器"></a>(2)包装器</h5><p>　　半结构化数据采用包装器技术进行获取数据,具体形式就是采用信息抽取引擎,首先需要配置好包装器,之后设定好规则,然后开始执行</p>
-<h5 id="3-文本信息抽取"><a href="#3-文本信息抽取" class="headerlink" title="(3)文本信息抽取"></a>(3)文本信息抽取</h5><p>　　文本信息抽取的任务:关系抽取,概念抽取,实体抽取,事件抽取.</p>
+<h4><span id="2-2-6-gong-ju">2.2.6  工具</span></h4><p>​    知识获取主要是从三个方面来进行说明的,依据是不同的处理对象:</p>
+<h5><span id="1-d2r">(1)D2R</span></h5><p>　　结构化数据采用D2R技术-&gt;具体工具就是D2RQ,将关系数据库的数据转换成虚拟的RDF数据集,通过映射机制,之后上传到D2RQ 的服务器中,之后采用SPARQL语言进行查询.数据多的话,查询速度就会很慢</p>
+<h5><span id="2-bao-zhuang-qi">(2)包装器</span></h5><p>　　半结构化数据采用包装器技术进行获取数据,具体形式就是采用信息抽取引擎,首先需要配置好包装器,之后设定好规则,然后开始执行</p>
+<h5><span id="3-wen-ben-xin-xi-chou-qu">(3)文本信息抽取</span></h5><p>　　文本信息抽取的任务:关系抽取,概念抽取,实体抽取,事件抽取.</p>
 <p>　　非结构化文本(就是txt,html之类的)采用OPENIE或者CloseIE技术,区别如下:    　　本人研究的是特定邻域的知识图谱,因此选择使用,closeIE方法,其实现工具就是DEEPDIVE这个关系提取工具.DEEPDIVE运行流程如下:</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85544.png" alt=""></p>
 <p> 　　定义抽取任务–&gt;准备好文件/文本–&gt;进行分词/实体识别(NER)–&gt;生成候选关系对–&gt;特征自动生成–&gt;数据自动标注(可以人工提前标注)+外部已经标注数据–&gt;最宗实现关系预测.</p>
-<h4 id="2-2-7-难点"><a href="#2-2-7-难点" class="headerlink" title="2.2.7  难点"></a>2.2.7  难点</h4><ul>
+<h4><span id="2-2-7-nan-dian">2.2.7  难点</span></h4><ul>
 <li>从结构化数据库中获取知识：D2R<ul>
 <li>难点：复杂表数据的处理</li>
 </ul>
@@ -452,7 +460,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-3-知识融合"><a href="#2-3-知识融合" class="headerlink" title="2.3 知识融合"></a>2.3 知识融合</h3><h4 id="2-3-1-融合内容"><a href="#2-3-1-融合内容" class="headerlink" title="2.3.1 融合内容"></a>2.3.1 融合内容</h4><table>
+<h3><span id="2-3-zhi-shi-rong-he">2.3 知识融合</span></h3><h4><span id="2-3-1-rong-he-nei-rong">2.3.1 融合内容</span></h4><table>
 <thead>
 <tr>
 <th>数据模式层融合</th>
@@ -477,7 +485,7 @@
 <p>　　行业知识图谱的融合通常采用自顶向下和自底向上结合的方式，因此基本都经</p>
 <p>过人工的校验，保证了可靠性；因此，<strong>知识融合的关键任务在数据层的融合</strong>。</p>
 <p>　　行业知识图谱的数据模式层通常是由专家人工构建或从可靠的结构化数据中映射得到的，通常在映射时会通过设置融合的规则来确保数据的统一。</p>
-<h5 id="2-3-1-1-数据层融合例子"><a href="#2-3-1-1-数据层融合例子" class="headerlink" title="2.3.1.1 数据层融合例子"></a>2.3.1.1 数据层融合例子</h5><p>(1). <strong>实体合并</strong></p>
+<h5><span id="2-3-1-1-shu-ju-ceng-rong-he-li-zi">2.3.1.1 数据层融合例子</span></h5><p>(1). <strong>实体合并</strong></p>
 <p>　　在构建行业知识图谱时，实体优先从结构化的数据在获取；对于结构化的数据，通常有对实体进行唯一标识的主键，因此在进行知识抽取时即可设定实体合并的依据。</p>
 <p>　　从非结构化数据中抽取的实体，同样使用设置合并条件的规则来完成实体的合并；</p>
 <p>例如：</p>
@@ -486,7 +494,7 @@
 <p>　<strong>(２)．实体属性与关系的合并</strong></p>
 <p>​    　　具有时态特性的属性（如）：使用新的数据覆盖老的数据</p>
 <p>​    　　依据数据源的可靠性进行选取：结构化数据源中的质量通常较高</p>
-<h4 id="2-3-2-知识融合关键技术与难点"><a href="#2-3-2-知识融合关键技术与难点" class="headerlink" title="2.3.2  知识融合关键技术与难点"></a>2.3.2  知识融合关键技术与难点</h4><ul>
+<h4><span id="2-3-2-zhi-shi-rong-he-guan-jian-ji-zhu-yu-nan-dian">2.3.2  知识融合关键技术与难点</span></h4><ul>
 <li>实现不同来源、不同形态数据的融合</li>
 </ul>
 <ul>
@@ -498,18 +506,18 @@
 <ul>
 <li>多语言的融合 </li>
 </ul>
-<h3 id="2-4-知识存储"><a href="#2-4-知识存储" class="headerlink" title="2.4 知识存储"></a>2.4 知识存储</h3><h4 id="2-4-1-基本数据存储"><a href="#2-4-1-基本数据存储" class="headerlink" title="2.4.1 基本数据存储"></a>2.4.1 基本数据存储</h4><p>知识图谱数据存储需要完成的基本数据存储<br>　• 三元组知识的存储<br>　• 事件信息的存储<br>　• 时态信息的存储<br>　• 使用知识图谱组织的数据的存储</p>
-<h4 id="2-4-2-存储方式"><a href="#2-4-2-存储方式" class="headerlink" title="2.4.2 存储方式"></a>2.4.2 存储方式</h4><p>知识图谱是基于图的数据结构<strong>**，其存储方式主要有两种方式：</strong></p>
+<h3><span id="2-4-zhi-shi-cun-chu">2.4 知识存储</span></h3><h4><span id="2-4-1-ji-ben-shu-ju-cun-chu">2.4.1 基本数据存储</span></h4><p>知识图谱数据存储需要完成的基本数据存储<br>　• 三元组知识的存储<br>　• 事件信息的存储<br>　• 时态信息的存储<br>　• 使用知识图谱组织的数据的存储</p>
+<h4><span id="2-4-2-cun-chu-fang-shi">2.4.2 存储方式</span></h4><p>知识图谱是基于图的数据结构<strong>**，其存储方式主要有两种方式：</strong></p>
 <p>　　RDF存储（W3C标准，一套完整和复杂的图谱表示框架）</p>
 <p>　　图数据库(Graph Database)（业界实践经验）－－JanusGraph，neo4j</p>
-<h5 id="1-JanusGraph"><a href="#1-JanusGraph" class="headerlink" title="1. JanusGraph"></a>1. JanusGraph</h5><p>架构：</p>
+<h5><span id="1-janusgraph">1. JanusGraph</span></h5><p>架构：</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085544.png" alt="JanusGraph架构图"></p>
 <p>JanusGraph可以使用多种非原生的存储系统，包括Hbase, BerkeleyDB, Cassandra, InMemory</p>
-<h5 id="2-RDF"><a href="#2-RDF" class="headerlink" title="2. RDF"></a>2. RDF</h5><h6 id="2-1-RDF定义"><a href="#2-1-RDF定义" class="headerlink" title="2.1 RDF定义"></a>2.1 RDF定义</h6><p>• Resource Description Framework<br>• Resource: 能被唯一标识的任何对象，如网页、地点<br>• Description: 资源的<strong>属性、关系</strong>等<br>• Framework: 为资源的描述提供了<strong>模型、语法</strong>等</p>
-<h6 id="2-2-基本元素"><a href="#2-2-基本元素" class="headerlink" title="2.2 基本元素"></a>2.2 基本元素</h6><p>• Internationalized Resource Identifier (IRI)<br>　　• 一个符合特定语法的UNICODE字符串，全球唯一<br>　　• 如： <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML" target="_blank" rel="noopener">http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</a><br>• 字面值 (literal)－－－＞可以理解为属性值<br>　　• 字符串 + 表示数据类型的IRI<br>　　• 如：”1”^^<u>xs:integer</u>　　　－－＞说明１是整型（分成两部分）<br>• 空节点 (blank node)<br>　　• 没有IRI的匿名节点（直接字符串）</p>
-<h6 id="2-3-三元组"><a href="#2-3-三元组" class="headerlink" title="2.3 三元组"></a>2.3 三元组</h6><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085545.png" alt=""></p>
+<h5><span id="2-rdf">2. RDF</span></h5><h6><span id="2-1-rdf-ding-yi">2.1 RDF定义</span></h6><p>• Resource Description Framework<br>• Resource: 能被唯一标识的任何对象，如网页、地点<br>• Description: 资源的<strong>属性、关系</strong>等<br>• Framework: 为资源的描述提供了<strong>模型、语法</strong>等</p>
+<h6><span id="2-2-ji-ben-yuan-su">2.2 基本元素</span></h6><p>• Internationalized Resource Identifier (IRI)<br>　　• 一个符合特定语法的UNICODE字符串，全球唯一<br>　　• 如： <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML" target="_blank" rel="noopener">http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</a><br>• 字面值 (literal)－－－＞可以理解为属性值<br>　　• 字符串 + 表示数据类型的IRI<br>　　• 如：”1”^^<u>xs:integer</u>　　　－－＞说明１是整型（分成两部分）<br>• 空节点 (blank node)<br>　　• 没有IRI的匿名节点（直接字符串）</p>
+<h6><span id="2-3-san-yuan-zu">2.3 三元组</span></h6><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085545.png" alt=""></p>
 <p>• RDF对资源的陈述(statement)用三元组表示<br>　　• (Subject, Predicate, Object)<br>　　• Subject－－－（IRI, blank node）<br>　　• Predicate－－－（IRI／属性）<br>　　• Object－－－（IRI, blank node, literal）</p>
-<h4 id="2-4-3-知识存储关键技术与难点"><a href="#2-4-3-知识存储关键技术与难点" class="headerlink" title="2.4.3 知识存储关键技术与难点"></a>2.4.3 知识存储关键技术与难点</h4><ul>
+<h4><span id="2-4-3-zhi-shi-cun-chu-guan-jian-ji-zhu-yu-nan-dian">2.4.3 知识存储关键技术与难点</span></h4><ul>
 <li><p>大规模三元组数据的存储</p>
 </li>
 <li><p>知识图谱组织的大数据的存储</p>
@@ -519,13 +527,13 @@
 <li><p> 快速推理与图计算的支持 </p>
 </li>
 </ul>
-<h3 id="2-5-知识计算"><a href="#2-5-知识计算" class="headerlink" title="2.5 知识计算"></a>2.5 知识计算</h3><h4 id="2-5-1-计算方式"><a href="#2-5-1-计算方式" class="headerlink" title="2.5.1 计算方式"></a>2.5.1 计算方式</h4><ul>
+<h3><span id="2-5-zhi-shi-ji-suan">2.5 知识计算</span></h3><h4><span id="2-5-1-ji-suan-fang-shi">2.5.1 计算方式</span></h4><ul>
 <li>本体推理：使用本体推理进行新知识发现或冲突检测。</li>
 <li>基于规则的推理：使用规则引擎，编写相应的业务规则，通过推理辅助业务决策。</li>
 <li>图查询：利用图模式匹配算法，对图谱中的数据进行快速访问。</li>
 <li>图挖掘计算：基于图论的相关算法，实现对图谱的探索和挖掘</li>
 </ul>
-<h4 id="2-5-2-图挖掘计算"><a href="#2-5-2-图挖掘计算" class="headerlink" title="2.5.2 图挖掘计算"></a>2.5.2 图挖掘计算</h4><p>　　图挖掘计算：基于图论的相关算法，实现对图谱的探索和挖掘。</p>
+<h4><span id="2-5-2-tu-wa-jue-ji-suan">2.5.2 图挖掘计算</span></h4><p>　　图挖掘计算：基于图论的相关算法，实现对图谱的探索和挖掘。</p>
 <p>(1)<strong>集成实现基本图算法</strong></p>
 <ul>
 <li>图遍历：广度优先遍历、深度优先遍历</li>
@@ -535,12 +543,12 @@
 <li>族群发现：最大流算法</li>
 <li>相似节点发现：基于节点属性、关系的相似度算法 </li>
 </ul>
-<h5 id="2-目的"><a href="#2-目的" class="headerlink" title="(2)目的"></a>(2)目的</h5><p>解决大规模的图数据分析问题，这里主要是指批量的计算，适合OLAP的应用场景</p>
-<h5 id="3-特点"><a href="#3-特点" class="headerlink" title="(3)特点"></a>(3)特点</h5><p>• 随机访问、局部性差<br>• 算法复杂度高</p>
-<h5 id="4-实现方式"><a href="#4-实现方式" class="headerlink" title="(4)实现方式"></a>(4)实现方式</h5><p>　　图计算引擎将<strong>图分布式的存储</strong>在<strong>内存</strong>中，提供简单的编程接口让用户实现复杂且高效的的并行图分析算法。</p>
-<h5 id="5-典型框架"><a href="#5-典型框架" class="headerlink" title="(5)典型框架"></a>(5)典型框架</h5><p>　　• Google Pregel<br>　　• Facebook Giraph<br>　　• Berkeley GraphX<br>　　• CMU PowerGraph</p>
-<h4 id="2-5-3-本体推理"><a href="#2-5-3-本体推理" class="headerlink" title="2.5.3 本体推理"></a>2.5.3 本体推理</h4><p>　　本体推理：使用本体推理进行新知识发现或冲突检测。</p>
-<h5 id="本体的五元组表示"><a href="#本体的五元组表示" class="headerlink" title="本体的五元组表示"></a>本体的五元组表示</h5><p><strong>(1) 本体的五元组表示 O= {C,R,F,A,I}</strong><br>　• C – 概念集合，通常以Taxonomy形式组织<br>　　• 球星，清华校友<br>　• R – 关系，描述概念或者实例之间语义关系的集合<br>　　• subClassOf，birthplace<br>　• F – 函数,一组特殊的关系，关系中第n个元素的值由 其他n-1个元素的值确定<br>　　• Price-of-a-used-car 由 the car-model, manufacturing data 和 kilometers确定<br>　• A – 公理（规则）<br>　　• 如果A是B的子女，B是C的子女，则A是C的子孙<br>　• I – 具体个体<br>　　• 如:Peter是概念学生的实例</p>
+<h5><span id="2-mu-de">(2)目的</span></h5><p>解决大规模的图数据分析问题，这里主要是指批量的计算，适合OLAP的应用场景</p>
+<h5><span id="3-te-dian">(3)特点</span></h5><p>• 随机访问、局部性差<br>• 算法复杂度高</p>
+<h5><span id="4-shi-xian-fang-shi">(4)实现方式</span></h5><p>　　图计算引擎将<strong>图分布式的存储</strong>在<strong>内存</strong>中，提供简单的编程接口让用户实现复杂且高效的的并行图分析算法。</p>
+<h5><span id="5-dian-xing-kuang-jia">(5)典型框架</span></h5><p>　　• Google Pregel<br>　　• Facebook Giraph<br>　　• Berkeley GraphX<br>　　• CMU PowerGraph</p>
+<h4><span id="2-5-3-ben-ti-tui-li">2.5.3 本体推理</span></h4><p>　　本体推理：使用本体推理进行新知识发现或冲突检测。</p>
+<h5><span id="ben-ti-de-wu-yuan-zu-biao-shi">本体的五元组表示</span></h5><p><strong>(1) 本体的五元组表示 O= {C,R,F,A,I}</strong><br>　• C – 概念集合，通常以Taxonomy形式组织<br>　　• 球星，清华校友<br>　• R – 关系，描述概念或者实例之间语义关系的集合<br>　　• subClassOf，birthplace<br>　• F – 函数,一组特殊的关系，关系中第n个元素的值由 其他n-1个元素的值确定<br>　　• Price-of-a-used-car 由 the car-model, manufacturing data 和 kilometers确定<br>　• A – 公理（规则）<br>　　• 如果A是B的子女，B是C的子女，则A是C的子孙<br>　• I – 具体个体<br>　　• 如:Peter是概念学生的实例</p>
 <p>Web Ontology Language = OWL<br>• OWL进一步提供了更多的术语来描述属性和类别</p>
 <p><strong>(2)本体推理基本方法</strong></p>
 <ul>
@@ -550,7 +558,7 @@
 <li>基于Datalog转换的方法如KAON、RDFox等。</li>
 <li>回答集程序 Answer set programming。</li>
 </ul>
-<h5 id="3-本体知识推理工具——RDFox"><a href="#3-本体知识推理工具——RDFox" class="headerlink" title="(3)本体知识推理工具——RDFox"></a>(3)本体知识推理工具——RDFox</h5><p><strong>(3.1)RDFox 特点</strong></p>
+<h5><span id="3-ben-ti-zhi-shi-tui-li-gong-ju-rdfox">(3)本体知识推理工具——RDFox</span></h5><p><strong>(3.1)RDFox 特点</strong></p>
 <ul>
 <li><p>支持共享内存并行OWL 2 RL推理</p>
 </li>
@@ -561,14 +569,14 @@
 <li><p>RDFox完全基于内存，对硬件的要求较高</p>
 </li>
 </ul>
-<h4 id="2-5-4基于规则的推理"><a href="#2-5-4基于规则的推理" class="headerlink" title="2.5.4基于规则的推理"></a>2.5.4基于规则的推理</h4><p>　　基于规则的推理：使用规则引擎，编写相应的业务规则，通过推理辅助业务决策。</p>
-<h5 id="1-基于规则推理工具——Drools"><a href="#1-基于规则推理工具——Drools" class="headerlink" title="(1)基于规则推理工具——Drools"></a>(1)基于规则推理工具——Drools</h5><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import com.hiekn.ruleengine.bean.RiskBean;</span><br><span class="line">rule highRiskRule1 <span class="comment">//高风险企业规则一：企业注册资金每100万加1分，成立的时长每年加1分，每有失信记录减3分，有税务问题每次减少5分。</span></span><br><span class="line">when</span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span> : RiskBean(eval(true))</span></span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (702, 1);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (703, 1);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (711, -3);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (712, -5);</span></span><br><span class="line">#<span class="number">711</span>是类型情况代号 </span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<h4 id="2-5-5补充"><a href="#2-5-5补充" class="headerlink" title="2.5.5补充"></a>2.5.5补充</h4><h5 id="1-基于符号的知识表示"><a href="#1-基于符号的知识表示" class="headerlink" title="(1) 基于符号的知识表示"></a>(1) 基于符号的知识表示</h5><h6 id="1-1-方法"><a href="#1-1-方法" class="headerlink" title="(1.1)方法"></a>(1.1)方法</h6><p>　• 一阶谓词逻辑<br>　　• 一套灵活且紧凑的对象知识表示方式<br>　　• 完善的推理能力和表达能力支持<br>　• Semantic Net<br>　　• 一个通过语义关系连接的概念网络<br>　　• 表达能力受限，直观但是缺乏语义支持<br>　• Frame<br>　　• 直接表示领域知识模型,支持默认推理<br>　　• 表达能力受限，缺乏语义支持<br>　• Script<br>　　• 表达事件知识，非常受限， 对符合条件的场景非常适合<br>　• 语义网知识表示语言体系<br>　　• 面向Web of Data,完善的一整套体系支持<br>　　• 有的时候杀鸡用牛刀</p>
-<h6 id="1-2-优缺点"><a href="#1-2-优缺点" class="headerlink" title="(1.2)优缺点"></a>(1.2)优缺点</h6><p>　　• 可解释、显式推理<br>　　• 难以大规模、语义鸿沟</p>
-<h5 id="2-基于分布式的知识推理"><a href="#2-基于分布式的知识推理" class="headerlink" title="(2) 基于分布式的知识推理"></a>(2) 基于分布式的知识推理</h5><h6 id="2-1-基于张量的模型"><a href="#2-1-基于张量的模型" class="headerlink" title="(2.1)基于张量的模型"></a>(2.1)基于张量的模型</h6><p>　<strong>基于重构的张量分解方法：通过矩阵分解获得关系、实体的表示</strong>，<strong>其实就是类似奇异值分解</strong></p>
+<h4><span id="2-5-4-ji-yu-gui-ze-de-tui-li">2.5.4基于规则的推理</span></h4><p>　　基于规则的推理：使用规则引擎，编写相应的业务规则，通过推理辅助业务决策。</p>
+<h5><span id="1-ji-yu-gui-ze-tui-li-gong-ju-drools">(1)基于规则推理工具——Drools</span></h5><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import com.hiekn.ruleengine.bean.RiskBean;</span><br><span class="line">rule highRiskRule1 <span class="comment">//高风险企业规则一：企业注册资金每100万加1分，成立的时长每年加1分，每有失信记录减3分，有税务问题每次减少5分。</span></span><br><span class="line">when</span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span> : RiskBean(eval(true))</span></span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (702, 1);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (703, 1);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (711, -3);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$risk</span>.addOrMinusScore (712, -5);</span></span><br><span class="line">#<span class="number">711</span>是类型情况代号 </span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h4><span id="2-5-5-bu-chong">2.5.5补充</span></h4><h5><span id="1-ji-yu-fu-hao-de-zhi-shi-biao-shi">(1) 基于符号的知识表示</span></h5><h6><span id="1-1-fang-fa">(1.1)方法</span></h6><p>　• 一阶谓词逻辑<br>　　• 一套灵活且紧凑的对象知识表示方式<br>　　• 完善的推理能力和表达能力支持<br>　• Semantic Net<br>　　• 一个通过语义关系连接的概念网络<br>　　• 表达能力受限，直观但是缺乏语义支持<br>　• Frame<br>　　• 直接表示领域知识模型,支持默认推理<br>　　• 表达能力受限，缺乏语义支持<br>　• Script<br>　　• 表达事件知识，非常受限， 对符合条件的场景非常适合<br>　• 语义网知识表示语言体系<br>　　• 面向Web of Data,完善的一整套体系支持<br>　　• 有的时候杀鸡用牛刀</p>
+<h6><span id="1-2-you-que-dian">(1.2)优缺点</span></h6><p>　　• 可解释、显式推理<br>　　• 难以大规模、语义鸿沟</p>
+<h5><span id="2-ji-yu-fen-bu-shi-de-zhi-shi-tui-li">(2) 基于分布式的知识推理</span></h5><h6><span id="2-1-ji-yu-zhang-liang-de-mo-xing">(2.1)基于张量的模型</span></h6><p>　<strong>基于重构的张量分解方法：通过矩阵分解获得关系、实体的表示</strong>，<strong>其实就是类似奇异值分解</strong></p>
 <p>• 知识图谱中三元组的结构是（头部实体ℎ，关系ｒ ，尾部实体ｔ ），其中ｒ连接头尾实体。<br>• 以Ｅ., Ｅ0, … , Ｅ2表示知识图谱中的实体，以Ｒ., Ｒ0, … , Ｒ3表示知识图谱中的关系，则可以使用一个三维矩阵 (张量) 表示知识图谱．</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085546.png" alt=""></p>
-<h6 id="2-2-基于翻译的模型：TRANSE"><a href="#2-2-基于翻译的模型：TRANSE" class="headerlink" title="(2.2)基于翻译的模型：TRANSE"></a>(2.2)基于翻译的模型：TRANSE</h6><p>　　用向量表示实体和关系。关系事实 = (head, relation, tail) 简写为（h, r, t），其中<br>h, r, t分别是一维的向量表示 。</p>
+<h6><span id="2-2-ji-yu-fan-yi-de-mo-xing-transe">(2.2)基于翻译的模型：TRANSE</span></h6><p>　　用向量表示实体和关系。关系事实 = (head, relation, tail) 简写为（h, r, t），其中<br>h, r, t分别是一维的向量表示 。</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085548.png" alt=""><br>　<strong>１．势能函数</strong></p>
 <p>• 对于positive的三元组(ℎ, ｒ,ｔ) ，要求ℎ + ｒ ≈ ｔ；<br>• 对于negative的三元组则不满足上述等式。<br>d （ℎ, ｒ,ｔ） =∥ℎ + ｒ − ｔ ∥＿２</p>
 <p>ｄ（ 中国、首都、北京） &lt; ｄ(中国、首都、杭州)</p>
@@ -577,16 +585,16 @@
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85549.png" alt=""></p>
 <p>　<strong>３解决方案:TransR</strong></p>
 <p>　• TransH、TransR、TransD<br>　• 利用投影方式，将不同语义的实体、关系嵌入到同一个语义空间中。</p>
-<h6 id="2-3-基于神经网络的模型"><a href="#2-3-基于神经网络的模型" class="headerlink" title="(2.3)基于神经网络的模型"></a>(2.3)基于神经网络的模型</h6><p>　　神经网络模型的核心思想：使用神经网络为三元组定义势能函数，在训练目标中，要求正确的三元组具有较高的能量，错误的三元组具有较低的能量。通过惩罚错误的三元组完成学习过程，使得正确的三元组和错误三元组的能量有一个明显的分界线．</p>
-<h6 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h6><p>• 可学习、可计算，适合大规模、开放域<br>• 不可解释、隐式推理</p>
-<h4 id="2-5-6-关键技术与难点"><a href="#2-5-6-关键技术与难点" class="headerlink" title="2.5.6 关键技术与难点"></a>2.5.6 关键技术与难点</h4><h5 id="图挖掘计算"><a href="#图挖掘计算" class="headerlink" title="图挖掘计算"></a>图挖掘计算</h5><ul>
+<h6><span id="2-3-ji-yu-shen-jing-wang-luo-de-mo-xing">(2.3)基于神经网络的模型</span></h6><p>　　神经网络模型的核心思想：使用神经网络为三元组定义势能函数，在训练目标中，要求正确的三元组具有较高的能量，错误的三元组具有较低的能量。通过惩罚错误的三元组完成学习过程，使得正确的三元组和错误三元组的能量有一个明显的分界线．</p>
+<h6><span id="you-que-dian">优缺点</span></h6><p>• 可学习、可计算，适合大规模、开放域<br>• 不可解释、隐式推理</p>
+<h4><span id="2-5-6-guan-jian-ji-zhu-yu-nan-dian">2.5.6 关键技术与难点</span></h4><h5><span id="tu-wa-jue-ji-suan">图挖掘计算</span></h5><ul>
 <li>本体推理：使用本体推理进行新知识发现或冲突检测。</li>
 <li>基于规则的推理：使用规则引擎，编写相应的业务规则，通过推理辅助业务决策。</li>
 <li>图查询：利用图模式匹配算法，对图谱中的数据进行快速访问。</li>
 <li>图挖掘计算：基于图论的相关算法，实现对图谱的探索和挖掘</li>
 </ul>
-<h5 id="本体推理与规则推理"><a href="#本体推理与规则推理" class="headerlink" title="本体推理与规则推理"></a>本体推理与规则推理</h5><p>　　大数据量下的快速推理<br>　　对于增量知识和规则的快速加载</p>
-<h3 id="2-6-知识应用"><a href="#2-6-知识应用" class="headerlink" title="2.6 知识应用"></a>2.6 知识应用</h3><h4 id="2-6-1-语义搜索"><a href="#2-6-1-语义搜索" class="headerlink" title="2.6.1 语义搜索"></a>2.6.1 语义搜索</h4><p>　　知识图谱提出的初衷即为解决搜索的准确率问题；传统基于关键词的检索完全不考虑语义信息，主要面临两个难题：</p>
+<h5><span id="ben-ti-tui-li-yu-gui-ze-tui-li">本体推理与规则推理</span></h5><p>　　大数据量下的快速推理<br>　　对于增量知识和规则的快速加载</p>
+<h3><span id="2-6-zhi-shi-ying-yong">2.6 知识应用</span></h3><h4><span id="2-6-1-yu-yi-sou-suo">2.6.1 语义搜索</span></h4><p>　　知识图谱提出的初衷即为解决搜索的准确率问题；传统基于关键词的检索完全不考虑语义信息，主要面临两个难题：</p>
 <ul>
 <li>自然语言表达的多样性     　　</li>
 <li>自然语言的歧义</li>
@@ -598,29 +606,29 @@
 <li><p>基于知识图谱的语义搜索 </p>
 </li>
 </ul>
-<h4 id="2-6-2-智能问答"><a href="#2-6-2-智能问答" class="headerlink" title="2.6.2 智能问答"></a>2.6.2 智能问答</h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085549.png" alt="智能问答流程图"></p>
-<h5 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h5><ul>
+<h4><span id="2-6-2-zhi-neng-wen-da">2.6.2 智能问答</span></h4><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085549.png" alt="智能问答流程图"></p>
+<h5><span id="nan-dian">难点</span></h5><ul>
 <li><strong>准确的语义解析</strong></li>
 <li>正确理解用户的真实意图</li>
 <li><strong>答案确定与排序</strong></li>
 </ul>
-<h5 id="1-基于信息检索的方法"><a href="#1-基于信息检索的方法" class="headerlink" title="(1)基于信息检索的方法"></a>(1)基于信息检索的方法</h5><p>　　 首先利用中文分词、命名实体识别等自然语言处理工具找到问句中所涉及到的实体和关键词，然后去知识资源库中去进行检索。(之前那个基于电影的知识图谱就是.)<br>　 　优点：实现简单，应用面广，在大部分场景下均可得到<br>　 　缺点：要求答案中必须至少包含问句中的一个字或词，所以不如语义解析方法精确。<br>　　改进：基于知识图谱知识进行语义扩充，提高匹配率；基于知识图谱进行检索时的语义消歧。</p>
-<h5 id="2-基于语义解析的方法"><a href="#2-基于语义解析的方法" class="headerlink" title="(2)基于语义解析的方法"></a>(2)基于语义解析的方法</h5><ul>
+<h5><span id="1-ji-yu-xin-xi-jian-suo-de-fang-fa">(1)基于信息检索的方法</span></h5><p>　　 首先利用中文分词、命名实体识别等自然语言处理工具找到问句中所涉及到的实体和关键词，然后去知识资源库中去进行检索。(之前那个基于电影的知识图谱就是.)<br>　 　优点：实现简单，应用面广，在大部分场景下均可得到<br>　 　缺点：要求答案中必须至少包含问句中的一个字或词，所以不如语义解析方法精确。<br>　　改进：基于知识图谱知识进行语义扩充，提高匹配率；基于知识图谱进行检索时的语义消歧。</p>
+<h5><span id="2-ji-yu-yu-yi-jie-xi-de-fang-fa">(2)基于语义解析的方法</span></h5><ul>
 <li>基于语义解析的方法非常符合人们的直觉，它将一个自然语言形式的问句，按照特定语言的语法规则，解析成语义表达式，在得到语义表达式之后，即可非常容易地将其转化为某种数据库的查询语言。</li>
 <li>首先自然语言问句的词汇被映射到语义表达式中的词汇，然后按照特定的规则将汇组合起来，进而得到了最终的语义表达式。</li>
 <li>改进方法：在特定的领域里边，基于知识图谱的实体、属性、概念等进行词法解析与映射(实体、属性、概念都需要进行映射)，</li>
 <li>然后基于图结构进行<strong>语法规则</strong>匹配。（子图查询匹配）—根据意思来查询</li>
 </ul>
-<h5 id="3-基于规则的专家系统方法"><a href="#3-基于规则的专家系统方法" class="headerlink" title="(3)基于规则的专家系统方法"></a>(3)基于规则的专家系统方法</h5><ul>
+<h5><span id="3-ji-yu-gui-ze-de-zhuan-jia-xi-tong-fang-fa">(3)基于规则的专家系统方法</span></h5><ul>
 <li>专家系统是一个具有大量的专门知识与经验的程序系统，它应用人工智能技术和计算机技术，根据某领域一个或多个专家提供的知识和经验，进行推理和判断，模拟人类专家的决策过程，以便解决那些需要人类专家处理的复杂问题。</li>
 <li>优点：在限定的领域范围内准确度高。<br>缺点：通用性欠缺，不能覆盖很多的应用场景。</li>
 </ul>
-<h5 id="4-基于深度学习的方法"><a href="#4-基于深度学习的方法" class="headerlink" title="(4)基于深度学习的方法"></a>(4)基于深度学习的方法</h5><ul>
+<h5><span id="4-ji-yu-shen-du-xue-xi-de-fang-fa">(4)基于深度学习的方法</span></h5><ul>
 <li>近几年卷积神经网络（CNN）和循环神经网络（RNN）在NLP领域任务中表现出来的语言表示能力，越来越多的研究人员尝试深度学习的方法完成问答领域的关键任务，包括 问题分类（question classification），语义匹配与答案选择（answer selection），答案自动生成（answer generation）；即对用户输入解析、答案查询与检索等环节进行优化。</li>
 <li>优点：实现“端到端”的问答：把问题与答案均使用复杂的特征向量表示，使用深度学习来计算问题与答案的相似度。</li>
 <li>不足：不支持复杂的查询；需要比较长的训练过程，不适用于现实应用场景中的知识更新后的实时查询。</li>
 </ul>
-<h5 id="5-最佳实践方法"><a href="#5-最佳实践方法" class="headerlink" title="(5)最佳实践方法"></a>(5)最佳实践方法</h5><ul>
+<h5><span id="5-zui-jia-shi-jian-fang-fa">(5)最佳实践方法</span></h5><ul>
 <li><p>基于语义解析的方法可解释性强，并且能够方便地转换成知识图谱的查询，给</p>
 <p>出明确的答案；因此对于<strong>用户输入，首先使用基于语义解析的方法进行回答</strong></p>
 </li>
@@ -628,14 +636,14 @@
 <p>信息检索的方法<strong>进行补充回答</strong>。</p>
 </li>
 </ul>
-<h5 id="基于语义解析的自动问答"><a href="#基于语义解析的自动问答" class="headerlink" title="基于语义解析的自动问答"></a>基于语义解析的自动问答</h5><ul>
+<h5><span id="ji-yu-yu-yi-jie-xi-de-zi-dong-wen-da">基于语义解析的自动问答</span></h5><ul>
 <li>人工配置语义解析模板</li>
 <li>知识图谱通用的子图匹配模板<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085550.png" alt=""></li>
 </ul>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085551.png" alt=""></p>
-<h4 id="2-6-3-可视化工具"><a href="#2-6-3-可视化工具" class="headerlink" title="2.6.3 可视化工具"></a>2.6.3 可视化工具</h4><p>D3.js   ,ECharts，Cytoscape.js</p>
-<h3 id="2-7-质量评估"><a href="#2-7-质量评估" class="headerlink" title="2.7 质量评估"></a>2.7 质量评估</h3><p>对知识库的质量评估任务<br>　　• 与实体对齐任务一起进行的<br>　　• 对知识的可信度进行量化，保留置信度较高的，舍弃置信度较低的，有效确保知识的质量</p>
-<h4 id="2-7-1可行方案"><a href="#2-7-1可行方案" class="headerlink" title="2.7.1可行方案"></a>2.7.1可行方案</h4><p>• 利用强业务规则进行筛选和评估<br>• 利用众包进行抽样打分<br>• 在对ReVerb系统的信息抽取质量进行评估时，采用人工标注的方式对1 000个句子中的实体关系三元组进行了标注，并以此作为训练集，使用logistic回归模型计算抽取结果的置信度。<br>• 基于LDIF框架，根据业务需求来定义质量评估函数，或者通过对多种评估方法的综合考评来确定知识的最终质量评分。<br>• Google的Knowledge Vault项目则根据指定数据信息的抽取频率对信息的可信度进行评分，然后利用从可信知识库中得到的先验知识对可信度进行修正。</p>
+<h4><span id="2-6-3-ke-shi-hua-gong-ju">2.6.3 可视化工具</span></h4><p>D3.js   ,ECharts，Cytoscape.js</p>
+<h3><span id="2-7-zhi-liang-ping-gu">2.7 质量评估</span></h3><p>对知识库的质量评估任务<br>　　• 与实体对齐任务一起进行的<br>　　• 对知识的可信度进行量化，保留置信度较高的，舍弃置信度较低的，有效确保知识的质量</p>
+<h4><span id="2-7-1-ke-xing-fang-an">2.7.1可行方案</span></h4><p>• 利用强业务规则进行筛选和评估<br>• 利用众包进行抽样打分<br>• 在对ReVerb系统的信息抽取质量进行评估时，采用人工标注的方式对1 000个句子中的实体关系三元组进行了标注，并以此作为训练集，使用logistic回归模型计算抽取结果的置信度。<br>• 基于LDIF框架，根据业务需求来定义质量评估函数，或者通过对多种评估方法的综合考评来确定知识的最终质量评分。<br>• Google的Knowledge Vault项目则根据指定数据信息的抽取频率对信息的可信度进行评分，然后利用从可信知识库中得到的先验知识对可信度进行修正。</p>
 <p>• 知识图谱 !== 知识</p>
 
         
@@ -856,7 +864,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

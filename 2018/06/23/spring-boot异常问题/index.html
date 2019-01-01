@@ -267,14 +267,22 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文所遇到的问题,是在配置关于电影的KBQA系统时,所出现的问题,目前有用户名及其密码无效,和缺少文件的exception,其实很多时候看bug解释,可以得到很多启发,避免少走很多弯路.<a id="more"></a></p>
+            <p>本文所遇到的问题,是在配置关于电影的KBQA系统时,所出现的问题,目前有用户名及其密码无效,和缺少文件的exception,其实很多时候看bug解释,可以得到很多启发,避免少走很多弯路.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#1-invalid-username-or-password">1.Invalid username or password.</a></li>
+<li><a href="#2-xi-tong-zhao-bu-dao-zhi-ding-de-wen-jian">2.系统找不到指定的文件</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="1-Invalid-username-or-password"><a href="#1-Invalid-username-or-password" class="headerlink" title="1.Invalid username or password."></a>1.Invalid username or password.</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  Servlet.service() <span class="keyword">for</span> servlet [dispatcherServlet] <span class="keyword">in</span> context </span><br><span class="line">  <span class="keyword">with</span> path [] threw <span class="keyword">exception</span> [Request processing failed; </span><br><span class="line">  nested <span class="keyword">exception</span> <span class="keyword">is</span> org.springframework.dao.DataAccessResourceFailureException: </span><br><span class="line">  http://localhost:<span class="number">7474</span>/db/data/transaction/commit; nested <span class="keyword">exception</span> <span class="keyword">is</span> org.neo4j.ogm.<span class="keyword">exception</span>.ConnectionException: </span><br><span class="line">  http://localhost:<span class="number">7474</span>/db/data/transaction/commit] <span class="keyword">with</span> root cause</span><br><span class="line">org.apache.http.client.HttpResponseException: Invalid username <span class="keyword">or</span> password.</span><br></pre></td></tr></table></figure>
+<h2><span id="1-invalid-username-or-password">1.Invalid username or password.</span></h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  Servlet.service() <span class="keyword">for</span> servlet [dispatcherServlet] <span class="keyword">in</span> context </span><br><span class="line">  <span class="keyword">with</span> path [] threw <span class="keyword">exception</span> [Request processing failed; </span><br><span class="line">  nested <span class="keyword">exception</span> <span class="keyword">is</span> org.springframework.dao.DataAccessResourceFailureException: </span><br><span class="line">  http://localhost:<span class="number">7474</span>/db/data/transaction/commit; nested <span class="keyword">exception</span> <span class="keyword">is</span> org.neo4j.ogm.<span class="keyword">exception</span>.ConnectionException: </span><br><span class="line">  http://localhost:<span class="number">7474</span>/db/data/transaction/commit] <span class="keyword">with</span> root cause</span><br><span class="line">org.apache.http.client.HttpResponseException: Invalid username <span class="keyword">or</span> password.</span><br></pre></td></tr></table></figure>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085255.jpg" alt="用户名与密码无效"><br>　　从上面的异常描述可以得知.neo4j的数据库不能连接,因为用户名与密码无效.<br>　　所以需要在spring-boot的项目的属性中进行配置即application.properties中修改关于neo4j的配置信息(用户名与密码)<br>修改成:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Neo4j配置</span><br><span class="line">spring<span class="selector-class">.data</span><span class="selector-class">.neo4j</span><span class="selector-class">.username</span>=自己设置的用户名</span><br><span class="line">spring<span class="selector-class">.data</span><span class="selector-class">.neo4j</span><span class="selector-class">.password</span>=自己设定的密码</span><br></pre></td></tr></table></figure></p>
 <p>　　之后进行console框的历史数据清除,重新以 java application地 方式运行.</p>
-<h2 id="2-系统找不到指定的文件"><a href="#2-系统找不到指定的文件" class="headerlink" title="2.系统找不到指定的文件"></a>2.系统找不到指定的文件</h2><p>   如图所示:</p>
+<h2><span id="2-xi-tong-zhao-bu-dao-zhi-ding-de-wen-jian">2.系统找不到指定的文件</span></h2><p>   如图所示:</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085256.jpg" alt="系统找不到指定的文件"></p>
 <p>说明在对应的位置缺少文件需要进行文件的补充即可.</p>
 
@@ -496,7 +504,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

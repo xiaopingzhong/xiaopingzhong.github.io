@@ -267,26 +267,52 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文是语义相似度系列的第一篇,主要讲诉的是语义相似度的基本概念及其基本情况,为后面使用工具包进行语义相似度的计算打下坚实的基础.相似度计算是作为语义解析的核心,相似度计算的复杂度是根据语义的复杂度来计确定的，将语义复杂度从低到高，我们可以使用关键词匹配，浅层语义匹配，和深层语义匹配三个思路来进行解决，其中思路的具体方法会在后面进行说明．<a id="more"></a></p>
+            <p>本文是语义相似度系列的第一篇,主要讲诉的是语义相似度的基本概念及其基本情况,为后面使用工具包进行语义相似度的计算打下坚实的基础.相似度计算是作为语义解析的核心,相似度计算的复杂度是根据语义的复杂度来计确定的，将语义复杂度从低到高，我们可以使用关键词匹配，浅层语义匹配，和深层语义匹配三个思路来进行解决，其中思路的具体方法会在后面进行说明．<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-chang-jing">一.场景</a></li>
+<li><a href="#er-gai-nian-bian-xi">二.概念辨析</a></li>
+<li><a href="#san-zhu-yao-fang-shi">三.主要方式:</a><ul>
+<li><a href="#3-1-ji-yu-ci-yu-fang-fa">3.1 基于词语方法:</a></li>
+<li><a href="#3-2-ji-yu-ju-fa-te-zheng-de-fang-fa">3.2 基于句法特征的方法</a></li>
+<li><a href="#3-3-ji-yu-shen-du-xue-xi-de-fang-fa">3.3 基于深度学习的方法</a></li>
+<li><a href="#3-4-jie-lun">3.4 结论</a></li>
+</ul>
+</li>
+<li><a href="#si-xiang-si-du-ju-ti-ji-suan-fang-fa">四.相似度具体计算方法</a></li>
+<li><a href="#wu-xiang-si-du-chong-lei-ji-qi-fang-fa">五.相似度种类及其方法</a><ul>
+<li><a href="#5-1-ci-yu-xiang-si-du-ji-suan">5.1 词语相似度计算</a></li>
+<li><a href="#5-2-duan-yu-xiang-si-du-ji-suan">5.2 短语相似度计算</a></li>
+<li><a href="#5-3-ju-zi-xiang-si-du-ji-suan">5.3 句子相似度计算</a></li>
+<li><a href="#5-4-wen-ben-xiang-si-du-ji-suan">5.4 文本相似度计算</a></li>
+<li><a href="#5-5-jin-si-ci">5.5 近似词</a></li>
+</ul>
+</li>
+<li><a href="#liu-xiang-liang-kong-jian-ci-xiang-liang-mo-xing-yu-yu-xian-xiang-si-xing-tong-su-jie-shi">六.向量空间/词向量模型与余弦相似性通俗解释</a></li>
+<li><a href="#qi-guan-jian-ci-ti-qu">七.关键词提取</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-场景"><a href="#一-场景" class="headerlink" title="一.场景"></a>一.场景</h1><p>　　在问句解析的时候中，我们经常要计算两个 query 的相似度，例如「推荐好看的电影」与「2016年好看的电影」。通过词向量按位累加的方式，得到这两个 query 的向量表示之后，可以利用 Cosine Similarity 来计算两者的相似度。对于较难的短文本-短文本语义匹配任务，则可以考虑引入有监督信号的训练数据并利用 Deep Structured Semantic Model (DSSM) 或 Convolutional Latent Semantic Model (CLSM) 这些更复杂的神经网络模型进行语义相关性的计算.</p>
-<h1 id="二-概念辨析"><a href="#二-概念辨析" class="headerlink" title="二.概念辨析"></a>二.概念辨析</h1><h1 id="三-主要方式"><a href="#三-主要方式" class="headerlink" title="三.主要方式:"></a>三.主要方式:</h1><h2 id="3-1-基于词语方法"><a href="#3-1-基于词语方法" class="headerlink" title="3.1 基于词语方法:"></a>3.1 基于词语方法:</h2><p>　（１）特点：只考虑词语（或词语之间的关系）,不考虑句法<br>　（２）类型:<br>　　　　(1)问句间的词语或关键词公共个数;<br>　　　　(2)词语语义矩阵(词语之间的相似度);<br>　　　　(3)向量空间模型(词向量模型)+余弦距离;<br>　　　　(4)主题模型(LDA):在短文本(问句)上的效果不太理想，在短文本-短文本匹配任务中词向量的应用比主题模型更为普遍。LDA模型就是符合该主题的词有很多,通过计算文档中的这些词,然后求出该文档更倾向于哪(几)个主题/类型.<br>　　　　(5)word2vec–浅层的神经网络模型:适用于简单的语义关系–浅层语义,用这种模型训练出来的词向量进行向量之间的余弦值.<br>说明：以向量空间模型为代表／例子：<br>　　向量空间模型(词向量模型)+余弦距离=余弦相似性:将文本转换成向量,之后向量间求余弦值.<br>　　涉及到的技术:wordEbeding技术,word2Vec模型构建,词典构建,特征词汇表的构建;<br>　　工具包:HANLP,FNLP,StardNLP.</p>
-<h2 id="3-2-基于句法特征的方法"><a href="#3-2-基于句法特征的方法" class="headerlink" title="3.2 基于句法特征的方法"></a>3.2 基于句法特征的方法</h2><p>　　问句的意思不仅仅有其词语组成，还与词语间的结构有关。基于句法的方法在词语语义方法的基础上，引入了句法特征，从句法特征角度考虑对应句法成分间的词语相似度，进而衡量句子间的相似度。<br>　　技术：句法分析，规则建立（Drool规则推理引擎）；<br>　　工具包：HANLP,FNLP,StardNLP之类的的句法分析器；</p>
-<h2 id="3-3-基于深度学习的方法"><a href="#3-3-基于深度学习的方法" class="headerlink" title="3.3 基于深度学习的方法"></a>3.3 基于深度学习的方法</h2><p>　　技术：深层语义匹配模型（DSSM、CLSM、DeepMatch、MatchingFeatures、ARC-II、DeepMind，具体依次参考下面的Reference）<br>　　工具包：matchzoo（ ①DSSM；②CDSSM；③ARC-I；④ARC-II；⑤MV-LSTM；⑥DRMM；⑦K-NRM；⑧CONV-KNRM；⑨DRMM-TKS；⑩BiMPM），allenNLP（ESIM），SPM_toolkit（DecAtt、ESIM、PWIM、SSE）<br>　　具体参考：<a href="http://www.cnblogs.com/d0main/p/9462947.html" target="_blank" rel="noopener">自然语言推断(NLI)、文本相似度相关开源项目推荐(Pytorch 实现)</a></p>
-<h2 id="3-4-结论"><a href="#3-4-结论" class="headerlink" title="3.4 结论"></a>3.4 结论</h2><p>　　只有融合了深度学习，语言逻辑，向量建模，规则，问答才能真正强大起来。而不是单单只靠某一某型就可以完全搞定。在query的过程中不断施加约束，或者说是action会有多个，我们可以从中选择出与quesion相似度得分最高的那个action作为最优的action,如此不断地施加约束，缩小范围，得到最终的结果。</p>
-<h1 id="四-相似度具体计算方法"><a href="#四-相似度具体计算方法" class="headerlink" title="四.相似度具体计算方法"></a>四.相似度具体计算方法</h1><p>　　关键词匹配（TF-IDF、BM25）<br>　　浅层语义匹配（WordEmbed隐语义模型，用word2vec或glove词向量直接累加构造的句向量）<br>　　深层语义匹配模型（DSSM、CLSM、DeepMatch、MatchingFeatures、ARC-II、DeepMind）</p>
-<h1 id="五-相似度种类及其方法"><a href="#五-相似度种类及其方法" class="headerlink" title="五.相似度种类及其方法"></a>五.相似度种类及其方法</h1><h2 id="5-1-词语相似度计算"><a href="#5-1-词语相似度计算" class="headerlink" title="5.1 词语相似度计算"></a>5.1 词语相似度计算</h2><ul>
+<h1><span id="yi-chang-jing">一.场景</span></h1><p>　　在问句解析的时候中，我们经常要计算两个 query 的相似度，例如「推荐好看的电影」与「2016年好看的电影」。通过词向量按位累加的方式，得到这两个 query 的向量表示之后，可以利用 Cosine Similarity 来计算两者的相似度。对于较难的短文本-短文本语义匹配任务，则可以考虑引入有监督信号的训练数据并利用 Deep Structured Semantic Model (DSSM) 或 Convolutional Latent Semantic Model (CLSM) 这些更复杂的神经网络模型进行语义相关性的计算.</p>
+<h1><span id="er-gai-nian-bian-xi">二.概念辨析</span></h1><h1><span id="san-zhu-yao-fang-shi">三.主要方式:</span></h1><h2><span id="3-1-ji-yu-ci-yu-fang-fa">3.1 基于词语方法:</span></h2><p>　（１）特点：只考虑词语（或词语之间的关系）,不考虑句法<br>　（２）类型:<br>　　　　(1)问句间的词语或关键词公共个数;<br>　　　　(2)词语语义矩阵(词语之间的相似度);<br>　　　　(3)向量空间模型(词向量模型)+余弦距离;<br>　　　　(4)主题模型(LDA):在短文本(问句)上的效果不太理想，在短文本-短文本匹配任务中词向量的应用比主题模型更为普遍。LDA模型就是符合该主题的词有很多,通过计算文档中的这些词,然后求出该文档更倾向于哪(几)个主题/类型.<br>　　　　(5)word2vec–浅层的神经网络模型:适用于简单的语义关系–浅层语义,用这种模型训练出来的词向量进行向量之间的余弦值.<br>说明：以向量空间模型为代表／例子：<br>　　向量空间模型(词向量模型)+余弦距离=余弦相似性:将文本转换成向量,之后向量间求余弦值.<br>　　涉及到的技术:wordEbeding技术,word2Vec模型构建,词典构建,特征词汇表的构建;<br>　　工具包:HANLP,FNLP,StardNLP.</p>
+<h2><span id="3-2-ji-yu-ju-fa-te-zheng-de-fang-fa">3.2 基于句法特征的方法</span></h2><p>　　问句的意思不仅仅有其词语组成，还与词语间的结构有关。基于句法的方法在词语语义方法的基础上，引入了句法特征，从句法特征角度考虑对应句法成分间的词语相似度，进而衡量句子间的相似度。<br>　　技术：句法分析，规则建立（Drool规则推理引擎）；<br>　　工具包：HANLP,FNLP,StardNLP之类的的句法分析器；</p>
+<h2><span id="3-3-ji-yu-shen-du-xue-xi-de-fang-fa">3.3 基于深度学习的方法</span></h2><p>　　技术：深层语义匹配模型（DSSM、CLSM、DeepMatch、MatchingFeatures、ARC-II、DeepMind，具体依次参考下面的Reference）<br>　　工具包：matchzoo（ ①DSSM；②CDSSM；③ARC-I；④ARC-II；⑤MV-LSTM；⑥DRMM；⑦K-NRM；⑧CONV-KNRM；⑨DRMM-TKS；⑩BiMPM），allenNLP（ESIM），SPM_toolkit（DecAtt、ESIM、PWIM、SSE）<br>　　具体参考：<a href="http://www.cnblogs.com/d0main/p/9462947.html" target="_blank" rel="noopener">自然语言推断(NLI)、文本相似度相关开源项目推荐(Pytorch 实现)</a></p>
+<h2><span id="3-4-jie-lun">3.4 结论</span></h2><p>　　只有融合了深度学习，语言逻辑，向量建模，规则，问答才能真正强大起来。而不是单单只靠某一某型就可以完全搞定。在query的过程中不断施加约束，或者说是action会有多个，我们可以从中选择出与quesion相似度得分最高的那个action作为最优的action,如此不断地施加约束，缩小范围，得到最终的结果。</p>
+<h1><span id="si-xiang-si-du-ju-ti-ji-suan-fang-fa">四.相似度具体计算方法</span></h1><p>　　关键词匹配（TF-IDF、BM25）<br>　　浅层语义匹配（WordEmbed隐语义模型，用word2vec或glove词向量直接累加构造的句向量）<br>　　深层语义匹配模型（DSSM、CLSM、DeepMatch、MatchingFeatures、ARC-II、DeepMind）</p>
+<h1><span id="wu-xiang-si-du-chong-lei-ji-qi-fang-fa">五.相似度种类及其方法</span></h1><h2><span id="5-1-ci-yu-xiang-si-du-ji-suan">5.1 词语相似度计算</span></h2><ul>
 <li>词林编码法相似度</li>
 <li>汉语语义法相似度</li>
 <li>知网词语相似度</li>
-<li>字面编辑距离法<h2 id="5-2-短语相似度计算"><a href="#5-2-短语相似度计算" class="headerlink" title="5.2 短语相似度计算"></a>5.2 短语相似度计算</h2></li>
-<li>简单短语相似度<h2 id="5-3-句子相似度计算"><a href="#5-3-句子相似度计算" class="headerlink" title="5.3 句子相似度计算"></a>5.3 句子相似度计算</h2></li>
+<li>字面编辑距离法<h2><span id="5-2-duan-yu-xiang-si-du-ji-suan">5.2 短语相似度计算</span></h2></li>
+<li>简单短语相似度<h2><span id="5-3-ju-zi-xiang-si-du-ji-suan">5.3 句子相似度计算</span></h2></li>
 <li>词性和词序结合法</li>
 <li>编辑距离算法</li>
 <li>Gregor编辑距离法</li>
-<li>优化编辑距离法<h2 id="5-4-文本相似度计算"><a href="#5-4-文本相似度计算" class="headerlink" title="5.4 文本相似度计算"></a>5.4 文本相似度计算</h2></li>
+<li>优化编辑距离法<h2><span id="5-4-wen-ben-xiang-si-du-ji-suan">5.4 文本相似度计算</span></h2></li>
 <li>余弦相似度</li>
 <li>编辑距离算法</li>
 <li>欧几里得距离</li>
@@ -295,8 +321,8 @@
 <li>Jaro–Winkler距离</li>
 <li>曼哈顿距离</li>
 <li>SimHash + 汉明距离</li>
-<li>Sørensen–Dice系数<h2 id="5-5-近似词"><a href="#5-5-近似词" class="headerlink" title="5.5 近似词"></a>5.5 近似词</h2></li>
-<li>word2vec工具包(神经网络模型)<h1 id="六-向量空间-词向量模型与余弦相似性通俗解释"><a href="#六-向量空间-词向量模型与余弦相似性通俗解释" class="headerlink" title="六.向量空间/词向量模型与余弦相似性通俗解释"></a>六.向量空间/词向量模型与余弦相似性通俗解释</h1>以问句相似性为例:<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句子<span class="keyword">A</span>：我喜欢看电视，不喜欢看电影。</span><br><span class="line">句子B：我不喜欢看电视，也不喜欢看电影。</span><br></pre></td></tr></table></figure>
+<li>Sørensen–Dice系数<h2><span id="5-5-jin-si-ci">5.5 近似词</span></h2></li>
+<li>word2vec工具包(神经网络模型)<h1><span id="liu-xiang-liang-kong-jian-ci-xiang-liang-mo-xing-yu-yu-xian-xiang-si-xing-tong-su-jie-shi">六.向量空间/词向量模型与余弦相似性通俗解释</span></h1>以问句相似性为例:<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句子<span class="keyword">A</span>：我喜欢看电视，不喜欢看电影。</span><br><span class="line">句子B：我不喜欢看电视，也不喜欢看电影。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>第一步，分词。<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句子A：我<span class="regexp">/喜欢/</span>看<span class="regexp">/电视，不/</span>喜欢<span class="regexp">/看/</span>电影。</span><br><span class="line">句子B：我<span class="regexp">/不/</span>喜欢<span class="regexp">/看/</span>电视，也<span class="regexp">/不/</span>喜欢<span class="regexp">/看/</span>电影。</span><br></pre></td></tr></table></figure></p>
@@ -304,7 +330,7 @@
 <p>第三步，计算词频。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句子A：我 <span class="number">1</span>，喜欢 <span class="number">2</span>，看 <span class="number">2</span>，电视 <span class="number">1</span>，电影 <span class="number">1</span>，不 <span class="number">1</span>，也 <span class="number">0</span>。</span><br><span class="line">句子B：我 <span class="number">1</span>，喜欢 <span class="number">2</span>，看 <span class="number">2</span>，电视 <span class="number">1</span>，电影 <span class="number">1</span>，不 <span class="number">2</span>，也 <span class="number">1</span>。</span><br></pre></td></tr></table></figure></p>
 <p>第四步，写出词频向量。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句子A：[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">句子B：[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure></p>
 <p>　　到这里，问题就变成了如何计算这两个向量的相似程度,<br><img src="http://www.ruanyifeng.com/blogimg/asset/201303/bg2013032008.png" alt=""><br>　　说明：”余弦相似度”是一种非常有用的算法，值越大就表示越相似,只要是计算两个向量的相似程度，都可以采用它．<br>　　参考：<a href="http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html" target="_blank" rel="noopener">TF-IDF与余弦相似性的应用（二）：找出相似文章</a></p>
-<h1 id="七-关键词提取"><a href="#七-关键词提取" class="headerlink" title="七.关键词提取"></a>七.关键词提取</h1><p>　　（１）TF-IDF:提取文中的关键词：词频乘以权重。<br>　　（２）”词频”（Term Frequency，缩写为TF）就是词在文中出现的次数或者百分比求得方法如下图：<br><img src="http://www.ruanyifeng.com/blogimg/asset/201303/bg2013031503.png" alt="词频计算"><br>　　（３）权重即IDF（”逆文档频率”（Inverse Document Frequency，缩写为IDF））就是对应词的权重，其设置原则就是：修饰词、停用词、常见词、非常见词的权重越来越大，求得方法如下图：<br><img src="http://www.ruanyifeng.com/blogimg/asset/201303/bg2013031506.png" alt="IDF权重"><br>　　（４）参考：<a href="http://www.ruanyifeng.com/blog/2013/03/tf-idf.html" target="_blank" rel="noopener">TF-IDF之关键词提取</a></p>
+<h1><span id="qi-guan-jian-ci-ti-qu">七.关键词提取</span></h1><p>　　（１）TF-IDF:提取文中的关键词：词频乘以权重。<br>　　（２）”词频”（Term Frequency，缩写为TF）就是词在文中出现的次数或者百分比求得方法如下图：<br><img src="http://www.ruanyifeng.com/blogimg/asset/201303/bg2013031503.png" alt="词频计算"><br>　　（３）权重即IDF（”逆文档频率”（Inverse Document Frequency，缩写为IDF））就是对应词的权重，其设置原则就是：修饰词、停用词、常见词、非常见词的权重越来越大，求得方法如下图：<br><img src="http://www.ruanyifeng.com/blogimg/asset/201303/bg2013031506.png" alt="IDF权重"><br>　　（４）参考：<a href="http://www.ruanyifeng.com/blog/2013/03/tf-idf.html" target="_blank" rel="noopener">TF-IDF之关键词提取</a></p>
 
         
         </div>
@@ -524,7 +550,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

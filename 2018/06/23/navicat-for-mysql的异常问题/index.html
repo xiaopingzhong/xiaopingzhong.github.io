@@ -267,19 +267,32 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲述了navicat在执行操作数据库的时候,所遇到的一些问题,导出问题,合并问题,语法问题.<a id="more"></a></p>
+            <p>本文主要讲述了navicat在执行操作数据库的时候,所遇到的一些问题,导出问题,合并问题,语法问题.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#1-dao-chu-de-wen-jian-yi-jing-cun-zai-jiu-hui-dao-zhi-hou-mian-sql-yu-ju-bu-neng-zhi-xing">1.导出的文件已经存在,就会导致后面SQL语句不能执行.</a></li>
+<li><a href="#2-chu-xian-sql-yu-ju-yu-fa-wen-ti">2.出现sql语句语法问题</a><ul>
+<li><a href="#3-select-de-shu-xing-xing-shi-wen-ti">3.select的属性形式问题</a></li>
+</ul>
+</li>
+<li><a href="#4-zai-he-bing-liang-zhang-biao-he-bing-shi-bai">4.在合并两张表合并失败</a></li>
+<li><a href="#5-navicat-dao-ru-sql-wen-jian-cheng-gong-dan-shi-mei-you-biao">5.navicat导入sql文件成功但是没有表</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="1-导出的文件已经存在-就会导致后面SQL语句不能执行"><a href="#1-导出的文件已经存在-就会导致后面SQL语句不能执行" class="headerlink" title="1.导出的文件已经存在,就会导致后面SQL语句不能执行."></a>1.导出的文件已经存在,就会导致后面SQL语句不能执行.</h2><p>如图所示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085037.jpg" alt=""><br>解决办法:</p>
+<h2><span id="1-dao-chu-de-wen-jian-yi-jing-cun-zai-jiu-hui-dao-zhi-hou-mian-sql-yu-ju-bu-neng-zhi-xing">1.导出的文件已经存在,就会导致后面SQL语句不能执行.</span></h2><p>如图所示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085037.jpg" alt=""><br>解决办法:</p>
 <ul>
 <li>需要导出的数据不是很多的,可以单独运行,选定之后,ctrl+shift+R就可以解决</li>
 <li>可以删除之前已经导出的文件,之后整体运行 ctrl+R即可</li>
 </ul>
-<h2 id="2-出现sql语句语法问题"><a href="#2-出现sql语句语法问题" class="headerlink" title="2.出现sql语句语法问题"></a>2.出现sql语句语法问题</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085038.jpg" alt="出现sql语句的语法问题"><br>  解决方法:</p>
+<h2><span id="2-chu-xian-sql-yu-ju-yu-fa-wen-ti">2.出现sql语句语法问题</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085038.jpg" alt="出现sql语句的语法问题"><br>  解决方法:</p>
 <ul>
 <li><p>去掉<code>when person_name is  then person_english_name</code>中的is,因为is常跟null,因此去掉之后就表示person_name存在</p>
-<h1 id="3-select的属性形式问题"><a href="#3-select的属性形式问题" class="headerlink" title="3.select的属性形式问题"></a>3.select的属性形式问题</h1></li>
+<h1><span id="3-select-de-shu-xing-xing-shi-wen-ti">3.select的属性形式问题</span></h1></li>
 <li><p>如果是一个新表(person_),那么在select的时候同时完成了新建属性与选择属性的功能</p>
 </li>
 <li>如果是旧表(person),那么属性名应该是变量名,而是用字符串的形式,否则就会将该字符串直接赋值给对应新表的属性名.错误情况如下</li>
@@ -287,13 +300,13 @@
 </ul>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085040.jpg" alt=""></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导出演员person的信息 == 如果有中文名要中文名，如果没有取英文名  </span></span><br><span class="line"><span class="keyword">SELECT</span> *  <span class="keyword">INTO</span> <span class="keyword">OUTFILE</span> <span class="string">'C:/ProgramData/MySQL/MySQL Server 5.7/Uploads/person.csv'</span>  </span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span>     </span><br><span class="line"><span class="keyword">OPTIONALLY</span> <span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span>     </span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">select</span> <span class="string">'pid'</span>,<span class="string">'birth'</span>,<span class="string">'death'</span>,<span class="string">'name'</span>,<span class="string">'biography'</span>,<span class="string">'birthplace'</span> <span class="keyword">union</span>   </span><br><span class="line"><span class="keyword">select</span> person_id,person_birth_day,person_death_day,<span class="keyword">case</span>  <span class="keyword">when</span> person_name <span class="keyword">is</span>  <span class="keyword">then</span> person_english_name <span class="keyword">else</span> person_name  <span class="keyword">end</span>   </span><br><span class="line">  <span class="keyword">as</span> <span class="keyword">name</span>,person_biography,person_birth_place <span class="keyword">from</span> person) person_;</span><br></pre></td></tr></table></figure>
-<h2 id="4-在合并两张表合并失败"><a href="#4-在合并两张表合并失败" class="headerlink" title="4.在合并两张表合并失败"></a>4.在合并两张表合并失败</h2><p>   原因有:</p>
+<h2><span id="4-zai-he-bing-liang-zhang-biao-he-bing-shi-bai">4.在合并两张表合并失败</span></h2><p>   原因有:</p>
 <ul>
 <li>可能是所选择的表名有错,就是from table_name</li>
 <li>或者旧表的属性名写错了</li>
 </ul>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85041.jpg" alt="合并两张表失败"></p>
-<h2 id="5-navicat导入sql文件成功但是没有表"><a href="#5-navicat导入sql文件成功但是没有表" class="headerlink" title="5.navicat导入sql文件成功但是没有表"></a>5.navicat导入sql文件成功但是没有表</h2><p> 有如下原因:</p>
+<h2><span id="5-navicat-dao-ru-sql-wen-jian-cheng-gong-dan-shi-mei-you-biao">5.navicat导入sql文件成功但是没有表</span></h2><p> 有如下原因:</p>
 <ul>
 <li>sql语句中本身就是有创建数据库的,可能需要创建的与需要导入的数据库的名称不一致,所以只需要全部替换sql语句的数据库名称就可以</li>
 <li>之后还是不能导入的话,直接将sql文件中内容复制到新建查询中,通过直接运行创建一个数据库.</li>
@@ -519,7 +532,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

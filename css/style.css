@@ -118,7 +118,7 @@ body,
 body {
   color: #565a5f;
   background: #f5f8f9;
-  font: 19px "方正宋刻本秀楷繁体", "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font: 19px STSong, "Source Code Pro", monospace, Consolas, "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 a {
@@ -580,7 +580,7 @@ pre {
   line-height: 2.2em;
   outline: none !important;
   background: none !important;
-  font: 19px "方正宋刻本秀楷繁体", "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font: 19px STSong, "Source Code Pro", monospace, Consolas, "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
   border: 1px solid #eceff2 !important;
 }
 .search-form-input:focus,
@@ -1012,7 +1012,7 @@ a.article-title:hover {
 }
 .article-entry blockquote {
   position: static;
-  font-family: "方正宋刻本秀楷繁体", Georgia, "Times New Roman", "Microsoft Yahei", serif;
+  font-family: STSong, "Source Code Pro", "Helvetica Neue", Helvetica, Tahoma, "方正宋刻本秀楷繁体", STSong, Consolas, "Times New Roman", "Microsoft Yahei", serif;
   font-size: 1.1em;
   margin: 0 -20px;
   padding: 10px 20px 10px 54px;
@@ -1033,7 +1033,7 @@ a.article-title:hover {
 .article-entry blockquote footer {
   font-size: 19px;
   margin: 2.2em 0;
-  font-family: "方正宋刻本秀楷繁体", "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-family: STSong, "Source Code Pro", monospace, Consolas, "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -1231,7 +1231,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px "方正宋刻本秀楷繁体", "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font: 14px STSong, "Source Code Pro", monospace, Consolas, "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
   padding: 0 10px;
   color: #565a5f;
   outline: none;

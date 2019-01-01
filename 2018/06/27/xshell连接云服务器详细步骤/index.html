@@ -267,15 +267,33 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲述了服务器的配置,主要使用了xshell与xftp这两款工具.配置过程出现比较多的错误,为此特地编写一个文章,便于回顾,避免再次入坑<a id="more"></a></p>
+            <p>本文主要讲述了服务器的配置,主要使用了xshell与xftp这两款工具.配置过程出现比较多的错误,为此特地编写一个文章,便于回顾,避免再次入坑<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-fu-wu-qi-bu-fen">一.服务器部分</a><ul>
+<li><a href="#1-1-fu-wu-qi-gou-mai">1.1服务器购买</a></li>
+<li><a href="#1-2-fu-wu-qi-pei-zhi">1.2服务器配置</a></li>
+<li><a href="#1-2-1-tian-jia-mi-yao">1.2.1添加密钥</a></li>
+<li><a href="#1-2-2-yong-hu-mi-ma-xiu-gai-ke-xuan">1.2.2用户密码修改[可选]</a></li>
+</ul>
+</li>
+<li><a href="#er-xhsell-bu-fen">二.xhsell部分</a><ul>
+<li><a href="#1-1-ruan-jian-xia-zai">1.1软件下载</a></li>
+<li><a href="#1-2-ruan-jian-pei-zhi">1.2软件配置</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-服务器部分"><a href="#一-服务器部分" class="headerlink" title="一.服务器部分"></a>一.服务器部分</h2><h3 id="1-1服务器购买"><a href="#1-1服务器购买" class="headerlink" title="1.1服务器购买"></a>1.1服务器购买</h3><p>　　服务器,假如是学生,直接购买学生套餐,操作系统选centos7.4 64位就可以,具体选择如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085322.jpg" alt="选购"><br>完成购买之后在,控制台可以看到,如图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085323.jpg" alt="购买成功"></p>
-<h3 id="1-2服务器配置"><a href="#1-2服务器配置" class="headerlink" title="1.2服务器配置"></a>1.2服务器配置</h3><h3 id="1-2-1添加密钥"><a href="#1-2-1添加密钥" class="headerlink" title="1.2.1添加密钥"></a>1.2.1添加密钥</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085325.jpg" alt="进入添加密钥界面"><br>　　选择添加,随机命名就可以,这个是用来之后xshell链接云服务器的.之后下载,一般放到对应的xshell的安装根目录就可以.没有点击下载,密钥就不会添加.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085326.jpg" alt="下载密钥"><br>点击云主机界面的登录:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085327.jpg" alt="登录centos云服务器"><br>得到如下界面:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085331.jpg" alt="登录界面"><br>　　注意:由于创建了密钥,所以密钥的优先级高于密码,所以如果选择密码登录,有时会出错,提示要使用密钥登录.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85332.jpg" alt="密钥登录"><br>　　注意上图,用户名是root,不是云主机上的那个ID,最后得到成功登录的界面:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085332.jpg" alt="成功登录"></p>
-<h3 id="1-2-2用户密码修改-可选"><a href="#1-2-2用户密码修改-可选" class="headerlink" title="1.2.2用户密码修改[可选]"></a>1.2.2用户密码修改[可选]</h3><p>由于初始密码,在你购买成功之后,会发到你相应的邮箱中,如果不放心,可以手动修改.方式就是:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085333.jpg" alt="重置密码"></p>
-<h2 id="二-xhsell部分"><a href="#二-xhsell部分" class="headerlink" title="二.xhsell部分"></a>二.xhsell部分</h2><h3 id="1-1软件下载"><a href="#1-1软件下载" class="headerlink" title="1.1软件下载"></a>1.1软件下载</h3><p>　　安装xshell6与xftp,最后安装得到如下界面,:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085334.jpg" alt="xshell"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085335.jpg" alt="xftp5"></p>
-<h3 id="1-2软件配置"><a href="#1-2软件配置" class="headerlink" title="1.2软件配置"></a>1.2软件配置</h3><p>1.xshell配置:<br>(1)配置连接主机地址<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085337.jpg" alt="配置连接"><br>(2)配置身份验证<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085338.jpg" alt="配置身份验证"><br>　　注意:登录方法一定是用公钥来登录的,用户名是root,这个一定注意,密码可以不用填写,直接点击连接即可,出现下述界面</p>
+<h2><span id="yi-fu-wu-qi-bu-fen">一.服务器部分</span></h2><h3><span id="1-1-fu-wu-qi-gou-mai">1.1服务器购买</span></h3><p>　　服务器,假如是学生,直接购买学生套餐,操作系统选centos7.4 64位就可以,具体选择如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085322.jpg" alt="选购"><br>完成购买之后在,控制台可以看到,如图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085323.jpg" alt="购买成功"></p>
+<h3><span id="1-2-fu-wu-qi-pei-zhi">1.2服务器配置</span></h3><h3><span id="1-2-1-tian-jia-mi-yao">1.2.1添加密钥</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085325.jpg" alt="进入添加密钥界面"><br>　　选择添加,随机命名就可以,这个是用来之后xshell链接云服务器的.之后下载,一般放到对应的xshell的安装根目录就可以.没有点击下载,密钥就不会添加.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085326.jpg" alt="下载密钥"><br>点击云主机界面的登录:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085327.jpg" alt="登录centos云服务器"><br>得到如下界面:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085331.jpg" alt="登录界面"><br>　　注意:由于创建了密钥,所以密钥的优先级高于密码,所以如果选择密码登录,有时会出错,提示要使用密钥登录.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85332.jpg" alt="密钥登录"><br>　　注意上图,用户名是root,不是云主机上的那个ID,最后得到成功登录的界面:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085332.jpg" alt="成功登录"></p>
+<h3><span id="1-2-2-yong-hu-mi-ma-xiu-gai-ke-xuan">1.2.2用户密码修改[可选]</span></h3><p>由于初始密码,在你购买成功之后,会发到你相应的邮箱中,如果不放心,可以手动修改.方式就是:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085333.jpg" alt="重置密码"></p>
+<h2><span id="er-xhsell-bu-fen">二.xhsell部分</span></h2><h3><span id="1-1-ruan-jian-xia-zai">1.1软件下载</span></h3><p>　　安装xshell6与xftp,最后安装得到如下界面,:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085334.jpg" alt="xshell"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085335.jpg" alt="xftp5"></p>
+<h3><span id="1-2-ruan-jian-pei-zhi">1.2软件配置</span></h3><p>1.xshell配置:<br>(1)配置连接主机地址<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085337.jpg" alt="配置连接"><br>(2)配置身份验证<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085338.jpg" alt="配置身份验证"><br>　　注意:登录方法一定是用公钥来登录的,用户名是root,这个一定注意,密码可以不用填写,直接点击连接即可,出现下述界面</p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085339.jpg" alt="登录成功界面"><br>否则会出现:<br>　　所选择的用户秘钥未在远程主机上注册,这个怪问题<br>2.xftp配置:<br>　　xftp主要为了方便管理云服务器上的文件<br>(1)登录界面:<br>　　基于之前的基础,先点击xshell上的文件夹,具体位置见下图<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085340.jpg" alt=""><br>之后出现一个配置界面.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085341.jpg" alt="xftp登录"><br>　　注意红框的部分,还是以公钥进行登录.选择对应的文件.<br>　　最后在弹出的页面当中点击接受性保存即可.<br>得到链接成功的界面:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085342.jpg" alt=""></p>
 
         
@@ -496,7 +514,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

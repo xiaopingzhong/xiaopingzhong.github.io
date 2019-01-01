@@ -267,20 +267,48 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　这篇主要是讲述本人在使用IDEA遇到的一些问题及其解决方法,以便节省开发时间,该文参考了许多网友的方法、经验,于此,对其表达感谢,这个系列会不定时更新.<a id="more"></a></p>
+            <p>这篇主要是讲述本人在使用IDEA遇到的一些问题及其解决方法,以便节省开发时间,该文参考了许多网友的方法、经验,于此,对其表达感谢,这个系列会不定时更新.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#1-idea2018-2-1-de-po-jie-fang-fa">1.IDEA2018.2.1的破解方法:</a></li>
+<li><a href="#2-idea-pei-zhi-maven">2.IDEA配置MAVEN</a></li>
+<li><a href="#3-idea-dai-ma-zhu-shi-xie-ti">3.IDEA代码注释斜体</a></li>
+<li><a href="#4-idea-de-maven-geng-xin">4.IDEA的MAVEN更新</a></li>
+<li><a href="#5-idea-jin-xing-http-ce-shi">5.IDEA进行http测试</a></li>
+<li><a href="#6-eclipse-xiang-mu-dao-ru-dao-idea-zhi-zhong">6.Eclipse项目导入到IDEA之中</a></li>
+<li><a href="#7-idea-xiang-mu-jin-xing-da-bao">7.IDEA项目进行打包</a></li>
+<li><a href="#8-idea-kuai-jie-jian">8.IDEA快捷键</a></li>
+<li><a href="#9-xiao-ji-qiao">9.小技巧</a><ul>
+<li><a href="#9-1-dai-ma-yan-se">9.1代码颜色</a></li>
+<li><a href="#9-2-guang-biao-wei-zhi">9.2光标位置</a></li>
+<li><a href="#9-3-fang-fa-tiao-zhuan">9.3 方法跳转</a></li>
+<li><a href="#9-4-guang-biao-yu-gua-hao">9.4 光标与括号</a></li>
+</ul>
+</li>
+<li><a href="#10-pei-zhi-zi-ding-yi-liu-lan-qi">10.配置自定义浏览器</a></li>
+<li><a href="#11-jquery-de-yin-ru">11.jQuery的引入</a></li>
+<li><a href="#12-shou-dong-tian-jia-jar-dao-ben-di-cang-ku">12.手动添加jar到本地仓库</a></li>
+<li><a href="#13-kuai-su-chuang-jian-ji-yu-mou-ge-jie-kou-de-lei">13.快速创建基于某个接口的类</a></li>
+<li><a href="#14-kuai-su-jin-xing-cuo-wu-ding-wei">14.快速进行错误定位:</a></li>
+<li><a href="#15-xiao-chu-li-shi-wen-jian">15.消除历史文件</a></li>
+<li><a href="#16-lei-wen-jian-jie-gou-cha-kan">16.类文件结构查看:</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="1-IDEA2018-2-1的破解方法"><a href="#1-IDEA2018-2-1的破解方法" class="headerlink" title="1.IDEA2018.2.1的破解方法:"></a>1.IDEA2018.2.1的破解方法:</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>www.ddooo.com<span class="regexp">/softdown/</span><span class="number">127543</span>.htm<span class="comment">#dltab</span></span><br></pre></td></tr></table></figure>
+<h1><span id="1-idea2018-2-1-de-po-jie-fang-fa">1.IDEA2018.2.1的破解方法:</span></h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>www.ddooo.com<span class="regexp">/softdown/</span><span class="number">127543</span>.htm<span class="comment">#dltab</span></span><br></pre></td></tr></table></figure>
 <p>重要步骤:<br>　　(1)先将补丁包放到安装目录的bin目录下;<br>　　(2)之后用记事本打开“idea64.exe.vmoptions”和“idea.exe.vmoptions”这两个文件，再后面添加破解文件的路径:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-javaagent</span><span class="selector-pseudo">:D</span>:\<span class="selector-tag">JetBrains</span>\<span class="selector-tag">IntelliJ</span> <span class="selector-tag">IDEA</span> 2018<span class="selector-class">.2</span><span class="selector-class">.1</span>\<span class="selector-tag">bin</span>\<span class="selector-tag">JetbrainsCrack-3</span><span class="selector-class">.1-release-enc</span><span class="selector-class">.jar</span></span><br></pre></td></tr></table></figure></p>
 <p>　　(3)生成快捷方式:之后生成”idea64.exe”的快捷方式,(重点),最好不直接用安装时生成的快捷方式.<br>　　(4)使用激活码激活:验证激活的时候,使用激活码:<br>   上述安装包及其破解文件,在文件夹中有.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/i2h8LmlGJJ.png" alt="破解"></p>
-<h1 id="2-IDEA配置MAVEN"><a href="#2-IDEA配置MAVEN" class="headerlink" title="2.IDEA配置MAVEN"></a>2.IDEA配置MAVEN</h1><p>主要步骤:<br>　　(1)设置MAVEN版本及其本地仓库(setting.xml)<br>　　(2)设置MAVEN镜像(配置了本地apache-maven setting.xml中的软件源)<br>参考文献:<br><a href="https://www.cnblogs.com/phpdragon/p/7216626.html" target="_blank" rel="noopener">IntellIJ IDEA 配置 Maven 以及 修改 默认 Repository</a><br><a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="noopener">下载地址</a></p>
-<h1 id="3-IDEA代码注释斜体"><a href="#3-IDEA代码注释斜体" class="headerlink" title="3.IDEA代码注释斜体"></a>3.IDEA代码注释斜体</h1><p><a href="https://blog.csdn.net/u014028392/article/details/78869047" target="_blank" rel="noopener">idea多行注释如何取消文档注释 的斜体</a></p>
-<h1 id="4-IDEA的MAVEN更新"><a href="#4-IDEA的MAVEN更新" class="headerlink" title="4.IDEA的MAVEN更新"></a>4.IDEA的MAVEN更新</h1><p><a href="https://blog.csdn.net/ljqueen/article/details/78543494" target="_blank" rel="noopener">idea更新maven依赖包</a><br>　一般是采用第一种方法比较快速</p>
-<h1 id="5-IDEA进行http测试"><a href="#5-IDEA进行http测试" class="headerlink" title="5.IDEA进行http测试"></a>5.IDEA进行http测试</h1><p><a href="https://jingyan.baidu.com/article/ca41422f0bfd8e1eae99ed31.html" target="_blank" rel="noopener">idea中使用restclient测试接口发送http请求</a></p>
-<h1 id="6-Eclipse项目导入到IDEA之中"><a href="#6-Eclipse项目导入到IDEA之中" class="headerlink" title="6.Eclipse项目导入到IDEA之中"></a>6.Eclipse项目导入到IDEA之中</h1><p><a href="https://www.cnblogs.com/lindp/p/4484390.html" target="_blank" rel="noopener">【Intellij IDEA】eclipse项目导入</a></p>
-<h1 id="7-IDEA项目进行打包"><a href="#7-IDEA项目进行打包" class="headerlink" title="7.IDEA项目进行打包"></a>7.IDEA项目进行打包</h1><p><a href="https://www.cnblogs.com/a8457013/p/7811939.html" target="_blank" rel="noopener">idea将maven项目打包成war包的方式，以及使用war包</a></p>
-<h1 id="8-IDEA快捷键"><a href="#8-IDEA快捷键" class="headerlink" title="8.IDEA快捷键"></a>8.IDEA快捷键</h1><table>
+<h1><span id="2-idea-pei-zhi-maven">2.IDEA配置MAVEN</span></h1><p>主要步骤:<br>　　(1)设置MAVEN版本及其本地仓库(setting.xml)<br>　　(2)设置MAVEN镜像(配置了本地apache-maven setting.xml中的软件源)<br>参考文献:<br><a href="https://www.cnblogs.com/phpdragon/p/7216626.html" target="_blank" rel="noopener">IntellIJ IDEA 配置 Maven 以及 修改 默认 Repository</a><br><a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="noopener">下载地址</a></p>
+<h1><span id="3-idea-dai-ma-zhu-shi-xie-ti">3.IDEA代码注释斜体</span></h1><p><a href="https://blog.csdn.net/u014028392/article/details/78869047" target="_blank" rel="noopener">idea多行注释如何取消文档注释 的斜体</a></p>
+<h1><span id="4-idea-de-maven-geng-xin">4.IDEA的MAVEN更新</span></h1><p><a href="https://blog.csdn.net/ljqueen/article/details/78543494" target="_blank" rel="noopener">idea更新maven依赖包</a><br>　一般是采用第一种方法比较快速</p>
+<h1><span id="5-idea-jin-xing-http-ce-shi">5.IDEA进行http测试</span></h1><p><a href="https://jingyan.baidu.com/article/ca41422f0bfd8e1eae99ed31.html" target="_blank" rel="noopener">idea中使用restclient测试接口发送http请求</a></p>
+<h1><span id="6-eclipse-xiang-mu-dao-ru-dao-idea-zhi-zhong">6.Eclipse项目导入到IDEA之中</span></h1><p><a href="https://www.cnblogs.com/lindp/p/4484390.html" target="_blank" rel="noopener">【Intellij IDEA】eclipse项目导入</a></p>
+<h1><span id="7-idea-xiang-mu-jin-xing-da-bao">7.IDEA项目进行打包</span></h1><p><a href="https://www.cnblogs.com/a8457013/p/7811939.html" target="_blank" rel="noopener">idea将maven项目打包成war包的方式，以及使用war包</a></p>
+<h1><span id="8-idea-kuai-jie-jian">8.IDEA快捷键</span></h1><table>
 <thead>
 <tr>
 <th>要求</th>
@@ -366,20 +394,20 @@
 </tbody>
 </table>
 <p>代码调试参考:问句向量化那节</p>
-<h1 id="9-小技巧"><a href="#9-小技巧" class="headerlink" title="9.小技巧"></a>9.小技巧</h1><h2 id="9-1代码颜色"><a href="#9-1代码颜色" class="headerlink" title="9.1代码颜色"></a>9.1代码颜色</h2><p>　　❋红色代码:说明字母拼写错误;<br>　　❋灰色代码:说明尚未使用;<br>　　❋波浪线:说明字符不符合规范,可以添加到字典当中.</p>
-<h2 id="9-2光标位置"><a href="#9-2光标位置" class="headerlink" title="9.2光标位置"></a>9.2光标位置</h2><p>　　　当一行代码假如没有分号,光标会缩进;</p>
-<h2 id="9-3-方法跳转"><a href="#9-3-方法跳转" class="headerlink" title="9.3 方法跳转"></a>9.3 方法跳转</h2><p>　　　连续点击跳转,会进行循环跳转</p>
-<h2 id="9-4-光标与括号"><a href="#9-4-光标与括号" class="headerlink" title="9.4 光标与括号"></a>9.4 光标与括号</h2><p>　　IDEA中,在引用某个方法的时候,如果该方法有参数,该软件会进入到括号内,没有的话则在括号外面.</p>
-<h1 id="10-配置自定义浏览器"><a href="#10-配置自定义浏览器" class="headerlink" title="10.配置自定义浏览器"></a>10.配置自定义浏览器</h1><hr>
+<h1><span id="9-xiao-ji-qiao">9.小技巧</span></h1><h2><span id="9-1-dai-ma-yan-se">9.1代码颜色</span></h2><p>　　❋红色代码:说明字母拼写错误;<br>　　❋灰色代码:说明尚未使用;<br>　　❋波浪线:说明字符不符合规范,可以添加到字典当中.</p>
+<h2><span id="9-2-guang-biao-wei-zhi">9.2光标位置</span></h2><p>　　　当一行代码假如没有分号,光标会缩进;</p>
+<h2><span id="9-3-fang-fa-tiao-zhuan">9.3 方法跳转</span></h2><p>　　　连续点击跳转,会进行循环跳转</p>
+<h2><span id="9-4-guang-biao-yu-gua-hao">9.4 光标与括号</span></h2><p>　　IDEA中,在引用某个方法的时候,如果该方法有参数,该软件会进入到括号内,没有的话则在括号外面.</p>
+<h1><span id="10-pei-zhi-zi-ding-yi-liu-lan-qi">10.配置自定义浏览器</span></h1><hr>
 <p><a href="https://blog.csdn.net/zhengzhi123456789/article/details/51226382" target="_blank" rel="noopener">Intellij IDear配置自定义浏览器预览效果</a></p>
 <hr>
-<h1 id="11-jQuery的引入"><a href="#11-jQuery的引入" class="headerlink" title="11.jQuery的引入"></a>11.jQuery的引入</h1><p><a href="https://www.jianshu.com/p/a1cc25da07b2" target="_blank" rel="noopener">Idea添加JQuery库及其说明文件</a><br>库文件需要自己下载:地址</p>
-<h1 id="12-手动添加jar到本地仓库"><a href="#12-手动添加jar到本地仓库" class="headerlink" title="12.手动添加jar到本地仓库"></a>12.手动添加jar到本地仓库</h1><p><a href="https://www.zhongxiaoping.cn/2018/10/10/%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0jar%E5%8C%85%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93/" target="_blank" rel="noopener">手动添加jar到本地仓库</a></p>
-<h1 id="13-快速创建基于某个接口的类"><a href="#13-快速创建基于某个接口的类" class="headerlink" title="13.快速创建基于某个接口的类"></a>13.快速创建基于某个接口的类</h1><p>基本步骤:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file -&gt;<span class="built_in"> settings </span>-&gt; Editor -&gt; Intentions -&gt; Declaration -&gt; Implement abstract class <span class="keyword">or</span> interface</span><br></pre></td></tr></table></figure></p>
+<h1><span id="11-jquery-de-yin-ru">11.jQuery的引入</span></h1><p><a href="https://www.jianshu.com/p/a1cc25da07b2" target="_blank" rel="noopener">Idea添加JQuery库及其说明文件</a><br>库文件需要自己下载:地址</p>
+<h1><span id="12-shou-dong-tian-jia-jar-dao-ben-di-cang-ku">12.手动添加jar到本地仓库</span></h1><p><a href="https://www.zhongxiaoping.cn/2018/10/10/%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0jar%E5%8C%85%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93/" target="_blank" rel="noopener">手动添加jar到本地仓库</a></p>
+<h1><span id="13-kuai-su-chuang-jian-ji-yu-mou-ge-jie-kou-de-lei">13.快速创建基于某个接口的类</span></h1><p>基本步骤:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file -&gt;<span class="built_in"> settings </span>-&gt; Editor -&gt; Intentions -&gt; Declaration -&gt; Implement abstract class <span class="keyword">or</span> interface</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113120436" alt="设置1"><br>用alt+enter实现:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/gm6gbfCb40.gif" alt="设置实现类"></p>
-<h1 id="14-快速进行错误定位"><a href="#14-快速进行错误定位" class="headerlink" title="14.快速进行错误定位:"></a>14.快速进行错误定位:</h1><p>错误分为:语法错误(编译之前,不能运行);逻辑错误:可以运行,结果不一样<br>快捷键:F2–&gt;下一个,shift+F2–&gt;上一个<br>右键点击感叹号图标会出现,以下两个选项:<br>　　(1)Go the high priority problems only 在优先级较高的错误间切换<br>　　(2)Go to next problem 永远跳向下一个错误和警告，不管优先级的问题<br>　　红线代表有错误的位置(主要是语法错误,).<br>　　错误的地方会有红杠线,点击红杠线,会跳转到的错误的文件(文件定位),之后可以使用F2进行定位(行内定位)<br>具体操作步骤如下图:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/FId3gKdEHj.gif" alt="IDEA错误定位"><br>具体参考:<a href="https://blog.csdn.net/Chen_anan/article/details/80911760" target="_blank" rel="noopener">Intellij IDEA_错误与调试</a></p>
-<h1 id="15-消除历史文件"><a href="#15-消除历史文件" class="headerlink" title="15.消除历史文件"></a>15.消除历史文件</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/D1aL3JhBEF.gif" alt="消除历史运行文件"></p>
-<h1 id="16-类文件结构查看"><a href="#16-类文件结构查看" class="headerlink" title="16.类文件结构查看:"></a>16.类文件结构查看:</h1><p>点击左下角:Structure,放在图标上,会有提示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/cjJe2hkbIl.png" alt="类文件结构"></p>
+<h1><span id="14-kuai-su-jin-xing-cuo-wu-ding-wei">14.快速进行错误定位:</span></h1><p>错误分为:语法错误(编译之前,不能运行);逻辑错误:可以运行,结果不一样<br>快捷键:F2–&gt;下一个,shift+F2–&gt;上一个<br>右键点击感叹号图标会出现,以下两个选项:<br>　　(1)Go the high priority problems only 在优先级较高的错误间切换<br>　　(2)Go to next problem 永远跳向下一个错误和警告，不管优先级的问题<br>　　红线代表有错误的位置(主要是语法错误,).<br>　　错误的地方会有红杠线,点击红杠线,会跳转到的错误的文件(文件定位),之后可以使用F2进行定位(行内定位)<br>具体操作步骤如下图:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/FId3gKdEHj.gif" alt="IDEA错误定位"><br>具体参考:<a href="https://blog.csdn.net/Chen_anan/article/details/80911760" target="_blank" rel="noopener">Intellij IDEA_错误与调试</a></p>
+<h1><span id="15-xiao-chu-li-shi-wen-jian">15.消除历史文件</span></h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/D1aL3JhBEF.gif" alt="消除历史运行文件"></p>
+<h1><span id="16-lei-wen-jian-jie-gou-cha-kan">16.类文件结构查看:</span></h1><p>点击左下角:Structure,放在图标上,会有提示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/cjJe2hkbIl.png" alt="类文件结构"></p>
 
         
         </div>
@@ -599,7 +627,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

@@ -267,21 +267,39 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要是介绍了基于数据的一些操作，主要有初始化，类型获取，长度测量等，其中对象数组，由于已经有人总结得很好，我就不必重复造轮子了．<a id="more"></a></p>
+            <p>本文主要是介绍了基于数据的一些操作，主要有初始化，类型获取，长度测量等，其中对象数组，由于已经有人总结得很好，我就不必重复造轮子了．<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-shu-zu-quan-bu-zhi-wei-0">一.数组全部置为0</a></li>
+<li><a href="#er-java-dui-xiang-shu-zu-de-shi-yong">二.java对象数组的使用</a></li>
+<li><a href="#san-dui-xiang-lei-xing-chu-shi-hua">三.对象类型初始化</a></li>
+<li><a href="#si-lei-xing-huo-qu">四.类型获取</a></li>
+<li><a href="#wu-shu-ju-de-chang-du-ce-liang">五.数据的长度测量</a><ul>
+<li><a href="#5-1-length">5.1 length</a></li>
+<li><a href="#5-2-length">5.2 length()</a></li>
+<li><a href="#5-3-size">5.3 size()</a></li>
+</ul>
+</li>
+<li><a href="#liu-double-yu-double">六.double[]与Double[]</a></li>
+<li><a href="#qi-qi-ta">七.其他</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-数组全部置为0"><a href="#一-数组全部置为0" class="headerlink" title="一.数组全部置为0"></a>一.数组全部置为0</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span>[] <span class="built_in">vector</span> = <span class="keyword">new</span> <span class="keyword">double</span>[voc.size()];</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 向量初始化--对应特征词汇表,防止其他方式出现异常</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="built_in">vector</span>.length ; i++) &#123;</span><br><span class="line">            <span class="built_in">vector</span>[i]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="二-java对象数组的使用"><a href="#二-java对象数组的使用" class="headerlink" title="二.java对象数组的使用"></a>二.java对象数组的使用</h2><p>　　对象数组与基本类型数组在运用上几乎一模一样，唯一差别在于，前者数组中的元素是引用地址，后者的则为直接数据；<br>例如：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Person</span> <span class="comment">[]</span> staff=new <span class="keyword">Person</span><span class="comment">[100]</span>;</span><br><span class="line">int <span class="comment">[]</span> num=new int<span class="comment">[10]</span>;</span><br></pre></td></tr></table></figure></p>
+<h2><span id="yi-shu-zu-quan-bu-zhi-wei-0">一.数组全部置为0</span></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span>[] <span class="built_in">vector</span> = <span class="keyword">new</span> <span class="keyword">double</span>[voc.size()];</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 向量初始化--对应特征词汇表,防止其他方式出现异常</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="built_in">vector</span>.length ; i++) &#123;</span><br><span class="line">            <span class="built_in">vector</span>[i]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="er-java-dui-xiang-shu-zu-de-shi-yong">二.java对象数组的使用</span></h2><p>　　对象数组与基本类型数组在运用上几乎一模一样，唯一差别在于，前者数组中的元素是引用地址，后者的则为直接数据；<br>例如：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Person</span> <span class="comment">[]</span> staff=new <span class="keyword">Person</span><span class="comment">[100]</span>;</span><br><span class="line">int <span class="comment">[]</span> num=new int<span class="comment">[10]</span>;</span><br></pre></td></tr></table></figure></p>
 <p>具体参考:<br><a href="https://www.cnblogs.com/luosongchao/p/3298150.html" target="_blank" rel="noopener">java 对象数组的使用</a></p>
-<h2 id="三-对象类型初始化"><a href="#三-对象类型初始化" class="headerlink" title="三.对象类型初始化"></a>三.对象类型初始化</h2><p>　　对象类型默认初始化为null，必须要手动初始化。如字符串是属于对象类型,默认值为null,但我们需要进行初始化赋值,代码如下<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">String str</span>=<span class="string">""</span>;</span><br></pre></td></tr></table></figure></p>
-<h2 id="四-类型获取"><a href="#四-类型获取" class="headerlink" title="四.类型获取"></a>四.类型获取</h2><p>getClass()与getSimpleName()<br>  new testClass().getClass()–对应new testClass().getClass()–类的全称<br>  new testClass().getClass().getSimpleName()–对应:testClass-类的简称</p>
-<h2 id="五-数据的长度测量"><a href="#五-数据的长度测量" class="headerlink" title="五.数据的长度测量"></a>五.数据的长度测量</h2><p>　　其实主要就是Java中length、length()、size()的区别/使用范围.</p>
-<h3 id="5-1-length"><a href="#5-1-length" class="headerlink" title="5.1 length"></a>5.1 length</h3><p>length–<strong>针对数组</strong>,数组当中的一个属性;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span>[] arr=<span class="keyword">new</span> <span class="keyword">double</span>[sentence.length];</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-2-length"><a href="#5-2-length" class="headerlink" title="5.2 length()"></a>5.2 length()</h3><p>length()–<strong>针对字符串的</strong><br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">int lh</span>=<span class="string">"ssde"</span>.length();</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-3-size"><a href="#5-3-size" class="headerlink" title="5.3 size()"></a>5.3 size()</h3><p>　　size()–<strong>针对集合数据类型</strong>的–List,Map,set,Queue<br>　　size()方法最后要找的其实还是数组的length属性；因为集合数据类型的底层还是数组;</p>
-<h2 id="六-double-与Double"><a href="#六-double-与Double" class="headerlink" title="六.double[]与Double[]"></a>六.double[]与Double[]</h2><p>　　包装类:便于对数据的操作;类型的转换(Double与double,int与Integer可以自动转换)<br>　　但double[]与Double[]尚且不能做到自动转换,否则会报错,下面例子:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Double[]这个类型会报错,因为Vectors.dense的方法类型是double[]</span></span><br><span class="line">Double[] <span class="built_in">vector</span> = sen2Arr.sentenceToArray(str);</span><br><span class="line">LabeledPoint train_one = <span class="keyword">new</span> LabeledPoint(<span class="number">0.0</span>, Vectors.dense(<span class="built_in">vector</span>));</span><br></pre></td></tr></table></figure></p>
-<h2 id="七-其他"><a href="#七-其他" class="headerlink" title="七.其他"></a>七.其他</h2><p>　　(1)小可自动转大，大转小会失去精度。<br>　　(2)字符串很多地方都要用到，但是由于string类生成的字符串不可修改，因此用stringbuffer或者stringbuild类进行字符串的修改。</p>
+<h2><span id="san-dui-xiang-lei-xing-chu-shi-hua">三.对象类型初始化</span></h2><p>　　对象类型默认初始化为null，必须要手动初始化。如字符串是属于对象类型,默认值为null,但我们需要进行初始化赋值,代码如下<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">String str</span>=<span class="string">""</span>;</span><br></pre></td></tr></table></figure></p>
+<h2><span id="si-lei-xing-huo-qu">四.类型获取</span></h2><p>getClass()与getSimpleName()<br>  new testClass().getClass()–对应new testClass().getClass()–类的全称<br>  new testClass().getClass().getSimpleName()–对应:testClass-类的简称</p>
+<h2><span id="wu-shu-ju-de-chang-du-ce-liang">五.数据的长度测量</span></h2><p>　　其实主要就是Java中length、length()、size()的区别/使用范围.</p>
+<h3><span id="5-1-length">5.1 length</span></h3><p>length–<strong>针对数组</strong>,数组当中的一个属性;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span>[] arr=<span class="keyword">new</span> <span class="keyword">double</span>[sentence.length];</span><br></pre></td></tr></table></figure></p>
+<h3><span id="5-2-length">5.2 length()</span></h3><p>length()–<strong>针对字符串的</strong><br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">int lh</span>=<span class="string">"ssde"</span>.length();</span><br></pre></td></tr></table></figure></p>
+<h3><span id="5-3-size">5.3 size()</span></h3><p>　　size()–<strong>针对集合数据类型</strong>的–List,Map,set,Queue<br>　　size()方法最后要找的其实还是数组的length属性；因为集合数据类型的底层还是数组;</p>
+<h2><span id="liu-double-yu-double">六.double[]与Double[]</span></h2><p>　　包装类:便于对数据的操作;类型的转换(Double与double,int与Integer可以自动转换)<br>　　但double[]与Double[]尚且不能做到自动转换,否则会报错,下面例子:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Double[]这个类型会报错,因为Vectors.dense的方法类型是double[]</span></span><br><span class="line">Double[] <span class="built_in">vector</span> = sen2Arr.sentenceToArray(str);</span><br><span class="line">LabeledPoint train_one = <span class="keyword">new</span> LabeledPoint(<span class="number">0.0</span>, Vectors.dense(<span class="built_in">vector</span>));</span><br></pre></td></tr></table></figure></p>
+<h2><span id="qi-qi-ta">七.其他</span></h2><p>　　(1)小可自动转大，大转小会失去精度。<br>　　(2)字符串很多地方都要用到，但是由于string类生成的字符串不可修改，因此用stringbuffer或者stringbuild类进行字符串的修改。</p>
 
         
         </div>
@@ -501,7 +519,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

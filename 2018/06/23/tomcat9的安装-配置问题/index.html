@@ -267,36 +267,66 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　tomcat是一个开源免费的服务器,本文主要讲了tomcat的安装,测试,及其在myeclipse中的配置,在此过程之中所带来的问题,并提出了相应的解决方法,并且对tomcat的服务器配置文件的三个端口进行了解析,说明了不同端口的作用.<a id="more"></a></p>
+            <p>tomcat是一个开源免费的服务器,本文主要讲了tomcat的安装,测试,及其在myeclipse中的配置,在此过程之中所带来的问题,并提出了相应的解决方法,并且对tomcat的服务器配置文件的三个端口进行了解析,说明了不同端口的作用.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-liu-cheng">一.流程</a><ul>
+<li><a href="#1-1-xia-zai-an-zhuang-bao">1.1下载安装包</a></li>
+<li><a href="#1-2-she-zhi-huan-jing-bian-liang">1.2设置环境变量</a></li>
+<li><a href="#1-3-qi-dong-fu-wu">1.3启动服务</a></li>
+<li><a href="#1-4-an-zhuang-fu-wu">1.4安装服务</a></li>
+<li><a href="#1-5-qi-dong-zan-ting-fu-wu">1.5启动/暂停服务</a></li>
+<li><a href="#1-6-ce-shi">1.6测试</a></li>
+</ul>
+</li>
+<li><a href="#er-wen-ti">二.问题</a><ul>
+<li><a href="#2-1-fu-wu-bu-neng-an-zhuang">2.1 服务不能安装</a></li>
+<li><a href="#2-2-8080-duan-kou-bei-zhan-yong-dao-zhi-fu-wu-bu-neng-kai-qi">2.2 8080端口被占用导致服务不能开启</a></li>
+</ul>
+</li>
+<li><a href="#san-shi-yi">三.释疑</a><ul>
+<li><a href="#3-1-server-xml-zhong-san-ge-duan-kou-de-zuo-yong">3.1 server.xml中三个端口的作用</a><ul>
+<li><a href="#3-1-1-jian-ting-liu-lan-qi-qing-qiu-de-duan-kou">3.1.1监听浏览器请求的端口</a></li>
+<li><a href="#3-1-2-jian-ting-qi-ta-fu-wu-qi-zhuan-fa-de-qing-qiu-de-duan-kou">3.1.2监听其他服务器转发的请求的端口</a></li>
+<li><a href="#3-1-3-jian-ting-de-guan-bi-duan-kou">3.1.3监听的关闭端口</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#si-zai-myeclipse2017-pei-zhi-tomcat">四.在myeclipse2017配置tomcat</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-流程"><a href="#一-流程" class="headerlink" title="一.流程"></a>一.流程</h2><h3 id="1-1下载安装包"><a href="#1-1下载安装包" class="headerlink" title="1.1下载安装包"></a>1.1下载安装包</h3><p>先从官网下载安装包,进行解压缩地址:<br><a href="http://211.81.63.130/cache/3/02/www-us.apache.org/33a3f05043b61c8d9a1bfe7ecfb45b40/apache-tomcat-9.0.8-windows-x64.zip" target="_blank" rel="noopener">http://211.81.63.130/cache/3/02/www-us.apache.org/33a3f05043b61c8d9a1bfe7ecfb45b40/apache-tomcat-9.0.8-windows-x64.zip</a></p>
-<h3 id="1-2设置环境变量"><a href="#1-2设置环境变量" class="headerlink" title="1.2设置环境变量"></a>1.2设置环境变量</h3><p>​    最好设置在系统变量中,不要在用户变量中:</p>
+<h2><span id="yi-liu-cheng">一.流程</span></h2><h3><span id="1-1-xia-zai-an-zhuang-bao">1.1下载安装包</span></h3><p>先从官网下载安装包,进行解压缩地址:<br><a href="http://211.81.63.130/cache/3/02/www-us.apache.org/33a3f05043b61c8d9a1bfe7ecfb45b40/apache-tomcat-9.0.8-windows-x64.zip" target="_blank" rel="noopener">http://211.81.63.130/cache/3/02/www-us.apache.org/33a3f05043b61c8d9a1bfe7ecfb45b40/apache-tomcat-9.0.8-windows-x64.zip</a></p>
+<h3><span id="1-2-she-zhi-huan-jing-bian-liang">1.2设置环境变量</span></h3><p>​    最好设置在系统变量中,不要在用户变量中:</p>
 <ul>
 <li>设置CATALINA_HOME–也就是安装包的目录</li>
 <li>设置path:   %CATALINA_HOME%\bin;%CATALINA_HOME%\lib;</li>
 <li>设置CLASSPATH: %CATALINA_HOME%\lib\servlet-api.jar;</li>
 </ul>
-<h3 id="1-3启动服务"><a href="#1-3启动服务" class="headerlink" title="1.3启动服务"></a>1.3启动服务</h3><p>两种方法</p>
+<h3><span id="1-3-qi-dong-fu-wu">1.3启动服务</span></h3><p>两种方法</p>
 <ul>
 <li>进入安装目录的bin文件下,打开startup.bat,启动看是否出现异常,没有继续下一步,</li>
 <li>或者在cmd之中输入startup 和catalina run</li>
 </ul>
-<h3 id="1-4安装服务"><a href="#1-4安装服务" class="headerlink" title="1.4安装服务"></a>1.4安装服务</h3><p> 安装服务之前先打开service.bat,之后在cmd中输入:<br>　　install service tomcat9(其中tomcat9代表需要设定服务名)<br>否则会出现报错</p>
-<h3 id="1-5启动-暂停服务"><a href="#1-5启动-暂停服务" class="headerlink" title="1.5启动/暂停服务"></a>1.5启动/暂停服务</h3>   <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net <span class="literal">start</span>/<span class="literal">stop</span> tomcat9</span><br></pre></td></tr></table></figure>
-<h3 id="1-6测试"><a href="#1-6测试" class="headerlink" title="1.6测试"></a>1.6测试</h3><p>　　在浏览器之中输入:<a href="http://localhost:8080并进行回车,成功的话就会得到tomcat的启动页面" target="_blank" rel="noopener">http://localhost:8080并进行回车,成功的话就会得到tomcat的启动页面</a></p>
-<h2 id="二-问题"><a href="#二-问题" class="headerlink" title="二.问题"></a>二.问题</h2><h3 id="2-1-服务不能安装"><a href="#2-1-服务不能安装" class="headerlink" title="2.1 服务不能安装"></a>2.1 服务不能安装</h3><p>　　install service tomcat9时出现install: cannot stat ‘service’: No such file or directory,如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085307.jpg" alt=""><br>　　是因为没有启动tomcat程序(startup.bat),和打开tomcat服务(service.bat)导致的,先后点击即可</p>
-<h3 id="2-2-8080端口被占用导致服务不能开启"><a href="#2-2-8080端口被占用导致服务不能开启" class="headerlink" title="2.2 8080端口被占用导致服务不能开启"></a>2.2 8080端口被占用导致服务不能开启</h3><ul>
+<h3><span id="1-4-an-zhuang-fu-wu">1.4安装服务</span></h3><p> 安装服务之前先打开service.bat,之后在cmd中输入:<br>　　install service tomcat9(其中tomcat9代表需要设定服务名)<br>否则会出现报错</p>
+<h3><span id="1-5-qi-dong-zan-ting-fu-wu">1.5启动/暂停服务</span></h3>   <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net <span class="literal">start</span>/<span class="literal">stop</span> tomcat9</span><br></pre></td></tr></table></figure>
+<h3><span id="1-6-ce-shi">1.6测试</span></h3><p>　　在浏览器之中输入:<a href="http://localhost:8080并进行回车,成功的话就会得到tomcat的启动页面" target="_blank" rel="noopener">http://localhost:8080并进行回车,成功的话就会得到tomcat的启动页面</a></p>
+<h2><span id="er-wen-ti">二.问题</span></h2><h3><span id="2-1-fu-wu-bu-neng-an-zhuang">2.1 服务不能安装</span></h3><p>　　install service tomcat9时出现install: cannot stat ‘service’: No such file or directory,如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085307.jpg" alt=""><br>　　是因为没有启动tomcat程序(startup.bat),和打开tomcat服务(service.bat)导致的,先后点击即可</p>
+<h3><span id="2-2-8080-duan-kou-bei-zhan-yong-dao-zhi-fu-wu-bu-neng-kai-qi">2.2 8080端口被占用导致服务不能开启</span></h3><ul>
 <li>在安装包的conf文件夹下的server.xml中修改端口号.</li>
 <li>用记事本打开,查找Connector port=”8080”中的8080改为其他任意端口号(例如8088)就可以.</li>
 <li>之后重复之前的测试:<a href="http://localhost:8088" target="_blank" rel="noopener">http://localhost:8088</a> ,成功的话就可以看到tomcat的成功界面</li>
 </ul>
-<h2 id="三-释疑"><a href="#三-释疑" class="headerlink" title="三.释疑"></a>三.释疑</h2><h3 id="3-1-server-xml中三个端口的作用"><a href="#3-1-server-xml中三个端口的作用" class="headerlink" title="3.1 server.xml中三个端口的作用"></a>3.1 server.xml中三个端口的作用</h3><p> 　　<strong>如果使用多个tomcat 是需要配置这三个</strong></p>
-<h4 id="3-1-1监听浏览器请求的端口"><a href="#3-1-1监听浏览器请求的端口" class="headerlink" title="3.1.1监听浏览器请求的端口"></a>3.1.1监听浏览器请求的端口</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8080"</span> <span class="attribute">protocol</span>=<span class="string">"HTTP/1.1"</span>  #HTTP/1.1是浏览器的请求协议</span><br><span class="line">               <span class="attribute">connectionTimeout</span>=<span class="string">"20000"</span></span><br><span class="line">               <span class="attribute">redirectPort</span>=<span class="string">"8443"</span> /&gt;  #如果是https请求,则将其转发到8443端口</span><br></pre></td></tr></table></figure>
-<h4 id="3-1-2监听其他服务器转发的请求的端口"><a href="#3-1-2监听其他服务器转发的请求的端口" class="headerlink" title="3.1.2监听其他服务器转发的请求的端口"></a>3.1.2监听其他服务器转发的请求的端口</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8009"</span> <span class="attribute">protocol</span>=<span class="string">"AJP/1.3"</span> #AJP/1.3服务器转发协议</span><br><span class="line">				<span class="attribute">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="3-1-3监听的关闭端口"><a href="#3-1-3监听的关闭端口" class="headerlink" title="3.1.3监听的关闭端口"></a>3.1.3监听的关闭端口</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Server <span class="attribute">port</span>=<span class="string">"8005"</span> <span class="attribute">shutdown</span>=<span class="string">"SHUTDOWN"</span>&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="四-在myeclipse2017配置tomcat"><a href="#四-在myeclipse2017配置tomcat" class="headerlink" title="四.在myeclipse2017配置tomcat"></a>四.在myeclipse2017配置tomcat</h2><p>　1.打开设置–进入server选项.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085308.jpg" alt=""><br>　2.点击添加之后:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085313.jpg" alt=""><br><strong>注意:JRE最好使用jdk_1.8.</strong><br>　　完成之后,设置默认的服务器就是本地的tomcat就可以<br>　3.将项目上传到服务器当中<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085315.jpg" alt=""><br>一开始是没有本地服务器的,所以需要进行添加<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85316.jpg" alt=""><br><strong>勾选上always use this server when…这项</strong><br>　4.最后点击finish,之后需要<strong>先将项目进行发布,点击publish</strong>,否则项目会没有上传到服务器.<br>　5.最后才是进行项目的运行</p>
+<h2><span id="san-shi-yi">三.释疑</span></h2><h3><span id="3-1-server-xml-zhong-san-ge-duan-kou-de-zuo-yong">3.1 server.xml中三个端口的作用</span></h3><p> 　　<strong>如果使用多个tomcat 是需要配置这三个</strong></p>
+<h4><span id="3-1-1-jian-ting-liu-lan-qi-qing-qiu-de-duan-kou">3.1.1监听浏览器请求的端口</span></h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8080"</span> <span class="attribute">protocol</span>=<span class="string">"HTTP/1.1"</span>  #HTTP/1.1是浏览器的请求协议</span><br><span class="line">               <span class="attribute">connectionTimeout</span>=<span class="string">"20000"</span></span><br><span class="line">               <span class="attribute">redirectPort</span>=<span class="string">"8443"</span> /&gt;  #如果是https请求,则将其转发到8443端口</span><br></pre></td></tr></table></figure>
+<h4><span id="3-1-2-jian-ting-qi-ta-fu-wu-qi-zhuan-fa-de-qing-qiu-de-duan-kou">3.1.2监听其他服务器转发的请求的端口</span></h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8009"</span> <span class="attribute">protocol</span>=<span class="string">"AJP/1.3"</span> #AJP/1.3服务器转发协议</span><br><span class="line">				<span class="attribute">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h4><span id="3-1-3-jian-ting-de-guan-bi-duan-kou">3.1.3监听的关闭端口</span></h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Server <span class="attribute">port</span>=<span class="string">"8005"</span> <span class="attribute">shutdown</span>=<span class="string">"SHUTDOWN"</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2><span id="si-zai-myeclipse2017-pei-zhi-tomcat">四.在myeclipse2017配置tomcat</span></h2><p>　1.打开设置–进入server选项.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085308.jpg" alt=""><br>　2.点击添加之后:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085313.jpg" alt=""><br><strong>注意:JRE最好使用jdk_1.8.</strong><br>　　完成之后,设置默认的服务器就是本地的tomcat就可以<br>　3.将项目上传到服务器当中<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085315.jpg" alt=""><br>一开始是没有本地服务器的,所以需要进行添加<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85316.jpg" alt=""><br><strong>勾选上always use this server when…这项</strong><br>　4.最后点击finish,之后需要<strong>先将项目进行发布,点击publish</strong>,否则项目会没有上传到服务器.<br>　5.最后才是进行项目的运行</p>
 
         
         </div>
@@ -516,7 +546,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

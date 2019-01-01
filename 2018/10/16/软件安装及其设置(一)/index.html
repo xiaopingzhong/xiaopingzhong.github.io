@@ -267,38 +267,75 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要整理一些常见的安装／配置小问题，由于涉及到的方面比较多，因此打算作为一个系列进行整理，文中参考了不少网友的经验，在此说声谢谢，同时也希望我的整理能够帮助他人．<a id="more"></a></p>
+            <p>本文主要整理一些常见的安装／配置小问题，由于涉及到的方面比较多，因此打算作为一个系列进行整理，文中参考了不少网友的经验，在此说声谢谢，同时也希望我的整理能够帮助他人．<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#1-powershell-cmd-huan-zi-ti">1.powershell/cmd换字体</a><ul>
+<li><a href="#1-1-xia-zai-powershell6">1.1下载powershell6</a></li>
+<li><a href="#1-2-xia-zai-windows-management-framework5-1-zu-jian">1.2下载Windows Management Framework5.1组件</a></li>
+<li><a href="#1-3-zeng-jia-zi-ti">1.3增加字体</a></li>
+<li><a href="#1-4-tian-jia-xiang-ying-de-ruan-jian-mu-lu-dao-huan-jing-mu-lu">1.4添加相应的软件目录到环境目录,</a></li>
+</ul>
+</li>
+<li><a href="#2-dai-ti-ji-shi-ben-de-ruan-jian-emeditor-yi-jing-xia-hao-liao-an-zhuang-bao">2.代替记事本的软件–emeditor (已经下好了安装包)</a><ul>
+<li><a href="#2-1-xia-zai-an-zhuang-bao-ji-qi-mi-yao">2.1 下载安装包及其密钥</a></li>
+<li><a href="#2-2-jiang-ruan-jian-suo-zai-mu-lu-tian-jia-dao-huan-jing-bian-liang">2.2 将软件所在目录添加到环境变量</a></li>
+</ul>
+</li>
+<li><a href="#3-eclipse-maven-huan-jing-pei-zhi">3.eclipse+maven环境配置</a></li>
+<li><a href="#4-eclipse-an-zhuang-ge-chong-ban-ben-spring-cha-jian-sts">4.eclipse 安装各种版本spring插件-STS</a></li>
+<li><a href="#5-notepad-markdown-shi-shi-yu-lan-gao-liang-xian-shi">5.notepad++ markdown实时预览,高亮显示</a></li>
+<li><a href="#6-ge-cheng-xu-de-kuai-jie-jian">6.各程序的快捷键</a></li>
+<li><a href="#7-xiu-gai-you-jian-cai-dan-xuan-xiang">7.修改右键菜单选项</a></li>
+<li><a href="#8-tian-jin-da-xue-you-xiang-deng-lu-outlook">8.天津大学邮箱登录outLook</a></li>
+<li><a href="#9-shou-xin-shu-ru-fa-kuai-jie-jian">9.手心输入法快捷键</a></li>
+<li><a href="#10-ti-gao-shu-biao-ling-min-du">10.提高鼠标灵敏度</a></li>
+<li><a href="#11-a-recent-hardware-or-software-change-might-be-the-cause">11.a recent hardware or software change might be the cause</a></li>
+<li><a href="#12-pdf-jie-mi">12.PDF解密</a></li>
+<li><a href="#13-uml-de-yong-li-tu-jian-tou-zhi-xiang">13.UML的用例图箭头指向</a></li>
+<li><a href="#14-uml-xu-lie-tu">14.UML序列图</a></li>
+<li><a href="#15-chong-zhi-cmd">15.重置cmd</a></li>
+<li><a href="#16-xi-tong-bian-liang-yong-hu-bian-liang-huan-jing-bian-liang-classpath-path-java-home">16.系统变量、用户变量、环境变量,ClassPath，path，JAVA_HOME</a></li>
+<li><a href="#17-spark-zai-window-xia-de-an-zhuang">17.Spark在window下的安装</a></li>
+<li><a href="#18-dai-li-fu-wu-qi-chu-xian-cuo-wu-dao-zhi-shang-bu-liao-wang">18.代理服务器出现错误(导致上不了网)</a></li>
+<li><a href="#19-shell-jie-mian-li-jie">19.shell界面理解</a></li>
+<li><a href="#20-windows-jie-mian-zhi-xian-shi-shi-jian-bu-xian-shi-ri-qi">20.windows界面只显示时间不显示日期</a></li>
+<li><a href="#21-she-zhi-wang-ye-mao-dian">21.设置网页锚点</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="1-powershell-cmd换字体"><a href="#1-powershell-cmd换字体" class="headerlink" title="1.powershell/cmd换字体"></a>1.powershell/cmd换字体</h2><h3 id="1-1下载powershell6"><a href="#1-1下载powershell6" class="headerlink" title="1.1下载powershell6"></a>1.1下载powershell6</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="string">//down1.greenxf.com</span><span class="function">:8010</span>/系统工具/系统其他<span class="string">/winpowershell</span><span class="params">(www.greenxf.com)</span><span class="string">.zip</span></span><br></pre></td></tr></table></figure>
-<h3 id="1-2下载Windows-Management-Framework5-1组件"><a href="#1-2下载Windows-Management-Framework5-1组件" class="headerlink" title="1.2下载Windows Management Framework5.1组件"></a>1.2下载Windows Management Framework5.1组件</h3><p><a href="http://www.microsoft.com/en-us/download/details.aspx?id=54616" target="_blank" rel="noopener">Windows Management Framework 5.1地址</a></p>
-<h3 id="1-3增加字体"><a href="#1-3增加字体" class="headerlink" title="1.3增加字体"></a>1.3增加字体</h3><p><a href="https://www.cnblogs.com/jiangu66/archive/2013/05/29/3106657.html" target="_blank" rel="noopener">教程方法Windows7更改替换cmd（powershell)字体完全方法教程</a></p>
-<h3 id="1-4添加相应的软件目录到环境目录"><a href="#1-4添加相应的软件目录到环境目录" class="headerlink" title="1.4添加相应的软件目录到环境目录,"></a>1.4添加相应的软件目录到环境目录,</h3><p>　　最好是系统环境变量的Path变量</p>
-<h2 id="2-代替记事本的软件–emeditor-已经下好了安装包"><a href="#2-代替记事本的软件–emeditor-已经下好了安装包" class="headerlink" title="2.代替记事本的软件–emeditor (已经下好了安装包)"></a>2.代替记事本的软件–emeditor (已经下好了安装包)</h2><h3 id="2-1-下载安装包及其密钥"><a href="#2-1-下载安装包及其密钥" class="headerlink" title="2.1 下载安装包及其密钥"></a>2.1 下载安装包及其密钥</h3><p><a href="http://www.zdfans.com/html/7569.html" target="_blank" rel="noopener">EmEditor下载地址</a></p>
-<h3 id="2-2-将软件所在目录添加到环境变量"><a href="#2-2-将软件所在目录添加到环境变量" class="headerlink" title="2.2 将软件所在目录添加到环境变量"></a>2.2 将软件所在目录添加到环境变量</h3><p>　　最好是系统变量的Path路径中</p>
-<h2 id="3-eclipse-maven环境配置"><a href="#3-eclipse-maven环境配置" class="headerlink" title="3.eclipse+maven环境配置"></a>3.eclipse+maven环境配置</h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/eclipse+maven%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">eclipse+maven环境配置</a></p>
-<h2 id="4-eclipse-安装各种版本spring插件-STS"><a href="#4-eclipse-安装各种版本spring插件-STS" class="headerlink" title="4.eclipse 安装各种版本spring插件-STS"></a>4.eclipse 安装各种版本spring插件-STS</h2><p><a href="https://blog.csdn.net/starloveleaf/article/details/69359756" target="_blank" rel="noopener">地址下载</a></p>
-<h2 id="5-notepad-markdown实时预览-高亮显示"><a href="#5-notepad-markdown实时预览-高亮显示" class="headerlink" title="5.notepad++ markdown实时预览,高亮显示"></a>5.notepad++ markdown实时预览,高亮显示</h2><p><a href="https://my.oschina.net/Alexyeh/blog/1821141" target="_blank" rel="noopener">Notepad++ 添加MarkdownViewerPlusPlus插件</a><br><a href="https://blog.csdn.net/littlehaes/article/details/79284338" target="_blank" rel="noopener">Notepad++上使用Markdown及其高亮Highlight设置</a></p>
-<h2 id="6-各程序的快捷键"><a href="#6-各程序的快捷键" class="headerlink" title="6.各程序的快捷键"></a>6.各程序的快捷键</h2><p>　　先将应用程序进行改名,之后添加到环境变量之中,Path变量<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xshell<span class="comment">----xs;</span></span><br><span class="line">eDiary<span class="comment">----dy</span></span><br><span class="line">EverEdit<span class="comment">----ee</span></span><br><span class="line">PowerShell<span class="comment">---pwsh</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="7-修改右键菜单选项"><a href="#7-修改右键菜单选项" class="headerlink" title="7.修改右键菜单选项"></a>7.修改右键菜单选项</h2><p><a href="https://jingyan.baidu.com/article/5d368d1e18e5b93f60c057ce.html" target="_blank" rel="noopener">使用右键管家</a></p>
-<h2 id="8-天津大学邮箱登录outLook"><a href="#8-天津大学邮箱登录outLook" class="headerlink" title="8.天津大学邮箱登录outLook"></a>8.天津大学邮箱登录outLook</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100454.png" alt="1"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100516.png" alt="2"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100532.png" alt="3"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100548.png" alt="4"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100608.png" alt="5"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100626.png" alt="6"></p>
-<h2 id="9-手心输入法快捷键"><a href="#9-手心输入法快捷键" class="headerlink" title="9.手心输入法快捷键"></a>9.手心输入法快捷键</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">❋<span class="comment">--fh</span></span><br><span class="line">①<span class="comment">--yqsz</span></span><br><span class="line">hexo的yaml设置<span class="comment">--ifmm</span></span><br></pre></td></tr></table></figure>
-<h2 id="10-提高鼠标灵敏度"><a href="#10-提高鼠标灵敏度" class="headerlink" title="10.提高鼠标灵敏度"></a>10.提高鼠标灵敏度</h2><p><a href="https://jingyan.baidu.com/article/5d368d1e0080813f60c05729.html" target="_blank" rel="noopener">提高鼠标灵敏度</a></p>
-<h2 id="11-a-recent-hardware-or-software-change-might-be-the-cause"><a href="#11-a-recent-hardware-or-software-change-might-be-the-cause" class="headerlink" title="11.a recent hardware or software change might be the cause"></a>11.a recent hardware or software change might be the cause</h2><p>说明需要修复分区引导使用U盘进入pe系统,点击修复图标,之后选择特定的启动盘,之后重启即可.</p>
-<h2 id="12-PDF解密"><a href="#12-PDF解密" class="headerlink" title="12.PDF解密"></a>12.PDF解密</h2><p><a href="https://smallpdf.com/cn/unlock-pdf" target="_blank" rel="noopener">PDF解密</a></p>
-<h2 id="13-UML的用例图箭头指向"><a href="#13-UML的用例图箭头指向" class="headerlink" title="13.UML的用例图箭头指向"></a>13.UML的用例图箭头指向</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100642.png" alt="用例图的各个关系"></p>
+<h2><span id="1-powershell-cmd-huan-zi-ti">1.powershell/cmd换字体</span></h2><h3><span id="1-1-xia-zai-powershell6">1.1下载powershell6</span></h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="string">//down1.greenxf.com</span><span class="function">:8010</span>/系统工具/系统其他<span class="string">/winpowershell</span><span class="params">(www.greenxf.com)</span><span class="string">.zip</span></span><br></pre></td></tr></table></figure>
+<h3><span id="1-2-xia-zai-windows-management-framework5-1-zu-jian">1.2下载Windows Management Framework5.1组件</span></h3><p><a href="http://www.microsoft.com/en-us/download/details.aspx?id=54616" target="_blank" rel="noopener">Windows Management Framework 5.1地址</a></p>
+<h3><span id="1-3-zeng-jia-zi-ti">1.3增加字体</span></h3><p><a href="https://www.cnblogs.com/jiangu66/archive/2013/05/29/3106657.html" target="_blank" rel="noopener">教程方法Windows7更改替换cmd（powershell)字体完全方法教程</a></p>
+<h3><span id="1-4-tian-jia-xiang-ying-de-ruan-jian-mu-lu-dao-huan-jing-mu-lu">1.4添加相应的软件目录到环境目录,</span></h3><p>　　最好是系统环境变量的Path变量</p>
+<h2><span id="2-dai-ti-ji-shi-ben-de-ruan-jian-emeditor-yi-jing-xia-hao-liao-an-zhuang-bao">2.代替记事本的软件–emeditor (已经下好了安装包)</span></h2><h3><span id="2-1-xia-zai-an-zhuang-bao-ji-qi-mi-yao">2.1 下载安装包及其密钥</span></h3><p><a href="http://www.zdfans.com/html/7569.html" target="_blank" rel="noopener">EmEditor下载地址</a></p>
+<h3><span id="2-2-jiang-ruan-jian-suo-zai-mu-lu-tian-jia-dao-huan-jing-bian-liang">2.2 将软件所在目录添加到环境变量</span></h3><p>　　最好是系统变量的Path路径中</p>
+<h2><span id="3-eclipse-maven-huan-jing-pei-zhi">3.eclipse+maven环境配置</span></h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/eclipse+maven%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">eclipse+maven环境配置</a></p>
+<h2><span id="4-eclipse-an-zhuang-ge-chong-ban-ben-spring-cha-jian-sts">4.eclipse 安装各种版本spring插件-STS</span></h2><p><a href="https://blog.csdn.net/starloveleaf/article/details/69359756" target="_blank" rel="noopener">地址下载</a></p>
+<h2><span id="5-notepad-markdown-shi-shi-yu-lan-gao-liang-xian-shi">5.notepad++ markdown实时预览,高亮显示</span></h2><p><a href="https://my.oschina.net/Alexyeh/blog/1821141" target="_blank" rel="noopener">Notepad++ 添加MarkdownViewerPlusPlus插件</a><br><a href="https://blog.csdn.net/littlehaes/article/details/79284338" target="_blank" rel="noopener">Notepad++上使用Markdown及其高亮Highlight设置</a></p>
+<h2><span id="6-ge-cheng-xu-de-kuai-jie-jian">6.各程序的快捷键</span></h2><p>　　先将应用程序进行改名,之后添加到环境变量之中,Path变量<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xshell<span class="comment">----xs;</span></span><br><span class="line">eDiary<span class="comment">----dy</span></span><br><span class="line">EverEdit<span class="comment">----ee</span></span><br><span class="line">PowerShell<span class="comment">---pwsh</span></span><br></pre></td></tr></table></figure></p>
+<h2><span id="7-xiu-gai-you-jian-cai-dan-xuan-xiang">7.修改右键菜单选项</span></h2><p><a href="https://jingyan.baidu.com/article/5d368d1e18e5b93f60c057ce.html" target="_blank" rel="noopener">使用右键管家</a></p>
+<h2><span id="8-tian-jin-da-xue-you-xiang-deng-lu-outlook">8.天津大学邮箱登录outLook</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100454.png" alt="1"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100516.png" alt="2"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100532.png" alt="3"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100548.png" alt="4"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100608.png" alt="5"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100626.png" alt="6"></p>
+<h2><span id="9-shou-xin-shu-ru-fa-kuai-jie-jian">9.手心输入法快捷键</span></h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">❋<span class="comment">--fh</span></span><br><span class="line">①<span class="comment">--yqsz</span></span><br><span class="line">hexo的yaml设置<span class="comment">--ifmm</span></span><br></pre></td></tr></table></figure>
+<h2><span id="10-ti-gao-shu-biao-ling-min-du">10.提高鼠标灵敏度</span></h2><p><a href="https://jingyan.baidu.com/article/5d368d1e0080813f60c05729.html" target="_blank" rel="noopener">提高鼠标灵敏度</a></p>
+<h2><span id="11-a-recent-hardware-or-software-change-might-be-the-cause">11.a recent hardware or software change might be the cause</span></h2><p>说明需要修复分区引导使用U盘进入pe系统,点击修复图标,之后选择特定的启动盘,之后重启即可.</p>
+<h2><span id="12-pdf-jie-mi">12.PDF解密</span></h2><p><a href="https://smallpdf.com/cn/unlock-pdf" target="_blank" rel="noopener">PDF解密</a></p>
+<h2><span id="13-uml-de-yong-li-tu-jian-tou-zhi-xiang">13.UML的用例图箭头指向</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100642.png" alt="用例图的各个关系"></p>
 <hr>
 <p><a href="https://blog.csdn.net/tangzhongxin/article/details/4640248" target="_blank" rel="noopener">UML之用例图箭头方向</a><br><a href="https://www.cnblogs.com/xiaolongbao-lzh/p/4590897.html" target="_blank" rel="noopener">UML建模——用例图（Use Case Diagram）</a></p>
 <hr>
-<h2 id="14-UML序列图"><a href="#14-UML序列图" class="headerlink" title="14.UML序列图"></a>14.UML序列图</h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/UML%E6%97%B6%E5%BA%8F%E5%9B%BE/" target="_blank" rel="noopener">UML序列图</a></p>
-<h2 id="15-重置cmd"><a href="#15-重置cmd" class="headerlink" title="15.重置cmd"></a>15.重置cmd</h2><p>进入注册表：<br>　　在注册表编辑器左边的文件夹目录里面找到:<br><code>HKEY_CURRENT_USER \ Console \ %SystemRoot%_system32_cmd.exe</code><br>删除文件夹 <code>%SystemRoot%_system32_cmd.exe</code>即可</p>
-<h2 id="16-系统变量、用户变量、环境变量-ClassPath，path，JAVA-HOME"><a href="#16-系统变量、用户变量、环境变量-ClassPath，path，JAVA-HOME" class="headerlink" title="16.系统变量、用户变量、环境变量,ClassPath，path，JAVA_HOME"></a>16.系统变量、用户变量、环境变量,ClassPath，path，JAVA_HOME</h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%B2%97%E8%AF%86/#more" target="_blank" rel="noopener">环境变量粗识</a></p>
-<h2 id="17-Spark在window下的安装"><a href="#17-Spark在window下的安装" class="headerlink" title="17.Spark在window下的安装"></a>17.Spark在window下的安装</h2><p><a href="https://blog.csdn.net/u011513853/article/details/52865076" target="_blank" rel="noopener">Spark在Windows下的环境搭建</a><br>java+scala+Spark+Hadoop，期间还有环境变量的设置。</p>
-<h2 id="18-代理服务器出现错误-导致上不了网"><a href="#18-代理服务器出现错误-导致上不了网" class="headerlink" title="18.代理服务器出现错误(导致上不了网)"></a>18.代理服务器出现错误(导致上不了网)</h2><p><a href="https://blog.csdn.net/chentu279203653csdn/article/details/79269730" target="_blank" rel="noopener">代理服务器出现问题</a><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100702.png" alt="取消手动代理服务器"></p>
-<h2 id="19-shell界面理解"><a href="#19-shell界面理解" class="headerlink" title="19.shell界面理解"></a>19.shell界面理解</h2><p>　　就是用户和系统/软件的一个交互界面,也是与内核交互的一种接口,用户只需要输入若干命令,就可调用系统/软件功能完成特定的操作.例如:<br>　　输入spark-shell 进入如下shell界面:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100717.png" alt="spark-shell"><br>　　使用scala语言进行交互,操作.加减乘除等等.</p>
-<h2 id="20-windows界面只显示时间不显示日期"><a href="#20-windows界面只显示时间不显示日期" class="headerlink" title="20.windows界面只显示时间不显示日期"></a>20.windows界面只显示时间不显示日期</h2><p>　　可能是任务栏太窄了,拉长些就可以.</p>
-<h2 id="21-设置网页锚点"><a href="#21-设置网页锚点" class="headerlink" title="21.设置网页锚点"></a>21.设置网页锚点</h2><p>　　主要通过复制个人网站的目录导航的链接实现锚点,具体实现如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100816.gif" alt="设置锚点"></p>
+<h2><span id="14-uml-xu-lie-tu">14.UML序列图</span></h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/UML%E6%97%B6%E5%BA%8F%E5%9B%BE/" target="_blank" rel="noopener">UML序列图</a></p>
+<h2><span id="15-chong-zhi-cmd">15.重置cmd</span></h2><p>进入注册表：<br>　　在注册表编辑器左边的文件夹目录里面找到:<br><code>HKEY_CURRENT_USER \ Console \ %SystemRoot%_system32_cmd.exe</code><br>删除文件夹 <code>%SystemRoot%_system32_cmd.exe</code>即可</p>
+<h2><span id="16-xi-tong-bian-liang-yong-hu-bian-liang-huan-jing-bian-liang-classpath-path-java-home">16.系统变量、用户变量、环境变量,ClassPath，path，JAVA_HOME</span></h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%B2%97%E8%AF%86/#more" target="_blank" rel="noopener">环境变量粗识</a></p>
+<h2><span id="17-spark-zai-window-xia-de-an-zhuang">17.Spark在window下的安装</span></h2><p><a href="https://blog.csdn.net/u011513853/article/details/52865076" target="_blank" rel="noopener">Spark在Windows下的环境搭建</a><br>java+scala+Spark+Hadoop，期间还有环境变量的设置。</p>
+<h2><span id="18-dai-li-fu-wu-qi-chu-xian-cuo-wu-dao-zhi-shang-bu-liao-wang">18.代理服务器出现错误(导致上不了网)</span></h2><p><a href="https://blog.csdn.net/chentu279203653csdn/article/details/79269730" target="_blank" rel="noopener">代理服务器出现问题</a><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100702.png" alt="取消手动代理服务器"></p>
+<h2><span id="19-shell-jie-mian-li-jie">19.shell界面理解</span></h2><p>　　就是用户和系统/软件的一个交互界面,也是与内核交互的一种接口,用户只需要输入若干命令,就可调用系统/软件功能完成特定的操作.例如:<br>　　输入spark-shell 进入如下shell界面:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100717.png" alt="spark-shell"><br>　　使用scala语言进行交互,操作.加减乘除等等.</p>
+<h2><span id="20-windows-jie-mian-zhi-xian-shi-shi-jian-bu-xian-shi-ri-qi">20.windows界面只显示时间不显示日期</span></h2><p>　　可能是任务栏太窄了,拉长些就可以.</p>
+<h2><span id="21-she-zhi-wang-ye-mao-dian">21.设置网页锚点</span></h2><p>　　主要通过复制个人网站的目录导航的链接实现锚点,具体实现如下:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100816.gif" alt="设置锚点"></p>
 
         
         </div>
@@ -518,7 +555,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

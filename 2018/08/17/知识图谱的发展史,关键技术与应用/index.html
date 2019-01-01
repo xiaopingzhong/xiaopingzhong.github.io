@@ -267,25 +267,102 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文是基于达观数据的桂洪冠老师的&lt;&lt;知识图谱关键技术与应用&gt;&gt;和文因互联鲍捷老师的&lt;&lt;知识图谱发展史&gt;&gt;进行整理的,用来加深对知识图谱的认识。重点是把握图谱构建的各个环节所用到的技术和知识图谱的发展历程。<a id="more"></a></p>
+            <p>本文是基于达观数据的桂洪冠老师的&lt;&lt;知识图谱关键技术与应用&gt;&gt;和文因互联鲍捷老师的&lt;&lt;知识图谱发展史&gt;&gt;进行整理的,用来加深对知识图谱的认识。重点是把握图谱构建的各个环节所用到的技术和知识图谱的发展历程。<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-gai-shu">一.概述</a><ul>
+<li><a href="#1-1-liang-ge-wen-ti">1.1 两个问题</a><ul>
+<li><a href="#1-1-1-yong-san-yuan-zu-lai-miao-shu-kg-de-yuan-yin">1.1.1 用三元组来描述KG的原因</a></li>
+<li><a href="#1-1-2-ai-wei-shi-me-xu-yao-zhi-shi-tu-pu">1.1.2 AI为什么需要知识图谱</a></li>
+</ul>
+</li>
+<li><a href="#1-2-chu-xian-yuan-yin">1.2 出现原因</a></li>
+</ul>
+</li>
+<li><a href="#er-ying-yong">二.应用</a><ul>
+<li><a href="#2-1-feng-kong-fan-qi-zha">2.1 风控反欺诈</a></li>
+<li><a href="#2-2-xin-dai-shen-he-dui-ge-ren">2.2 信贷审核（对个人）</a></li>
+<li><a href="#2-3-tou-yan-fen-xi-dui-gong-si">2.3 投研分析（对公司）</a></li>
+<li><a href="#2-4-jing-zhun-ying-xiao-ge-xing-hua-tui-jian">2.4 精准营销(个性化推荐)</a></li>
+<li><a href="#2-5-gai-shan-sou-suo">2.5 改善搜索</a></li>
+<li><a href="#2-6-gai-shan-wen-da">2.6 改善问答</a></li>
+</ul>
+</li>
+<li><a href="#san-tu-pu-gou-jian-zhou-qi">三.图谱构建周期</a></li>
+<li><a href="#si-zhi-shi-jian-mo">四.知识建模</a><ul>
+<li><a href="#4-1-ben-ti-ceng">4.1 本体层</a></li>
+</ul>
+</li>
+<li><a href="#wu-zhi-shi-chou-qu">五.知识抽取:</a><ul>
+<li><a href="#5-1-shi-ti-chou-qu">5.1 实体抽取</a></li>
+<li><a href="#5-2-guan-xi-chou-qu">5.2 关系抽取</a><ul>
+<li><a href="#5-2-1-fang-fa">5.2.1 方法</a></li>
+<li><a href="#5-2-2-gong-ju">5.2.2 工具</a><ul>
+<li><a href="#1-deepdvie">(1).deepdvie</a></li>
+<li><a href="#1-1-gong-zuo-liu-cheng">(1.1) 工作流程</a></li>
+</ul>
+</li>
+<li><a href="#2-lian-he-xue-xi-biao-zhu">(2).联合学习标注</a><ul>
+<li><a href="#2-1-ji-yu-shen-du-xue-xi-duan-dao-duan-de-lian-he-biao-zhu">(2.1) 基于深度学习端到端的联合标注</a><ul>
+<li><a href="#2-1-1-xu-lie-biao-zhu">(2.1.1) 序列标注：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#liu-shi-ti-rong-he">六.实体融合</a><ul>
+<li><a href="#6-1-shi-ti-dui-qi">6.1 实体对齐</a><ul>
+<li><a href="#6-1-1-ji-suan-xiang-si-du">6.1.1 计算相似度</a></li>
+<li><a href="#6-1-2-rong-he-ren-gong-dui-qi-de-biao-zhu-shu-ju">6.1.2 融合人工对齐的标注数据</a></li>
+</ul>
+</li>
+<li><a href="#6-2-shi-ti-he-bing">6.2 实体合并</a></li>
+</ul>
+</li>
+<li><a href="#qi-zhi-shi-cun-chu">七.知识存储</a></li>
+<li><a href="#ba-zhi-shi-tui-li">八.知识推理</a><ul>
+<li><a href="#8-1-ji-yu-fu-hao-de-tui-li">8.1 基于符号的推理</a></li>
+<li><a href="#8-2-ji-yu-tu-ji-suan-de-tui-li">8.2 基于图计算的推理</a><ul>
+<li><a href="#8-2-1-tu-ji-suan-yin-qing">8.2.1 图计算引擎</a></li>
+<li><a href="#8-2-2-zhong-xin-du">8.2.2 中心度</a></li>
+<li><a href="#8-2-3-xin-xi-liu">8.2.3 信息流</a></li>
+<li><a href="#8-2-4-guan-xi">8.2.4 关系</a></li>
+</ul>
+</li>
+<li><a href="#8-3-ji-yu-fen-bu-shi-tui-li">8.3 基于分布式推理</a><ul>
+<li><a href="#8-3-1-transe-xi-lie-mo-xing">8.3.1 transe系列模型</a></li>
+<li><a href="#8-3-2-ji-yu-shen-du-xue-xi">8.3.2 基于深度学习</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#jiu-jing-yan">九.经验</a></li>
+<li><a href="#shi-zhi-shi-tu-pu-fa-zhan-shi">十.知识图谱发展史</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-概述"><a href="#一-概述" class="headerlink" title="一.概述"></a>一.概述</h1><h2 id="1-1-两个问题"><a href="#1-1-两个问题" class="headerlink" title="1.1 两个问题"></a>1.1 两个问题</h2><h3 id="1-1-1-用三元组来描述KG的原因"><a href="#1-1-1-用三元组来描述KG的原因" class="headerlink" title="1.1.1 用三元组来描述KG的原因"></a>1.1.1 用三元组来描述KG的原因</h3><p>　　三元组是一种简单的易于人类解读的结构三元组方便编写计算机程序来进行抽取和加工处理</p>
-<h3 id="1-1-2-AI为什么需要知识图谱"><a href="#1-1-2-AI为什么需要知识图谱" class="headerlink" title="1.1.2 AI为什么需要知识图谱"></a>1.1.2 AI为什么需要知识图谱</h3><p>　　(1)<strong>帮助人工智能从感知阶段迈向认知阶段</strong>。认知的建立需要思考的能力，而思考是建立在知识基础上的知识图谱富含实体、概念、属性、事件、关系等信息，基于一定的知识推理为可解释性AI提供了全新的视角和机遇<br>　　(2)<strong>消除自然语言和深度学习黑盒之间的语义鸿沟</strong>。因为深度学习的可解释性差,知识图谱的可解释强</p>
-<h2 id="1-2-出现原因"><a href="#1-2-出现原因" class="headerlink" title="1.2 出现原因"></a>1.2 出现原因</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085510.png" alt="挑战"><br> 补充:<br>　　(1)答案在知识库的问答系统就是KBQA<br>　　(2)通用知识图谱为行业知识图谱提供框架,常识性知识,反过来行业知识图谱扩展了通用知识图谱的深度;</p>
-<h1 id="二-应用"><a href="#二-应用" class="headerlink" title="二.应用"></a>二.应用</h1><h2 id="2-1-风控反欺诈"><a href="#2-1-风控反欺诈" class="headerlink" title="2.1 风控反欺诈"></a>2.1 风控反欺诈</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085514.png" alt="风控反欺诈"></p>
+<h1><span id="yi-gai-shu">一.概述</span></h1><h2><span id="1-1-liang-ge-wen-ti">1.1 两个问题</span></h2><h3><span id="1-1-1-yong-san-yuan-zu-lai-miao-shu-kg-de-yuan-yin">1.1.1 用三元组来描述KG的原因</span></h3><p>　　三元组是一种简单的易于人类解读的结构三元组方便编写计算机程序来进行抽取和加工处理</p>
+<h3><span id="1-1-2-ai-wei-shi-me-xu-yao-zhi-shi-tu-pu">1.1.2 AI为什么需要知识图谱</span></h3><p>　　(1)<strong>帮助人工智能从感知阶段迈向认知阶段</strong>。认知的建立需要思考的能力，而思考是建立在知识基础上的知识图谱富含实体、概念、属性、事件、关系等信息，基于一定的知识推理为可解释性AI提供了全新的视角和机遇<br>　　(2)<strong>消除自然语言和深度学习黑盒之间的语义鸿沟</strong>。因为深度学习的可解释性差,知识图谱的可解释强</p>
+<h2><span id="1-2-chu-xian-yuan-yin">1.2 出现原因</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085510.png" alt="挑战"><br> 补充:<br>　　(1)答案在知识库的问答系统就是KBQA<br>　　(2)通用知识图谱为行业知识图谱提供框架,常识性知识,反过来行业知识图谱扩展了通用知识图谱的深度;</p>
+<h1><span id="er-ying-yong">二.应用</span></h1><h2><span id="2-1-feng-kong-fan-qi-zha">2.1 风控反欺诈</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085514.png" alt="风控反欺诈"></p>
 <ul>
 <li>不一致性验证:<br> 　　就是两个不同的人填写的号码是同一个公司的;</li>
 <li>组团欺诈:<br>　　三个不相关的人同一天向银行发起贷款,并且号码一样.</li>
 <li>静态异常检测:<br>　　以前几个人不常联系,最近常联系,会引起注意;</li>
 <li>动态异常检测:<br>　　节点关系发生脱离;</li>
-<li>失联客户管理<br>　　联系不到本人的时候,可以联系与它与相关的人,不只只是亲戚<h2 id="2-2-信贷审核（对个人）"><a href="#2-2-信贷审核（对个人）" class="headerlink" title="2.2 信贷审核（对个人）"></a>2.2 信贷审核（对个人）</h2>　　这种知识图谱一般是融合多个数据库,通过搜索某个人，就可以快速知道该人的社会关系和自身情况等多方面情况,可以确定是否需要进行放贷。<h2 id="2-3-投研分析（对公司）"><a href="#2-3-投研分析（对公司）" class="headerlink" title="2.3 投研分析（对公司）"></a>2.3 投研分析（对公司）</h2>　　这种知识图谱一般也是融合多个数据库，搜索该公司就可以得到该公司的自身情况与与其他公司的关系，从而确定公司的评级，从而辅助投资报告的生成。<h2 id="2-4-精准营销-个性化推荐"><a href="#2-4-精准营销-个性化推荐" class="headerlink" title="2.4 精准营销(个性化推荐)"></a>2.4 精准营销(个性化推荐)</h2>基本思想:<br>　　根据人物的自身属性，社会属性，行为属性推荐符合该用户的情况的产品</li>
+<li>失联客户管理<br>　　联系不到本人的时候,可以联系与它与相关的人,不只只是亲戚<h2><span id="2-2-xin-dai-shen-he-dui-ge-ren">2.2 信贷审核（对个人）</span></h2>　　这种知识图谱一般是融合多个数据库,通过搜索某个人，就可以快速知道该人的社会关系和自身情况等多方面情况,可以确定是否需要进行放贷。<h2><span id="2-3-tou-yan-fen-xi-dui-gong-si">2.3 投研分析（对公司）</span></h2>　　这种知识图谱一般也是融合多个数据库，搜索该公司就可以得到该公司的自身情况与与其他公司的关系，从而确定公司的评级，从而辅助投资报告的生成。<h2><span id="2-4-jing-zhun-ying-xiao-ge-xing-hua-tui-jian">2.4 精准营销(个性化推荐)</span></h2>基本思想:<br>　　根据人物的自身属性，社会属性，行为属性推荐符合该用户的情况的产品</li>
 <li>场景化推荐 （沙滩鞋-&gt;游泳衣、防晒霜、海岛度假产品）</li>
 <li>任务型推荐 （牛肉卷、羊肉卷-&gt;火锅底料、电磁炉？ ；螺丝、螺钉-&gt;多功能螺丝刀）</li>
 <li>冷启动环境（最初使用的时候）下推荐，可以根据浏览时长最长的内容的标签来推荐。（语义标签：摄影VS旅游；相同导演或相同主演的电影；）</li>
 <li>跨领域推荐 （微博如何推荐淘宝商品？用户经常晒九寨沟、黄山、泰山的照片-&gt;淘宝登山装备 )</li>
-<li>知识型推荐—基于知识库的推荐 （清华大学、北京大学-&gt;复旦大学（985名校);阿里、百度-&gt;腾讯（互联网BAT等）<br>趋势：<font color="red">从基于行为的推荐发展到行为与语义融合的智能推荐</font><h2 id="2-5-改善搜索"><a href="#2-5-改善搜索" class="headerlink" title="2.5 改善搜索"></a>2.5 改善搜索</h2>　　有利于让用户探索知识发现的快乐，（利用知识图谱，在提高结果准确率的同时，同时推荐与该结果同主题的知识，例如：搜索长城，推荐故宫，因为两者有一个共同的属性：所在地都是北京），而不是单单搜索答案。<h2 id="2-6-改善问答"><a href="#2-6-改善问答" class="headerlink" title="2.6 改善问答"></a>2.6 改善问答</h2>　　之前KBQA讲过很多,这里不在叙述。<h1 id="三-图谱构建周期"><a href="#三-图谱构建周期" class="headerlink" title="三.图谱构建周期"></a>三.图谱构建周期</h1>　　讲完概念，应用之后，接下来就涉及到图谱的构建。具体情况见如下图：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085517.png" alt="图谱构建过程"><br>　　有五个过程：知识建模,知识抽取,知识融合,知识存储,知识推理（循环迭代）<h1 id="四-知识建模"><a href="#四-知识建模" class="headerlink" title="四.知识建模"></a>四.知识建模</h1>　　在进行知识建模之前。需要对本体要有一定的认识。<h2 id="4-1-本体层"><a href="#4-1-本体层" class="headerlink" title="4.1 本体层"></a>4.1 本体层</h2>　　本体：描述事物的本质，在维基百科中的定义：特定领域的实体及其属性的相互关系的定义<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085519.png" alt="本体层的层次"><br>　　总共有五层：事件层,实体层,概念层,主题分类层<br>　　本体编辑器protege屏蔽了具体的本体描述语言，用户只需在概念层次上进行领域本体模型的构建<h1 id="五-知识抽取"><a href="#五-知识抽取" class="headerlink" title="五.知识抽取:"></a>五.知识抽取:</h1>　　信息抽取(information extraction, IE)；信息抽取是一项从文本中发现实体(entity)以及实体之间的关系(relation)的技术。<br>　　共指解析(coreference resolution)可以帮助IE系统对文中出现的指称(mention)进行归类，避免提取冗余的信息。（就是确定多个指称指向同一个实体）<h2 id="5-1-实体抽取"><a href="#5-1-实体抽取" class="headerlink" title="5.1 实体抽取"></a>5.1 实体抽取</h2>　　crf只能学习相邻比较近的上下文特征。（距离较短）无法获取整个句子，甚至段落更长的特征。<br>业界主流：<br>　　<font color="red">深度循环神经网络（bi-LSTM）+CRF+Embeding</font> ，<br>具体情况如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085521.png" alt="NER技术"><br>　　<strong>顶层</strong>:用crf可以对结果有更好的控制。（之前用深度循环神经网络（bi-LSTM）来细化，之后用crf粗化(约束)，防止过拟合）<br>　　<strong>中层</strong>:深度循环神经网络（bi-LSTM）从前往后与从后往前双向学习上下文的特征，得到序列信号(的记忆与传递。<br>　　　(1)从前往后：华为发布了新一代的麒麟处理X<br>　　　(2)从后往前：X鲜和美国签订了新一轮的谅解备忘录<br>　　<strong>底层</strong>:词向量技术,先将句子/文章转换为高维的稀疏词向量(one-hot),之后使用embeding技术转换成低维的稠密的词向量<h2 id="5-2-关系抽取"><a href="#5-2-关系抽取" class="headerlink" title="5.2 关系抽取"></a>5.2 关系抽取</h2>　　信息抽取(information extraction, IE)；信息抽取是一项从文本中发现实体(entity)以及实体之间的关系(relation)的技术。<br>　　共指解析（coreference resolution）可以帮助IE系统对文中出现的指称(mention)进行归类，避免提取冗余的信息<h3 id="5-2-1-方法"><a href="#5-2-1-方法" class="headerlink" title="5.2.1 方法"></a>5.2.1 方法</h3>(1)有监督的学习方法:<br>　　分类的方法,根据训练的数据,设计有效的特征,来学习各个分类模型—需要大量的人工标注/训练的语料<br>(2)半监督的学习方法<br>　　<strong>常用Bootstrapping进行关系抽取</strong>:对于要抽取的关系:先基于手工设定若干种子实例,之后迭代的从数据当中抽取关系对应的模版和更多的实例,使用迭代的方式来抽取越来越多的实例。<br>(2)无监督的学习方法:聚类<br>　　先假设拥有相同语义关系的实体(实体链接相同)拥有相同的上下文,因此可以利用实体的上下文代表实体的语义关系,然后对实体的语义关系进行聚类<br>　　三种方法当中: 有监督的方法能够抽取有效的特征,其余两种效果不是很好.因此如何高效获取训练样本,就成为了一个问题.使用远程监督（Distant supervision）技术，代表工具:deepdive:信息抽取框架。<h3 id="5-2-2-工具"><a href="#5-2-2-工具" class="headerlink" title="5.2.2 工具"></a>5.2.2 工具</h3><h4 id="1-deepdvie"><a href="#1-deepdvie" class="headerlink" title="(1).deepdvie"></a>(1).deepdvie</h4>　　使用弱监督方法（Distant supervision技术）的deppdive,lDeepdive是由斯坦福大学InfoLab实验室开发的一个开源知识抽取系统。它通过弱监督学习，从非结构化的文本中抽取结构化的关系数据 ，可以判断两个实体间是否存在指定关系。具有较强的灵活性，可以自己训练模型。<br>　　DeepDive要求开发者思考特征而不是算法，可以通过使用已有的领域知识指导推理，接受用户反馈，提高预测的质量，使用Distant supervision技术，只需少量/甚至不需要训练数据，有监督学习法因为能够抽取并有效利用特征，在获得高准确率和高召回率方面更有优势，<font color="red">是目前业界应用最广泛的一类方法</font>。先讲一下一些相关的概念：<br>　　(1)实体(entity)：知识库中完整定义的，唯一存在的条目，在coreference resolution这个任务中，每一个实体都可以看作是指代它的名词短语或代词构成的集合(巴拉克－奥巴马={美国总统, 奥巴马, 第44任美国总统, 他})。<br>　　(2)指称(mention)：实体在自然语言文本中的别名或另一种指代形式，美国总统, 奥巴马, 第44任美国总统, 他 等都是mention。mention的类型一般有3类：专有名词（proper noun，巴拉克－奥巴马），名词性词（nominal, 第44任美国总统），代词（pronominal, 他）<br>　　(3)共指(corefer)：如果文本或句子中的两个mention指代的是同一个entity，那么它们之间存在着一种共指(corefer)关系。美国总统与第44任美国总统 即是共指的两个mention<h4 id="1-1-工作流程"><a href="#1-1-工作流程" class="headerlink" title="(1.1) 工作流程"></a>(1.1) 工作流程</h4><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085522.png" alt="Deepdive工作流程"><br>具体工作流程如下：<br>1.<strong>输入句子（可以长句）</strong>：<br>　　如”Barack and Michelle are married”这个句子—<font color="red">mention级数据</font><br>2.<strong>实体识别</strong>：<br>　　识别实体的指称(mention)，实体在自然语言文本中的别名或另一种指代形式，美国总统, 奥巴马, 第44任美国总统, 他 等都是mention。mention的类型一般有3类：专有名词（proper noun，巴拉克－奥巴马），名词性词（nominal, 第44任美国总统），代词（pronominal, 他）—<font color="red">mention级实体</font><br>3.<strong>确定mention级关系</strong>：<br>　　确定-mention级实体之间的关系，因为mention级实体两两匹配可能会有多个mention级关系。—-<font color="red">mention级关系</font><br>3.<strong>实体链接</strong>:<br>　　就是将实体的指称映射到知识库当中,当然这也是以知识库当中的知识都是正确的。—<font color="red">Mention的实体与知识库级实体的映射</font><br>4.<strong>确定实体级/知识库级关系</strong>：<br>　　在知识库当中查找确定最终关系.—<font color="red">实体级/知识库级关系</font><br>总体就是流水线式抽取，但是有两个缺点：<br>　　（1）错误传播，如果实体识别错了，后面一定会错；<br>　　（2）关系冗余：因为mention级实体两两匹配可能会有多个mention级关系，导致在知识库级实体的关系也是有多个，尽管有些关系不存在，但是还是需要进行验证。<h3 id="2-联合学习标注"><a href="#2-联合学习标注" class="headerlink" title="(2).联合学习标注"></a>(2).联合学习标注</h3>通常是基于神经网络的联合标注<br>两个问题:<br>　　<strong>模型参数共享的问题与标注的策略</strong>。<br>　　其中模型参数共享的问题:在训练的时候能够进行实体识别与关系分类。通过反向传播来更新参数，实现模型参数的依赖来完成上述两个子任务（也是相互依赖，实体识别与关系分类），本质还是两个任务，只不过将两个子任务的依赖体现在参数的不断更新，使得模型合适实体识别与关系分类，因此仍然会有关系冗余（训练之前还需要进行NER，然后对句子中出现的各个实体进行相两两匹配，进行关系的分类）。<h4 id="2-1-基于深度学习端到端的联合标注"><a href="#2-1-基于深度学习端到端的联合标注" class="headerlink" title="(2.1) 基于深度学习端到端的联合标注"></a>(2.1) 基于深度学习端到端的联合标注</h4><font color="red">将抽取的问题转换成标注任务</font>，两个步骤：<br>　　(1)训练模型：先构建一个标注框架,之后训练一个端到端的标注模型。<br>　　(2)答案提取：输入句子之后，先使用标注框架进行标注（<font color="red">实质是进行实体识别,之后两两匹配,得到多个关系,也就是得到的标注情况有多种</font>），之后使用训练好的模型得到最合适的序列标注(<font color="red">确定实体关系</font>)，然后将同样关系类型的实体合并成一个三元组，作为最终的提取结果。具体过程见下图：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085523.png" alt="深度学习端到端的联合标注"><br>因此需要对序列标注进行着重讲解:<h5 id="2-1-1-序列标注："><a href="#2-1-1-序列标注：" class="headerlink" title="(2.1.1) 序列标注："></a>(2.1.1) 序列标注：</h5>具体情况见下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085524.png" alt="序列标注"><br>　　(1)实体中词的位置：（实体中词的位置，B，I，E分别表示实体的开始，内部，结尾）<br>　　(2)关系类型的信息：cp:总统,cf:创始人<br>　　(3)实体的位置:是实体1还是实体2<br>　　(4)除了实体及其关系的其他词语都用o来表示<h1 id="六-实体融合"><a href="#六-实体融合" class="headerlink" title="六.实体融合"></a>六.实体融合</h1>　　<strong>主要任务是实体对齐，实体合并</strong>。最主要实体对齐,其中实体合并的过程包括实体对齐，不同实体的合并问题等等。<h2 id="6-1-实体对齐"><a href="#6-1-实体对齐" class="headerlink" title="6.1 实体对齐"></a>6.1 实体对齐</h2>　　旨在发现具有<strong>不同标识实体但却代表真实世界中同一对象的那些实体</strong>，并将这些实体归并为一个具有全局唯一标识的实体对象添加到知识图谱中（例如china，中国，中华人民共和国指的是相同的实体）.和共指解析有异曲同工之妙。通常采用聚类的方法,关键定义相似度的阈值。<strong>主要有两种方法实现实体对齐：计算相似度，融合人工对齐的标注数据</strong>。<h3 id="6-1-1-计算相似度"><a href="#6-1-1-计算相似度" class="headerlink" title="6.1.1 计算相似度"></a>6.1.1 计算相似度</h3>实体对齐主要通过计算实例之间相似度<br>　　(1)字符相似度维度：实体间的描述的相似度；<br>　　(2)属性相似度：实体间的属性相似度，相同属性值<br>　　(3)结构相似度：具有相同邻居的实体可能指向同一个对象<h3 id="6-1-2-融合人工对齐的标注数据"><a href="#6-1-2-融合人工对齐的标注数据" class="headerlink" title="6.1.2 融合人工对齐的标注数据"></a>6.1.2 融合人工对齐的标注数据</h3>　　如LOD (linked open data)中已有的人工对齐标注数据（使用owl:sameAs关联两个实体）可以作为训练数据学习发现更多相同的实体对。<h2 id="6-2-实体合并"><a href="#6-2-实体合并" class="headerlink" title="6.2 实体合并"></a>6.2 实体合并</h2>例如：不同实体的合并问题，隐含父子关系<br>　　(1)考虑不同实体间对应数据源的可靠性；<br>　　(2)考虑不同实体在各个数据源当中的出现频率等确定选用哪个实体。<br>　　<strong>不管使用哪种方法，因为无论何种自动化方法都无法保证100%的准确率，最后都需要使用人工校验</strong><h1 id="七-知识存储"><a href="#七-知识存储" class="headerlink" title="七.知识存储"></a>七.知识存储</h1>　数据库层面的选择有：图数据库、NoSQL数据库、关系数据库<br>　　(1)若KG结构复杂，且关系复杂，连接多，建议使用图数据库，如Neo4J等<br>　　(2)若KG侧重节点知识，关系简单，连接少，可以使用传统关系数据库<br>　　(3)若考虑KG的性能、扩展性和分布式等，可以使用NoSQL数据库（HBASE，HIVE）<br>　　(4)根据实际情况，也可以多种数据库融合使用（ES和Neo4J )<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085525.png" alt="各个图数据"><h1 id="八-知识推理"><a href="#八-知识推理" class="headerlink" title="八.知识推理"></a>八.知识推理</h1><h2 id="8-1-基于符号的推理"><a href="#8-1-基于符号的推理" class="headerlink" title="8.1 基于符号的推理"></a>8.1 基于符号的推理</h2>1.一阶谓词逻辑<br>　　(1)一套灵活且紧凑的对象知识表示方式<br>　　(2)完善的推理能力和表达能力支持<br>2.Semantic Net<br>　　(1)一个通过语义关系连接的概念网络<br>　　(2)表达能力受限，直观但是缺乏语义支持<br>3.Frame–框架逻辑<br>　　(1)直接表示领域知识模型,支持默认推理<br>　　(2)表达能力受限，缺乏语义支持<br>4.Script<br>　　表达事件知识，非常受限， 对符合条件的场景非常适合<br>5.语义网知识表示语言体系<br>　　语义网提供了一套为描述数据而设计的表示语言和工具，用于形式化的描述一个知识领域内的概念、术语和关系。一系列W3C的标准和工具:<br>　　(1)RDF,RDFS: 缺少准确的语义描述; 不含推理模型。<br>　　(2)OWL,XML等<br>缺点:<br>　　学习成本较高,有的时候杀鸡用牛刀.<h2 id="8-2-基于图计算的推理"><a href="#8-2-基于图计算的推理" class="headerlink" title="8.2 基于图计算的推理"></a>8.2 基于图计算的推理</h2>　　主要是PRA算法(path ranking algorithm),将连接两个实体的路径作为特征来预测其之间可能存在的关系。主要涉及中心度(缩短路径距离)与信息流(优化路径)的选择。<h3 id="8-2-1-图计算引擎"><a href="#8-2-1-图计算引擎" class="headerlink" title="8.2.1 图计算引擎"></a>8.2.1 图计算引擎</h3>　　基于图计算的推理，一般都采用图计算引擎来实现,这里结合项目，以graphX和neo4j（本质上也是一个图引擎）为例，两者区别见下图。</li>
+<li>知识型推荐—基于知识库的推荐 （清华大学、北京大学-&gt;复旦大学（985名校);阿里、百度-&gt;腾讯（互联网BAT等）<br>趋势：<font color="red">从基于行为的推荐发展到行为与语义融合的智能推荐</font><h2><span id="2-5-gai-shan-sou-suo">2.5 改善搜索</span></h2>　　有利于让用户探索知识发现的快乐，（利用知识图谱，在提高结果准确率的同时，同时推荐与该结果同主题的知识，例如：搜索长城，推荐故宫，因为两者有一个共同的属性：所在地都是北京），而不是单单搜索答案。<h2><span id="2-6-gai-shan-wen-da">2.6 改善问答</span></h2>　　之前KBQA讲过很多,这里不在叙述。<h1><span id="san-tu-pu-gou-jian-zhou-qi">三.图谱构建周期</span></h1>　　讲完概念，应用之后，接下来就涉及到图谱的构建。具体情况见如下图：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085517.png" alt="图谱构建过程"><br>　　有五个过程：知识建模,知识抽取,知识融合,知识存储,知识推理（循环迭代）<h1><span id="si-zhi-shi-jian-mo">四.知识建模</span></h1>　　在进行知识建模之前。需要对本体要有一定的认识。<h2><span id="4-1-ben-ti-ceng">4.1 本体层</span></h2>　　本体：描述事物的本质，在维基百科中的定义：特定领域的实体及其属性的相互关系的定义<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085519.png" alt="本体层的层次"><br>　　总共有五层：事件层,实体层,概念层,主题分类层<br>　　本体编辑器protege屏蔽了具体的本体描述语言，用户只需在概念层次上进行领域本体模型的构建<h1><span id="wu-zhi-shi-chou-qu">五.知识抽取:</span></h1>　　信息抽取(information extraction, IE)；信息抽取是一项从文本中发现实体(entity)以及实体之间的关系(relation)的技术。<br>　　共指解析(coreference resolution)可以帮助IE系统对文中出现的指称(mention)进行归类，避免提取冗余的信息。（就是确定多个指称指向同一个实体）<h2><span id="5-1-shi-ti-chou-qu">5.1 实体抽取</span></h2>　　crf只能学习相邻比较近的上下文特征。（距离较短）无法获取整个句子，甚至段落更长的特征。<br>业界主流：<br>　　<font color="red">深度循环神经网络（bi-LSTM）+CRF+Embeding</font> ，<br>具体情况如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085521.png" alt="NER技术"><br>　　<strong>顶层</strong>:用crf可以对结果有更好的控制。（之前用深度循环神经网络（bi-LSTM）来细化，之后用crf粗化(约束)，防止过拟合）<br>　　<strong>中层</strong>:深度循环神经网络（bi-LSTM）从前往后与从后往前双向学习上下文的特征，得到序列信号(的记忆与传递。<br>　　　(1)从前往后：华为发布了新一代的麒麟处理X<br>　　　(2)从后往前：X鲜和美国签订了新一轮的谅解备忘录<br>　　<strong>底层</strong>:词向量技术,先将句子/文章转换为高维的稀疏词向量(one-hot),之后使用embeding技术转换成低维的稠密的词向量<h2><span id="5-2-guan-xi-chou-qu">5.2 关系抽取</span></h2>　　信息抽取(information extraction, IE)；信息抽取是一项从文本中发现实体(entity)以及实体之间的关系(relation)的技术。<br>　　共指解析（coreference resolution）可以帮助IE系统对文中出现的指称(mention)进行归类，避免提取冗余的信息<h3><span id="5-2-1-fang-fa">5.2.1 方法</span></h3>(1)有监督的学习方法:<br>　　分类的方法,根据训练的数据,设计有效的特征,来学习各个分类模型—需要大量的人工标注/训练的语料<br>(2)半监督的学习方法<br>　　<strong>常用Bootstrapping进行关系抽取</strong>:对于要抽取的关系:先基于手工设定若干种子实例,之后迭代的从数据当中抽取关系对应的模版和更多的实例,使用迭代的方式来抽取越来越多的实例。<br>(2)无监督的学习方法:聚类<br>　　先假设拥有相同语义关系的实体(实体链接相同)拥有相同的上下文,因此可以利用实体的上下文代表实体的语义关系,然后对实体的语义关系进行聚类<br>　　三种方法当中: 有监督的方法能够抽取有效的特征,其余两种效果不是很好.因此如何高效获取训练样本,就成为了一个问题.使用远程监督（Distant supervision）技术，代表工具:deepdive:信息抽取框架。<h3><span id="5-2-2-gong-ju">5.2.2 工具</span></h3><h4><span id="1-deepdvie">(1).deepdvie</span></h4>　　使用弱监督方法（Distant supervision技术）的deppdive,lDeepdive是由斯坦福大学InfoLab实验室开发的一个开源知识抽取系统。它通过弱监督学习，从非结构化的文本中抽取结构化的关系数据 ，可以判断两个实体间是否存在指定关系。具有较强的灵活性，可以自己训练模型。<br>　　DeepDive要求开发者思考特征而不是算法，可以通过使用已有的领域知识指导推理，接受用户反馈，提高预测的质量，使用Distant supervision技术，只需少量/甚至不需要训练数据，有监督学习法因为能够抽取并有效利用特征，在获得高准确率和高召回率方面更有优势，<font color="red">是目前业界应用最广泛的一类方法</font>。先讲一下一些相关的概念：<br>　　(1)实体(entity)：知识库中完整定义的，唯一存在的条目，在coreference resolution这个任务中，每一个实体都可以看作是指代它的名词短语或代词构成的集合(巴拉克－奥巴马={美国总统, 奥巴马, 第44任美国总统, 他})。<br>　　(2)指称(mention)：实体在自然语言文本中的别名或另一种指代形式，美国总统, 奥巴马, 第44任美国总统, 他 等都是mention。mention的类型一般有3类：专有名词（proper noun，巴拉克－奥巴马），名词性词（nominal, 第44任美国总统），代词（pronominal, 他）<br>　　(3)共指(corefer)：如果文本或句子中的两个mention指代的是同一个entity，那么它们之间存在着一种共指(corefer)关系。美国总统与第44任美国总统 即是共指的两个mention<h4><span id="1-1-gong-zuo-liu-cheng">(1.1) 工作流程</span></h4><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085522.png" alt="Deepdive工作流程"><br>具体工作流程如下：<br>1.<strong>输入句子（可以长句）</strong>：<br>　　如”Barack and Michelle are married”这个句子—<font color="red">mention级数据</font><br>2.<strong>实体识别</strong>：<br>　　识别实体的指称(mention)，实体在自然语言文本中的别名或另一种指代形式，美国总统, 奥巴马, 第44任美国总统, 他 等都是mention。mention的类型一般有3类：专有名词（proper noun，巴拉克－奥巴马），名词性词（nominal, 第44任美国总统），代词（pronominal, 他）—<font color="red">mention级实体</font><br>3.<strong>确定mention级关系</strong>：<br>　　确定-mention级实体之间的关系，因为mention级实体两两匹配可能会有多个mention级关系。—-<font color="red">mention级关系</font><br>3.<strong>实体链接</strong>:<br>　　就是将实体的指称映射到知识库当中,当然这也是以知识库当中的知识都是正确的。—<font color="red">Mention的实体与知识库级实体的映射</font><br>4.<strong>确定实体级/知识库级关系</strong>：<br>　　在知识库当中查找确定最终关系.—<font color="red">实体级/知识库级关系</font><br>总体就是流水线式抽取，但是有两个缺点：<br>　　（1）错误传播，如果实体识别错了，后面一定会错；<br>　　（2）关系冗余：因为mention级实体两两匹配可能会有多个mention级关系，导致在知识库级实体的关系也是有多个，尽管有些关系不存在，但是还是需要进行验证。<h3><span id="2-lian-he-xue-xi-biao-zhu">(2).联合学习标注</span></h3>通常是基于神经网络的联合标注<br>两个问题:<br>　　<strong>模型参数共享的问题与标注的策略</strong>。<br>　　其中模型参数共享的问题:在训练的时候能够进行实体识别与关系分类。通过反向传播来更新参数，实现模型参数的依赖来完成上述两个子任务（也是相互依赖，实体识别与关系分类），本质还是两个任务，只不过将两个子任务的依赖体现在参数的不断更新，使得模型合适实体识别与关系分类，因此仍然会有关系冗余（训练之前还需要进行NER，然后对句子中出现的各个实体进行相两两匹配，进行关系的分类）。<h4><span id="2-1-ji-yu-shen-du-xue-xi-duan-dao-duan-de-lian-he-biao-zhu">(2.1) 基于深度学习端到端的联合标注</span></h4><font color="red">将抽取的问题转换成标注任务</font>，两个步骤：<br>　　(1)训练模型：先构建一个标注框架,之后训练一个端到端的标注模型。<br>　　(2)答案提取：输入句子之后，先使用标注框架进行标注（<font color="red">实质是进行实体识别,之后两两匹配,得到多个关系,也就是得到的标注情况有多种</font>），之后使用训练好的模型得到最合适的序列标注(<font color="red">确定实体关系</font>)，然后将同样关系类型的实体合并成一个三元组，作为最终的提取结果。具体过程见下图：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085523.png" alt="深度学习端到端的联合标注"><br>因此需要对序列标注进行着重讲解:<h5><span id="2-1-1-xu-lie-biao-zhu">(2.1.1) 序列标注：</span></h5>具体情况见下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085524.png" alt="序列标注"><br>　　(1)实体中词的位置：（实体中词的位置，B，I，E分别表示实体的开始，内部，结尾）<br>　　(2)关系类型的信息：cp:总统,cf:创始人<br>　　(3)实体的位置:是实体1还是实体2<br>　　(4)除了实体及其关系的其他词语都用o来表示<h1><span id="liu-shi-ti-rong-he">六.实体融合</span></h1>　　<strong>主要任务是实体对齐，实体合并</strong>。最主要实体对齐,其中实体合并的过程包括实体对齐，不同实体的合并问题等等。<h2><span id="6-1-shi-ti-dui-qi">6.1 实体对齐</span></h2>　　旨在发现具有<strong>不同标识实体但却代表真实世界中同一对象的那些实体</strong>，并将这些实体归并为一个具有全局唯一标识的实体对象添加到知识图谱中（例如china，中国，中华人民共和国指的是相同的实体）.和共指解析有异曲同工之妙。通常采用聚类的方法,关键定义相似度的阈值。<strong>主要有两种方法实现实体对齐：计算相似度，融合人工对齐的标注数据</strong>。<h3><span id="6-1-1-ji-suan-xiang-si-du">6.1.1 计算相似度</span></h3>实体对齐主要通过计算实例之间相似度<br>　　(1)字符相似度维度：实体间的描述的相似度；<br>　　(2)属性相似度：实体间的属性相似度，相同属性值<br>　　(3)结构相似度：具有相同邻居的实体可能指向同一个对象<h3><span id="6-1-2-rong-he-ren-gong-dui-qi-de-biao-zhu-shu-ju">6.1.2 融合人工对齐的标注数据</span></h3>　　如LOD (linked open data)中已有的人工对齐标注数据（使用owl:sameAs关联两个实体）可以作为训练数据学习发现更多相同的实体对。<h2><span id="6-2-shi-ti-he-bing">6.2 实体合并</span></h2>例如：不同实体的合并问题，隐含父子关系<br>　　(1)考虑不同实体间对应数据源的可靠性；<br>　　(2)考虑不同实体在各个数据源当中的出现频率等确定选用哪个实体。<br>　　<strong>不管使用哪种方法，因为无论何种自动化方法都无法保证100%的准确率，最后都需要使用人工校验</strong><h1><span id="qi-zhi-shi-cun-chu">七.知识存储</span></h1>　数据库层面的选择有：图数据库、NoSQL数据库、关系数据库<br>　　(1)若KG结构复杂，且关系复杂，连接多，建议使用图数据库，如Neo4J等<br>　　(2)若KG侧重节点知识，关系简单，连接少，可以使用传统关系数据库<br>　　(3)若考虑KG的性能、扩展性和分布式等，可以使用NoSQL数据库（HBASE，HIVE）<br>　　(4)根据实际情况，也可以多种数据库融合使用（ES和Neo4J )<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085525.png" alt="各个图数据"><h1><span id="ba-zhi-shi-tui-li">八.知识推理</span></h1><h2><span id="8-1-ji-yu-fu-hao-de-tui-li">8.1 基于符号的推理</span></h2>1.一阶谓词逻辑<br>　　(1)一套灵活且紧凑的对象知识表示方式<br>　　(2)完善的推理能力和表达能力支持<br>2.Semantic Net<br>　　(1)一个通过语义关系连接的概念网络<br>　　(2)表达能力受限，直观但是缺乏语义支持<br>3.Frame–框架逻辑<br>　　(1)直接表示领域知识模型,支持默认推理<br>　　(2)表达能力受限，缺乏语义支持<br>4.Script<br>　　表达事件知识，非常受限， 对符合条件的场景非常适合<br>5.语义网知识表示语言体系<br>　　语义网提供了一套为描述数据而设计的表示语言和工具，用于形式化的描述一个知识领域内的概念、术语和关系。一系列W3C的标准和工具:<br>　　(1)RDF,RDFS: 缺少准确的语义描述; 不含推理模型。<br>　　(2)OWL,XML等<br>缺点:<br>　　学习成本较高,有的时候杀鸡用牛刀.<h2><span id="8-2-ji-yu-tu-ji-suan-de-tui-li">8.2 基于图计算的推理</span></h2>　　主要是PRA算法(path ranking algorithm),将连接两个实体的路径作为特征来预测其之间可能存在的关系。主要涉及中心度(缩短路径距离)与信息流(优化路径)的选择。<h3><span id="8-2-1-tu-ji-suan-yin-qing">8.2.1 图计算引擎</span></h3>　　基于图计算的推理，一般都采用图计算引擎来实现,这里结合项目，以graphX和neo4j（本质上也是一个图引擎）为例，两者区别见下图。</li>
 </ul>
 <table>
 <thead>
@@ -318,13 +395,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id="8-2-2-中心度"><a href="#8-2-2-中心度" class="headerlink" title="8.2.2 中心度"></a>8.2.2 中心度</h3><p>1.紧密中心度<br>　　紧密中心度（closeness centrality）是依据网络中各个节点之间的最短路分布而定义的中心度。</p>
+<h3><span id="8-2-2-zhong-xin-du">8.2.2 中心度</span></h3><p>1.紧密中心度<br>　　紧密中心度（closeness centrality）是依据网络中各个节点之间的最短路分布而定义的中心度。</p>
 <ul>
 <li>顶点到其余顶点的最短距离总和越小，紧密中心度就越大。 </li>
 <li>形象理解为紧密中心度越大的顶点越处于网络的“中央”。</li>
 </ul>
 <p>2.中介(Betweenness)中心度<br>　　如果一个顶点位于其余顶点间的多条最短路径上，则认为该顶点重要节点。<br>3.特征向量中心度<br>　　认为“顶点g的每个邻居为g贡献一个点的重要性”<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85526.png" alt="特征向量中心度"></p>
-<h3 id="8-2-3-信息流"><a href="#8-2-3-信息流" class="headerlink" title="8.2.3 信息流"></a>8.2.3 信息流</h3><p>传播种类:<br>(1)信息传播模式</p>
+<h3><span id="8-2-3-xin-xi-liu">8.2.3 信息流</span></h3><p>传播种类:<br>(1)信息传播模式</p>
 <ul>
 <li>replication：并行复制、串行复制</li>
 <li>transfer</li>
@@ -340,10 +417,10 @@
 <li>最优选择</li>
 <li>随机选择</li>
 </ul>
-<h3 id="8-2-4-关系"><a href="#8-2-4-关系" class="headerlink" title="8.2.4 关系"></a>8.2.4 关系</h3><ul>
+<h3><span id="8-2-4-guan-xi">8.2.4 关系</span></h3><ul>
 <li>中心度衡量节点的重要性；</li>
 <li>重要性则由网络上信息传播过程中节点的关键性体现； </li>
-<li>不同的信息传递方式对节点重要性的度量有着不同的影响。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085527.png" alt="中心度与信息流关系"><h2 id="8-3-基于分布式推理"><a href="#8-3-基于分布式推理" class="headerlink" title="8.3 基于分布式推理"></a>8.3 基于分布式推理</h2><h3 id="8-3-1-transe系列模型"><a href="#8-3-1-transe系列模型" class="headerlink" title="8.3.1 transe系列模型"></a>8.3.1 transe系列模型</h3>　　将实体和关系映射到一个低维的embedding空间中，基于知识的语义表达进行推理建模.<h3 id="8-3-2-基于深度学习"><a href="#8-3-2-基于深度学习" class="headerlink" title="8.3.2 基于深度学习"></a>8.3.2 基于深度学习</h3><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085528.png" alt="基于深度学习的推理"><br>　　词向量是基于依存数的,也就是词在文中/句中的位置,将位置写入词向量中,之后使用卷积神经网络训练,效果较之前单纯的词向量有较大的提升<h1 id="九-经验"><a href="#九-经验" class="headerlink" title="九.经验"></a>九.经验</h1>1.界定场景与急需解决的问题<br>2.设计好模型：<br>　　定义出与场景和问题相关的领域概念层次结构、概念之间的关系类型定义<br>3.搜集数据：<br>　　根据问题和场景梳理领域相关数据，结构化、半结构化、无结构化行业语料、百科相关数据、行业词典、专家规则（规则也是数据，类似词典）。<br>4.不要重复造轮子：<br>　　合理利用百科的数据和开放知识图谱的数据<br>5.验证与反馈：<br>　　必须要有验证与反馈机制，确保知识的精确性<br>6.持续迭代：<br>　　本身是一个持续迭代的系统工程，人机交互，持续运营，不断丰富完善。<br><strong>补充:</strong><br>　　(1)结构化数据:sql数据库<br>　　(2)半结构划数据:—excel,csv,json,xml<br>　　(3)无结构化数据:纯文本,html<br>　　(4)知识图谱的更新,在三元组基础上加上时间维度,或者知识图谱实时连接到实时更新的关系数据库上。<h1 id="十-知识图谱发展史"><a href="#十-知识图谱发展史" class="headerlink" title="十.知识图谱发展史"></a>十.知识图谱发展史</h1><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085530.png" alt="知识图谱发展史"></li>
+<li>不同的信息传递方式对节点重要性的度量有着不同的影响。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085527.png" alt="中心度与信息流关系"><h2><span id="8-3-ji-yu-fen-bu-shi-tui-li">8.3 基于分布式推理</span></h2><h3><span id="8-3-1-transe-xi-lie-mo-xing">8.3.1 transe系列模型</span></h3>　　将实体和关系映射到一个低维的embedding空间中，基于知识的语义表达进行推理建模.<h3><span id="8-3-2-ji-yu-shen-du-xue-xi">8.3.2 基于深度学习</span></h3><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085528.png" alt="基于深度学习的推理"><br>　　词向量是基于依存数的,也就是词在文中/句中的位置,将位置写入词向量中,之后使用卷积神经网络训练,效果较之前单纯的词向量有较大的提升<h1><span id="jiu-jing-yan">九.经验</span></h1>1.界定场景与急需解决的问题<br>2.设计好模型：<br>　　定义出与场景和问题相关的领域概念层次结构、概念之间的关系类型定义<br>3.搜集数据：<br>　　根据问题和场景梳理领域相关数据，结构化、半结构化、无结构化行业语料、百科相关数据、行业词典、专家规则（规则也是数据，类似词典）。<br>4.不要重复造轮子：<br>　　合理利用百科的数据和开放知识图谱的数据<br>5.验证与反馈：<br>　　必须要有验证与反馈机制，确保知识的精确性<br>6.持续迭代：<br>　　本身是一个持续迭代的系统工程，人机交互，持续运营，不断丰富完善。<br><strong>补充:</strong><br>　　(1)结构化数据:sql数据库<br>　　(2)半结构划数据:—excel,csv,json,xml<br>　　(3)无结构化数据:纯文本,html<br>　　(4)知识图谱的更新,在三元组基础上加上时间维度,或者知识图谱实时连接到实时更新的关系数据库上。<h1><span id="shi-zhi-shi-tu-pu-fa-zhan-shi">十.知识图谱发展史</span></h1><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085530.png" alt="知识图谱发展史"></li>
 </ul>
 
         
@@ -564,7 +641,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

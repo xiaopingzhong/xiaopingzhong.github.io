@@ -267,16 +267,30 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　fuseki就是一个sparql服务,主要是用来查询知识图谱的RDF三元组的,可以把它看成一个查询语言,可以作为一个查询与存储的服务器.<a id="more"></a></p>
+            <p>fuseki就是一个sparql服务,主要是用来查询知识图谱的RDF三元组的,可以把它看成一个查询语言,可以作为一个查询与存储的服务器.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-jian-jie">一.简介</a></li>
+<li><a href="#er-shi-li">二、 示例</a><ul>
+<li><a href="#2-1-qi-dong-fuseki-fu-wu-qi">2.1启动fuseki服务器</a></li>
+<li><a href="#2-2-liu-lan-qi-zhong-ce-shi-bing-xing-jian-shu-ju-ku">2.2浏览器中测试并兴建数据库</a></li>
+<li><a href="#2-3-shang-chuan-shu-ju-dao-shu-ju-ku-zhi-zhong">2.3上传数据到数据库之中</a></li>
+<li><a href="#2-4-jin-xing-zai-xian-ce-shi-cha-xun">2.4进行在线测试查询</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-简介"><a href="#一-简介" class="headerlink" title="一.简介"></a>一.简介</h1><p>　　Fuseki，通过HTTP提供RDF数据。Fuseki是一个SPARQL服务器。它通过HTTP提供使用SPARQL协议的REST式SPARQL HTTP更新，SPARQL查询和SPARQL更新。<br>  详细内容请访问下面的网址<a href="http://jena.apache.org/documentation/fuseki2/index.html" target="_blank" rel="noopener">http://jena.apache.org/documentation/fuseki2/index.html</a><br>　　关于安装和使用下面的一个示例来介绍。 </p>
-<h1 id="二、-示例"><a href="#二、-示例" class="headerlink" title="二、 示例"></a>二、 示例</h1><p>　　构建一个YAGO的图数据库，并且提供endpoint访问接口。 </p>
-<h3 id="2-1启动fuseki服务器"><a href="#2-1启动fuseki服务器" class="headerlink" title="2.1启动fuseki服务器"></a>2.1启动fuseki服务器</h3><p>　（1） 首先，我们在官网上下载Fuseki。最新版本是3.5的，我使用的是3.4版本的为例。下载zip，解压之后,找到相应的文件夹。<br> 　　例如：D:\APP\apache-jena-fuseki-3.4.0。双击fuseki-server.bat脚本文件，出现如图所示的界面。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084715.jpg" alt=""></p>
-<h3 id="2-2浏览器中测试并兴建数据库"><a href="#2-2浏览器中测试并兴建数据库" class="headerlink" title="2.2浏览器中测试并兴建数据库"></a>2.2浏览器中测试并兴建数据库</h3><p>（2）打开，浏览器，访问：<a href="http://localhost:3030/" target="_blank" rel="noopener">http://localhost:3030</a> 回车。出现如图所示的界面。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084716.jpg" alt="mark"><br>　　这样就搭建好了Fuseki，接下来，我们可以创建数据库了。点击addone<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084717.jpg" alt=""><br>　　注意：这里第二步要选择persistent持久化，以确保数据能够永久保存，而in-memorary是关闭Fuseki之后数据就会消失的，可以当作小练习的时候选择，如果是做项目建议选择persistent。这样就创建好了一个数据库了。 </p>
-<h3 id="2-3上传数据到数据库之中"><a href="#2-3上传数据到数据库之中" class="headerlink" title="2.3上传数据到数据库之中"></a>2.3上传数据到数据库之中</h3><p>　　(3) 点击uploaddata，可以上传数据。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084719.jpg" alt=""><br>点击select files, 选择一个文件。比如yagoDataTest.ttl<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84720.jpg" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084721.jpg" alt=""><br>单击updata now.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084722.jpg" alt=""><br>　　文件上传成功！可以上传多个文件。文件格式可以是多个支持RDF文件的格式。上传到我们后台数据库中了。<br>　　再看看命令终端显示Fuseki的信息，也是成功了.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084723.jpg" alt=""></p>
-<h3 id="2-4进行在线测试查询"><a href="#2-4进行在线测试查询" class="headerlink" title="2.4进行在线测试查询"></a>2.4进行在线测试查询</h3><p>　　(4) 测试+查询:<br>　　点击query:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084728.jpg" alt=""><br>　　执行之后:<br>　　运行结果如图所示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084729.jpg" alt=""><br>　　好了,开始你自己的查询吧!</p>
+<h1><span id="yi-jian-jie">一.简介</span></h1><p>　　Fuseki，通过HTTP提供RDF数据。Fuseki是一个SPARQL服务器。它通过HTTP提供使用SPARQL协议的REST式SPARQL HTTP更新，SPARQL查询和SPARQL更新。<br>  详细内容请访问下面的网址<a href="http://jena.apache.org/documentation/fuseki2/index.html" target="_blank" rel="noopener">http://jena.apache.org/documentation/fuseki2/index.html</a><br>　　关于安装和使用下面的一个示例来介绍。 </p>
+<h1><span id="er-shi-li">二、 示例</span></h1><p>　　构建一个YAGO的图数据库，并且提供endpoint访问接口。 </p>
+<h3><span id="2-1-qi-dong-fuseki-fu-wu-qi">2.1启动fuseki服务器</span></h3><p>　（1） 首先，我们在官网上下载Fuseki。最新版本是3.5的，我使用的是3.4版本的为例。下载zip，解压之后,找到相应的文件夹。<br> 　　例如：D:\APP\apache-jena-fuseki-3.4.0。双击fuseki-server.bat脚本文件，出现如图所示的界面。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084715.jpg" alt=""></p>
+<h3><span id="2-2-liu-lan-qi-zhong-ce-shi-bing-xing-jian-shu-ju-ku">2.2浏览器中测试并兴建数据库</span></h3><p>（2）打开，浏览器，访问：<a href="http://localhost:3030/" target="_blank" rel="noopener">http://localhost:3030</a> 回车。出现如图所示的界面。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084716.jpg" alt="mark"><br>　　这样就搭建好了Fuseki，接下来，我们可以创建数据库了。点击addone<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084717.jpg" alt=""><br>　　注意：这里第二步要选择persistent持久化，以确保数据能够永久保存，而in-memorary是关闭Fuseki之后数据就会消失的，可以当作小练习的时候选择，如果是做项目建议选择persistent。这样就创建好了一个数据库了。 </p>
+<h3><span id="2-3-shang-chuan-shu-ju-dao-shu-ju-ku-zhi-zhong">2.3上传数据到数据库之中</span></h3><p>　　(3) 点击uploaddata，可以上传数据。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084719.jpg" alt=""><br>点击select files, 选择一个文件。比如yagoDataTest.ttl<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84720.jpg" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084721.jpg" alt=""><br>单击updata now.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084722.jpg" alt=""><br>　　文件上传成功！可以上传多个文件。文件格式可以是多个支持RDF文件的格式。上传到我们后台数据库中了。<br>　　再看看命令终端显示Fuseki的信息，也是成功了.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084723.jpg" alt=""></p>
+<h3><span id="2-4-jin-xing-zai-xian-ce-shi-cha-xun">2.4进行在线测试查询</span></h3><p>　　(4) 测试+查询:<br>　　点击query:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084728.jpg" alt=""><br>　　执行之后:<br>　　运行结果如图所示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084729.jpg" alt=""><br>　　好了,开始你自己的查询吧!</p>
 
         
         </div>
@@ -496,7 +510,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

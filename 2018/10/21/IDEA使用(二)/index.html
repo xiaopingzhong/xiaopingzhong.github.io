@@ -267,11 +267,21 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文的IDEA使用经验是基于现有项目开发而来的,主要是对现有操作方式的进行速度提升,提升用户体验,可能文中有些叙述不对,欢迎大家指正.<a id="more"></a></p>
+            <p>本文的IDEA使用经验是基于现有项目开发而来的,主要是对现有操作方式的进行速度提升,提升用户体验,可能文中有些叙述不对,欢迎大家指正.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-idea-ji-qiao">一.IDEA 技巧</a></li>
+<li><a href="#er-idea-wen-jian-de-shan-chu">二.IDEA文件的删除</a></li>
+<li><a href="#san-groupid-he-artifactid-zen-me-tian-xie">三.GroupId和ArtifactId怎么填写</a></li>
+<li><a href="#si-qi-ta">四.其他</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-IDEA-技巧"><a href="#一-IDEA-技巧" class="headerlink" title="一.IDEA 技巧"></a>一.IDEA 技巧</h2><ul>
+<h2><span id="yi-idea-ji-qiao">一.IDEA 技巧</span></h2><ul>
 <li>cosole中查找错误定位:ctrl+F输入exception</li>
 <li>打开快捷方式:alt+insert==</li>
 <li>页面切换:alt+  -&gt;/&lt;- </li>
@@ -294,11 +304,11 @@
 <li>快速生成实体类:<a href="https://www.cnblogs.com/1024zy/p/6370305.html" target="_blank" rel="noopener">插件GsonFormat快速生成JSon实体类</a></li>
 <li>快速构造方法,alt+Insert</li>
 <li>IDEA的git项目克隆:<br>　　(1)vcs-&gt;checkout from version control–&gt;git ,粘贴项目地址即可.<br>　　(2)记住是https地址不是,SSH地址</li>
-<li>package.json:对包的说明,采用json形式<h2 id="二-IDEA文件的删除"><a href="#二-IDEA文件的删除" class="headerlink" title="二.IDEA文件的删除"></a>二.IDEA文件的删除</h2></li>
+<li>package.json:对包的说明,采用json形式<h2><span id="er-idea-wen-jian-de-shan-chu">二.IDEA文件的删除</span></h2></li>
 </ul>
 <p>IDEA删除文件时出现如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102539.png" alt="删除文件提示框"><br>　　(1)Safe delete ( with usage search):相当于代码重构了，编辑器会查找项目代码里跟这个文件相关的代码，有的话你就斟酌更改，以防你因为删除了这个文件而导致程序运行出错.<br>　　(2)Search in comments and string” 选项, 如果选中 , 会同时搜寻注解中是否有相关文件. 如果有,一样会提醒 ; 如果没有相关文件,会完成删除.<br>　　(3)建议使用Safe delete,避免误删除或删除后留下冗余代码<br>　　(4)如果有相关文件会提醒有几处被使用,并且列出以下三个按钮:如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102600.png" alt="删除检查"><br>　　❋ Delete Anyway 确认删除<br>　　❋ View usages 查看哪里被使用<br>　　❋ Cancel  取消删除</p>
-<h2 id="三-GroupId和ArtifactId怎么填写"><a href="#三-GroupId和ArtifactId怎么填写" class="headerlink" title="三.GroupId和ArtifactId怎么填写"></a>三.GroupId和ArtifactId怎么填写</h2><p>　　(1)groupid和artifactId被统称为“坐标”是为了保证项目唯一性而提出的,就是一个项目坐标<br>　　(2)groupid:域–org,com,cn;如公司名称–apache,zxp<br>　　(3)artifactId:项目名–testQA<br>　　(4)cn.zxp.项目名　　</p>
-<h2 id="四-其他"><a href="#四-其他" class="headerlink" title="四.其他"></a>四.其他</h2><p>　　(1)一般源码当中的的参数是大写的,说明是类型–&gt;例如T</p>
+<h2><span id="san-groupid-he-artifactid-zen-me-tian-xie">三.GroupId和ArtifactId怎么填写</span></h2><p>　　(1)groupid和artifactId被统称为“坐标”是为了保证项目唯一性而提出的,就是一个项目坐标<br>　　(2)groupid:域–org,com,cn;如公司名称–apache,zxp<br>　　(3)artifactId:项目名–testQA<br>　　(4)cn.zxp.项目名　　</p>
+<h2><span id="si-qi-ta">四.其他</span></h2><p>　　(1)一般源码当中的的参数是大写的,说明是类型–&gt;例如T</p>
 
         
         </div>
@@ -518,7 +528,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

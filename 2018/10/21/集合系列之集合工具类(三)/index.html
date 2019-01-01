@@ -269,9 +269,19 @@
             
             <p>因为集合工具类是静态类,不需要进行实例化对象就可以进行方法的调用.集合工具类除了java内置的,还有GUAVA这个工具类插件,使用体验也是非常不错.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-ge-lei-xing-dui-xiang-de-gong-ju-lei">一.各类型对象的工具类</a></li>
+<li><a href="#er-conllections-yu-collection">二.Conllections与Collection</a></li>
+<li><a href="#san-arrays-yu-array">三.Arrays与Array</a></li>
+<li><a href="#si-map-yu-maps">四.Map与Maps</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-各类型对象的工具类"><a href="#一-各类型对象的工具类" class="headerlink" title="一.各类型对象的工具类"></a>一.各类型对象的工具类</h2><p>　　任何对JDK集合框架有经验的程序员都熟悉和喜欢<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collections.html" target="_blank" rel="noopener"><code>java.util.Collections</code></a>包含的工具方法。Guava沿着这些路线提供了更多的工具方法：适用于所有集合的静态方法。</p>
+<h2><span id="yi-ge-lei-xing-dui-xiang-de-gong-ju-lei">一.各类型对象的工具类</span></h2><p>　　任何对JDK集合框架有经验的程序员都熟悉和喜欢<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collections.html" target="_blank" rel="noopener"><code>java.util.Collections</code></a>包含的工具方法。Guava沿着这些路线提供了更多的工具方法：适用于所有集合的静态方法。</p>
 <table>
 <thead>
 <tr>
@@ -338,10 +348,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="二-Conllections与Collection"><a href="#二-Conllections与Collection" class="headerlink" title="二.Conllections与Collection"></a>二.Conllections与Collection</h2><p>　　Conllection是一个java.util包下的集合接口–(java.util.Collection)<br>　　Collections是个java.util下的类，它包含有各种有关集合操作的静态方法。此类不需要实例化，就像一个工具类。如Collections的排序方法sort –Collections.sort(list);</p>
-<h2 id="三-Arrays与Array"><a href="#三-Arrays与Array" class="headerlink" title="三.Arrays与Array"></a>三.Arrays与Array</h2><p>　　Arrays:java.util下的类-工具类,是拥有静态方法操作数组的工具类,不需要实例化:直接:<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] inits = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>] ;</span><br><span class="line">     <span class="comment">//将数组全部赋值为2</span></span><br><span class="line">     Arrays.<span class="built_in">fill</span>(inits , <span class="number">2</span>) ;</span><br></pre></td></tr></table></figure></p>
+<h2><span id="er-conllections-yu-collection">二.Conllections与Collection</span></h2><p>　　Conllection是一个java.util包下的集合接口–(java.util.Collection)<br>　　Collections是个java.util下的类，它包含有各种有关集合操作的静态方法。此类不需要实例化，就像一个工具类。如Collections的排序方法sort –Collections.sort(list);</p>
+<h2><span id="san-arrays-yu-array">三.Arrays与Array</span></h2><p>　　Arrays:java.util下的类-工具类,是拥有静态方法操作数组的工具类,不需要实例化:直接:<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] inits = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>] ;</span><br><span class="line">     <span class="comment">//将数组全部赋值为2</span></span><br><span class="line">     Arrays.<span class="built_in">fill</span>(inits , <span class="number">2</span>) ;</span><br></pre></td></tr></table></figure></p>
 <p>此静态类专门用来操作Array对象 ，提供搜索、排序、复制等静态方法。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">equals</span><span class="params">()</span></span>：比较两个array是否相等。array拥有相同元素个数，且所有对应元素两两相等。</span><br><span class="line"><span class="function"><span class="title">sort</span><span class="params">()</span></span>：用来对array进行排序。</span><br><span class="line"><span class="function"><span class="title">binarySearch</span><span class="params">()</span></span>：在排好序的array中寻找元素</span><br></pre></td></tr></table></figure></p>
-<h2 id="四-Map与Maps"><a href="#四-Map与Maps" class="headerlink" title="四.Map与Maps"></a>四.Map与Maps</h2><p>　　Map是一个k-v结构的接口<br>　　Maps:则为<code>com.google.common.collect</code>下的工具类,主要是对Map集合进行数据操作,具体实现不作过多介绍.</p>
+<h2><span id="si-map-yu-maps">四.Map与Maps</span></h2><p>　　Map是一个k-v结构的接口<br>　　Maps:则为<code>com.google.common.collect</code>下的工具类,主要是对Map集合进行数据操作,具体实现不作过多介绍.</p>
 
         
         </div>
@@ -561,7 +571,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

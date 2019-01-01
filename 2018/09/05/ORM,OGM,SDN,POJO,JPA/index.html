@@ -267,12 +267,20 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　在学习Neo4j的SDN建模时候,涉及到一些基本概念,为此在此进行总结.以便日后复习.ORM与JPA是针对关系POJO对象与关系数据库的,映射ORM的实现形式可以使用注解的形式实现,JPA就是针对数据库的接口.OGM与SDN则是针对POJO对象与Neo4j图数据库的,映射OGM的实现也可以用注解实现,SDN也是数据库的接口。<a id="more"></a></p>
+            <p>在学习Neo4j的SDN建模时候,涉及到一些基本概念,为此在此进行总结.以便日后复习.ORM与JPA是针对关系POJO对象与关系数据库的,映射ORM的实现形式可以使用注解的形式实现,JPA就是针对数据库的接口.OGM与SDN则是针对POJO对象与Neo4j图数据库的,映射OGM的实现也可以用注解实现,SDN也是数据库的接口。<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#1-gai-nian">1. 概念</a></li>
+<li><a href="#2-guan-xi">2. 关系</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><p>　　(1)ORM:Object/Relation Mapping–对象/关系数据库映射<br>　　(2)OGM:Object/Graph Mapping–对象/图数据库映射<br>　　(3)POJO:plain Ordinary Java Object–简单java对象<br>　　(4)SDN:Spring Data Neo4j–为访图数据库提供接口(是在建立映射之后)<br>　　(5)JPA:Java Persistence API–Java持久层API–主要是为访问关系数据库提供接口(是在建立映射之后)</p>
-<h3 id="2-关系"><a href="#2-关系" class="headerlink" title="2. 关系"></a>2. 关系</h3><p>　　<font color="red">创建一个POJO对象,对象建模,然后不同的存储库/数据库访问接口(SDN/JPA)使用对应的映射(ORM,OGM)实现对象与数据库当中元素的转换(映射),最终实现CRUD的功能</font>.以SDN使用OGM映射机制为例,只需要添加简单的注解就可以实现对象与图数据库的映射</p>
+<h3><span id="1-gai-nian">1. 概念</span></h3><p>　　(1)ORM:Object/Relation Mapping–对象/关系数据库映射<br>　　(2)OGM:Object/Graph Mapping–对象/图数据库映射<br>　　(3)POJO:plain Ordinary Java Object–简单java对象<br>　　(4)SDN:Spring Data Neo4j–为访图数据库提供接口(是在建立映射之后)<br>　　(5)JPA:Java Persistence API–Java持久层API–主要是为访问关系数据库提供接口(是在建立映射之后)</p>
+<h3><span id="2-guan-xi">2. 关系</span></h3><p>　　<font color="red">创建一个POJO对象,对象建模,然后不同的存储库/数据库访问接口(SDN/JPA)使用对应的映射(ORM,OGM)实现对象与数据库当中元素的转换(映射),最终实现CRUD的功能</font>.以SDN使用OGM映射机制为例,只需要添加简单的注解就可以实现对象与图数据库的映射</p>
 
         
         </div>
@@ -492,7 +500,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

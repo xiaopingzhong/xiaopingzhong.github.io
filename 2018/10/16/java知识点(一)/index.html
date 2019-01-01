@@ -269,39 +269,72 @@
             
             <p>本文主要是涉及java的一些基本概念,打算作为一个系列,作为查漏补缺,尽量用比较精辟,简短,通俗易懂的话语来解释,当然这些也离不开网友的宝贵经验,特此感谢.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#1-sdk">1.SDK</a></li>
+<li><a href="#2-pop3-smtp-imap">2.pop3,SMTP,IMAP</a></li>
+<li><a href="#3-jpa">3.JPA</a></li>
+<li><a href="#4-san-ceng-jia-gou-yu-mvc">4.三层架构与MVC</a></li>
+<li><a href="#5-orm-ogm-sdn-pojo-jpa">5.ORM,OGM,SDN,POJO,JPA</a><ul>
+<li><a href="#5-1-gai-nian">5.1 概念</a></li>
+<li><a href="#5-2-guan-xi">5.2 关系</a></li>
+</ul>
+</li>
+<li><a href="#6-sessionfactory">6.SessionFactory</a></li>
+<li><a href="#7-map-string-object">7.Map&lt;String,Object&gt;</a></li>
+<li><a href="#8-page-request-session-application-de-zuo-yong-yu-fan-wei">8.page,request,session,Application的作用域范围</a></li>
+<li><a href="#9-page-pageable-de-qu-bie-yu-lian-xi">9.Page,Pageable的区别与联系</a></li>
+<li><a href="#10-model-modelmap-modelandview">10.model,ModelMap,ModelAndView</a></li>
+<li><a href="#11-spring-zhong-shi-ti-ceng-dao-ceng-service-ceng-controller-kong-zhi-ceng-view-ceng">11.spring中实体层,DAO层,service层,controller(控制层),view层</a></li>
+<li><a href="#12-mvvm">12.MVVM</a><ul>
+<li><a href="#1-yuan-yin">(1)原因</a></li>
+<li><a href="#2-gai-nian">(2)概念</a></li>
+<li><a href="#3-chan-pin">(3)产品</a></li>
+</ul>
+</li>
+<li><a href="#13-qian-duan-shi-yong-kuang-jia-avalonjs-ru-men">13.前端实用框架avalonJS入门</a></li>
+<li><a href="#14-get-post-put-delete">14.GET，POST，PUT，DELETE</a></li>
+<li><a href="#15-dom">15.dom</a></li>
+<li><a href="#16-int-yu-integer">16.int与integer</a></li>
+<li><a href="#17-vm-wen-jian">17.vm文件</a></li>
+<li><a href="#18-map-yu-hashmap">18.map与HashMap</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="1-SDK"><a href="#1-SDK" class="headerlink" title="1.SDK"></a>1.SDK</h2><p>　　软件开发工具包（缩写：SDK、外语全称：Software Development Kit）<br>一般都是一些软件工程师为特定的软件包、软件框架、硬件平台、操作系统等建立应用软件时的开发工具的集合</p>
-<h2 id="2-pop3-SMTP-IMAP"><a href="#2-pop3-SMTP-IMAP" class="headerlink" title="2.pop3,SMTP,IMAP"></a>2.pop3,SMTP,IMAP</h2><p>这个是电子邮件的三种协议其中：<br>　　①pop3是收取邮件<br>　　②smtp是发送邮件,这两个是配套一起使用的<br>　　③imap是邮件收发一起都包含的</p>
-<h2 id="3-JPA"><a href="#3-JPA" class="headerlink" title="3.JPA"></a>3.JPA</h2><p>　　JPA是Java Persistence API的简称(<strong>就是一种映射</strong>)，中文名Java持久层API,是JDK 5.0注解或XML描述<strong>对象－关系表</strong>的映射关系,就是定义的对象(属性/实体)与数据库当中的属性/实体进行映射</p>
-<h2 id="4-三层架构与MVC"><a href="#4-三层架构与MVC" class="headerlink" title="4.三层架构与MVC"></a>4.三层架构与MVC</h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8Emvc/#more" target="_blank" rel="noopener">三层架构与MVC</a></p>
-<h2 id="5-ORM-OGM-SDN-POJO-JPA"><a href="#5-ORM-OGM-SDN-POJO-JPA" class="headerlink" title="5.ORM,OGM,SDN,POJO,JPA"></a>5.ORM,OGM,SDN,POJO,JPA</h2><h3 id="5-1-概念"><a href="#5-1-概念" class="headerlink" title="5.1 概念"></a>5.1 概念</h3><p>　　(1)ORM:Object/Relation Mapping–对象/关系数据库映射<br>　　(2)OGM:Object/Graph Mapping–对象/图数据库映射<br>　　(3)POJO:plain Ordinary Java Object–简单java对象<br>　　(4)SDN:Spring Data Neo4j–为访图数据库提供接口(是在建立映射之后)<br>　　(5)JPA:Java Persistence API–Java持久层API–主要是为访问关系数据库提供接口(是在建立映射之后)</p>
-<h3 id="5-2-关系"><a href="#5-2-关系" class="headerlink" title="5.2 关系"></a>5.2 关系</h3><p>　　<font color="red">创建一个POJO对象,对象建模,然后不同的存储库/数据库访问接口(SDN/JPA)使用对应的映射(ORM,OGM)实现对象与数据库当中元素的转换(映射),最终实现CRUD的功能</font>.以SDN使用OGM映射机制为例,只需要添加简单的注解就可以实现对象与图数据库的映射</p>
-<h2 id="6-SessionFactory"><a href="#6-SessionFactory" class="headerlink" title="6.SessionFactory"></a>6.SessionFactory</h2><p>　　存储着连接数据库的配置信息和映射信息(java对象与数据库),所以相当于一个连接池(里面有很多的连接信息–连接数据库的配置信息和映射信息),有时候有多个连接,因此存在多个session–(与数据库的会话),相当于Connection</p>
-<h2 id="7-Map-lt-String-Object-gt"><a href="#7-Map-lt-String-Object-gt" class="headerlink" title="7.Map&lt;String,Object&gt;"></a>7.Map&lt;String,Object&gt;</h2><p>　　实际上String就是Key(Key必须是String类型),Value是Object类型,说明Value可以存储任何类型的数据<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">实际上就是定义了名为aa的<span class="built_in">Map</span>容器,这个容器规定了Key和Value的类型</span><br><span class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt; aa=<span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<h2><span id="1-sdk">1.SDK</span></h2><p>　　软件开发工具包（缩写：SDK、外语全称：Software Development Kit）<br>一般都是一些软件工程师为特定的软件包、软件框架、硬件平台、操作系统等建立应用软件时的开发工具的集合</p>
+<h2><span id="2-pop3-smtp-imap">2.pop3,SMTP,IMAP</span></h2><p>这个是电子邮件的三种协议其中：<br>　　①pop3是收取邮件<br>　　②smtp是发送邮件,这两个是配套一起使用的<br>　　③imap是邮件收发一起都包含的</p>
+<h2><span id="3-jpa">3.JPA</span></h2><p>　　JPA是Java Persistence API的简称(<strong>就是一种映射</strong>)，中文名Java持久层API,是JDK 5.0注解或XML描述<strong>对象－关系表</strong>的映射关系,就是定义的对象(属性/实体)与数据库当中的属性/实体进行映射</p>
+<h2><span id="4-san-ceng-jia-gou-yu-mvc">4.三层架构与MVC</span></h2><p><a href="https://www.zhongxiaoping.cn/2018/10/11/%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8Emvc/#more" target="_blank" rel="noopener">三层架构与MVC</a></p>
+<h2><span id="5-orm-ogm-sdn-pojo-jpa">5.ORM,OGM,SDN,POJO,JPA</span></h2><h3><span id="5-1-gai-nian">5.1 概念</span></h3><p>　　(1)ORM:Object/Relation Mapping–对象/关系数据库映射<br>　　(2)OGM:Object/Graph Mapping–对象/图数据库映射<br>　　(3)POJO:plain Ordinary Java Object–简单java对象<br>　　(4)SDN:Spring Data Neo4j–为访图数据库提供接口(是在建立映射之后)<br>　　(5)JPA:Java Persistence API–Java持久层API–主要是为访问关系数据库提供接口(是在建立映射之后)</p>
+<h3><span id="5-2-guan-xi">5.2 关系</span></h3><p>　　<font color="red">创建一个POJO对象,对象建模,然后不同的存储库/数据库访问接口(SDN/JPA)使用对应的映射(ORM,OGM)实现对象与数据库当中元素的转换(映射),最终实现CRUD的功能</font>.以SDN使用OGM映射机制为例,只需要添加简单的注解就可以实现对象与图数据库的映射</p>
+<h2><span id="6-sessionfactory">6.SessionFactory</span></h2><p>　　存储着连接数据库的配置信息和映射信息(java对象与数据库),所以相当于一个连接池(里面有很多的连接信息–连接数据库的配置信息和映射信息),有时候有多个连接,因此存在多个session–(与数据库的会话),相当于Connection</p>
+<h2><span id="7-map-lt-string-object-gt">7.Map&lt;String,Object&gt;</span></h2><p>　　实际上String就是Key(Key必须是String类型),Value是Object类型,说明Value可以存储任何类型的数据<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">实际上就是定义了名为aa的<span class="built_in">Map</span>容器,这个容器规定了Key和Value的类型</span><br><span class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt; aa=<span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <p>　　名为aa的Map容器主要是为了调用put与get方法,例如<code>aa.put(&quot;user&quot;, obj)</code>,可以认为是把Object类型的对象–obj放入到aa这个Map容器当中,对象obj在容器中的代号是”user”(也就是Key为user,Value是对象obj),最后取出语句就是:<code>aa.get(user)</code>,根据这个名为user的key,取出对应的value–obj.</p>
-<h2 id="8-page-request-session-Application的作用域范围"><a href="#8-page-request-session-Application的作用域范围" class="headerlink" title="8.page,request,session,Application的作用域范围"></a>8.page,request,session,Application的作用域范围</h2><p>   (1)page:就是在本页面有效;<br>　　(2)request:就是在请求发送直至服务器回应结束,这个周期当中有效,可能中间会经过多个跳转页面.但是手动刷新之后,又是一个新的request.<br>　　(3)session:一次会话的有效期,例如从浏览器开启直至关闭,在此期间,访问某个网站的服务器,其都知道是同一个人请求.这就是一次会话的过程.<br>　　(4)Application :从应用的开启到关闭,存活时间最长,例如服务器的开启与关闭,电脑的开启与关闭.<br>　　好好屡屡:从页面之间–&gt;多个页面–&gt;会话–&gt;应用</p>
+<h2><span id="8-page-request-session-application-de-zuo-yong-yu-fan-wei">8.page,request,session,Application的作用域范围</span></h2><p>   (1)page:就是在本页面有效;<br>　　(2)request:就是在请求发送直至服务器回应结束,这个周期当中有效,可能中间会经过多个跳转页面.但是手动刷新之后,又是一个新的request.<br>　　(3)session:一次会话的有效期,例如从浏览器开启直至关闭,在此期间,访问某个网站的服务器,其都知道是同一个人请求.这就是一次会话的过程.<br>　　(4)Application :从应用的开启到关闭,存活时间最长,例如服务器的开启与关闭,电脑的开启与关闭.<br>　　好好屡屡:从页面之间–&gt;多个页面–&gt;会话–&gt;应用</p>
 <hr>
 <p><a href="https://blog.csdn.net/kk791159796/article/details/16332829" target="_blank" rel="noopener">page,request,session,Application区别</a></p>
 <hr>
-<h2 id="9-Page-Pageable的区别与联系"><a href="#9-Page-Pageable的区别与联系" class="headerlink" title="9.Page,Pageable的区别与联系"></a>9.Page,Pageable的区别与联系</h2><hr>
+<h2><span id="9-page-pageable-de-qu-bie-yu-lian-xi">9.Page,Pageable的区别与联系</span></h2><hr>
 <p><a href="https://www.zhongxiaoping.cn/2018/09/05/Page%E4%B8%8EPageable/" target="_blank" rel="noopener">Page与Pageable</a></p>
 <hr>
-<h2 id="10-model-ModelMap-ModelAndView"><a href="#10-model-ModelMap-ModelAndView" class="headerlink" title="10.model,ModelMap,ModelAndView"></a>10.model,ModelMap,ModelAndView</h2><p>作用：装载数据,传递数据.{从控制类（以controller为例）向页面（jsp页面）传值}。</p>
+<h2><span id="10-model-modelmap-modelandview">10.model,ModelMap,ModelAndView</span></h2><p>作用：装载数据,传递数据.{从控制类（以controller为例）向页面（jsp页面）传值}。</p>
 <hr>
 <p><a href="https://www.zhongxiaoping.cn/2018/09/05/model,ModelMap,ModelAndView%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/#more" target="_blank" rel="noopener">model,ModelMap,ModelAndView联系</a></p>
 <hr>
-<h2 id="11-spring中实体层-DAO层-service层-controller-控制层-view层"><a href="#11-spring中实体层-DAO层-service层-controller-控制层-view层" class="headerlink" title="11.spring中实体层,DAO层,service层,controller(控制层),view层"></a>11.spring中实体层,DAO层,service层,controller(控制层),view层</h2><p>在项目中，控制器完成的工作主要是流程控制，及请求相应，根据对应的结果返回对应的视图，具体的业务代码代码不应该写到控制器里，而是交给service负责实现。比如要验证一个用户名是否存在，应该在控制器里调用Service层的验证的方法，由service去验证用户名是否存在，而service再调用dao层，dao层跟底层的数据库打交道，查询出结果返回service层，service层返回结果给控制器层。控制层根据结果返回对应的资源。<br>如果涉及到到了dao的操作，都是由service去调用dao的。<br>个人认为，所谓的耦合是指在编译时就确定了类型，如果要更改，得全部修改。而采用面向接口编程，运行时才知道具体实现的是那个类。控制器在运行时才知道具体实现的是哪一个service，service在运行的时候才知道具体实现的是哪一个dao。<br><a href="https://blog.csdn.net/ftd1314/article/details/80531193" target="_blank" rel="noopener">dao层，service层，controller层，entriy层的理解</a><br><a href="https://bbs.csdn.net/topics/390440927" target="_blank" rel="noopener">关于service层的作用，有点疑惑，求各路前辈指点迷津</a></p>
-<h2 id="12-MVVM"><a href="#12-MVVM" class="headerlink" title="12.MVVM"></a>12.MVVM</h2><h3 id="1-原因"><a href="#1-原因" class="headerlink" title="(1)原因"></a>(1)原因</h3><p>　　由于前端开发混合了HTML、CSS和JavaScript，而且页面众多，所以，代码的组织和维护难度其实更加复杂，这就是MVVM出现的原因。<br>　　现在，随着前端页面越来越复杂，用户对于交互性要求也越来越高，想要写出Gmail这样的页面，仅仅用jQuery是远远不够的。MVVM模型应运而生。<br>　　MVVM最早由微软提出来，它借鉴了桌面应用程序的MVC思想，在前端页面中，把Model用纯JavaScript对象表示，View负责显示，两者做到了最大限度的分离。</p>
-<h3 id="2-概念"><a href="#2-概念" class="headerlink" title="(2)概念"></a>(2)概念</h3><p>model-view-ViewModel:<br>model负责逻辑;<br>view:负责显示;<br>ViewModel:负责逻辑与显示的同步,(把Model和View关联起来的就是ViewModel。ViewModel负责把Model的数据同步到View显示出来，还负责把View的修改同步回Model)</p>
-<h3 id="3-产品"><a href="#3-产品" class="headerlink" title="(3)产品"></a>(3)产品</h3><p>avalonjs 是国内大神司徒正美开发的一个迷你MVVM框架,可以轻松实现<strong>视图与数据的隔离和双向绑定</strong>.</p>
-<h2 id="13-前端实用框架avalonJS入门"><a href="#13-前端实用框架avalonJS入门" class="headerlink" title="13.前端实用框架avalonJS入门"></a>13.前端实用框架avalonJS入门</h2><p><a href="http://www.sohu.com/a/230699783_100126044" target="_blank" rel="noopener">前端实用框架avalonJS入门</a></p>
-<h2 id="14-GET，POST，PUT，DELETE"><a href="#14-GET，POST，PUT，DELETE" class="headerlink" title="14.GET，POST，PUT，DELETE"></a>14.GET，POST，PUT，DELETE</h2><p>　　HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查，改，增，删4个操作。而我们在实际操作的时候，就get和post两种用的比较多。而post方法又比get方法要安全的多，<strong>因为get方法会将参数都放在url上（<a href="">就是典型的get方法）</a></strong>，<strong>而且get方法传送的数据量较小，不能大于2KB；另，用get方法传参到后台，会造成中文乱码等问题</strong></p>
-<h2 id="15-dom"><a href="#15-dom" class="headerlink" title="15.dom"></a>15.dom</h2><p>　　dom树其实就是html/xml文档的一种标签总体结构.</p>
-<h2 id="16-int与integer"><a href="#16-int与integer" class="headerlink" title="16.int与integer"></a>16.int与integer</h2><p>　　integer是int的封装类:<code>Integer a = new Integer(1)</code>,其中1是整型.但要记住:<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Integer a</span> = new Integer(1);</span><br><span class="line"><span class="attribute">Integer b</span> = new Integer(1);</span><br><span class="line"><span class="attribute">int c</span> = 1;</span><br></pre></td></tr></table></figure></p>
+<h2><span id="11-spring-zhong-shi-ti-ceng-dao-ceng-service-ceng-controller-kong-zhi-ceng-view-ceng">11.spring中实体层,DAO层,service层,controller(控制层),view层</span></h2><p>在项目中，控制器完成的工作主要是流程控制，及请求相应，根据对应的结果返回对应的视图，具体的业务代码代码不应该写到控制器里，而是交给service负责实现。比如要验证一个用户名是否存在，应该在控制器里调用Service层的验证的方法，由service去验证用户名是否存在，而service再调用dao层，dao层跟底层的数据库打交道，查询出结果返回service层，service层返回结果给控制器层。控制层根据结果返回对应的资源。<br>如果涉及到到了dao的操作，都是由service去调用dao的。<br>个人认为，所谓的耦合是指在编译时就确定了类型，如果要更改，得全部修改。而采用面向接口编程，运行时才知道具体实现的是那个类。控制器在运行时才知道具体实现的是哪一个service，service在运行的时候才知道具体实现的是哪一个dao。<br><a href="https://blog.csdn.net/ftd1314/article/details/80531193" target="_blank" rel="noopener">dao层，service层，controller层，entriy层的理解</a><br><a href="https://bbs.csdn.net/topics/390440927" target="_blank" rel="noopener">关于service层的作用，有点疑惑，求各路前辈指点迷津</a></p>
+<h2><span id="12-mvvm">12.MVVM</span></h2><h3><span id="1-yuan-yin">(1)原因</span></h3><p>　　由于前端开发混合了HTML、CSS和JavaScript，而且页面众多，所以，代码的组织和维护难度其实更加复杂，这就是MVVM出现的原因。<br>　　现在，随着前端页面越来越复杂，用户对于交互性要求也越来越高，想要写出Gmail这样的页面，仅仅用jQuery是远远不够的。MVVM模型应运而生。<br>　　MVVM最早由微软提出来，它借鉴了桌面应用程序的MVC思想，在前端页面中，把Model用纯JavaScript对象表示，View负责显示，两者做到了最大限度的分离。</p>
+<h3><span id="2-gai-nian">(2)概念</span></h3><p>model-view-ViewModel:<br>model负责逻辑;<br>view:负责显示;<br>ViewModel:负责逻辑与显示的同步,(把Model和View关联起来的就是ViewModel。ViewModel负责把Model的数据同步到View显示出来，还负责把View的修改同步回Model)</p>
+<h3><span id="3-chan-pin">(3)产品</span></h3><p>avalonjs 是国内大神司徒正美开发的一个迷你MVVM框架,可以轻松实现<strong>视图与数据的隔离和双向绑定</strong>.</p>
+<h2><span id="13-qian-duan-shi-yong-kuang-jia-avalonjs-ru-men">13.前端实用框架avalonJS入门</span></h2><p><a href="http://www.sohu.com/a/230699783_100126044" target="_blank" rel="noopener">前端实用框架avalonJS入门</a></p>
+<h2><span id="14-get-post-put-delete">14.GET，POST，PUT，DELETE</span></h2><p>　　HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查，改，增，删4个操作。而我们在实际操作的时候，就get和post两种用的比较多。而post方法又比get方法要安全的多，<strong>因为get方法会将参数都放在url上（<a href="">就是典型的get方法）</a></strong>，<strong>而且get方法传送的数据量较小，不能大于2KB；另，用get方法传参到后台，会造成中文乱码等问题</strong></p>
+<h2><span id="15-dom">15.dom</span></h2><p>　　dom树其实就是html/xml文档的一种标签总体结构.</p>
+<h2><span id="16-int-yu-integer">16.int与integer</span></h2><p>　　integer是int的封装类:<code>Integer a = new Integer(1)</code>,其中1是整型.但要记住:<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Integer a</span> = new Integer(1);</span><br><span class="line"><span class="attribute">Integer b</span> = new Integer(1);</span><br><span class="line"><span class="attribute">int c</span> = 1;</span><br></pre></td></tr></table></figure></p>
 <p>　　a= = c为true。b= = c为true,但是a = =b为false,因为a和c,b与c比较的是数值,a,b比较的是内存地址.不同的内存地址,指向同一个值–1.</p>
-<h2 id="17-vm文件"><a href="#17-vm文件" class="headerlink" title="17.vm文件"></a>17.vm文件</h2><p>　　基于java的velocity模板引擎的一种页面控制文件，你可以用文本编译器打开，能够看到他只是一些类似html的语句和一种叫VLT的语句构成的。</p>
-<h2 id="18-map与HashMap"><a href="#18-map与HashMap" class="headerlink" title="18.map与HashMap"></a>18.map与HashMap</h2><p>　　map是接口,而HashMap则是接口map的实现类,加之map接口的实例化不能用new方法,因此有:<code>Map map=new HashMap()</code></p>
+<h2><span id="17-vm-wen-jian">17.vm文件</span></h2><p>　　基于java的velocity模板引擎的一种页面控制文件，你可以用文本编译器打开，能够看到他只是一些类似html的语句和一种叫VLT的语句构成的。</p>
+<h2><span id="18-map-yu-hashmap">18.map与HashMap</span></h2><p>　　map是接口,而HashMap则是接口map的实现类,加之map接口的实例化不能用new方法,因此有:<code>Map map=new HashMap()</code></p>
 
         
         </div>
@@ -521,7 +554,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

@@ -5,19 +5,19 @@
     
     <title>动图形象理解LSTM | iVEGA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Si">
+    <meta name="description" content="本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Sigm">
 <meta name="keywords" content="LSTM,RNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动图形象理解LSTM">
 <meta property="og:url" content="http://yoursite.com/2018/11/17/动图理解LSTM/index.html">
 <meta property="og:site_name" content="iVEGA">
-<meta property="og:description" content="本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Si">
+<meta property="og:description" content="本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Sigm">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181117135515.jpg">
 <meta property="og:updated_time" content="2018-11-17T06:17:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动图形象理解LSTM">
-<meta name="twitter:description" content="本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Si">
+<meta name="twitter:description" content="本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Sigm">
 <meta name="twitter:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181117135515.jpg">
     
 
@@ -267,26 +267,53 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Sigmoid进行信息选择.<a id="more"></a></p>
+            <p>本文主要讲述的是LSTM的原理,结合动图进行阐述,遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的,被添加到细胞状态c；输出门确定下一个隐藏状态h应该是什么，细胞状态的哪些信息需要在下次输入被用到.其中隐藏状态h与输入文本的向量相加作为输入变量．其中激活函数Sigmoid用来进行信息选择,Tanh激活函数则是用来输入信息的规约,便于激活函数Sigmoid进行信息选择.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-duan-shi-ji-yi">一.短时记忆</a></li>
+<li><a href="#er-lstm-he-gru">二.LSTM 和 GRU</a></li>
+<li><a href="#san-ben-zhi">三.本质</a></li>
+<li><a href="#si-rnn-shu-ping">四.RNN 述评</a><ul>
+<li><a href="#4-1-ji-huo-han-shu-tanh">4.1 激活函数 Tanh</a></li>
+</ul>
+</li>
+<li><a href="#wu-lstm">五.LSTM</a><ul>
+<li><a href="#5-1-he-xin-gai-nian">5.1 核心概念</a></li>
+<li><a href="#5-2-sigmoid">5.2 Sigmoid</a></li>
+<li><a href="#5-3-yi-wang-men">5.3 遗忘门</a></li>
+<li><a href="#5-4-shu-ru-men">5.4 输入门</a></li>
+<li><a href="#5-5-xi-bao-zhuang-tai">5.5 细胞状态</a></li>
+<li><a href="#5-6-shu-chu-men">5.6 输出门</a></li>
+</ul>
+</li>
+<li><a href="#liu-dai-ma-shi-li">六.代码示例</a><ul>
+<li><a href="#6-1-guo-cheng-jie-shi">6.1 过程解释：</a></li>
+</ul>
+</li>
+<li><a href="#qi-zong-jie">七.总结</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
 <p>　　本文转至：<a href="https://www.toutiao.com/i6616099436189712910/?tt_from=weixin&amp;wxshare_count=1&amp;timestamp=1540517942&amp;app=news_article&amp;utm_source=weixin&amp;iid=47048978920&amp;utm_medium=toutiao_and&amp;group_id=6616099436189712910" target="_blank" rel="noopener">动图形象理解LSTM</a><br><img src="http://p3.pstatp.com/large/pgc-image/1540429670193b9d7935337" alt="动图形象理解LSTM"><br>　　LSTM ——是一种特殊 RNN 类型，可以学习长期依赖信息。LSTM 由Hochreiter &amp; Schmidhuber (1997)提出，并在近期被Alex Graves进行了改良和推广。在很多应用问题，LSTM 都取得相当巨大的成功，并得到了广泛的使用。<br>　　然而LSTM结构复杂，初学者难于理解，本文通过动图形象直观的理解LSTM.</p>
-<h1 id="一-短时记忆"><a href="#一-短时记忆" class="headerlink" title="一.短时记忆"></a>一.短时记忆</h1><p>　　RNN 会受到短时记忆的影响。如果一条序列足够长，那它们将很难将信息从较早的时间步传送到后面的时间步。 因此，如果你正在尝试处理一段文本进行预测，RNN 可能从一开始就会遗漏重要信息。<br>　　在反向传播期间，RNN 会面临梯度消失的问题。 梯度是用于更新神经网络的权重值，消失的梯度问题是当梯度随着时间的推移传播时梯度下降，如果梯度值变得非常小，就不会继续学习。<br><img src="http://p1.pstatp.com/large/pgc-image/154042967013855ef00522c" alt="梯度更新规则"><br>　　因此，在递归神经网络中，获得小梯度更新的层会停止学习—— 那些通常是较早的层。 由于这些层不学习，RNN 可以忘记它在较长序列中看到的内容，因此具有短时记忆。</p>
-<h1 id="二-LSTM-和-GRU"><a href="#二-LSTM-和-GRU" class="headerlink" title="二.LSTM 和 GRU"></a>二.LSTM 和 GRU</h1><p>　　LSTM 和 GRU 是解决短时记忆问题的解决方案，它们具有称为“门”的内部机制，可以调节信息流。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670174705c77f23b" alt="动图形象理解LSTM"><br>　　这些“门”可以知道序列中哪些重要的数据是需要保留，而哪些是要删除的。 随后，它可以沿着长链序列传递相关信息以进行预测，几乎所有基于递归神经网络的技术成果都是通过这两个网络实现的。<br>　　LSTM 和 GRU 可以在语音识别、语音合成和文本生成中找到，你甚至可以用它们为视频生成字幕。对 LSTM 和 GRU 擅长处理长序列的原因，到这篇文章结束时你应该会有充分了解。<br>下面我将通过直观解释和插图进行阐述，并避免尽可能多的数学运算。</p>
-<h1 id="三-本质"><a href="#三-本质" class="headerlink" title="三.本质"></a>三.本质</h1><p>　　让我们从一个有趣的小实验开始吧。当你想在网上购买生活用品时，一般都会查看一下此前已购买该商品用户的评价。<br><img src="http://p99.pstatp.com/large/pgc-image/154042967012444388dc0bf" alt="动图形象理解LSTM"><br>　　当你浏览评论时，你的大脑下意识地只会记住重要的关键词，比如“amazing”和“awsome”这样的词汇，而不太会关心“this”、“give”、“all”、“should”等字样。如果朋友第二天问你用户评价都说了什么，那你可能不会一字不漏地记住它，而是会说出但大脑里记得的主要观点，比如“下次肯定还会来买”，那其他一些无关紧要的内容自然会从记忆中逐渐消失。<br><img src="http://p99.pstatp.com/large/pgc-image/15404296701905702679cd9" alt="动图形象理解LSTM"><br>　　而这基本上就像是 LSTM 或 GRU 所做的那样，它们可以学习只保留相关信息来进行预测，并忘记不相关的数据。</p>
-<h1 id="四-RNN-述评"><a href="#四-RNN-述评" class="headerlink" title="四.RNN 述评"></a>四.RNN 述评</h1><p>　　为了了解 LSTM 或 GRU 如何实现这一点，让我们回顾一下递归神经网络。 RNN 的工作原理如下；第一个词被转换成了机器可读的向量，然后 RNN 逐个处理向量序列。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670114394e995428" alt="逐一处理矢量序列"><br>　　处理时，RNN 将先前隐藏状态传递给序列的下一步。 而隐藏状态充当了神经网络记忆，它包含相关网络之前所见过的数据的信息。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670275aa67f9b199" alt="将隐藏状态传递给下一个时间步"><br>　　让我们看看 RNN 的一个细胞，了解一下它如何计算隐藏状态。 首先，将输入和先前隐藏状态组合成向量， 该向量包含当前输入和先前输入的信息。 向量经过激活函数 tanh之后，输出的是新的隐藏状态或网络记忆。</p>
-<h2 id="4-1-激活函数-Tanh"><a href="#4-1-激活函数-Tanh" class="headerlink" title="4.1 激活函数 Tanh"></a>4.1 激活函数 Tanh</h2><p>　　激活函数 Tanh 用于帮助调节流经网络的值。 tanh 函数将数值始终限制在 -1 和 1 之间。<br><img src="http://p3.pstatp.com/large/pgc-image/154042967029207d2ba916d" alt="激活函数 Tanh"><br>　　当向量流经神经网络时，由于有各种数学运算的缘故，它经历了许多变换。 因此想象让一个值继续乘以 3，你可以想到一些值是如何变成天文数字的，这让其他值看起来微不足道。<br><img src="http://p3.pstatp.com/large/pgc-image/1540429670397d824964aab" alt="没有 tanh 函数的向量转换"><br>　　tanh 函数确保值保持在 -1~1 之间，从而调节了神经网络的输出。 你可以看到上面的相同值是如何保持在 tanh 函数所允许的边界之间的。<br><img src="http://p9.pstatp.com/large/pgc-image/154042967058351647fbd91" alt="有tanh函数的向量转换"><br>　　这是一个 RNN。 它内部的操作很少，但在适当的情形下（如短序列）运作的很好。 RNN 使用的计算资源比它的演化变体 LSTM 和 GRU 要少得多。</p>
-<h1 id="五-LSTM"><a href="#五-LSTM" class="headerlink" title="五.LSTM"></a>五.LSTM</h1><p>　　LSTM 的控制流程与 RNN 相似，它们都是在前向传播的过程中处理流经细胞的数据，不同之处在于 LSTM 中细胞的结构和运算有所变化。<br><img src="http://p9.pstatp.com/large/pgc-image/15404296703959d4cb7c991" alt="LSTM 的细胞结构和运算"><br>　　这一系列运算操作使得 LSTM具有能选择保存信息或遗忘信息的功能。咋一看这些运算操作时可能有点复杂，但没关系下面将带你一步步了解这些运算操作。</p>
-<h2 id="5-1-核心概念"><a href="#5-1-核心概念" class="headerlink" title="5.1 核心概念"></a>5.1 核心概念</h2><p>　　LSTM 的核心概念在于细胞状态以及“门”结构。细胞状态相当于信息传输的路径，让信息能在序列连中传递下去。你可以将其看作网络的“记忆”。理论上讲，细胞状态能够将序列处理过程中的相关信息一直传递下去。<br>　　因此，即使是较早时间步长的信息也能携带到较后时间步长的细胞中来，这克服了短时记忆的影响。信息的添加和移除我们通过“门”结构来实现，“门”结构在训练过程中会去学习该保存或遗忘哪些信息。</p>
-<h2 id="5-2-Sigmoid"><a href="#5-2-Sigmoid" class="headerlink" title="5.2 Sigmoid"></a>5.2 Sigmoid</h2><p>　　门结构中包含着 sigmoid 激活函数。Sigmoid 激活函数与 tanh 函数类似，不同之处在于 sigmoid 是把值压缩到 0~1 之间而不是 -1~1 之间。这样的设置有助于更新或忘记信息，因为任何数乘以 0 都得 0，这部分信息就会剔除掉。同样的，任何数乘以 1 都得到它本身，这部分信息就会完美地保存下来。这样网络就能了解哪些数据是需要遗忘，哪些数据是需要保存。<br><img src="http://p3.pstatp.com/large/pgc-image/154042967045844903da67d" alt="Sigmoid 将值压缩到 0~1 之间"><br>　　接下来了解一下门结构的功能。LSTM 有三种类型的门结构：遗忘门、输入门和输出门。</p>
-<h2 id="5-3-遗忘门"><a href="#5-3-遗忘门" class="headerlink" title="5.3 遗忘门"></a>5.3 遗忘门</h2><p>　　遗忘门的功能是决定应丢弃或保留哪些信息。来自前一个隐藏状态的信息和当前输入的信息同时传递到 sigmoid 函数中去，输出值介于 0 和 1 之间，越接近 0 意味着越应该丢弃，越接近 1 意味着越应该保留。<br><img src="http://p9.pstatp.com/large/pgc-image/15404296705045e09f1ea0a" alt="遗忘门的运算过程"></p>
-<h2 id="5-4-输入门"><a href="#5-4-输入门" class="headerlink" title="5.4 输入门"></a>5.4 输入门</h2><p>　　输入门用于更新细胞状态。首先将前一层隐藏状态的信息和当前输入的信息传递到 sigmoid 函数中去。将值调整到 0~1 之间来决定要更新哪些信息。0 表示不重要，1 表示重要。<br>　　其次还要将前一层隐藏状态的信息和当前输入的信息传递到 tanh 函数中去，创造一个新的侯选值向量。最后将 sigmoid 的输出值与 tanh 的输出值相乘，sigmoid 的输出值将决定 tanh 的输出值中哪些信息是重要且需要保留下来的。<br><img src="http://p3.pstatp.com/large/pgc-image/15404296706529acd0be44a" alt="输入门的运算过程"></p>
-<h2 id="5-5-细胞状态"><a href="#5-5-细胞状态" class="headerlink" title="5.5 细胞状态"></a>5.5 细胞状态</h2><p>　　下一步，就是计算细胞状态。首先前一层的细胞状态与遗忘向量逐点相乘。如果它乘以接近 0 的值，意味着在新的细胞状态中，这些信息是需要丢弃掉的。然后再将该值与输入门的输出值逐点相加，将神经网络发现的新信息更新到细胞状态中去。至此，就得到了更新后的细胞状态。<br><img src="http://p3.pstatp.com/large/pgc-image/15404296705469a3bff22d0" alt="细胞状态的计算"></p>
-<h2 id="5-6-输出门"><a href="#5-6-输出门" class="headerlink" title="5.6 输出门"></a>5.6 输出门</h2><p>　　输出门用来确定下一个隐藏状态的值，隐藏状态包含了先前输入的信息。首先，我们将前一个隐藏状态和当前输入传递到 sigmoid 函数中，然后将新得到的细胞状态传递给 tanh 函数。<br>　　最后将 tanh 的输出与 sigmoid 的输出相乘，以确定隐藏状态应携带的信息。再将隐藏状态作为当前细胞的输出，把新的细胞状态和新的隐藏状态传递到下一个时间步长中去。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670632250c75a003" alt="输出门的运算过程"><br>　　让我们再梳理一下。遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的；输出门确定下一个隐藏状态应该是什么。</p>
-<h1 id="六-代码示例"><a href="#六-代码示例" class="headerlink" title="六.代码示例"></a>六.代码示例</h1><p>　　对于那些懒得看文字的人来说，代码也许更好理解，下面给出一个用 python 写的示例。<br><img src="http://p99.pstatp.com/large/pgc-image/1540429826196f9969472bc" alt="python 伪代码"></p>
-<h2 id="6-1-过程解释："><a href="#6-1-过程解释：" class="headerlink" title="6.1 过程解释："></a>6.1 过程解释：</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>首先，我们将先前的隐藏状态和当前的输入连接起来，这里将它称为 combine；</span><br><span class="line"><span class="number">2.</span>其次将 combine 丢到遗忘层中，用于删除不相关的数据；</span><br><span class="line"><span class="number">3.</span>再用 combine 创建一个候选层，候选层中包含着可能要添加到细胞状态中的值；</span><br><span class="line"><span class="number">4.</span>combine 同样要丢到输入层中，该层决定了候选层中哪些数据需要添加到新的细胞状态中；</span><br><span class="line"><span class="number">5.</span>接下来细胞状态再根据遗忘层、候选层、输入层以及先前细胞状态的向量来计算；</span><br><span class="line"><span class="number">6.</span>再计算当前细胞的输出；</span><br><span class="line"><span class="number">7.</span>最后将输出与新的细胞状态逐点相乘以得到新的隐藏状态。</span><br></pre></td></tr></table></figure>
-<h1 id="七-总结"><a href="#七-总结" class="headerlink" title="七.总结"></a>七.总结</h1><p>　　总而言之，RNN适用于处理序列数据和预测任务，但会受到短期记忆的影响。LSTM通过引入门结构来减弱短期记忆影响的演化变体，其中门结构可用来调节流经序列链的信息流。目前，LSTM经常被用于语音识别、语音合成和自然语言理解等多个深度学习应用中。<br><img src="http://p3.pstatp.com/large/pgc-image/1540430846879d10f4f2cda" alt="动图形象理解LSTM"></p>
+<h1><span id="yi-duan-shi-ji-yi">一.短时记忆</span></h1><p>　　RNN 会受到短时记忆的影响。如果一条序列足够长，那它们将很难将信息从较早的时间步传送到后面的时间步。 因此，如果你正在尝试处理一段文本进行预测，RNN 可能从一开始就会遗漏重要信息。<br>　　在反向传播期间，RNN 会面临梯度消失的问题。 梯度是用于更新神经网络的权重值，消失的梯度问题是当梯度随着时间的推移传播时梯度下降，如果梯度值变得非常小，就不会继续学习。<br><img src="http://p1.pstatp.com/large/pgc-image/154042967013855ef00522c" alt="梯度更新规则"><br>　　因此，在递归神经网络中，获得小梯度更新的层会停止学习—— 那些通常是较早的层。 由于这些层不学习，RNN 可以忘记它在较长序列中看到的内容，因此具有短时记忆。</p>
+<h1><span id="er-lstm-he-gru">二.LSTM 和 GRU</span></h1><p>　　LSTM 和 GRU 是解决短时记忆问题的解决方案，它们具有称为“门”的内部机制，可以调节信息流。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670174705c77f23b" alt="动图形象理解LSTM"><br>　　这些“门”可以知道序列中哪些重要的数据是需要保留，而哪些是要删除的。 随后，它可以沿着长链序列传递相关信息以进行预测，几乎所有基于递归神经网络的技术成果都是通过这两个网络实现的。<br>　　LSTM 和 GRU 可以在语音识别、语音合成和文本生成中找到，你甚至可以用它们为视频生成字幕。对 LSTM 和 GRU 擅长处理长序列的原因，到这篇文章结束时你应该会有充分了解。<br>下面我将通过直观解释和插图进行阐述，并避免尽可能多的数学运算。</p>
+<h1><span id="san-ben-zhi">三.本质</span></h1><p>　　让我们从一个有趣的小实验开始吧。当你想在网上购买生活用品时，一般都会查看一下此前已购买该商品用户的评价。<br><img src="http://p99.pstatp.com/large/pgc-image/154042967012444388dc0bf" alt="动图形象理解LSTM"><br>　　当你浏览评论时，你的大脑下意识地只会记住重要的关键词，比如“amazing”和“awsome”这样的词汇，而不太会关心“this”、“give”、“all”、“should”等字样。如果朋友第二天问你用户评价都说了什么，那你可能不会一字不漏地记住它，而是会说出但大脑里记得的主要观点，比如“下次肯定还会来买”，那其他一些无关紧要的内容自然会从记忆中逐渐消失。<br><img src="http://p99.pstatp.com/large/pgc-image/15404296701905702679cd9" alt="动图形象理解LSTM"><br>　　而这基本上就像是 LSTM 或 GRU 所做的那样，它们可以学习只保留相关信息来进行预测，并忘记不相关的数据。</p>
+<h1><span id="si-rnn-shu-ping">四.RNN 述评</span></h1><p>　　为了了解 LSTM 或 GRU 如何实现这一点，让我们回顾一下递归神经网络。 RNN 的工作原理如下；第一个词被转换成了机器可读的向量，然后 RNN 逐个处理向量序列。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670114394e995428" alt="逐一处理矢量序列"><br>　　处理时，RNN 将先前隐藏状态传递给序列的下一步。 而隐藏状态充当了神经网络记忆，它包含相关网络之前所见过的数据的信息。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670275aa67f9b199" alt="将隐藏状态传递给下一个时间步"><br>　　让我们看看 RNN 的一个细胞，了解一下它如何计算隐藏状态。 首先，将输入和先前隐藏状态组合成向量， 该向量包含当前输入和先前输入的信息。 向量经过激活函数 tanh之后，输出的是新的隐藏状态或网络记忆。</p>
+<h2><span id="4-1-ji-huo-han-shu-tanh">4.1 激活函数 Tanh</span></h2><p>　　激活函数 Tanh 用于帮助调节流经网络的值。 tanh 函数将数值始终限制在 -1 和 1 之间。<br><img src="http://p3.pstatp.com/large/pgc-image/154042967029207d2ba916d" alt="激活函数 Tanh"><br>　　当向量流经神经网络时，由于有各种数学运算的缘故，它经历了许多变换。 因此想象让一个值继续乘以 3，你可以想到一些值是如何变成天文数字的，这让其他值看起来微不足道。<br><img src="http://p3.pstatp.com/large/pgc-image/1540429670397d824964aab" alt="没有 tanh 函数的向量转换"><br>　　tanh 函数确保值保持在 -1~1 之间，从而调节了神经网络的输出。 你可以看到上面的相同值是如何保持在 tanh 函数所允许的边界之间的。<br><img src="http://p9.pstatp.com/large/pgc-image/154042967058351647fbd91" alt="有tanh函数的向量转换"><br>　　这是一个 RNN。 它内部的操作很少，但在适当的情形下（如短序列）运作的很好。 RNN 使用的计算资源比它的演化变体 LSTM 和 GRU 要少得多。</p>
+<h1><span id="wu-lstm">五.LSTM</span></h1><p>　　LSTM 的控制流程与 RNN 相似，它们都是在前向传播的过程中处理流经细胞的数据，不同之处在于 LSTM 中细胞的结构和运算有所变化。<br><img src="http://p9.pstatp.com/large/pgc-image/15404296703959d4cb7c991" alt="LSTM 的细胞结构和运算"><br>　　这一系列运算操作使得 LSTM具有能选择保存信息或遗忘信息的功能。咋一看这些运算操作时可能有点复杂，但没关系下面将带你一步步了解这些运算操作。</p>
+<h2><span id="5-1-he-xin-gai-nian">5.1 核心概念</span></h2><p>　　LSTM 的核心概念在于细胞状态以及“门”结构。细胞状态相当于信息传输的路径，让信息能在序列连中传递下去。你可以将其看作网络的“记忆”。理论上讲，细胞状态能够将序列处理过程中的相关信息一直传递下去。<br>　　因此，即使是较早时间步长的信息也能携带到较后时间步长的细胞中来，这克服了短时记忆的影响。信息的添加和移除我们通过“门”结构来实现，“门”结构在训练过程中会去学习该保存或遗忘哪些信息。</p>
+<h2><span id="5-2-sigmoid">5.2 Sigmoid</span></h2><p>　　门结构中包含着 sigmoid 激活函数。Sigmoid 激活函数与 tanh 函数类似，不同之处在于 sigmoid 是把值压缩到 0~1 之间而不是 -1~1 之间。这样的设置有助于更新或忘记信息，因为任何数乘以 0 都得 0，这部分信息就会剔除掉。同样的，任何数乘以 1 都得到它本身，这部分信息就会完美地保存下来。这样网络就能了解哪些数据是需要遗忘，哪些数据是需要保存。<br><img src="http://p3.pstatp.com/large/pgc-image/154042967045844903da67d" alt="Sigmoid 将值压缩到 0~1 之间"><br>　　接下来了解一下门结构的功能。LSTM 有三种类型的门结构：遗忘门、输入门和输出门。</p>
+<h2><span id="5-3-yi-wang-men">5.3 遗忘门</span></h2><p>　　遗忘门的功能是决定应丢弃或保留哪些信息。来自前一个隐藏状态的信息和当前输入的信息同时传递到 sigmoid 函数中去，输出值介于 0 和 1 之间，越接近 0 意味着越应该丢弃，越接近 1 意味着越应该保留。<br><img src="http://p9.pstatp.com/large/pgc-image/15404296705045e09f1ea0a" alt="遗忘门的运算过程"></p>
+<h2><span id="5-4-shu-ru-men">5.4 输入门</span></h2><p>　　输入门用于更新细胞状态。首先将前一层隐藏状态的信息和当前输入的信息传递到 sigmoid 函数中去。将值调整到 0~1 之间来决定要更新哪些信息。0 表示不重要，1 表示重要。<br>　　其次还要将前一层隐藏状态的信息和当前输入的信息传递到 tanh 函数中去，创造一个新的侯选值向量。最后将 sigmoid 的输出值与 tanh 的输出值相乘，sigmoid 的输出值将决定 tanh 的输出值中哪些信息是重要且需要保留下来的。<br><img src="http://p3.pstatp.com/large/pgc-image/15404296706529acd0be44a" alt="输入门的运算过程"></p>
+<h2><span id="5-5-xi-bao-zhuang-tai">5.5 细胞状态</span></h2><p>　　下一步，就是计算细胞状态。首先前一层的细胞状态与遗忘向量逐点相乘。如果它乘以接近 0 的值，意味着在新的细胞状态中，这些信息是需要丢弃掉的。然后再将该值与输入门的输出值逐点相加，将神经网络发现的新信息更新到细胞状态中去。至此，就得到了更新后的细胞状态。<br><img src="http://p3.pstatp.com/large/pgc-image/15404296705469a3bff22d0" alt="细胞状态的计算"></p>
+<h2><span id="5-6-shu-chu-men">5.6 输出门</span></h2><p>　　输出门用来确定下一个隐藏状态的值，隐藏状态包含了先前输入的信息。首先，我们将前一个隐藏状态和当前输入传递到 sigmoid 函数中，然后将新得到的细胞状态传递给 tanh 函数。<br>　　最后将 tanh 的输出与 sigmoid 的输出相乘，以确定隐藏状态应携带的信息。再将隐藏状态作为当前细胞的输出，把新的细胞状态和新的隐藏状态传递到下一个时间步长中去。<br><img src="http://p1.pstatp.com/large/pgc-image/1540429670632250c75a003" alt="输出门的运算过程"><br>　　让我们再梳理一下。遗忘门确定前一个步长中哪些相关的信息需要被保留；输入门确定当前输入中哪些信息是重要的，需要被添加的；输出门确定下一个隐藏状态应该是什么。</p>
+<h1><span id="liu-dai-ma-shi-li">六.代码示例</span></h1><p>　　对于那些懒得看文字的人来说，代码也许更好理解，下面给出一个用 python 写的示例。<br><img src="http://p99.pstatp.com/large/pgc-image/1540429826196f9969472bc" alt="python 伪代码"></p>
+<h2><span id="6-1-guo-cheng-jie-shi">6.1 过程解释：</span></h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>首先，我们将先前的隐藏状态和当前的输入连接起来，这里将它称为 combine；</span><br><span class="line"><span class="number">2.</span>其次将 combine 丢到遗忘层中，用于删除不相关的数据；</span><br><span class="line"><span class="number">3.</span>再用 combine 创建一个候选层，候选层中包含着可能要添加到细胞状态中的值；</span><br><span class="line"><span class="number">4.</span>combine 同样要丢到输入层中，该层决定了候选层中哪些数据需要添加到新的细胞状态中；</span><br><span class="line"><span class="number">5.</span>接下来细胞状态再根据遗忘层、候选层、输入层以及先前细胞状态的向量来计算；</span><br><span class="line"><span class="number">6.</span>再计算当前细胞的输出；</span><br><span class="line"><span class="number">7.</span>最后将输出与新的细胞状态逐点相乘以得到新的隐藏状态。</span><br></pre></td></tr></table></figure>
+<h1><span id="qi-zong-jie">七.总结</span></h1><p>　　总而言之，RNN适用于处理序列数据和预测任务，但会受到短期记忆的影响。LSTM通过引入门结构来减弱短期记忆影响的演化变体，其中门结构可用来调节流经序列链的信息流。目前，LSTM经常被用于语音识别、语音合成和自然语言理解等多个深度学习应用中。<br><img src="http://p3.pstatp.com/large/pgc-image/1540430846879d10f4f2cda" alt="动图形象理解LSTM"></p>
 
         
         </div>
@@ -506,7 +533,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

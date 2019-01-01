@@ -269,14 +269,25 @@
             
             <p>进行Pom依赖注入的时候,当出现 <code>Dependency &quot;XXX&quot; not found</code>需要解决一些jar的导入问题,为此总结了手动导入jar的一些方法和技巧<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#1-xia-zai-jar-bao">1.下载jar包</a></li>
+<li><a href="#2-pom-zhu-ru">2.Pom注入</a></li>
+<li><a href="#3-an-zhuang-jar-wen-jian">3.安装jar文件</a></li>
+<li><a href="#4-qiang-zhi-geng-xin">4.强制更新</a></li>
+<li><a href="#5-e-wai-ji-qiao">5.额外技巧</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="1-下载jar包"><a href="#1-下载jar包" class="headerlink" title="1.下载jar包"></a>1.下载jar包</h1><p><a href="http://mvnrepository.com/" target="_blank" rel="noopener">官网</a>进行查找对应的jar包并下载；</p>
-<h1 id="2-Pom注入"><a href="#2-Pom注入" class="headerlink" title="2.Pom注入"></a>2.Pom注入</h1><p>粘贴jar包添加语句到pom文件当中；<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.hankcs<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hanlp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>portable-1.6.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="3-安装jar文件"><a href="#3-安装jar文件" class="headerlink" title="3.安装jar文件"></a>3.安装jar文件</h1><p>Maven 安装 JAR 包的命令是：<br><code>mvn install:install-file -Dfile=jar包的位置（任意地方都可以） -DgroupId=上面的groupId -DartifactId=上面的artifactId -Dversion=上面的version -Dpackaging=jar</code><br>注意:<br>　　setting.xml文件不要乱添加镜像。<br>具体实例为：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file <span class="attribute">-Dfile</span>=D:\HanLp\hanlp-portable-1.6.8.jar <span class="attribute">-DgroupId</span>=com.hankcs <span class="attribute">-DartifactId</span>=hanlp <span class="attribute">-Dversion</span>=portable-1.6.8 <span class="attribute">-Dpackaging</span>=jar</span><br></pre></td></tr></table></figure></p>
+<h1><span id="1-xia-zai-jar-bao">1.下载jar包</span></h1><p><a href="http://mvnrepository.com/" target="_blank" rel="noopener">官网</a>进行查找对应的jar包并下载；</p>
+<h1><span id="2-pom-zhu-ru">2.Pom注入</span></h1><p>粘贴jar包添加语句到pom文件当中；<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.hankcs<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hanlp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>portable-1.6.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1><span id="3-an-zhuang-jar-wen-jian">3.安装jar文件</span></h1><p>Maven 安装 JAR 包的命令是：<br><code>mvn install:install-file -Dfile=jar包的位置（任意地方都可以） -DgroupId=上面的groupId -DartifactId=上面的artifactId -Dversion=上面的version -Dpackaging=jar</code><br>注意:<br>　　setting.xml文件不要乱添加镜像。<br>具体实例为：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file <span class="attribute">-Dfile</span>=D:\HanLp\hanlp-portable-1.6.8.jar <span class="attribute">-DgroupId</span>=com.hankcs <span class="attribute">-DartifactId</span>=hanlp <span class="attribute">-Dversion</span>=portable-1.6.8 <span class="attribute">-Dpackaging</span>=jar</span><br></pre></td></tr></table></figure></p>
 <p>安装结果：<br>　<img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085409.png" alt="安装结果"></p>
-<h1 id="4-强制更新"><a href="#4-强制更新" class="headerlink" title="4.强制更新"></a>4.强制更新</h1><p>　　<code>MAVEN-&gt;reimport</code></p>
-<h1 id="5-额外技巧"><a href="#5-额外技巧" class="headerlink" title="5.额外技巧"></a>5.额外技巧</h1><p>依赖包找不到（Dependency ‘’ not found）<br>还可能是以下情况：<br>　　❋包找不到-手动导入（参考上面）或者<a href="https://blog.csdn.net/m0_37525917/article/details/79391787" target="_blank" rel="noopener">更换镜像</a>；<br>　　❋没有及时更新：存在缓存，需要消除缓存并重启或者<a href="https://blog.csdn.net/goquesting/article/details/78422964" target="_blank" rel="noopener">开启强制更新</a></p>
+<h1><span id="4-qiang-zhi-geng-xin">4.强制更新</span></h1><p>　　<code>MAVEN-&gt;reimport</code></p>
+<h1><span id="5-e-wai-ji-qiao">5.额外技巧</span></h1><p>依赖包找不到（Dependency ‘’ not found）<br>还可能是以下情况：<br>　　❋包找不到-手动导入（参考上面）或者<a href="https://blog.csdn.net/m0_37525917/article/details/79391787" target="_blank" rel="noopener">更换镜像</a>；<br>　　❋没有及时更新：存在缓存，需要消除缓存并重启或者<a href="https://blog.csdn.net/goquesting/article/details/78422964" target="_blank" rel="noopener">开启强制更新</a></p>
 
         
         </div>
@@ -496,7 +507,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

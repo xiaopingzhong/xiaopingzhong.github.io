@@ -267,9 +267,13 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　CrudRepository 接口是用来操作Neo4j的重要接口,因此对其的基本方法需要有一个基本的认识,为此,特地从网上摘取相关的说明文档,以便日后回忆,同时谢谢网友的热心分享.<a id="more"></a></p>
+            <p>CrudRepository 接口是用来操作Neo4j的重要接口,因此对其的基本方法需要有一个基本的认识,为此,特地从网上摘取相关的说明文档,以便日后回忆,同时谢谢网友的热心分享.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
 <p>　　本文转自:<a href="https://blog.csdn.net/strive_peter/article/details/76276758" target="_blank" rel="noopener">SpringData中的CrudRepository接口</a>,谢谢分享.<br>　　CrudRepository 接口提供了最基本的对实体类的添删改查操作<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>).<span class="function">T <span class="title">save</span><span class="params">(T entity)</span></span>;<span class="comment">//保存单个实体 </span></span><br><span class="line">(<span class="number">2</span>).Iterable&lt;T&gt; save(Iterable&lt;? <span class="keyword">extends</span> T&gt; entities);<span class="comment">//保存集合        </span></span><br><span class="line">(<span class="number">3</span>).<span class="function">T <span class="title">findOne</span><span class="params">(ID id)</span></span>;<span class="comment">//根据id查找实体         </span></span><br><span class="line">(<span class="number">4</span>).<span class="function"><span class="keyword">boolean</span> <span class="title">exists</span><span class="params">(ID id)</span></span>;<span class="comment">//根据id判断实体是否存在         </span></span><br><span class="line">(<span class="number">5</span>).Iterable&lt;T&gt; findAll();<span class="comment">//查询所有实体,不用或慎用!       </span></span><br><span class="line">(<span class="number">6</span>).<span class="function"><span class="keyword">long</span> <span class="title">count</span><span class="params">()</span></span>;<span class="comment">//查询实体数量         </span></span><br><span class="line">(<span class="number">7</span>).<span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(ID id)</span></span>;<span class="comment">//根据Id删除实体         </span></span><br><span class="line">(<span class="number">8</span>).<span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(T entity)</span></span>;<span class="comment">//删除一个实体 </span></span><br><span class="line">(<span class="number">9</span>).<span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(Iterable&lt;? <span class="keyword">extends</span> T&gt; entities)</span></span>;<span class="comment">//删除一个实体的集合        </span></span><br><span class="line">(<span class="number">10</span>).<span class="function"><span class="keyword">void</span> <span class="title">deleteAll</span><span class="params">()</span></span>;<span class="comment">//删除所有实体,不用或慎用!</span></span><br></pre></td></tr></table></figure></p>
 <p>上述方法,都是系统定义好了,如无扩展需求,则不需要进行覆写.</p>
@@ -492,7 +496,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

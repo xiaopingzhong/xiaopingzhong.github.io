@@ -267,15 +267,65 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　java容器类主要为了解决不同类的对象的存储、操作问题.Docker则是为了减少应用配置复杂度,保持开发,测试,生产环境的一致性.上述两个问题主要是从概念,原因,组成部分三个部分来进行阐述.文章涉及的概念问题比较多,需要好好屡屡.<a id="more"></a></p>
+            <p>java容器类主要为了解决不同类的对象的存储、操作问题.Docker则是为了减少应用配置复杂度,保持开发,测试,生产环境的一致性.上述两个问题主要是从概念,原因,组成部分三个部分来进行阐述.文章涉及的概念问题比较多,需要好好屡屡.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-java-rong-qi">一.java容器</a><ul>
+<li><a href="#1-1-gai-nian">1.1 概念</a></li>
+<li><a href="#1-2-yuan-yin">1.2 原因</a></li>
+<li><a href="#1-3-zuo-yong">1.3 作用</a></li>
+<li><a href="#1-4-zu-cheng-bu-fen">1.4 组成部分</a><ul>
+<li><a href="#1-4-1-collection-jie-kou">1.4.1 collection 接口</a><ul>
+<li><a href="#1-set">1.set</a></li>
+<li><a href="#2-list">2.List</a></li>
+<li><a href="#3-queue">3.Queue</a></li>
+</ul>
+</li>
+<li><a href="#1-4-2-map-jie-kou">1.4.2 Map接口</a></li>
+</ul>
+</li>
+<li><a href="#1-5-bing-fa-rong-qi">1.5 并发容器</a><ul>
+<li><a href="#1-5-1-copyonwrite-rong-qi">1.5.1 CopyOnWrite容器</a></li>
+<li><a href="#1-5-2-concurrentlinkedqueue">1.5.2 ConcurrentLinkedQueue</a></li>
+<li><a href="#1-5-3-concurrenthashmap-yu-suo-fen-duan-ji-zhu">1.5.3 ConcurrentHashMap与锁分段技术</a></li>
+</ul>
+</li>
+<li><a href="#1-6-die-dai-qi">1.6 迭代器</a></li>
+</ul>
+</li>
+<li><a href="#er-docker">二.Docker</a><ul>
+<li><a href="#2-1-gai-nian">2.1 概念</a></li>
+<li><a href="#2-2-yuan-yin">2.2 原因</a><ul>
+<li><a href="#2-2-1-jian-shao-pei-zhi-de-fu-za-du">2.2.1 减少配置的复杂度。</a></li>
+<li><a href="#2-2-2-bao-zheng-kai-fa-ce-shi-he-sheng-chan-huan-jing-yi-zhi">2.2.2 保证开发、测试和生产环境一致。</a></li>
+</ul>
+</li>
+<li><a href="#2-3-rong-qi-he-vm">2.3 容器和 VM</a><ul>
+<li><a href="#rong-qi">容器</a></li>
+</ul>
+</li>
+<li><a href="#2-4-zu-cheng-bu-fen">2.4 组成部分</a><ul>
+<li><a href="#2-4-1-docker">2.4.1 Docker</a></li>
+<li><a href="#2-4-2-jing-xiang">2.4.2 镜像</a></li>
+<li><a href="#2-4-3-rong-qi">2.4.3 容器</a></li>
+<li><a href="#2-4-4-docker-cang-ku">2.4.4 Docker 仓库</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#can-kao-wen-xian">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-java容器"><a href="#一-java容器" class="headerlink" title="一.java容器"></a>一.java容器</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><p>　　容器也是一个类,只不过是用来存放其他类的对象的类.其中对象之间的性质/类型可以不一样.因此容器也可以叫做集合.也就是用来存储数据的数据结构.<br>容器可以分成两类:collection接口范围的容器,Map接口类型的容器.</p>
-<h2 id="1-2-原因"><a href="#1-2-原因" class="headerlink" title="1.2 原因"></a>1.2 原因</h2><p>为了弥补数组的两大缺陷:<br>　　(1)长度难以扩充;<br>　　(2)数组中元素类型必须相同.</p>
-<h2 id="1-3-作用"><a href="#1-3-作用" class="headerlink" title="1.3 作用"></a>1.3 作用</h2><p>　　容器可以管理对象的生命周期、对象与对象之间的依赖关系。通过一个配置文件或者一些注解来配置实现，通过定义对象的名称、产生方式，哪个对象产生后必须设定成为那个对象的属性等，容器启动之后所有对象都可以直接取用，不用编写任何一行程序来产生对象或者建立对象与对象之间的依赖关系.</p>
-<h2 id="1-4-组成部分"><a href="#1-4-组成部分" class="headerlink" title="1.4 组成部分"></a>1.4 组成部分</h2><h3 id="1-4-1-collection-接口"><a href="#1-4-1-collection-接口" class="headerlink" title="1.4.1 collection 接口"></a>1.4.1 collection 接口</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084936.jpg" alt="collection接口类型容器"></p>
-<h4 id="1-set"><a href="#1-set" class="headerlink" title="1.set"></a>1.set</h4><p>　　Set不保存重复的元素，通常用于快速查找元素。值得一提的是，Set具有与Collection完全一样的接口，没有任何额外的功能。 存入的元素必须定义equals()方法</p>
+<h1><span id="yi-java-rong-qi">一.java容器</span></h1><h2><span id="1-1-gai-nian">1.1 概念</span></h2><p>　　容器也是一个类,只不过是用来存放其他类的对象的类.其中对象之间的性质/类型可以不一样.因此容器也可以叫做集合.也就是用来存储数据的数据结构.<br>容器可以分成两类:collection接口范围的容器,Map接口类型的容器.</p>
+<h2><span id="1-2-yuan-yin">1.2 原因</span></h2><p>为了弥补数组的两大缺陷:<br>　　(1)长度难以扩充;<br>　　(2)数组中元素类型必须相同.</p>
+<h2><span id="1-3-zuo-yong">1.3 作用</span></h2><p>　　容器可以管理对象的生命周期、对象与对象之间的依赖关系。通过一个配置文件或者一些注解来配置实现，通过定义对象的名称、产生方式，哪个对象产生后必须设定成为那个对象的属性等，容器启动之后所有对象都可以直接取用，不用编写任何一行程序来产生对象或者建立对象与对象之间的依赖关系.</p>
+<h2><span id="1-4-zu-cheng-bu-fen">1.4 组成部分</span></h2><h3><span id="1-4-1-collection-jie-kou">1.4.1 collection 接口</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084936.jpg" alt="collection接口类型容器"></p>
+<h4><span id="1-set">1.set</span></h4><p>　　Set不保存重复的元素，通常用于快速查找元素。值得一提的是，Set具有与Collection完全一样的接口，没有任何额外的功能。 存入的元素必须定义equals()方法</p>
 <table>
 <thead>
 <tr>
@@ -302,7 +352,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="2-List"><a href="#2-List" class="headerlink" title="2.List"></a>2.List</h4><p>　　可以保存重复元素，两种类型的List，ArrayList和LinkedList</p>
+<h4><span id="2-list">2.List</span></h4><p>　　可以保存重复元素，两种类型的List，ArrayList和LinkedList</p>
 <table>
 <thead>
 <tr>
@@ -327,8 +377,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="3-Queue"><a href="#3-Queue" class="headerlink" title="3.Queue"></a>3.Queue</h4><p>　　除了并发应用，Queue仅有的两个实现是LinkedList和PriorityQueue, 其中LinkedList同时实现了List, Deque接口。它们的差异在于排序行为而不是性能。</p>
-<h3 id="1-4-2-Map接口"><a href="#1-4-2-Map接口" class="headerlink" title="1.4.2 Map接口"></a>1.4.2 Map接口</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084937.jpg" alt="Map接口类型容器"></p>
+<h4><span id="3-queue">3.Queue</span></h4><p>　　除了并发应用，Queue仅有的两个实现是LinkedList和PriorityQueue, 其中LinkedList同时实现了List, Deque接口。它们的差异在于排序行为而不是性能。</p>
+<h3><span id="1-4-2-map-jie-kou">1.4.2 Map接口</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084937.jpg" alt="Map接口类型容器"></p>
 <table>
 <thead>
 <tr>
@@ -371,19 +421,19 @@
 </tbody>
 </table>
 <p>　　PS:不要使用过时的容器 如Vector Enumeration Hashtable Stack(没错，这就是java最初的糟糕设计，实际中使用栈的话推荐LinkedList)</p>
-<h2 id="1-5-并发容器"><a href="#1-5-并发容器" class="headerlink" title="1.5 并发容器"></a>1.5 并发容器</h2><h3 id="1-5-1-CopyOnWrite容器"><a href="#1-5-1-CopyOnWrite容器" class="headerlink" title="1.5.1 CopyOnWrite容器"></a>1.5.1 CopyOnWrite容器</h3><p>　　写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
-<h3 id="1-5-2-ConcurrentLinkedQueue"><a href="#1-5-2-ConcurrentLinkedQueue" class="headerlink" title="1.5.2 ConcurrentLinkedQueue"></a>1.5.2 ConcurrentLinkedQueue</h3><p>　　在并发编程中，有时候需要使用线程安全的队列或列表。通常实现线程安全有两种方式，一种是使用阻塞算法，一种是使用非阻塞算法。非阻塞算法实现基础为循环CAS(Compare and Swipe 比较和交换)。<br>　　ConcurrentLinkedQueue技术上的实现与CopyOnWriteArrayList与Copy类似，但是容器只有部分内容而不是整个容器可以被复制和修改。ConcurrentLinkedQueue有head节点和tail节点组成，每个节点由节点元素(item)和指向下一个结点(next)的引用组成。节点之间通过next关联起来，形成一张链表结构的队列。</p>
-<h3 id="1-5-3-ConcurrentHashMap与锁分段技术"><a href="#1-5-3-ConcurrentHashMap与锁分段技术" class="headerlink" title="1.5.3 ConcurrentHashMap与锁分段技术"></a>1.5.3 ConcurrentHashMap与锁分段技术</h3><p>1.ConcurrentHashMap<br>　　线程安全且高效的HashMap。多线程环境下，使用非线程安全的HashMap会导致死循环，而如文章中建议的那样，HashTable这种过时容器效率低下(使用synchronized来保证线程安全)。ConcurrentHashMap使用锁分段技术，大大提高了并发使用的效率。<br>2.锁分段技术<br>　　假设容器有多把锁，每一把锁用于锁容器其中一部分数据，当多线程访问容器不同数据段数据时，线程间就不存在锁竞争，从而提高并发访问效率。</p>
-<h2 id="1-6-迭代器"><a href="#1-6-迭代器" class="headerlink" title="1.6 迭代器"></a>1.6 迭代器</h2><p>　　迭代器统一了对容器的访问方式，同时创建它的代价很小。值得注意的是，Iterator只能单向移动。要想双向移动,需要ListIterator是Iterator的扩展之内，用于各种List类访问，支持双向移动。<br>　　一般步骤:<br>　　　　(1)通过容器的iterator()方法拿到容器的迭代器<br>　　　　(2)迭代器的next()获取下一个元素<br>　　　　(3)hasNext()判断是否还有元素<br>　　　　(4)remove()删除指定元素.</p>
-<h1 id="二-Docker"><a href="#二-Docker" class="headerlink" title="二.Docker"></a>二.Docker</h1><h2 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h2><p>　　Docker就是一个基于软件层面的轻量虚拟机,与基于硬件的VM不同,它直接复用了 Host 主机的 OS,在 Docker Engine 层面实现了调度和隔离重量一下子就降低了好几个档次。 Docker 的容器利用了LXC，管理利用了 namespaces 来做权限的控制和隔离，  cgroups 来进行资源的配置，并且还通过aufs 来进一步提高文件系统的资源利用率。<br>　　其中的 aufs 是个很有意思的东西，是  UnionFS 的一种。他的思想和 git 有些类似，可以把对文件系统的改动当成一次 commit 一层层的叠加。这样的话多个容器之间就可以共享他们的文件系统层次，每个容器下面都是共享的文件系统层次，上面再是各自对文件系统改动的层次，这样的话极大的节省了对存储的需求，并且也能加速容器的启动</p>
-<h2 id="2-2-原因"><a href="#2-2-原因" class="headerlink" title="2.2 原因"></a>2.2 原因</h2><h3 id="2-2-1-减少配置的复杂度。"><a href="#2-2-1-减少配置的复杂度。" class="headerlink" title="2.2.1 减少配置的复杂度。"></a>2.2.1 减少配置的复杂度。</h3><p>　　比如我现在想用MySQL那我就找个装好MySQL的容器，运行起来，那么我就可以使用 MySQL了。那么我直接装个 MySQL不就好了，何必还需要这个容器这么诡异的概念？话是这么说，可是你要真装MySQL的话可能要再装一堆依赖库，根据你的操作系统平台和版本进行设置，有时候还要从源代码编译报出一堆莫名其妙的错误，可不是这么好装。而且万一你机器挂了，所有的东西都要重新来，可能还要把配置在重新弄一遍。但是有了容器，你就相当于有了一个可以运行起来的虚拟机，只要你能运行容器，MySQL的配置就全省了。而且一旦你想换台机器，直接把这个容器端起来，再放到另一个机器就好了。硬件，操作系统，运行环境什么的都不需要考虑了。</p>
-<h3 id="2-2-2-保证开发、测试和生产环境一致。"><a href="#2-2-2-保证开发、测试和生产环境一致。" class="headerlink" title="2.2.2 保证开发、测试和生产环境一致。"></a>2.2.2 保证开发、测试和生产环境一致。</h3><p>　　若果利用容器的话，那么开发直接在容器里开发，提测的时候把整个容器给测试，测好了把改动改在容器里再上线就好了。通过容器，整个开发、测试和生产环境可以保持高度的一致。此外容器也和VM一样具有着一定的隔离性，各个容器之间的数据和内存空间相互隔离，可以保证一定的安全性。</p>
-<h2 id="2-3-容器和-VM"><a href="#2-3-容器和-VM" class="headerlink" title="2.3 容器和 VM"></a>2.3 容器和 VM</h2><h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084938.jpg" alt="Docker与虚拟机对比"><br>　　可见容器是在操作系统层面上实现虚拟化，直接复用本地主机的操作系统，而传统方式（VM）则是在硬件层面实现，VM 的 Hypervisor 需要实现对硬件的虚拟化，并且还要搭载自己的操作系统，自然在启动速度和资源利用率以及性能上有比较大的开销。</p>
-<h2 id="2-4-组成部分"><a href="#2-4-组成部分" class="headerlink" title="2.4 组成部分"></a>2.4 组成部分</h2><h3 id="2-4-1-Docker"><a href="#2-4-1-Docker" class="headerlink" title="2.4.1 Docker"></a>2.4.1 Docker</h3><p>　　之前概念部分说过Docker就是一个基于软件层面的轻量虚拟机，可以多平台运行,用来打包软件运行环境和基于运行环境开发的软件。</p>
-<h3 id="2-4-2-镜像"><a href="#2-4-2-镜像" class="headerlink" title="2.4.2 镜像"></a>2.4.2 镜像</h3><p>　　我们把打包好的运行环境（即系统）和基于运行环境开发的软件生成的东东叫镜像（image），类似我们装windows系统使用过的GHO、ISO等系统镜像,可以在多平台运行.<br>　　要生成自定义镜像，有个东东来了，那就是Dockerfile，简单来说，Dockerfile是一个脚本，用来编写要自定义的镜像该如何去生成的步骤，比如说，要生成一个自定义的image镜像，是基于ubuntu的，那么在Dockerfile的最前头应该有这么一句话 FROM ubuntu等等，具体的Dockerfile的指令操作，在此不细说，大家只要明白Dockerfile是个用来描述自定义镜像的生成步骤的脚本，啰嗦一句，每个Dockerfile中操作的指令都会让docker在执行Dockerfile的时候生成一个临时的layer，多个layer构成一个image镜像，如果命令有改动，会生成新的layer，没有改动，就只保留一份layer.<br>　　docker打包系统生成image镜像，并不是在虚拟机中，而是对我们正在运行的系统进行打包操作，这点要注意.<br>　　镜像文件是只读文件.静态的</p>
-<h3 id="2-4-3-容器"><a href="#2-4-3-容器" class="headerlink" title="2.4.3 容器"></a>2.4.3 容器</h3><p>　　镜像运行的地方就叫做Container–容器，因此Docker不单单是只有容器，其中Container是被docker管理的,当要在container中运行image镜像的时候，docker会拷贝一个image到container中，原本的image还是被docker管理着，运行在container中的image是一个副本，准确来说，不是副本，这里不深入说，有兴趣的可以去搜搜cgroup，docker利用了linux系统的这个弄的。不深入来看，可以理解为一个image副本.因为镜像自身是只读的。<br>　　容器从镜像启动的时候，Docker会在镜像的最上层创建一个可写层，镜像本身将保持不变。要保存修改,那么就将当前镜像进行打包成新的镜像。<br>　　每个容器都是相互隔离的、保证安全的平台</p>
-<h3 id="2-4-4-Docker-仓库"><a href="#2-4-4-Docker-仓库" class="headerlink" title="2.4.4 Docker 仓库"></a>2.4.4 Docker 仓库</h3><p>　　集中存放镜像文件的场所。有时候会把仓库和仓库注册服务器（Registry）混为一谈，并不严格区分。实际上，仓库注册服务器上往往存放着多个仓库，每个仓库中又包含了多个镜像，每个镜像有不同的标签（tag）。<br>　　仓库分为公开仓库（Public）和私有仓库（Private）两种形式。<br>　　最大的公开仓库是 Docker Hub，存放了数量庞大的镜像供用户下载。国内的公开仓库包括Docker Pool 等，可以提供大陆用户更稳定快速的访问。当然，用户也可以在本地网络内创建一个私有仓库。<br>　　当用户创建了自己的镜像之后就可以使用 push 命令将它上传到公有或者私有仓库，这样下次在另外一台机器上使用这个镜像时候，只需要从仓库上pull 下来就可以了。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>(1)<a href="https://blog.csdn.net/albertfly/article/details/52403393" target="_blank" rel="noopener">https://blog.csdn.net/albertfly/article/details/52403393</a><br>(2)<a href="https://blog.csdn.net/S_gy_Zetrov/article/details/78161154" target="_blank" rel="noopener">https://blog.csdn.net/S_gy_Zetrov/article/details/78161154</a></p>
+<h2><span id="1-5-bing-fa-rong-qi">1.5 并发容器</span></h2><h3><span id="1-5-1-copyonwrite-rong-qi">1.5.1 CopyOnWrite容器</span></h3><p>　　写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
+<h3><span id="1-5-2-concurrentlinkedqueue">1.5.2 ConcurrentLinkedQueue</span></h3><p>　　在并发编程中，有时候需要使用线程安全的队列或列表。通常实现线程安全有两种方式，一种是使用阻塞算法，一种是使用非阻塞算法。非阻塞算法实现基础为循环CAS(Compare and Swipe 比较和交换)。<br>　　ConcurrentLinkedQueue技术上的实现与CopyOnWriteArrayList与Copy类似，但是容器只有部分内容而不是整个容器可以被复制和修改。ConcurrentLinkedQueue有head节点和tail节点组成，每个节点由节点元素(item)和指向下一个结点(next)的引用组成。节点之间通过next关联起来，形成一张链表结构的队列。</p>
+<h3><span id="1-5-3-concurrenthashmap-yu-suo-fen-duan-ji-zhu">1.5.3 ConcurrentHashMap与锁分段技术</span></h3><p>1.ConcurrentHashMap<br>　　线程安全且高效的HashMap。多线程环境下，使用非线程安全的HashMap会导致死循环，而如文章中建议的那样，HashTable这种过时容器效率低下(使用synchronized来保证线程安全)。ConcurrentHashMap使用锁分段技术，大大提高了并发使用的效率。<br>2.锁分段技术<br>　　假设容器有多把锁，每一把锁用于锁容器其中一部分数据，当多线程访问容器不同数据段数据时，线程间就不存在锁竞争，从而提高并发访问效率。</p>
+<h2><span id="1-6-die-dai-qi">1.6 迭代器</span></h2><p>　　迭代器统一了对容器的访问方式，同时创建它的代价很小。值得注意的是，Iterator只能单向移动。要想双向移动,需要ListIterator是Iterator的扩展之内，用于各种List类访问，支持双向移动。<br>　　一般步骤:<br>　　　　(1)通过容器的iterator()方法拿到容器的迭代器<br>　　　　(2)迭代器的next()获取下一个元素<br>　　　　(3)hasNext()判断是否还有元素<br>　　　　(4)remove()删除指定元素.</p>
+<h1><span id="er-docker">二.Docker</span></h1><h2><span id="2-1-gai-nian">2.1 概念</span></h2><p>　　Docker就是一个基于软件层面的轻量虚拟机,与基于硬件的VM不同,它直接复用了 Host 主机的 OS,在 Docker Engine 层面实现了调度和隔离重量一下子就降低了好几个档次。 Docker 的容器利用了LXC，管理利用了 namespaces 来做权限的控制和隔离，  cgroups 来进行资源的配置，并且还通过aufs 来进一步提高文件系统的资源利用率。<br>　　其中的 aufs 是个很有意思的东西，是  UnionFS 的一种。他的思想和 git 有些类似，可以把对文件系统的改动当成一次 commit 一层层的叠加。这样的话多个容器之间就可以共享他们的文件系统层次，每个容器下面都是共享的文件系统层次，上面再是各自对文件系统改动的层次，这样的话极大的节省了对存储的需求，并且也能加速容器的启动</p>
+<h2><span id="2-2-yuan-yin">2.2 原因</span></h2><h3><span id="2-2-1-jian-shao-pei-zhi-de-fu-za-du">2.2.1 减少配置的复杂度。</span></h3><p>　　比如我现在想用MySQL那我就找个装好MySQL的容器，运行起来，那么我就可以使用 MySQL了。那么我直接装个 MySQL不就好了，何必还需要这个容器这么诡异的概念？话是这么说，可是你要真装MySQL的话可能要再装一堆依赖库，根据你的操作系统平台和版本进行设置，有时候还要从源代码编译报出一堆莫名其妙的错误，可不是这么好装。而且万一你机器挂了，所有的东西都要重新来，可能还要把配置在重新弄一遍。但是有了容器，你就相当于有了一个可以运行起来的虚拟机，只要你能运行容器，MySQL的配置就全省了。而且一旦你想换台机器，直接把这个容器端起来，再放到另一个机器就好了。硬件，操作系统，运行环境什么的都不需要考虑了。</p>
+<h3><span id="2-2-2-bao-zheng-kai-fa-ce-shi-he-sheng-chan-huan-jing-yi-zhi">2.2.2 保证开发、测试和生产环境一致。</span></h3><p>　　若果利用容器的话，那么开发直接在容器里开发，提测的时候把整个容器给测试，测好了把改动改在容器里再上线就好了。通过容器，整个开发、测试和生产环境可以保持高度的一致。此外容器也和VM一样具有着一定的隔离性，各个容器之间的数据和内存空间相互隔离，可以保证一定的安全性。</p>
+<h2><span id="2-3-rong-qi-he-vm">2.3 容器和 VM</span></h2><h3><span id="rong-qi">容器</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084938.jpg" alt="Docker与虚拟机对比"><br>　　可见容器是在操作系统层面上实现虚拟化，直接复用本地主机的操作系统，而传统方式（VM）则是在硬件层面实现，VM 的 Hypervisor 需要实现对硬件的虚拟化，并且还要搭载自己的操作系统，自然在启动速度和资源利用率以及性能上有比较大的开销。</p>
+<h2><span id="2-4-zu-cheng-bu-fen">2.4 组成部分</span></h2><h3><span id="2-4-1-docker">2.4.1 Docker</span></h3><p>　　之前概念部分说过Docker就是一个基于软件层面的轻量虚拟机，可以多平台运行,用来打包软件运行环境和基于运行环境开发的软件。</p>
+<h3><span id="2-4-2-jing-xiang">2.4.2 镜像</span></h3><p>　　我们把打包好的运行环境（即系统）和基于运行环境开发的软件生成的东东叫镜像（image），类似我们装windows系统使用过的GHO、ISO等系统镜像,可以在多平台运行.<br>　　要生成自定义镜像，有个东东来了，那就是Dockerfile，简单来说，Dockerfile是一个脚本，用来编写要自定义的镜像该如何去生成的步骤，比如说，要生成一个自定义的image镜像，是基于ubuntu的，那么在Dockerfile的最前头应该有这么一句话 FROM ubuntu等等，具体的Dockerfile的指令操作，在此不细说，大家只要明白Dockerfile是个用来描述自定义镜像的生成步骤的脚本，啰嗦一句，每个Dockerfile中操作的指令都会让docker在执行Dockerfile的时候生成一个临时的layer，多个layer构成一个image镜像，如果命令有改动，会生成新的layer，没有改动，就只保留一份layer.<br>　　docker打包系统生成image镜像，并不是在虚拟机中，而是对我们正在运行的系统进行打包操作，这点要注意.<br>　　镜像文件是只读文件.静态的</p>
+<h3><span id="2-4-3-rong-qi">2.4.3 容器</span></h3><p>　　镜像运行的地方就叫做Container–容器，因此Docker不单单是只有容器，其中Container是被docker管理的,当要在container中运行image镜像的时候，docker会拷贝一个image到container中，原本的image还是被docker管理着，运行在container中的image是一个副本，准确来说，不是副本，这里不深入说，有兴趣的可以去搜搜cgroup，docker利用了linux系统的这个弄的。不深入来看，可以理解为一个image副本.因为镜像自身是只读的。<br>　　容器从镜像启动的时候，Docker会在镜像的最上层创建一个可写层，镜像本身将保持不变。要保存修改,那么就将当前镜像进行打包成新的镜像。<br>　　每个容器都是相互隔离的、保证安全的平台</p>
+<h3><span id="2-4-4-docker-cang-ku">2.4.4 Docker 仓库</span></h3><p>　　集中存放镜像文件的场所。有时候会把仓库和仓库注册服务器（Registry）混为一谈，并不严格区分。实际上，仓库注册服务器上往往存放着多个仓库，每个仓库中又包含了多个镜像，每个镜像有不同的标签（tag）。<br>　　仓库分为公开仓库（Public）和私有仓库（Private）两种形式。<br>　　最大的公开仓库是 Docker Hub，存放了数量庞大的镜像供用户下载。国内的公开仓库包括Docker Pool 等，可以提供大陆用户更稳定快速的访问。当然，用户也可以在本地网络内创建一个私有仓库。<br>　　当用户创建了自己的镜像之后就可以使用 push 命令将它上传到公有或者私有仓库，这样下次在另外一台机器上使用这个镜像时候，只需要从仓库上pull 下来就可以了。</p>
+<h1><span id="can-kao-wen-xian">参考文献</span></h1><p>(1)<a href="https://blog.csdn.net/albertfly/article/details/52403393" target="_blank" rel="noopener">https://blog.csdn.net/albertfly/article/details/52403393</a><br>(2)<a href="https://blog.csdn.net/S_gy_Zetrov/article/details/78161154" target="_blank" rel="noopener">https://blog.csdn.net/S_gy_Zetrov/article/details/78161154</a></p>
 
         
         </div>
@@ -603,7 +653,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

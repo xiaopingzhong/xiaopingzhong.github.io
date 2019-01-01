@@ -267,27 +267,49 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文的讲解主要是为了便于理解后面的知识图谱综述,语义网是以分层的形式来进行阐述的,第一层是资源的存储形式和地址形式,第二层则是资源内部结构是怎样的,第三层主要讲的是资源之间的关系是怎样的,第四层是对第三层的细化增加了资源的属性及其约束,为此形成了一个本体的概念,采用owl语言进行描述,便于区分不同本体之间的界限.最后几层就是验证,加密,应用交互层.<a id="more"></a></p>
+            <p>本文的讲解主要是为了便于理解后面的知识图谱综述,语义网是以分层的形式来进行阐述的,第一层是资源的存储形式和地址形式,第二层则是资源内部结构是怎样的,第三层主要讲的是资源之间的关系是怎样的,第四层是对第三层的细化增加了资源的属性及其约束,为此形成了一个本体的概念,采用owl语言进行描述,便于区分不同本体之间的界限.最后几层就是验证,加密,应用交互层.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-ge-ceng-gai-nian">一.各层概念:</a><ul>
+<li><a href="#1-1-uri-yu-unicode">1.1 URI与UNICODE</a></li>
+<li><a href="#1-2xml">1.2XML</a></li>
+<li><a href="#1-3-rdf">1.3 RDF</a><ul>
+<li><a href="#1-3-1-rdf-data-model">1.3.1 RDF  data model</a></li>
+<li><a href="#1-3-2-rdf-schema">1.3.2 RDF schema</a></li>
+<li><a href="#1-3-2-rdf-sytanx">1.3.2 RDF sytanx</a></li>
+</ul>
+</li>
+<li><a href="#1-4-rdf-schema-yu-sparql">1.4 RDF schema 与SPARQL</a></li>
+<li><a href="#1-5-owl-rif-swrl">1.5 OWL ,RIF/SWRL</a></li>
+<li><a href="#1-6-logic-proof-trust">1. 6 Logic + Proof + Trust</a></li>
+<li><a href="#1-7-interaction">1.7 interaction</a></li>
+<li><a href="#1-8-can-kao">1.8 参考</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
 <p>先上图</p>
 <p><div align="center"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085608.png" alt="语义网技术栈"><br></div></p>
-<h2 id="一-各层概念"><a href="#一-各层概念" class="headerlink" title="一.各层概念:"></a>一.各层概念:</h2><p>阐述之前,先说下资源的概念:<br>　　1.可以是任意<strong>拥有URI(这是最重要的)</strong>的对象,人,物体,概念,文档,文件,音频.等等<br>　　2.URI:统一资源标识符</p>
-<h3 id="1-1-URI与UNICODE"><a href="#1-1-URI与UNICODE" class="headerlink" title="1.1 URI与UNICODE"></a>1.1 URI与UNICODE</h3><ul>
+<h2><span id="yi-ge-ceng-gai-nian">一.各层概念:</span></h2><p>阐述之前,先说下资源的概念:<br>　　1.可以是任意<strong>拥有URI(这是最重要的)</strong>的对象,人,物体,概念,文档,文件,音频.等等<br>　　2.URI:统一资源标识符</p>
+<h3><span id="1-1-uri-yu-unicode">1.1 URI与UNICODE</span></h3><ul>
 <li>UNICODE:规定了资源的编码形式;</li>
 <li>URI规定了每个资源的唯一标识符.</li>
 </ul>
-<h3 id="1-2XML"><a href="#1-2XML" class="headerlink" title="1.2XML"></a>1.2XML</h3><ul>
+<h3><span id="1-2xml">1.2XML</span></h3><ul>
 <li>XML规定了资源的内容及其数据结构(XML tree,标签来描述),最重要的是没有语义的描述能力.(就是不知道资源之间的关系是怎样的).</li>
 <li>同时XML的标签可以人为定义,这就导致不能很好地被计算机处理,为了规范化标签,增强可处理性,所以推出了xml schema来规定所拥有的标签,形式为<a href="xs:schema" target="_blank" rel="noopener">xs:schema</a>&lt;/xs:schema&gt;</li>
 <li>但是由于标签的数量减少了,就很容易带来重复,这就引入了了命名空间的概念,xmlns (namespace–ns),在不同的命名空间下,同名的标签不受影响.形式为:xmlns:前缀=地址.具体代码如下:</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">xs:schema</span> <span class="attr">xmlns:xs</span>=<span class="string">"http://www.w3.org/2001/XMLSchema"</span>&gt;</span> <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"note"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">xs:sequence</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"to"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"from"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"body"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">xs:sequence</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xs:element</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xs:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="1-3-RDF"><a href="#1-3-RDF" class="headerlink" title="1.3 RDF"></a>1.3 RDF</h3><p>　RDF: 主要是用来描述资源之间的关系.采用SPO三元组 形式.<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">subject predict <span class="class"><span class="keyword">object</span></span></span><br><span class="line"><span class="class"><span class="title">#subject</span> <span class="title">与object是节点</span>,<span class="title">节点可以是资源或描述资源的属性值</span>(<span class="params">不是属性</span>),<span class="title">predict是关系</span></span>:只要能够描述两个节点的关系都可以称之为关系/属性</span><br><span class="line">#(资源，属性，属性值/资源)</span><br></pre></td></tr></table></figure></p>
+<h3><span id="1-3-rdf">1.3 RDF</span></h3><p>　RDF: 主要是用来描述资源之间的关系.采用SPO三元组 形式.<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">subject predict <span class="class"><span class="keyword">object</span></span></span><br><span class="line"><span class="class"><span class="title">#subject</span> <span class="title">与object是节点</span>,<span class="title">节点可以是资源或描述资源的属性值</span>(<span class="params">不是属性</span>),<span class="title">predict是关系</span></span>:只要能够描述两个节点的关系都可以称之为关系/属性</span><br><span class="line">#(资源，属性，属性值/资源)</span><br></pre></td></tr></table></figure></p>
 <p>　RDF资源描述框架,是一种图模型,数据模型,不是具体的数据类型.主要有三部分构成:</p>
-<h4 id="1-3-1-RDF-data-model"><a href="#1-3-1-RDF-data-model" class="headerlink" title="1.3.1 RDF  data model"></a>1.3.1 RDF  data model</h4><p>　就是单纯描述资源的方式:SPO三元组形式,但是没有语义信息</p>
-<h4 id="1-3-2-RDF-schema"><a href="#1-3-2-RDF-schema" class="headerlink" title="1.3.2 RDF schema"></a>1.3.2 RDF schema</h4><p>　在RDF data model上增加了语义信息,就是描述资源的关系,<strong>方式就是增加资源的属性及其资源所属的类的描述.</strong>具体方法如下:</p>
+<h4><span id="1-3-1-rdf-data-model">1.3.1 RDF  data model</span></h4><p>　就是单纯描述资源的方式:SPO三元组形式,但是没有语义信息</p>
+<h4><span id="1-3-2-rdf-schema">1.3.2 RDF schema</span></h4><p>　在RDF data model上增加了语义信息,就是描述资源的关系,<strong>方式就是增加资源的属性及其资源所属的类的描述.</strong>具体方法如下:</p>
 <table>
 <thead>
 <tr>
@@ -334,7 +356,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="1-3-2-RDF-sytanx"><a href="#1-3-2-RDF-sytanx" class="headerlink" title="1.3.2 RDF sytanx"></a>1.3.2 RDF sytanx</h4><p>　　就是讲如何将RDF数据存入到计算机当中,也就是我们所说的RDF序列化方法,这就是RDF   sytanx的作用.主要有如下集中方式:</p>
+<h4><span id="1-3-2-rdf-sytanx">1.3.2 RDF sytanx</span></h4><p>　　就是讲如何将RDF数据存入到计算机当中,也就是我们所说的RDF序列化方法,这就是RDF   sytanx的作用.主要有如下集中方式:</p>
 <ul>
 <li>JSON-LD:“JSON for Linking Data”，用键值对的方式来存储RDF数据,基于json基础扩展的一种语法,以键值对的形式来存储RDF</li>
 <li>RDFA:将RDF数据嵌入到网页中</li>
@@ -343,14 +365,14 @@
 <li>Turtle, 应该是使用得最多的一种RDF序列化方式了。它比RDF/XML紧凑，且可读性比N-Triples好.<br>turtle语法形式如下:<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@prefix</span> <span class="attribute">person</span>: &lt;<span class="attribute">http</span>:<span class="comment">//www.kg.com/person/&gt; .</span></span><br><span class="line"><span class="variable">@prefix</span> <span class="attribute">place</span>: &lt;<span class="attribute">http</span>:<span class="comment">//www.kg.com/place/&gt; .</span></span><br><span class="line"><span class="variable">@prefix</span> : &lt;<span class="attribute">http</span>:<span class="comment">//www.kg.com/ontology/&gt; .</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :chineseName <span class="string">"罗纳尔多·路易斯·纳萨里奥·德·利马"</span>^^string.</span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :career <span class="string">"足球运动员"</span>^^string.</span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :fullName <span class="string">"Ronaldo Luís Nazário de Lima"</span>^^string.</span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :birthDate <span class="string">"1976-09-18"</span>^^date.</span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :height <span class="string">"180"</span>^^int. </span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :weight <span class="string">"98"</span>^^int.</span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :nationality <span class="string">"巴西"</span>^^string. </span><br><span class="line"><span class="attribute">person</span>:<span class="number">1</span> :hasBirthPlace <span class="attribute">place</span>:<span class="number">10086</span>.</span><br><span class="line"><span class="attribute">place</span>:<span class="number">10086</span> :address <span class="string">"里约热内卢"</span>^^string.</span><br><span class="line"><span class="attribute">place</span>:<span class="number">10086</span> :coordinate <span class="string">"-22.908333, -43.196389"</span>^^string.</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="1-4-RDF-schema-与SPARQL"><a href="#1-4-RDF-schema-与SPARQL" class="headerlink" title="1.4 RDF schema 与SPARQL"></a>1.4 RDF schema 与SPARQL</h3><p>　RDF schema:主要还是为了增强资源关系的描述能力(上面讲了),</p>
+<h3><span id="1-4-rdf-schema-yu-sparql">1.4 RDF schema 与SPARQL</span></h3><p>　RDF schema:主要还是为了增强资源关系的描述能力(上面讲了),</p>
 <p>　SPARQL是一个查询图,RDF是一个存储图,是查询RDF数据的语言.</p>
-<h3 id="1-5-OWL-RIF-SWRL"><a href="#1-5-OWL-RIF-SWRL" class="headerlink" title="1.5 OWL ,RIF/SWRL"></a>1.5 OWL ,RIF/SWRL</h3><p>　OWL:在RDF schema的基础上,增加了对属性及其类的约束,也就是对资源的属性及其类增加了性质,这样能实现两个功能:分类,推理</p>
+<h3><span id="1-5-owl-rif-swrl">1.5 OWL ,RIF/SWRL</span></h3><p>　OWL:在RDF schema的基础上,增加了对属性及其类的约束,也就是对资源的属性及其类增加了性质,这样能实现两个功能:分类,推理</p>
 <ul>
 <li>实现对概念的分类,因为根据属性及类的约束,容易确定概念的边界</li>
 <li>有利于RIF(规则交换)–实现推理,因为某些属性含有某些性质,例如:传递性.</li>
 </ul>
-<h3 id="1-6-Logic-Proof-Trust"><a href="#1-6-Logic-Proof-Trust" class="headerlink" title="1. 6 Logic + Proof + Trust"></a>1. 6 Logic + Proof + Trust</h3><p>分别对应逻辑层,验证层,信任层</p>
+<h3><span id="1-6-logic-proof-trust">1. 6 Logic + Proof + Trust</span></h3><p>分别对应逻辑层,验证层,信任层</p>
 <ul>
 <li>逻辑层:提供公理及其规则,实现逻辑操作.</li>
 </ul>
@@ -360,8 +382,8 @@
 <ul>
 <li>信任层:根据验证层的结果和一些数字签名,建立信任</li>
 </ul>
-<h3 id="1-7-interaction"><a href="#1-7-interaction" class="headerlink" title="1.7 interaction"></a>1.7 interaction</h3><p>​    就是语义网的交互层,通过实现各种应用来进行交互</p>
-<h3 id="1-8-参考"><a href="#1-8-参考" class="headerlink" title="1.8 参考"></a>1.8 参考</h3><p><a href="https://blog.csdn.net/hohaizx/article/details/80043623" target="_blank" rel="noopener">https://blog.csdn.net/hohaizx/article/details/80043623</a></p>
+<h3><span id="1-7-interaction">1.7 interaction</span></h3><p>​    就是语义网的交互层,通过实现各种应用来进行交互</p>
+<h3><span id="1-8-can-kao">1.8 参考</span></h3><p><a href="https://blog.csdn.net/hohaizx/article/details/80043623" target="_blank" rel="noopener">https://blog.csdn.net/hohaizx/article/details/80043623</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/32122644" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32122644</a></p>
 <p><a href="http://blog.sina.com.cn/s/blog_541caaee0100jjmc.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_541caaee0100jjmc.html</a></p>
 
@@ -583,7 +605,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

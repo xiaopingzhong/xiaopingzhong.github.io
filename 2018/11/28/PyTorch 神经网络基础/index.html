@@ -267,33 +267,86 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲述的是深度学习的一些基本概念和一些常用的模型,包括激活函数,损失函数,常见模型CNN,RNN,LSTM,自编码器,常见的数据处理方法有:针对过拟合的DropOut和BN(批量标准化).<a id="more"></a></p>
+            <p>本文主要讲述的是深度学习的一些基本概念和一些常用的模型,包括激活函数,损失函数,常见模型CNN,RNN,LSTM,自编码器,常见的数据处理方法有:针对过拟合的DropOut和BN(批量标准化).<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-ji-li-han-shu">一.激励函数</a><ul>
+<li><a href="#1-1-zuo-yong">1.1 作用</a></li>
+<li><a href="#1-2-lei-xing">1.2 类型</a><ul>
+<li><a href="#1-2-1-sigmoid-yu-softmax">1.2.1 sigmoid与softmax</a></li>
+<li><a href="#1-2-2-tanh">1.2.2 tanh</a></li>
+<li><a href="#1-2-3-relu">1.2.3 Relu</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#er-sun-shi-han-shu">二.损失函数</a><ul>
+<li><a href="#2-1-mseloss">2.1 MSELoss</a></li>
+<li><a href="#2-2-crossentropyloss">2.2 Crossentropyloss</a></li>
+</ul>
+</li>
+<li><a href="#san-cnn">三.CNN</a><ul>
+<li><a href="#3-1-tong-su-jie-shi">3.1 通俗解释</a></li>
+<li><a href="#3-2-ge-ceng-de-han-yi">3.2 各层的含义:</a></li>
+</ul>
+</li>
+<li><a href="#si-rnn-yu-lstm">四.RNN与LSTM</a><ul>
+<li><a href="#4-1-mu-de">4.1 目的:</a></li>
+<li><a href="#4-2-nn-gong-zuo-yuan-li">4.2 NN工作原理</a></li>
+<li><a href="#4-3-rnn-de-wen-ti">4.3 RNN的问题</a></li>
+<li><a href="#4-4-lstm">4.4 LSTM</a></li>
+</ul>
+</li>
+<li><a href="#wu-zi-bian-ma-qi">五.自编码器</a><ul>
+<li><a href="#5-1-yuan-yin">5.1 原因</a></li>
+<li><a href="#5-2-guo-cheng">5.2 过程</a></li>
+</ul>
+</li>
+<li><a href="#liu-guo-ni-he">六.过拟合</a><ul>
+<li><a href="#6-1-yuan-yin">6.1 原因</a></li>
+<li><a href="#6-2-fang-fa">6.2 方法</a><ul>
+<li><a href="#6-2-1-zheng-ze-hua-fang-fa">6.2.1 正则化方法</a></li>
+<li><a href="#6-2-2-dropout">6.2.2 DropOut</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#qi-pi-biao-zhun-hua">七.批标准化</a><ul>
+<li><a href="#7-1-yuan-yin">7.1 原因</a></li>
+<li><a href="#7-2-xiao-guo">7.2 效果</a></li>
+</ul>
+</li>
+<li><a href="#ba-torch-de-dong-tai-ti-xian">八.Torch的动态体现</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-激励函数"><a href="#一-激励函数" class="headerlink" title="一.激励函数"></a>一.激励函数</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125235444.png" alt="激活函数"></p>
-<h2 id="1-1-作用"><a href="#1-1-作用" class="headerlink" title="1.1 作用"></a>1.1 作用</h2><p>　　激励函数/激活函数(AF–Active Function):<strong>主要目的增加特征的非线性,更好地拟合实际情况(逼近拟合实际的任意函数,因为参数多).来丰富特征之间的联系(因为可以学习到若干特征之间的不同关系),而不是单单只有线性关系,最后也利于增加模型的复杂度,即增加模型对非线性情况的拟合程度</strong>.<br>　　因为生活当中,线性情况(成正比,成反比)在实际中比较少,更多的是不确定的事情比较多,所以使用激励函数使原本的预测结果与输入值的线性关系得以改变,变成非线性关系(就好比中间一根直线,代表线性关系的直线,突然由于线上的某个点在激励函数的作用下,改变了值,导致线性关系被破环.),同时有时可以缓解梯度消失.(因为sigmoid函数反向传播时，很容易就会出现梯度消失的情况（<strong>在sigmoid接近饱和区时，变换太缓慢，导数趋于0,导致反向传播时,梯度线接近躺平,出现梯度消失</strong>，这种情况会造成信息丢失），从而无法完成深层网络的训练).<br>　　<strong>引入非线性函数</strong>作为激励函数，这样深层神经网络就有意义了（不再是输入的线性组合，可以逼近任意函数）。激活函数的输出有界，很容易充当下一层输入,<strong>激活函数对神经网络的深层抽象</strong>功能有着极其重要的意义,主要是对非线性特征的抽象.</p>
-<h2 id="1-2-类型"><a href="#1-2-类型" class="headerlink" title="1.2 类型"></a>1.2 类型</h2><h3 id="1-2-1-sigmoid与softmax"><a href="#1-2-1-sigmoid与softmax" class="headerlink" title="1.2.1 sigmoid与softmax"></a>1.2.1 sigmoid与softmax</h3><p><strong>收敛速度可以理解为梯度线的移动速度</strong><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126123550.png" alt="四种激活函数"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126001848.png" alt="sigmoid"><br>　　sigmoid:有效区间较短,但曲线平缓,该函数收敛速度较慢.<br>　　说明:虽然在一定程度会增加非线性,但是容易过饱和(例如:输入值只要大于-5或者小于,梯度线就会躺平),也就是我们所说的是有效区间较短,边缘区间(梯度线接近躺平)较长,会导致很多数据落在边缘区间,梯度线躺平.导致激活值相差不大,数据的非线性关系覆盖率减少,导致梯度消失.(非线性,软饱和),观察sigmoid函数,可以得知其曲线较为平缓,因此该函数收敛速度慢,可以用tanh来进行缓解.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126124833.png" alt="softmax函数"><br>　　sigmoid将一个real value映射到（0,1）的区间（当然也可以是（-1,1）），这样可以用来做二分类。 (根据激活值的正负来进行二分类)<br>　　softmax把一个k维的real value向量（a1,a2,a3,a4….）带入到softmax函数当中,之后映射成一个类似（b1,b2,b3,b4….）的向量(就是概率),其中bi是一个0-1的常数(对应类别的概率)，然后可以根据bi的大小,取最大bi值,之后根据该值所对应的类别(也就是序号)进行分类.(根据概率值进行分类)<br>　　虽然多个sigmoid函数通过叠加也同样可以实现多分类的效果，但是 softmax函数进行的多分类，<strong>类与类之间是互斥的</strong>，即一个输入只能被归为一类；多个sigmoid函数进行多分类，输出的类别并不是互斥的，即”苹果”这个词语既属于”水果”类也属于”3C”类别。</p>
-<h3 id="1-2-2-tanh"><a href="#1-2-2-tanh" class="headerlink" title="1.2.2 tanh"></a>1.2.2 tanh</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126002633.png" alt="tanh"><br>　　tanh:有效区间较sigmoid窄,但是收敛速度更快(),但是有效区间较短,边缘区间(梯度线接近躺平)较长的现状尚未改变.(非线性,软饱和)</p>
-<h3 id="1-2-3-Relu"><a href="#1-2-3-Relu" class="headerlink" title="1.2.3 Relu"></a>1.2.3 Relu</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126130902.png" alt="Relu与SoftPlus"><br>　　(1)有效区间较大:占一半,即大于0的部分,有效缓解了梯度消失的问题;<br>　　(2)收敛速度快:函数简单,且右侧为线性函数,<strong>求导运算较为简单</strong>,因为是线性,收敛速度更快,所以梯度下降的时候,只需沿着那条线周边的点走即可.<br>　　(3)稀疏激活性:Relu函数值会使一部分神经元的输出为0(左侧为0)，这样就造成了网络的稀疏性，并且减少了参数的相互依存关系，缓解了过拟合问题的发生.如果学习率太快,虽然Relu函数可以更快收敛,到达局部最优,即梯度线躺平,许多知识会忽略,即容易简化模型过度,导致很多神经元死亡,因此要控制学习率<br>注意:Relu只能用于隐藏层<br>　　其中tanh与sigmoid是增加非线性,丰富特征,缓解欠拟合.Relu/Softplus则是缓解过拟合,其会使一部分神经元的输出为0，这样就造成了网络的稀疏性，并且减少了参数的相互依存关系，缓解了过拟合问题的发生<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rectified Linear <span class="keyword">Unit</span>(ReLU) - 用于隐层神经元输出:用于缓解过拟合</span><br><span class="line">Sigmoid/<span class="built_in">tanh</span> - 用于隐层神经元输出:用于缓解欠拟合,丰富特征程度</span><br><span class="line">Softmax - 用于多分类神经网络输出</span><br></pre></td></tr></table></figure></p>
-<h1 id="二-损失函数"><a href="#二-损失函数" class="headerlink" title="二.损失函数"></a>二.损失函数</h1><h2 id="2-1-MSELoss"><a href="#2-1-MSELoss" class="headerlink" title="2.1 MSELoss"></a>2.1 MSELoss</h2><p>　　(实际值-预测值)的平方</p>
-<h2 id="2-2-Crossentropyloss"><a href="#2-2-Crossentropyloss" class="headerlink" title="2.2 Crossentropyloss"></a>2.2 Crossentropyloss</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126194846.png" alt="交叉熵公式"><br>　　交叉熵主要是比较真实标签分布p与预测标签分布q的相似性,相似度越高,就说明q值越大,最后交叉熵越小,说明损失也越小</p>
-<h1 id="三-CNN"><a href="#三-CNN" class="headerlink" title="三.CNN"></a>三.CNN</h1><h2 id="3-1-通俗解释"><a href="#3-1-通俗解释" class="headerlink" title="3.1 通俗解释"></a>3.1 通俗解释</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128094142.png" alt="CNN工作原理"><br>　　之前是以图片的像素点作为基本的处理单位,这样使得学习到的特征之间没有关联,导致泛化性差,现在的CNN则是以图片的一小块作为处理单元,之后用卷积核(特征提取器)来提取每块的特征,之后设置移动的步伐,一步步提取,这样就能加强图片间信息的连续性和联系性,从而能够提取出特征及其之间的关系,最终便于机器加深对图片的理解,因为让机器看到的是一个图形而不是一个个像素点.(图片–&gt;边缘信息–&gt;脸和鼻子之类的特征信息–&gt;特征组合–&gt;区别不同的类.)</p>
-<h2 id="3-2-各层的含义"><a href="#3-2-各层的含义" class="headerlink" title="3.2 各层的含义:"></a>3.2 各层的含义:</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128093458.png" alt="卷积层与池化层"><br>　　（１）卷积层:丰富信息阶段,提取特征.多个卷积核(参数不同),则是为了尽量地保留更多信息,实现提取多个不同类/情况的特征,加深机器对输入图片更深的理解,不压缩长宽,增加高度(卷积核的个数)<br>　　（２）池化层:用来压缩信息,压缩高度,筛选具有代表性的特征(最大池化(取最大值),平均池化)<br>　　（３）全连接层:实现特征间的不同组合,配合不同的权重参数,得到众多不同的类别.配合softmax函数,实现多分类.</p>
-<h1 id="四-RNN与LSTM"><a href="#四-RNN与LSTM" class="headerlink" title="四.RNN与LSTM"></a>四.RNN与LSTM</h1><h2 id="4-1-目的"><a href="#4-1-目的" class="headerlink" title="4.1 目的:"></a>4.1 目的:</h2><p>　　实现数据之间的关联,</p>
-<h2 id="4-2-NN工作原理"><a href="#4-2-NN工作原理" class="headerlink" title="4.2 NN工作原理"></a>4.2 NN工作原理</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128095824.png" alt="RNN工作原理"><br>　　以语音转文本产生为例,就是将之前输入数据X(t)的状态S(t),这个状态则是由第一个NN(一层或者几层神经元)产生,根据这个状态进行处理判断,得到结果Y(t),即第一个短语,之后将这个状态传递给下一个状态S(t+1),第二个状态S(t+1)则是X(t+1)通过NN产生的,之后将第一个状态S(t)与第二个状态S(t+1)进行结合,得到当前的状态,根据当前的状态进行判断处理,得到第二个短语Y(t+1),以此类推,最后得到一个完整的句子.其中X(t)与Y(t)的对应关系根据不同的情况进行设置.(例如根据一段文字,判断句子的正负面,那就有输入X(t),X(t+1)….X(n),只有一个结果Y(n).)</p>
-<h2 id="4-3-RNN的问题"><a href="#4-3-RNN的问题" class="headerlink" title="4.3 RNN的问题"></a>4.3 RNN的问题</h2><p>　　例子:输入值/长序列X是以下一句话: ‘我今天要做红烧排骨, 首先要准备排骨, 然后…., 最后美味的一道菜就出锅了,用RNN进行判断,如果判断错误,判断为辣子鸡,那么就需要学习红烧排骨与长序列X的关系来修正错误,因此需要借助误差进行反向传播,不断调整参数,学习两者的关系,但是由于红烧排骨离句尾的距离很远,如果W只要大于1,<strong>那么之后的误差就会越来越大,形成梯度爆炸,调整的参数更加错误了</strong>,也就是梯度爆炸,如果W小于1,那么经过长途跋涉,最后的误差只会越来越小,到句首的时候,<strong>误差接近为0,参数相当于没调整,学习不到正确的参数.</strong>也就是梯度消失的现象.</p>
-<h2 id="4-4-LSTM"><a href="#4-4-LSTM" class="headerlink" title="4.4 LSTM"></a>4.4 LSTM</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128104038.png" alt="LSTM运行原理2"><br>　　只不过是在序列状态当中增加了三个门,遗忘门,输入门和输出门.我们将序列状态改叫为细胞状态,相当于一条总线,贯穿RNN始终,当前输入的数据和上一个状态(之前的数据)构成当前的输入状态.<br>　　（１）遗忘门:主要根据当前的输入决定细胞状态中哪些状态需要遗忘;(<strong>舍弃部分状态</strong>)–用sigmoid函数<br>　　（２）输入门:主要根据当前的输入确定细胞状态还需要增加哪些状态,之后用加法实现细胞状态的更新;(<strong>增加部分状态,实现细胞状态的更新</strong>)<br>　　（３）输出门:<strong>根据最新细胞状态和当前输入状态,确定最终输出的是什么</strong><br>　　sigmoid(当前输入状态)*tanh(最新细胞状态):在基于当前输入和最新细胞状态的条件下,确定输出的是什么.</p>
-<h1 id="五-自编码器"><a href="#五-自编码器" class="headerlink" title="五.自编码器"></a>五.自编码器</h1><h2 id="5-1-原因"><a href="#5-1-原因" class="headerlink" title="5.1 原因"></a>5.1 原因</h2><p>　　高清图片作为输入,就会学习上千万个像素点,非常耗时耗力,卷积效率也不高,因此提取高清图片的关键性/代表性信息(特征)作为输入,是一种好的方法.这就是压缩部分,也就是自编码器的编码部分,(提取关键信息)</p>
-<h2 id="5-2-过程"><a href="#5-2-过程" class="headerlink" title="5.2 过程"></a>5.2 过程</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128110535.png" alt="自编码器过程"><br>　　自编码器由编码器(提取特征,压缩)和解码器(根据特征还原,解压).<br>　　以白X作为输入,对白X进行压缩,提取关键信息,之后进行解压得到预测值–黑X,将黑X与白X进行比对,求出误差进行反向传递,然后逐步调整编码器部分和解码器部分的神经网络的参数,减少误差,提升自编码器的准确度.<br>　　其中,中间的部分则是编码器的输出结果,也是作为解码器的输入部分.</p>
-<h1 id="六-过拟合"><a href="#六-过拟合" class="headerlink" title="六.过拟合"></a>六.过拟合</h1><h2 id="6-1-原因"><a href="#6-1-原因" class="headerlink" title="6.1 原因"></a>6.1 原因</h2><p>　　过于追求误差小,导致模型复杂度超过数据复杂度,导致训练时误差小,测试时误差大.</p>
-<h2 id="6-2-方法"><a href="#6-2-方法" class="headerlink" title="6.2 方法"></a>6.2 方法</h2><p>　　(1)增加数据量抵消模型复杂度<br>　　(2)简化模型</p>
-<h3 id="6-2-1-正则化方法"><a href="#6-2-1-正则化方法" class="headerlink" title="6.2.1 正则化方法"></a>6.2.1 正则化方法</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128112300.png" alt="正则化思想"><br>　　因为在过拟合的时候,参数W的变化值往往变化比较大,这是由于之前过于追求误差小的结果,因此在训练的时候,如果W值变大,我们就需要使得误差也会变大来进行调整,反之则相反,这就是对W参数惩罚,因此也就有了L1,L2正则化,分别是为误差加上参数W的绝对值和参数W的的平方,这种方法就是正则化的思想.这种思想适用于机器学习与深度学习</p>
-<h3 id="6-2-2-DropOut"><a href="#6-2-2-DropOut" class="headerlink" title="6.2.2 DropOut"></a>6.2.2 DropOut</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128112735.png" alt="DropOut过程"><br>　　每次训练随机忽略各层的若干个神经单元,有利于简化模型,缓解过拟合;同时不会过度依赖某些神经元,从而导致某些神经元权重过大,增加模型的稳定性.<strong>但是在测试的时候则需要关闭此功能</strong>.</p>
-<h1 id="七-批标准化"><a href="#七-批标准化" class="headerlink" title="七.批标准化"></a>七.批标准化</h1><p>　　Batch Normalization:对每层进行标准化–批标准化</p>
-<h2 id="7-1-原因"><a href="#7-1-原因" class="headerlink" title="7.1 原因"></a>7.1 原因</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128113847.png" alt="批标准化"><br>　　(1)数据的分布情况对于机器理解学习的数据程度有至关重要的作用.<strong>(针对数据的分布)</strong>假如有些数据值很大,有些很小,并且很分散,这样就很不利于机器的学习.因此需要对这些数据进行统一处理,将其规约在某个区间上,便于机器学习到数据之中的规律.<br>　　(2)<strong>不进行标准化,会让神经网络对特征值大的数据不敏感</strong>(针对某些数据),例如输入两个数值:1和20,权重系数为0.1,之后经过tanh激活函数,但是结果分别是0.1和0.96,0.96所在的梯度线差不多快躺平了,之后进行反向传播,进行参数调整,就会让該点误差变得非常小,导致参数调整缓慢,不利于机器对某些特征的学习.</p>
-<h2 id="7-2-效果"><a href="#7-2-效果" class="headerlink" title="7.2 效果"></a>7.2 效果</h2><p>　　由于进行了BN,导致每层的输入数据<strong>大部分</strong>分布在激活函数的有效区间(梯度线较为倾斜的区间).好处有两个:<br>　　(1)不仅方便机器在训练,进行反向传播的时候,<strong>根据误差求得梯度,进而调整参数</strong>,增加准确率;<br>　　(2)而且还有利于实现机器学习不同特征之间的关系.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128115444.png" alt="效果对比"></p>
-<h1 id="八-Torch的动态体现"><a href="#八-Torch的动态体现" class="headerlink" title="八.Torch的动态体现"></a>八.Torch的动态体现</h1><p>动态RNN:<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> # 随机 <span class="built_in">time</span> <span class="keyword">step</span> 长度</span><br><span class="line">dynamic_steps = <span class="built_in">np</span>.<span class="built_in">random</span>.randint(<span class="number">1</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure></p>
+<h1><span id="yi-ji-li-han-shu">一.激励函数</span></h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125235444.png" alt="激活函数"></p>
+<h2><span id="1-1-zuo-yong">1.1 作用</span></h2><p>　　激励函数/激活函数(AF–Active Function):<strong>主要目的增加特征的非线性,更好地拟合实际情况(逼近拟合实际的任意函数,因为参数多).来丰富特征之间的联系(因为可以学习到若干特征之间的不同关系),而不是单单只有线性关系,最后也利于增加模型的复杂度,即增加模型对非线性情况的拟合程度</strong>.<br>　　因为生活当中,线性情况(成正比,成反比)在实际中比较少,更多的是不确定的事情比较多,所以使用激励函数使原本的预测结果与输入值的线性关系得以改变,变成非线性关系(就好比中间一根直线,代表线性关系的直线,突然由于线上的某个点在激励函数的作用下,改变了值,导致线性关系被破环.),同时有时可以缓解梯度消失.(因为sigmoid函数反向传播时，很容易就会出现梯度消失的情况（<strong>在sigmoid接近饱和区时，变换太缓慢，导数趋于0,导致反向传播时,梯度线接近躺平,出现梯度消失</strong>，这种情况会造成信息丢失），从而无法完成深层网络的训练).<br>　　<strong>引入非线性函数</strong>作为激励函数，这样深层神经网络就有意义了（不再是输入的线性组合，可以逼近任意函数）。激活函数的输出有界，很容易充当下一层输入,<strong>激活函数对神经网络的深层抽象</strong>功能有着极其重要的意义,主要是对非线性特征的抽象.</p>
+<h2><span id="1-2-lei-xing">1.2 类型</span></h2><h3><span id="1-2-1-sigmoid-yu-softmax">1.2.1 sigmoid与softmax</span></h3><p><strong>收敛速度可以理解为梯度线的移动速度</strong><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126123550.png" alt="四种激活函数"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126001848.png" alt="sigmoid"><br>　　sigmoid:有效区间较短,但曲线平缓,该函数收敛速度较慢.<br>　　说明:虽然在一定程度会增加非线性,但是容易过饱和(例如:输入值只要大于-5或者小于,梯度线就会躺平),也就是我们所说的是有效区间较短,边缘区间(梯度线接近躺平)较长,会导致很多数据落在边缘区间,梯度线躺平.导致激活值相差不大,数据的非线性关系覆盖率减少,导致梯度消失.(非线性,软饱和),观察sigmoid函数,可以得知其曲线较为平缓,因此该函数收敛速度慢,可以用tanh来进行缓解.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126124833.png" alt="softmax函数"><br>　　sigmoid将一个real value映射到（0,1）的区间（当然也可以是（-1,1）），这样可以用来做二分类。 (根据激活值的正负来进行二分类)<br>　　softmax把一个k维的real value向量（a1,a2,a3,a4….）带入到softmax函数当中,之后映射成一个类似（b1,b2,b3,b4….）的向量(就是概率),其中bi是一个0-1的常数(对应类别的概率)，然后可以根据bi的大小,取最大bi值,之后根据该值所对应的类别(也就是序号)进行分类.(根据概率值进行分类)<br>　　虽然多个sigmoid函数通过叠加也同样可以实现多分类的效果，但是 softmax函数进行的多分类，<strong>类与类之间是互斥的</strong>，即一个输入只能被归为一类；多个sigmoid函数进行多分类，输出的类别并不是互斥的，即”苹果”这个词语既属于”水果”类也属于”3C”类别。</p>
+<h3><span id="1-2-2-tanh">1.2.2 tanh</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126002633.png" alt="tanh"><br>　　tanh:有效区间较sigmoid窄,但是收敛速度更快(),但是有效区间较短,边缘区间(梯度线接近躺平)较长的现状尚未改变.(非线性,软饱和)</p>
+<h3><span id="1-2-3-relu">1.2.3 Relu</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126130902.png" alt="Relu与SoftPlus"><br>　　(1)有效区间较大:占一半,即大于0的部分,有效缓解了梯度消失的问题;<br>　　(2)收敛速度快:函数简单,且右侧为线性函数,<strong>求导运算较为简单</strong>,因为是线性,收敛速度更快,所以梯度下降的时候,只需沿着那条线周边的点走即可.<br>　　(3)稀疏激活性:Relu函数值会使一部分神经元的输出为0(左侧为0)，这样就造成了网络的稀疏性，并且减少了参数的相互依存关系，缓解了过拟合问题的发生.如果学习率太快,虽然Relu函数可以更快收敛,到达局部最优,即梯度线躺平,许多知识会忽略,即容易简化模型过度,导致很多神经元死亡,因此要控制学习率<br>注意:Relu只能用于隐藏层<br>　　其中tanh与sigmoid是增加非线性,丰富特征,缓解欠拟合.Relu/Softplus则是缓解过拟合,其会使一部分神经元的输出为0，这样就造成了网络的稀疏性，并且减少了参数的相互依存关系，缓解了过拟合问题的发生<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rectified Linear <span class="keyword">Unit</span>(ReLU) - 用于隐层神经元输出:用于缓解过拟合</span><br><span class="line">Sigmoid/<span class="built_in">tanh</span> - 用于隐层神经元输出:用于缓解欠拟合,丰富特征程度</span><br><span class="line">Softmax - 用于多分类神经网络输出</span><br></pre></td></tr></table></figure></p>
+<h1><span id="er-sun-shi-han-shu">二.损失函数</span></h1><h2><span id="2-1-mseloss">2.1 MSELoss</span></h2><p>　　(实际值-预测值)的平方</p>
+<h2><span id="2-2-crossentropyloss">2.2 Crossentropyloss</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181126194846.png" alt="交叉熵公式"><br>　　交叉熵主要是比较真实标签分布p与预测标签分布q的相似性,相似度越高,就说明q值越大,最后交叉熵越小,说明损失也越小</p>
+<h1><span id="san-cnn">三.CNN</span></h1><h2><span id="3-1-tong-su-jie-shi">3.1 通俗解释</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128094142.png" alt="CNN工作原理"><br>　　之前是以图片的像素点作为基本的处理单位,这样使得学习到的特征之间没有关联,导致泛化性差,现在的CNN则是以图片的一小块作为处理单元,之后用卷积核(特征提取器)来提取每块的特征,之后设置移动的步伐,一步步提取,这样就能加强图片间信息的连续性和联系性,从而能够提取出特征及其之间的关系,最终便于机器加深对图片的理解,因为让机器看到的是一个图形而不是一个个像素点.(图片–&gt;边缘信息–&gt;脸和鼻子之类的特征信息–&gt;特征组合–&gt;区别不同的类.)</p>
+<h2><span id="3-2-ge-ceng-de-han-yi">3.2 各层的含义:</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128093458.png" alt="卷积层与池化层"><br>　　（１）卷积层:丰富信息阶段,提取特征.多个卷积核(参数不同),则是为了尽量地保留更多信息,实现提取多个不同类/情况的特征,加深机器对输入图片更深的理解,不压缩长宽,增加高度(卷积核的个数)<br>　　（２）池化层:用来压缩信息,压缩高度,筛选具有代表性的特征(最大池化(取最大值),平均池化)<br>　　（３）全连接层:实现特征间的不同组合,配合不同的权重参数,得到众多不同的类别.配合softmax函数,实现多分类.</p>
+<h1><span id="si-rnn-yu-lstm">四.RNN与LSTM</span></h1><h2><span id="4-1-mu-de">4.1 目的:</span></h2><p>　　实现数据之间的关联,</p>
+<h2><span id="4-2-nn-gong-zuo-yuan-li">4.2 NN工作原理</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128095824.png" alt="RNN工作原理"><br>　　以语音转文本产生为例,就是将之前输入数据X(t)的状态S(t),这个状态则是由第一个NN(一层或者几层神经元)产生,根据这个状态进行处理判断,得到结果Y(t),即第一个短语,之后将这个状态传递给下一个状态S(t+1),第二个状态S(t+1)则是X(t+1)通过NN产生的,之后将第一个状态S(t)与第二个状态S(t+1)进行结合,得到当前的状态,根据当前的状态进行判断处理,得到第二个短语Y(t+1),以此类推,最后得到一个完整的句子.其中X(t)与Y(t)的对应关系根据不同的情况进行设置.(例如根据一段文字,判断句子的正负面,那就有输入X(t),X(t+1)….X(n),只有一个结果Y(n).)</p>
+<h2><span id="4-3-rnn-de-wen-ti">4.3 RNN的问题</span></h2><p>　　例子:输入值/长序列X是以下一句话: ‘我今天要做红烧排骨, 首先要准备排骨, 然后…., 最后美味的一道菜就出锅了,用RNN进行判断,如果判断错误,判断为辣子鸡,那么就需要学习红烧排骨与长序列X的关系来修正错误,因此需要借助误差进行反向传播,不断调整参数,学习两者的关系,但是由于红烧排骨离句尾的距离很远,如果W只要大于1,<strong>那么之后的误差就会越来越大,形成梯度爆炸,调整的参数更加错误了</strong>,也就是梯度爆炸,如果W小于1,那么经过长途跋涉,最后的误差只会越来越小,到句首的时候,<strong>误差接近为0,参数相当于没调整,学习不到正确的参数.</strong>也就是梯度消失的现象.</p>
+<h2><span id="4-4-lstm">4.4 LSTM</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128104038.png" alt="LSTM运行原理2"><br>　　只不过是在序列状态当中增加了三个门,遗忘门,输入门和输出门.我们将序列状态改叫为细胞状态,相当于一条总线,贯穿RNN始终,当前输入的数据和上一个状态(之前的数据)构成当前的输入状态.<br>　　（１）遗忘门:主要根据当前的输入决定细胞状态中哪些状态需要遗忘;(<strong>舍弃部分状态</strong>)–用sigmoid函数<br>　　（２）输入门:主要根据当前的输入确定细胞状态还需要增加哪些状态,之后用加法实现细胞状态的更新;(<strong>增加部分状态,实现细胞状态的更新</strong>)<br>　　（３）输出门:<strong>根据最新细胞状态和当前输入状态,确定最终输出的是什么</strong><br>　　sigmoid(当前输入状态)*tanh(最新细胞状态):在基于当前输入和最新细胞状态的条件下,确定输出的是什么.</p>
+<h1><span id="wu-zi-bian-ma-qi">五.自编码器</span></h1><h2><span id="5-1-yuan-yin">5.1 原因</span></h2><p>　　高清图片作为输入,就会学习上千万个像素点,非常耗时耗力,卷积效率也不高,因此提取高清图片的关键性/代表性信息(特征)作为输入,是一种好的方法.这就是压缩部分,也就是自编码器的编码部分,(提取关键信息)</p>
+<h2><span id="5-2-guo-cheng">5.2 过程</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128110535.png" alt="自编码器过程"><br>　　自编码器由编码器(提取特征,压缩)和解码器(根据特征还原,解压).<br>　　以白X作为输入,对白X进行压缩,提取关键信息,之后进行解压得到预测值–黑X,将黑X与白X进行比对,求出误差进行反向传递,然后逐步调整编码器部分和解码器部分的神经网络的参数,减少误差,提升自编码器的准确度.<br>　　其中,中间的部分则是编码器的输出结果,也是作为解码器的输入部分.</p>
+<h1><span id="liu-guo-ni-he">六.过拟合</span></h1><h2><span id="6-1-yuan-yin">6.1 原因</span></h2><p>　　过于追求误差小,导致模型复杂度超过数据复杂度,导致训练时误差小,测试时误差大.</p>
+<h2><span id="6-2-fang-fa">6.2 方法</span></h2><p>　　(1)增加数据量抵消模型复杂度<br>　　(2)简化模型</p>
+<h3><span id="6-2-1-zheng-ze-hua-fang-fa">6.2.1 正则化方法</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128112300.png" alt="正则化思想"><br>　　因为在过拟合的时候,参数W的变化值往往变化比较大,这是由于之前过于追求误差小的结果,因此在训练的时候,如果W值变大,我们就需要使得误差也会变大来进行调整,反之则相反,这就是对W参数惩罚,因此也就有了L1,L2正则化,分别是为误差加上参数W的绝对值和参数W的的平方,这种方法就是正则化的思想.这种思想适用于机器学习与深度学习</p>
+<h3><span id="6-2-2-dropout">6.2.2 DropOut</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128112735.png" alt="DropOut过程"><br>　　每次训练随机忽略各层的若干个神经单元,有利于简化模型,缓解过拟合;同时不会过度依赖某些神经元,从而导致某些神经元权重过大,增加模型的稳定性.<strong>但是在测试的时候则需要关闭此功能</strong>.</p>
+<h1><span id="qi-pi-biao-zhun-hua">七.批标准化</span></h1><p>　　Batch Normalization:对每层进行标准化–批标准化</p>
+<h2><span id="7-1-yuan-yin">7.1 原因</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128113847.png" alt="批标准化"><br>　　(1)数据的分布情况对于机器理解学习的数据程度有至关重要的作用.<strong>(针对数据的分布)</strong>假如有些数据值很大,有些很小,并且很分散,这样就很不利于机器的学习.因此需要对这些数据进行统一处理,将其规约在某个区间上,便于机器学习到数据之中的规律.<br>　　(2)<strong>不进行标准化,会让神经网络对特征值大的数据不敏感</strong>(针对某些数据),例如输入两个数值:1和20,权重系数为0.1,之后经过tanh激活函数,但是结果分别是0.1和0.96,0.96所在的梯度线差不多快躺平了,之后进行反向传播,进行参数调整,就会让該点误差变得非常小,导致参数调整缓慢,不利于机器对某些特征的学习.</p>
+<h2><span id="7-2-xiao-guo">7.2 效果</span></h2><p>　　由于进行了BN,导致每层的输入数据<strong>大部分</strong>分布在激活函数的有效区间(梯度线较为倾斜的区间).好处有两个:<br>　　(1)不仅方便机器在训练,进行反向传播的时候,<strong>根据误差求得梯度,进而调整参数</strong>,增加准确率;<br>　　(2)而且还有利于实现机器学习不同特征之间的关系.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128115444.png" alt="效果对比"></p>
+<h1><span id="ba-torch-de-dong-tai-ti-xian">八.Torch的动态体现</span></h1><p>动态RNN:<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> # 随机 <span class="built_in">time</span> <span class="keyword">step</span> 长度</span><br><span class="line">dynamic_steps = <span class="built_in">np</span>.<span class="built_in">random</span>.randint(<span class="number">1</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure></p>
 <p>　　动态设置步数</p>
 
         
@@ -514,7 +567,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

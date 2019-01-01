@@ -267,9 +267,13 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文就是专门讲的是readLine()的数据读取策略,只要出现,readLine()就会进行下一行的读取,那么就需要一个变量来接收readLine()读取的结果–String类型.<a id="more"></a></p>
+            <p>本文就是专门讲的是readLine()的数据读取策略,只要出现,readLine()就会进行下一行的读取,那么就需要一个变量来接收readLine()读取的结果–String类型.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
 <p>　　BufferedReader.readLine()只要是读取了就会跳到下一行,因此最好用用一个字符串变量接收br.readLine()值,否则再次使用的时候会出现跳行读取,也容易形成空行读取,造成Null,如:<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">while</span> (br.readLine()!=null)&#123; <span class="comment">//读取的是第一行</span></span><br><span class="line">			<span class="comment">//读取的是第二行,如果文本刚好只有一行,那么这个就会造成null.</span></span><br><span class="line">          <span class="keyword">String</span>[] dict = br.readLine().split(<span class="string">":"</span>);</span><br><span class="line">          System.out.<span class="built_in">println</span>(dict);</span><br><span class="line">          <span class="keyword">int</span> index = Integer.<span class="built_in">parseInt</span>(dict[<span class="number">0</span>]);</span><br><span class="line">          <span class="keyword">String</span> <span class="keyword">word</span> = dict[<span class="number">1</span>];</span><br><span class="line">          dictMap.<span class="built_in">put</span>(<span class="keyword">word</span>,index);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="built_in">return</span> dictMap;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
 <p>所以第一二行改为:<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">String</span> <span class="built_in">line</span>=<span class="string">""</span>;</span><br><span class="line"> <span class="keyword">while</span> ((<span class="built_in">line</span>=br.readLine())!=<span class="keyword">null</span>)&#123; <span class="comment">//line保存第一行的读取</span></span><br><span class="line"> 			<span class="comment">//因为是值传递方式,line一直保存的结果</span></span><br><span class="line">            <span class="keyword">String</span>[] dict = ;</span><br><span class="line">            <span class="built_in">line</span>.<span class="built_in">split</span>(<span class="string">":"</span>);</span><br></pre></td></tr></table></figure></p>
@@ -493,7 +497,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

@@ -5,19 +5,19 @@
     
     <title>D2RQ 启动安装时出现的问题 | iVEGA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换">
+    <meta name="description" content="本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换时候">
 <meta name="keywords" content="D2RQ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="D2RQ 启动安装时出现的问题">
 <meta property="og:url" content="http://yoursite.com/2018/06/22/D2RQ 启动安装时出现的问题/index.html">
 <meta property="og:site_name" content="iVEGA">
-<meta property="og:description" content="本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换">
+<meta property="og:description" content="本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换时候">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113101859.png">
 <meta property="og:updated_time" content="2018-11-13T02:19:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="D2RQ 启动安装时出现的问题">
-<meta name="twitter:description" content="本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换">
+<meta name="twitter:description" content="本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换时候">
 <meta name="twitter:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113101859.png">
     
 
@@ -267,14 +267,25 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换时候可以在承受范围之内.<a id="more"></a></p>
+            <p>本文主要讲的是D2RQ的安装及其在安装中需要的注意事项,D2RQ全称可以这样理解:database to RDF数据集 query,就是将关系型数据库通过映射引擎转换成RDF数据,然后上传到D2RQ服务器上,之后然后就可以使用SPARQL语言(RDF数据的查询语言)进行关系的查询(就相当于一个客户端的请求,相对于D2RQ服务器来说),但是这种方法在数据量不是很大的情况下是有效的.因为需要的转换时候可以在承受范围之内.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-d2rq-zhi-linked-data">一.D2RQ之Linked data：</a><ul>
+<li><a href="#1-1-huan-jing-zhun-bei">1.1环境准备</a></li>
+</ul>
+</li>
+<li><a href="#er-qi-dong-d2r-server">二.启动D2R Server</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-D2RQ之Linked-data："><a href="#一-D2RQ之Linked-data：" class="headerlink" title="一.D2RQ之Linked data："></a>一.D2RQ之Linked data：</h2><h3 id="1-1环境准备"><a href="#1-1环境准备" class="headerlink" title="1.1环境准备"></a>1.1环境准备</h3><p>　<strong>第一步:下载d2r-server-0.7.zip 解压到自己的工作目录下。地址（<a href="http://d2rq.org/" target="_blank" rel="noopener">http://d2rq.org/</a> 这里是0.8.1了）–最好是最新版的</strong><br>　<strong>第二步:我是用的Mysql数据库，这里d2r支持很多数据库，解压包就包含了mysql和PostgreSQL的驱动，创建数据库,例如kg_demo_movie,里面就涉及到在navicat当中如何导入sql语句的问题:连接上mysql之后–&gt;双击对应的数据库,右键就会看到转存储sql文件–&gt;根据自己需求导入结构与或数据</strong><br>　第三步:之后运行脚本,在对应的文件目录当中呼出cmd,来通过命令行运行脚本:<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">generate</span>-mapping -u root -p root -o kg_demo_movie_mapping<span class="variable">.ttl</span> jdbc:mysql:<span class="comment">///kg_demo_movie</span></span><br></pre></td></tr></table></figure></p>
+<h2><span id="yi-d2rq-zhi-linked-data">一.D2RQ之Linked data：</span></h2><h3><span id="1-1-huan-jing-zhun-bei">1.1环境准备</span></h3><p>　<strong>第一步:下载d2r-server-0.7.zip 解压到自己的工作目录下。地址（<a href="http://d2rq.org/" target="_blank" rel="noopener">http://d2rq.org/</a> 这里是0.8.1了）–最好是最新版的</strong><br>　<strong>第二步:我是用的Mysql数据库，这里d2r支持很多数据库，解压包就包含了mysql和PostgreSQL的驱动，创建数据库,例如kg_demo_movie,里面就涉及到在navicat当中如何导入sql语句的问题:连接上mysql之后–&gt;双击对应的数据库,右键就会看到转存储sql文件–&gt;根据自己需求导入结构与或数据</strong><br>　第三步:之后运行脚本,在对应的文件目录当中呼出cmd,来通过命令行运行脚本:<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">generate</span>-mapping -u root -p root -o kg_demo_movie_mapping<span class="variable">.ttl</span> jdbc:mysql:<span class="comment">///kg_demo_movie</span></span><br></pre></td></tr></table></figure></p>
 <p>　就相当于创建一个kg_demo_movie_mapping.ttl 映射文件(可以将SPARQL语句转换成SQL语句来查询 关系数据库当中的数据,而不用进行将关系数据库当中的数据转成RDF格式的数据,D2RQ 就是将SPARQL语句虚拟化成SQL语句)–因此只适用于数据比较少的情况下.<br>　　<strong>其中generate-mapping.bat是一个运行脚本</strong><br>　　其中必须要创建一个对应的数据库,否则会报错.<br>　　///  代表的是本地localhost的当中的数据<br>             连接成功就会出现如下截图:<br>   <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084711.jpg" alt=""><br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">generate</span>-mapping -u root -p root -o kg_demo_movie<span class="variable">.nt</span> jdbc:mysql:<span class="comment">///kg_demo_movie</span></span><br></pre></td></tr></table></figure></p>
 <p>就相当于创建一个kg_demo_movie.nt的主谓宾文件</p>
-<h2 id="二-启动D2R-Server"><a href="#二-启动D2R-Server" class="headerlink" title="二.启动D2R Server"></a>二.启动D2R Server</h2><p>　输入如下命令:</p>
+<h2><span id="er-qi-dong-d2r-server">二.启动D2R Server</span></h2><p>　输入如下命令:</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">d2r-server</span><span class="selector-class">.bat</span> <span class="selector-tag">kg_demo_movie_mapping</span><span class="selector-class">.ttl</span></span><br></pre></td></tr></table></figure>
 <p>　正常情况下就会得到:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084713.jpg" alt=""><br>　否则就会出现如下情况:<br>   <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84714.jpg" alt=""><br>　这主要是因为:<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">No</span> <span class="attr">d2rq:Database</span> <span class="string">defined</span> <span class="string">in</span> <span class="string">the</span> <span class="string">mapping</span> <span class="string">(E1)</span></span><br></pre></td></tr></table></figure></p>
 <p>　数据库没有进行映射,也就是<code>kg_demo_movie_mapping.ttl</code> 为空,那也就是可能<code>mysql</code>没有连接/或者该数据库没有创建,要回滚到第一步<code>linked data</code></p>
@@ -497,7 +508,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

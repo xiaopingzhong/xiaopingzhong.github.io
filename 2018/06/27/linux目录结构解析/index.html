@@ -267,32 +267,74 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲述了linux的目录结构,主要分成四类目录:管理类目录,用户类目录,应用程序类目录,信息类目录.分别讲了根目录下各个目录的英文全称及其作用,主要是用来查漏补缺.为之后的linux的深入操作作铺垫.<a id="more"></a></p>
+            <p>本文主要讲述了linux的目录结构,主要分成四类目录:管理类目录,用户类目录,应用程序类目录,信息类目录.分别讲了根目录下各个目录的英文全称及其作用,主要是用来查漏补缺.为之后的linux的深入操作作铺垫.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-guan-li-lei-mu-lu">一.管理类目录</a><ul>
+<li><a href="#1-1-boot">1.1 boot</a></li>
+<li><a href="#1-2-bin">1.2 bin</a></li>
+<li><a href="#1-3-sbin">1.3 sbin</a></li>
+<li><a href="#1-4-etc">1.4 etc</a></li>
+<li><a href="#1-5-sys">1.5 sys</a></li>
+<li><a href="#1-6-dev">1.6 dev</a></li>
+<li><a href="#1-7-mnt">1.7 mnt</a></li>
+<li><a href="#1-8-media">1.8 media</a></li>
+</ul>
+</li>
+<li><a href="#er-yong-hu-lei-mu-lu">二.用户类目录</a><ul>
+<li><a href="#2-1-home">2.1 home</a></li>
+<li><a href="#2-2-root">2.2 root</a></li>
+</ul>
+</li>
+<li><a href="#san-ying-yong-cheng-xu-lei-mu-lu">三.应用程序类目录</a><ul>
+<li><a href="#3-1-lib-lib-64">3.1 lib/lib 64</a></li>
+<li><a href="#3-2-opt">3.2 opt</a></li>
+<li><a href="#3-3-usr">3.3 usr</a></li>
+<li><a href="#3-4-selinux">3.4 selinux</a></li>
+</ul>
+</li>
+<li><a href="#si-xin-xi-lei-mu-lu">四.信息类目录</a><ul>
+<li><a href="#4-1-srv">4.1 srv</a></li>
+<li><a href="#4-2-var">4.2 var</a></li>
+<li><a href="#4-3-tmp">4.3 tmp</a></li>
+<li><a href="#4-4-lost-found">4.4 lost+found</a></li>
+<li><a href="#4-5-proc">4.5 proc</a></li>
+</ul>
+</li>
+<li><a href="#wu-qu-bie">五.区别</a><ul>
+<li><a href="#5-1-mnt-media-he-dev">5.1 /mnt /media和/dev</a></li>
+<li><a href="#5-2-srv-var-he-tmp">5.2 /srv、/var和/tmp</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
 <p>先上图:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085016.jpg" alt="目录结构图"></p>
-<h1 id="一-管理类目录"><a href="#一-管理类目录" class="headerlink" title="一.管理类目录"></a>一.管理类目录</h1><h2 id="1-1-boot"><a href="#1-1-boot" class="headerlink" title="1.1 boot"></a>1.1 boot</h2><p>作用:启动配置文件,程序的引导加载文件</p>
-<h2 id="1-2-bin"><a href="#1-2-bin" class="headerlink" title="1.2 bin"></a>1.2 bin</h2><p>1.全称:binary:二进制可执行文件<br>2.作用:用实现系统的基本操作,例如对文件操作的增删改查.<br>3.目录内容:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085019.jpg" alt="bin目录下文件"></p>
-<h2 id="1-3-sbin"><a href="#1-3-sbin" class="headerlink" title="1.3 sbin"></a>1.3 sbin</h2><p>1.全称:super binary–超级用户可执行的操作<br>2.作用:存放root用户才能执行的一些操作</p>
-<h2 id="1-4-etc"><a href="#1-4-etc" class="headerlink" title="1.4 etc"></a>1.4 etc</h2><p>1.全称:etcetera:等等<br>2.作用:存放系统所有的配置文件(包括通过指令yum,让系统自动安装的程序的配置文件)<br>3.重要目录:<br>   /etc/rc.d            放置开机和关机的脚本。<br>   /etc/rc.d/init.d    放置启动脚本<br>   /etc/xinetd.d      配置xinetd.conf可以配置启动其他额外服务。</p>
-<h2 id="1-5-sys"><a href="#1-5-sys" class="headerlink" title="1.5 sys"></a>1.5 sys</h2><p>1.全称:system<br>2.作用:存放当前运行的硬件设备的驱动程序信息</p>
-<h2 id="1-6-dev"><a href="#1-6-dev" class="headerlink" title="1.6 dev"></a>1.6 dev</h2><p>1.全称:device<br>2.作用:作为访问外部设备文件的接口,也就是所谓即设备的驱动程序,插入U盘之后在dev中显示为/dev/sd1,说明提供了一个接口,可以手动将U盘加载到指定目录(例如是/mnt/usb1)–&gt;mount /dev/sd1 /mnt/usb1</p>
-<h2 id="1-7-mnt"><a href="#1-7-mnt" class="headerlink" title="1.7 mnt"></a>1.7 mnt</h2><p>1.全称:mounted–挂载<br>2.作用:被系统管理员使用,用来手动加载其他的文件系统.(手动加载)</p>
-<h2 id="1-8-media"><a href="#1-8-media" class="headerlink" title="1.8 media"></a>1.8 media</h2><p>作用:用来加载移动设备(可移除的)的目录(自动加载)</p>
-<h1 id="二-用户类目录"><a href="#二-用户类目录" class="headerlink" title="二.用户类目录"></a>二.用户类目录</h1><h2 id="2-1-home"><a href="#2-1-home" class="headerlink" title="2.1 home"></a>2.1 home</h2><p>作用:主要是其他普通用户的家目录</p>
-<h2 id="2-2-root"><a href="#2-2-root" class="headerlink" title="2.2 root"></a>2.2 root</h2><p>作用:是root用户的家目录</p>
-<h1 id="三-应用程序类目录"><a href="#三-应用程序类目录" class="headerlink" title="三.应用程序类目录"></a>三.应用程序类目录</h1><h2 id="3-1-lib-lib-64"><a href="#3-1-lib-lib-64" class="headerlink" title="3.1 lib/lib 64"></a>3.1 lib/lib 64</h2><p>作用:主要是用来存放在系统/程序运行当中所需要的一些库.</p>
-<h2 id="3-2-opt"><a href="#3-2-opt" class="headerlink" title="3.2 opt"></a>3.2 opt</h2><p>作用:就是安装第三方程序,自己手动编译的.</p>
-<h2 id="3-3-usr"><a href="#3-3-usr" class="headerlink" title="3.3 usr"></a>3.3 usr</h2><p>1.全称:Unix Software Resource<br>2.作用:系统自动安装的软件目录<br>3.重要目录:<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/usr/local 主要存放那些手动安装的软件，</span><br><span class="line">/usr/bin 用于存放程序</span><br><span class="line">/usr/share 用于存放一些共享数据</span><br><span class="line">/usr/<span class="class"><span class="keyword">lib</span> 存放一些不能不能直接运行，但却是许多程序运行所必需的一些函数库文件</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="3-4-selinux"><a href="#3-4-selinux" class="headerlink" title="3.4 selinux"></a>3.4 selinux</h2><p>   主要用来加固操作系统，提高系统的安全性</p>
-<h1 id="四-信息类目录"><a href="#四-信息类目录" class="headerlink" title="四.信息类目录"></a>四.信息类目录</h1><h2 id="4-1-srv"><a href="#4-1-srv" class="headerlink" title="4.1 srv"></a>4.1 srv</h2><p>1.全称:service<br>2.存放一些对外的服务数据,例如web,用户主动生产的数据、对外提供服务.(用户主动放入的一些文件)</p>
-<h2 id="4-2-var"><a href="#4-2-var" class="headerlink" title="4.2 var"></a>4.2 var</h2><p>1.全称:variable<br>2.作用:系统和程序运行当中产生的不可销毁的缓存文件(邮箱文件,数据库文件),日志记录(日志文件),只能手动清理.(产生的东西,需要手动清理)</p>
-<h2 id="4-3-tmp"><a href="#4-3-tmp" class="headerlink" title="4.3 tmp"></a>4.3 tmp</h2><p>   保存了使用完毕之后,随时可以销毁的缓存文件,系统可以自动清理,可能是系统/程序自动产生,或者用户主动将文件放入该临时目录(缓存文件能自动清理)</p>
-<h2 id="4-4-lost-found"><a href="#4-4-lost-found" class="headerlink" title="4.4 lost+found"></a>4.4 lost+found</h2><p> 就是在断电之类突发情况下,为系统提供一个临时文件,用来恢复丢失的文件.这个目录平时是空的</p>
-<h2 id="4-5-proc"><a href="#4-5-proc" class="headerlink" title="4.5 proc"></a>4.5 proc</h2><p>1.全称:processes<br>2.作用:操作系统运行时,整个系统的进程信息,内存资源信息,硬盘分区信息.</p>
-<h1 id="五-区别"><a href="#五-区别" class="headerlink" title="五.区别"></a>五.区别</h1><h2 id="5-1-mnt-media和-dev"><a href="#5-1-mnt-media和-dev" class="headerlink" title="5.1 /mnt /media和/dev"></a>5.1 /mnt /media和/dev</h2><p>  /media:自动加载外来设备目录;<br>  /mnt:手动挂载外来设备目录<br>  /dev:为挂载外来设备提供接口</p>
-<h2 id="5-2-srv、-var和-tmp"><a href="#5-2-srv、-var和-tmp" class="headerlink" title="5.2 /srv、/var和/tmp"></a>5.2 /srv、/var和/tmp</h2><p>/srv:用户主动提供的数据<br>/var:系统.程序主动产生的缓存,日志数据,需手动清除<br>/tmp:保存用完可以随时销毁的数据,可以说系统产生的,也可以是,用户临时放入的.总之系统可以随时清理.</p>
+<h1><span id="yi-guan-li-lei-mu-lu">一.管理类目录</span></h1><h2><span id="1-1-boot">1.1 boot</span></h2><p>作用:启动配置文件,程序的引导加载文件</p>
+<h2><span id="1-2-bin">1.2 bin</span></h2><p>1.全称:binary:二进制可执行文件<br>2.作用:用实现系统的基本操作,例如对文件操作的增删改查.<br>3.目录内容:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085019.jpg" alt="bin目录下文件"></p>
+<h2><span id="1-3-sbin">1.3 sbin</span></h2><p>1.全称:super binary–超级用户可执行的操作<br>2.作用:存放root用户才能执行的一些操作</p>
+<h2><span id="1-4-etc">1.4 etc</span></h2><p>1.全称:etcetera:等等<br>2.作用:存放系统所有的配置文件(包括通过指令yum,让系统自动安装的程序的配置文件)<br>3.重要目录:<br>   /etc/rc.d            放置开机和关机的脚本。<br>   /etc/rc.d/init.d    放置启动脚本<br>   /etc/xinetd.d      配置xinetd.conf可以配置启动其他额外服务。</p>
+<h2><span id="1-5-sys">1.5 sys</span></h2><p>1.全称:system<br>2.作用:存放当前运行的硬件设备的驱动程序信息</p>
+<h2><span id="1-6-dev">1.6 dev</span></h2><p>1.全称:device<br>2.作用:作为访问外部设备文件的接口,也就是所谓即设备的驱动程序,插入U盘之后在dev中显示为/dev/sd1,说明提供了一个接口,可以手动将U盘加载到指定目录(例如是/mnt/usb1)–&gt;mount /dev/sd1 /mnt/usb1</p>
+<h2><span id="1-7-mnt">1.7 mnt</span></h2><p>1.全称:mounted–挂载<br>2.作用:被系统管理员使用,用来手动加载其他的文件系统.(手动加载)</p>
+<h2><span id="1-8-media">1.8 media</span></h2><p>作用:用来加载移动设备(可移除的)的目录(自动加载)</p>
+<h1><span id="er-yong-hu-lei-mu-lu">二.用户类目录</span></h1><h2><span id="2-1-home">2.1 home</span></h2><p>作用:主要是其他普通用户的家目录</p>
+<h2><span id="2-2-root">2.2 root</span></h2><p>作用:是root用户的家目录</p>
+<h1><span id="san-ying-yong-cheng-xu-lei-mu-lu">三.应用程序类目录</span></h1><h2><span id="3-1-lib-lib-64">3.1 lib/lib 64</span></h2><p>作用:主要是用来存放在系统/程序运行当中所需要的一些库.</p>
+<h2><span id="3-2-opt">3.2 opt</span></h2><p>作用:就是安装第三方程序,自己手动编译的.</p>
+<h2><span id="3-3-usr">3.3 usr</span></h2><p>1.全称:Unix Software Resource<br>2.作用:系统自动安装的软件目录<br>3.重要目录:<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/usr/local 主要存放那些手动安装的软件，</span><br><span class="line">/usr/bin 用于存放程序</span><br><span class="line">/usr/share 用于存放一些共享数据</span><br><span class="line">/usr/<span class="class"><span class="keyword">lib</span> 存放一些不能不能直接运行，但却是许多程序运行所必需的一些函数库文件</span></span><br></pre></td></tr></table></figure></p>
+<h2><span id="3-4-selinux">3.4 selinux</span></h2><p>   主要用来加固操作系统，提高系统的安全性</p>
+<h1><span id="si-xin-xi-lei-mu-lu">四.信息类目录</span></h1><h2><span id="4-1-srv">4.1 srv</span></h2><p>1.全称:service<br>2.存放一些对外的服务数据,例如web,用户主动生产的数据、对外提供服务.(用户主动放入的一些文件)</p>
+<h2><span id="4-2-var">4.2 var</span></h2><p>1.全称:variable<br>2.作用:系统和程序运行当中产生的不可销毁的缓存文件(邮箱文件,数据库文件),日志记录(日志文件),只能手动清理.(产生的东西,需要手动清理)</p>
+<h2><span id="4-3-tmp">4.3 tmp</span></h2><p>   保存了使用完毕之后,随时可以销毁的缓存文件,系统可以自动清理,可能是系统/程序自动产生,或者用户主动将文件放入该临时目录(缓存文件能自动清理)</p>
+<h2><span id="4-4-lost-found">4.4 lost+found</span></h2><p> 就是在断电之类突发情况下,为系统提供一个临时文件,用来恢复丢失的文件.这个目录平时是空的</p>
+<h2><span id="4-5-proc">4.5 proc</span></h2><p>1.全称:processes<br>2.作用:操作系统运行时,整个系统的进程信息,内存资源信息,硬盘分区信息.</p>
+<h1><span id="wu-qu-bie">五.区别</span></h1><h2><span id="5-1-mnt-media-he-dev">5.1 /mnt /media和/dev</span></h2><p>  /media:自动加载外来设备目录;<br>  /mnt:手动挂载外来设备目录<br>  /dev:为挂载外来设备提供接口</p>
+<h2><span id="5-2-srv-var-he-tmp">5.2 /srv、/var和/tmp</span></h2><p>/srv:用户主动提供的数据<br>/var:系统.程序主动产生的缓存,日志数据,需手动清除<br>/tmp:保存用完可以随时销毁的数据,可以说系统产生的,也可以是,用户临时放入的.总之系统可以随时清理.</p>
 
         
         </div>
@@ -512,7 +554,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

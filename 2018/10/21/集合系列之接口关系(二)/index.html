@@ -269,10 +269,18 @@
             
             <p>本章主要是讲集合接口的各种关系，其中Map接口与Collection接口只是实现了Iterable的接口,从而调用iterator(),生成迭代器/iterator对象是其实现类.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-jie-kou-guan-xi-tu">一.接口关系图</a></li>
+<li><a href="#er-yi-zhao-shi-xian-jie-kou-fen-lei">二.依照实现接口分类</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-接口关系图"><a href="#一-接口关系图" class="headerlink" title="一.接口关系图"></a>一.接口关系图</h2><p>说明下:<br>　　Map与Collection接口只是实现了Iterable的接口,从而调用iterator(),生成迭代器/iterator对象是其实现类.<br>各个集合接口关系如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/7.png" alt="总体图1"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/8.png" alt="总体图2"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/9.png" alt="总结图"></p>
-<h2 id="二-依照实现接口分类"><a href="#二-依照实现接口分类" class="headerlink" title="二.依照实现接口分类"></a>二.依照实现接口分类</h2><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实现<span class="built_in">Map</span>接口的有：EnumMap、IdentityHashMap、HashMap、LinkedHashMap、WeakHashMap、TreeMap</span><br><span class="line">实现<span class="built_in">List</span>接口的有：ArrayList、LinkedList</span><br><span class="line">实现<span class="built_in">Set</span>接口的有：HashSet、LinkedHashSet、TreeSet</span><br><span class="line">实现<span class="built_in">Queue</span>接口的有：PriorityQueue、LinkedList、ArrayQueue</span><br><span class="line">依据底层实现的数据结构分类：</span><br><span class="line">底层以数组的形式实现：EnumMap、ArrayList、ArrayQueue</span><br><span class="line">底层以链表的形式实现：LinkedHashSet、LinkedList、LinkedHashMap</span><br><span class="line">底层以hash table的形式实现：HashMap、HashSet、LinkedHashMap、LinkedHashSet、WeakHashMap、IdentityHashMap</span><br><span class="line">底层以红黑树的形式实现：TreeMap、TreeSet</span><br><span class="line">底层以二叉堆的形式实现：PriorityQueue</span><br></pre></td></tr></table></figure>
+<h2><span id="yi-jie-kou-guan-xi-tu">一.接口关系图</span></h2><p>说明下:<br>　　Map与Collection接口只是实现了Iterable的接口,从而调用iterator(),生成迭代器/iterator对象是其实现类.<br>各个集合接口关系如下图:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/7.png" alt="总体图1"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/8.png" alt="总体图2"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/9.png" alt="总结图"></p>
+<h2><span id="er-yi-zhao-shi-xian-jie-kou-fen-lei">二.依照实现接口分类</span></h2><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实现<span class="built_in">Map</span>接口的有：EnumMap、IdentityHashMap、HashMap、LinkedHashMap、WeakHashMap、TreeMap</span><br><span class="line">实现<span class="built_in">List</span>接口的有：ArrayList、LinkedList</span><br><span class="line">实现<span class="built_in">Set</span>接口的有：HashSet、LinkedHashSet、TreeSet</span><br><span class="line">实现<span class="built_in">Queue</span>接口的有：PriorityQueue、LinkedList、ArrayQueue</span><br><span class="line">依据底层实现的数据结构分类：</span><br><span class="line">底层以数组的形式实现：EnumMap、ArrayList、ArrayQueue</span><br><span class="line">底层以链表的形式实现：LinkedHashSet、LinkedList、LinkedHashMap</span><br><span class="line">底层以hash table的形式实现：HashMap、HashSet、LinkedHashMap、LinkedHashSet、WeakHashMap、IdentityHashMap</span><br><span class="line">底层以红黑树的形式实现：TreeMap、TreeSet</span><br><span class="line">底层以二叉堆的形式实现：PriorityQueue</span><br></pre></td></tr></table></figure>
 <p>stack,HashTale退出历史舞台</p>
 
         
@@ -493,7 +501,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

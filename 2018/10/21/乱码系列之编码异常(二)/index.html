@@ -267,14 +267,26 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文是乱码系列的第二篇,在该篇中我们会对Integer.parseInt()这个让我头疼了很久的异常进行重点解析,还有在生成javaDoc说明文档的时候,出现的一些乱码异常.<a id="more"></a></p>
+            <p>本文是乱码系列的第二篇,在该篇中我们会对Integer.parseInt()这个让我头疼了很久的异常进行重点解析,还有在生成javaDoc说明文档的时候,出现的一些乱码异常.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-integer-parseint-yi-chang">一.Integer.parseInt()异常;</a><ul>
+<li><a href="#1-1-yuan-yin">1.1 原因:</a></li>
+<li><a href="#1-2-jie-jue-fang-fa">1.2 解决方法:</a></li>
+</ul>
+</li>
+<li><a href="#er-chu-xian-fei-fa-zi-fu-ufeff">二.出现非法字符：“\ufeff”</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-Integer-parseInt-异常"><a href="#一-Integer-parseInt-异常" class="headerlink" title="一.Integer.parseInt()异常;"></a>一.Integer.parseInt()异常;</h2><h3 id="1-1-原因"><a href="#1-1-原因" class="headerlink" title="1.1 原因:"></a>1.1 原因:</h3><p>　　(1)数字字符串有空格–对对应数组元素采取trim方式;<br>　　(2)数字没有空格依然报错,那就很有可能是编码错误:<br>可能UTF-8编码在此处不合适,可能Integer.parseInt()是根据系统的原先默认编码(ANSI编码)来读取,同时在简体中文系统中,ansi编码的默认字符编码是GB2312,在日文操作系统下，ANSI 编码代表 JIS 编码,</p>
-<h3 id="1-2-解决方法"><a href="#1-2-解决方法" class="headerlink" title="1.2 解决方法:"></a>1.2 解决方法:</h3><p>　　修改文件编码:<strong>改为字节流读取.设置字符编码.</strong><br>　　1.将utf-8编码的文件改为ansi编码文件-可以另存为ansi编码,进行覆盖,<br>　　2.并修改编码变换的乱码,乱码如下:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100328.png" alt="修改编码的乱码"><br>　　3.不使用FileReader的方式读取文件,采用InputStreamReader方式,(字节流的方式),指定编码,代码如下:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">File</span> <span class="keyword">file</span> = <span class="keyword">new</span> <span class="keyword">File</span>(rootPath + s);</span><br><span class="line">        InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="keyword">file</span>), <span class="string">"GB2312"</span>);</span><br><span class="line">        BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</span><br></pre></td></tr></table></figure></p>
+<h2><span id="yi-integer-parseint-yi-chang">一.Integer.parseInt()异常;</span></h2><h3><span id="1-1-yuan-yin">1.1 原因:</span></h3><p>　　(1)数字字符串有空格–对对应数组元素采取trim方式;<br>　　(2)数字没有空格依然报错,那就很有可能是编码错误:<br>可能UTF-8编码在此处不合适,可能Integer.parseInt()是根据系统的原先默认编码(ANSI编码)来读取,同时在简体中文系统中,ansi编码的默认字符编码是GB2312,在日文操作系统下，ANSI 编码代表 JIS 编码,</p>
+<h3><span id="1-2-jie-jue-fang-fa">1.2 解决方法:</span></h3><p>　　修改文件编码:<strong>改为字节流读取.设置字符编码.</strong><br>　　1.将utf-8编码的文件改为ansi编码文件-可以另存为ansi编码,进行覆盖,<br>　　2.并修改编码变换的乱码,乱码如下:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100328.png" alt="修改编码的乱码"><br>　　3.不使用FileReader的方式读取文件,采用InputStreamReader方式,(字节流的方式),指定编码,代码如下:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">File</span> <span class="keyword">file</span> = <span class="keyword">new</span> <span class="keyword">File</span>(rootPath + s);</span><br><span class="line">        InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="keyword">file</span>), <span class="string">"GB2312"</span>);</span><br><span class="line">        BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</span><br></pre></td></tr></table></figure></p>
 <p>这步没有做的话,会导致中文乱码<br>　　4.重新运行即可得到结果:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113100350.png" alt="运行成功"></p>
-<h2 id="二-出现非法字符：“-ufeff”"><a href="#二-出现非法字符：“-ufeff”" class="headerlink" title="二.出现非法字符：“\ufeff”"></a>二.出现非法字符：“\ufeff”</h2><p>  说明该文件是utf-8带Bom格式的,因此需要转换成不带Bom格式的;方法如下:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将文件编码更改为UTF<span class="number">-16</span>，再改回UTF<span class="number">-8</span>即可</span><br></pre></td></tr></table></figure></p>
+<h2><span id="er-chu-xian-fei-fa-zi-fu-ufeff">二.出现非法字符：“\ufeff”</span></h2><p>  说明该文件是utf-8带Bom格式的,因此需要转换成不带Bom格式的;方法如下:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将文件编码更改为UTF<span class="number">-16</span>，再改回UTF<span class="number">-8</span>即可</span><br></pre></td></tr></table></figure></p>
 <p>或者改为其他编码如GBK,在读取文件的时候,指定编码格式,如下面:<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javadoc -encoding <span class="string">"GBK"</span> -d <span class="meta">doc</span> UseAnnotation.java</span><br></pre></td></tr></table></figure></p>
 <p>即可.</p>
 
@@ -496,7 +508,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

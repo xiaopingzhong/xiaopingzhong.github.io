@@ -267,20 +267,46 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　由于知识图谱的构建是从数据库当中读取,其间还需要进行格式的转换,以neo4j为例,需要转换成csv或者json文件(需要apoc组件包支持),因此最开始的是数据库的构建,数据库的最基础就是数据建模.本文主要讲述了数据建模的一般过程,其中还涉及到navicat的一些操作技巧.<a id="more"></a></p>
+            <p>由于知识图谱的构建是从数据库当中读取,其间还需要进行格式的转换,以neo4j为例,需要转换成csv或者json文件(需要apoc组件包支持),因此最开始的是数据库的构建,数据库的最基础就是数据建模.本文主要讲述了数据建模的一般过程,其中还涉及到navicat的一些操作技巧.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-shu-ju-jian-mo">一.数据建模</a><ul>
+<li><a href="#1-1-jian-biao">1.1 建表</a><ul>
+<li><a href="#1-1-1-shu-ju-lei-xing">1.1.1 数据类型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#er-mo-xing-shi-yong">二.模型使用</a><ul>
+<li><a href="#2-1-dao-chu-sql-wen-jian">2.1 导出sql文件</a></li>
+</ul>
+</li>
+<li><a href="#san-jian-mo-xiao-ji-qiao">三.建模小技巧</a><ul>
+<li><a href="#3-1-bu-tong-ping-tai-shu-ju-ku-de-mo-xing-zhuan-huan">3.1 不同平台数据库的模型转换</a></li>
+<li><a href="#3-2-mo-xing-tui-song-dao-shu-ju-ku-zhong">3.2 模型推送到数据库中</a></li>
+<li><a href="#3-3-cong-yi-you-shu-ju-ku-dang-zhong-dao-ru-mo-xing">3.3 从已有数据库当中导入模型</a></li>
+<li><a href="#3-4-ni-xiang-shu-ju-ku-dao-mo-xing">3.4 逆向数据库到模型</a></li>
+</ul>
+</li>
+<li><a href="#si-dao-chu-cao-zuo">四.导出操作</a></li>
+<li><a href="#cha-xun-chuang-jian-gong-ju">查询创建工具</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-数据建模"><a href="#一-数据建模" class="headerlink" title="一.数据建模"></a>一.数据建模</h1><p>打开软件,点击模型选项<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085410.png" alt="新建模型"></p>
-<h2 id="1-1-建表"><a href="#1-1-建表" class="headerlink" title="1.1 建表"></a>1.1 建表</h2><p>右边空白区新建表<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85413.png" alt="新建表"><br>进行表的重命名<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85413.png" alt=""><br>添加字段/主键<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085416.png" alt="添加字段/主键"><br>以新建genre表为例<br>首先字段添加:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085418.png" alt="字段添加"><br>添加外键:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085419.png" alt="添加外键"><br>添加外键之后的效果如下<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085421.png" alt="外键效果"><br>建模完成效果:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85422.png" alt=""></p>
-<h3 id="1-1-1-数据类型"><a href="#1-1-1-数据类型" class="headerlink" title="1.1.1 数据类型"></a>1.1.1 数据类型</h3><p>1.int与integer<br>　　(1)Integer是int的包装类，int则是java的一种基本数据类型<br>　　(2)Integer变量必须实例化后才能使用，而int变量不需要<br>　　(4)Integer实际是对象的引用，当new一个Integer时，实际上是生成一个指针指向此对象；而int则是直接存储数据值<br>　　(5)Integer的默认值是null，int的默认值是0<br>2.char与varchar<br>　　(1)char是大小固定的字符串类型,不因存储的数值的大小而改变,<br>　　(2)varchar是大小可变的字符串类型,所占内存是根据实际值的大小来确定</p>
-<h1 id="二-模型使用"><a href="#二-模型使用" class="headerlink" title="二.模型使用"></a>二.模型使用</h1><h2 id="2-1-导出sql文件"><a href="#2-1-导出sql文件" class="headerlink" title="2.1 导出sql文件"></a>2.1 导出sql文件</h2><p>选择导出文件<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085425.png" alt=""><br>导出成功后关闭模型页面．<br>数据库运行sql文件:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085426.png" alt=""><br>注意如下选项:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085427.png" alt=""><br>导入成功<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85428.png" alt="导入成功"></p>
-<h1 id="三-建模小技巧"><a href="#三-建模小技巧" class="headerlink" title="三.建模小技巧"></a>三.建模小技巧</h1><h2 id="3-1-不同平台数据库的模型转换"><a href="#3-1-不同平台数据库的模型转换" class="headerlink" title="3.1 不同平台数据库的模型转换"></a>3.1 不同平台数据库的模型转换</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085428.png" alt=""><br>点击下图对应的数据库,确认即可:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085429.png" alt=""></p>
-<h2 id="3-2-模型推送到数据库中"><a href="#3-2-模型推送到数据库中" class="headerlink" title="3.2 模型推送到数据库中"></a>3.2 模型推送到数据库中</h2><p>(1)推送到新数据库<br>　　需要先进行新数据库的建立,之后点击同步到数据库．<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085431.png" alt="一"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085432.png" alt="二"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085433.png" alt="三"><br>同步中比对的设置<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085434.png" alt=""><br>细化比对步骤<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85435.png" alt=""><br>运行查询之后,可以选择再次比对:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085435.png" alt=""><br> 再次比对界面:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085436.png" alt=""><br> PS:一般最好/安全的方法就是新建一个数据库,比对一次就可以了.</p>
-<h2 id="3-3-从已有数据库当中导入模型"><a href="#3-3-从已有数据库当中导入模型" class="headerlink" title="3.3 从已有数据库当中导入模型"></a>3.3 从已有数据库当中导入模型</h2><p>　从文件选项可以看到<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085437.png" alt=""><br>点击之后,得到导入源的设置<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85438.png" alt=""><br>设置数据库<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085438.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085439.png" alt=""><br>导入不满意,可以使用ctrl+z撤销导入操作.</p>
-<h2 id="3-4-逆向数据库到模型"><a href="#3-4-逆向数据库到模型" class="headerlink" title="3.4 逆向数据库到模型"></a>3.4 逆向数据库到模型</h2><p>其实就是为当前数据库修改模型具体方法如下:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085442.png" alt=""><br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085443.png" alt=""></p>
-<h1 id="四-导出操作"><a href="#四-导出操作" class="headerlink" title="四.导出操作"></a>四.导出操作</h1><p>1.导出为csv文件<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085445.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085446.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085450.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085453.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085455.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85456.png" alt=""><br>桌面上就有五个文件:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085459.png" alt=""><br>数据库当中的导出设置文件:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85502.png" alt=""><br>  可以导出来的会乱码,之后用记事本打开,以utf-8格式保存即可<br>2.导出为json文件<br>　　一直默认即可,最后只需要进行导出设置文件保存<br>3.导出为sql文件<br>　　类似上面,,这步需要注意:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085503.png" alt="mark"><br>  最后只需要进行导出设置文件保存</p>
-<h1 id="查询创建工具"><a href="#查询创建工具" class="headerlink" title="查询创建工具"></a>查询创建工具</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085506.png" alt=""></p>
+<h1><span id="yi-shu-ju-jian-mo">一.数据建模</span></h1><p>打开软件,点击模型选项<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085410.png" alt="新建模型"></p>
+<h2><span id="1-1-jian-biao">1.1 建表</span></h2><p>右边空白区新建表<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85413.png" alt="新建表"><br>进行表的重命名<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85413.png" alt=""><br>添加字段/主键<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085416.png" alt="添加字段/主键"><br>以新建genre表为例<br>首先字段添加:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085418.png" alt="字段添加"><br>添加外键:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085419.png" alt="添加外键"><br>添加外键之后的效果如下<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085421.png" alt="外键效果"><br>建模完成效果:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85422.png" alt=""></p>
+<h3><span id="1-1-1-shu-ju-lei-xing">1.1.1 数据类型</span></h3><p>1.int与integer<br>　　(1)Integer是int的包装类，int则是java的一种基本数据类型<br>　　(2)Integer变量必须实例化后才能使用，而int变量不需要<br>　　(4)Integer实际是对象的引用，当new一个Integer时，实际上是生成一个指针指向此对象；而int则是直接存储数据值<br>　　(5)Integer的默认值是null，int的默认值是0<br>2.char与varchar<br>　　(1)char是大小固定的字符串类型,不因存储的数值的大小而改变,<br>　　(2)varchar是大小可变的字符串类型,所占内存是根据实际值的大小来确定</p>
+<h1><span id="er-mo-xing-shi-yong">二.模型使用</span></h1><h2><span id="2-1-dao-chu-sql-wen-jian">2.1 导出sql文件</span></h2><p>选择导出文件<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085425.png" alt=""><br>导出成功后关闭模型页面．<br>数据库运行sql文件:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085426.png" alt=""><br>注意如下选项:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085427.png" alt=""><br>导入成功<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85428.png" alt="导入成功"></p>
+<h1><span id="san-jian-mo-xiao-ji-qiao">三.建模小技巧</span></h1><h2><span id="3-1-bu-tong-ping-tai-shu-ju-ku-de-mo-xing-zhuan-huan">3.1 不同平台数据库的模型转换</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085428.png" alt=""><br>点击下图对应的数据库,确认即可:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085429.png" alt=""></p>
+<h2><span id="3-2-mo-xing-tui-song-dao-shu-ju-ku-zhong">3.2 模型推送到数据库中</span></h2><p>(1)推送到新数据库<br>　　需要先进行新数据库的建立,之后点击同步到数据库．<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085431.png" alt="一"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085432.png" alt="二"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085433.png" alt="三"><br>同步中比对的设置<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085434.png" alt=""><br>细化比对步骤<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85435.png" alt=""><br>运行查询之后,可以选择再次比对:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085435.png" alt=""><br> 再次比对界面:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085436.png" alt=""><br> PS:一般最好/安全的方法就是新建一个数据库,比对一次就可以了.</p>
+<h2><span id="3-3-cong-yi-you-shu-ju-ku-dang-zhong-dao-ru-mo-xing">3.3 从已有数据库当中导入模型</span></h2><p>　从文件选项可以看到<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085437.png" alt=""><br>点击之后,得到导入源的设置<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85438.png" alt=""><br>设置数据库<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085438.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085439.png" alt=""><br>导入不满意,可以使用ctrl+z撤销导入操作.</p>
+<h2><span id="3-4-ni-xiang-shu-ju-ku-dao-mo-xing">3.4 逆向数据库到模型</span></h2><p>其实就是为当前数据库修改模型具体方法如下:<br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085442.png" alt=""><br> <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085443.png" alt=""></p>
+<h1><span id="si-dao-chu-cao-zuo">四.导出操作</span></h1><p>1.导出为csv文件<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085445.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085446.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085450.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085453.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085455.png" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85456.png" alt=""><br>桌面上就有五个文件:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085459.png" alt=""><br>数据库当中的导出设置文件:<br>  <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-85502.png" alt=""><br>  可以导出来的会乱码,之后用记事本打开,以utf-8格式保存即可<br>2.导出为json文件<br>　　一直默认即可,最后只需要进行导出设置文件保存<br>3.导出为sql文件<br>　　类似上面,,这步需要注意:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085503.png" alt="mark"><br>  最后只需要进行导出设置文件保存</p>
+<h1><span id="cha-xun-chuang-jian-gong-ju">查询创建工具</span></h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-085506.png" alt=""></p>
 
         
         </div>
@@ -500,7 +526,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

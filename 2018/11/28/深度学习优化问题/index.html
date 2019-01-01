@@ -267,23 +267,52 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要讲述的是优化问题,优化问题主要是加快损失函数的最小化(局部/全局),本质还是要找调节权重参数,因此学习率和梯度成为优化问题的关键,目前主要是有四种优化器/算法,主要是从两个方面加快梯度的下降:调节学习率和调节学习率的更新幅度.<a id="more"></a></p>
+            <p>本文主要讲述的是优化问题,优化问题主要是加快损失函数的最小化(局部/全局),本质还是要找调节权重参数,因此学习率和梯度成为优化问题的关键,目前主要是有四种优化器/算法,主要是从两个方面加快梯度的下降:调节学习率和调节学习率的更新幅度.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-xun-lian-bu-zou">一.训练步骤</a></li>
+<li><a href="#er-you-hua-wen-ti">二.优化问题</a></li>
+<li><a href="#san-wu-chai">三.误差</a><ul>
+<li><a href="#3-1-er-wei-ping-mian-de-wu-chai">3.1 二维平面的误差</a></li>
+<li><a href="#3-2-san-wei-ji-qi-yi-shang-de-wu-chai">3.2 三维及其以上的误差</a></li>
+</ul>
+</li>
+<li><a href="#si-quan-ju-zui-you-yu-ju-bu-zui-you">四.全局最优与局部最优</a></li>
+<li><a href="#wu-xue-xi-lu">五.学习率</a><ul>
+<li><a href="#5-1-xue-xi-lu-shuai-jian">5.1 学习率衰减</a></li>
+</ul>
+</li>
+<li><a href="#liu-you-hua-qi">六.优化器</a><ul>
+<li><a href="#6-1-chong-lei">6.1 种类</a><ul>
+<li><a href="#6-1-1-sgd">6.1.1 SGD</a></li>
+<li><a href="#6-1-2-momentum">6.1.2 Momentum:</a></li>
+<li><a href="#6-1-3-rmsprop">6.1.3 RMSprop</a></li>
+<li><a href="#6-1-4-adam">6.1.4 Adam</a></li>
+</ul>
+</li>
+<li><a href="#6-2-suan-fa-dai-ma">6.2 算法代码</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-训练步骤"><a href="#一-训练步骤" class="headerlink" title="一.训练步骤"></a>一.训练步骤</h1><p>（１）单个样本<br>（２）根据前向算法,得到误差<br>（２）反向传播得到梯度<br>（３）根据之前设定的学习率,结合公式:<code>new_weight = existing_weight — learning_rate * gradient</code>,调整权重参数<br>（４）循环往复,训练完全部样本<br>（５）得到损失函数(损失函数L = 1/N ∑ Li （每个样本损失函数的叠加求均值）。这个损失函数L变量就是θ，其中L中的参数是整个训练集,损失函数是通过整个训练集的训练叠加得到的)</p>
-<h1 id="二-优化问题"><a href="#二-优化问题" class="headerlink" title="二.优化问题"></a>二.优化问题</h1><p>　　主要是通过优化减少误差,优化的方法主要有三个系列:牛顿法 (Newton’s method), 最小二乘法(Least Squares method), 梯度下降法 (Gradient Descent) ,其中梯度下降法 (Gradient Descent)在神经网络当中较为常用.主要方法有(Stochastic gradient descent)随机梯度下降,MSProp,Adam等方法.其中梯度就是某点的导数<br>　　优化问题就是减少误差问题，减少误差问题在NN中主要是使用梯度下降法，因此误差问题本质上就是找出使得梯度为0的权重W解.<strong>该解若为局部最优解也可以出色地完成任务</strong>.</p>
-<h1 id="三-误差"><a href="#三-误差" class="headerlink" title="三.误差"></a>三.误差</h1><h2 id="3-1-二维平面的误差"><a href="#3-1-二维平面的误差" class="headerlink" title="3.1 二维平面的误差"></a>3.1 二维平面的误差</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125210957.png" alt="二维平面的误差曲线"><br>　　误差就是实际值与预测值的差距,其中x是输入数据,<code>ωx</code>则是预测值,y是实际值。因为只需要求出cost最小，加上x，y都是固定的，所以为了简化，大胆假设把x，y去掉，留下ω，之后进行求导，图中可以看出，最低点时，也就是误差最小的时候，也就是导数、梯度为0。<strong>因此求cost最小就演变成梯度等于0即找到梯度线躺平的问题。其中梯度线则是沿着梯度下降的方向移动的，直至梯度线躺平</strong>。</p>
-<h2 id="3-2-三维及其以上的误差"><a href="#3-2-三维及其以上的误差" class="headerlink" title="3.2 三维及其以上的误差"></a>3.2 三维及其以上的误差</h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125212910.png" alt="三维及其以上的误差曲线"><br>　　三维及其以上的梯度线则是不那么好找，因为W的参数个数也会增加，导致<strong>对应的误差曲线也会变复杂</strong>，会不止有一个小山沟，这就容易会导致有多个躺平的梯度线，同时 不同的 W 初始化的位置, 将会带来不同的下降区域. 不同的下降区域, 又会带来不同的 W 解，得到误差曲线值的局部最小. 从而有多个局部最优解（简化为关于权重W的）和一个全局最优解（简化为关于权重W的）。于是就有了全局最优解与局部最优解的问题。</p>
-<h1 id="四-全局最优与局部最优"><a href="#四-全局最优与局部最优" class="headerlink" title="四.全局最优与局部最优"></a>四.全局最优与局部最优</h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125214038.png" alt="全局最优与局部最优"><br>　　鉴于时间与成本的压力，神经网络的局部最优解一般也能出色的完成任务。</p>
-<h1 id="五-学习率"><a href="#五-学习率" class="headerlink" title="五.学习率"></a>五.学习率</h1><p>　　主要是用在参数更新的速度上,结合公式:<code>new_weight = existing_weight — learning_rate * gradient</code><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128123226.png" alt="学习率使用"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128123706.png" alt="学习率评判标准"></p>
-<h2 id="5-1-学习率衰减"><a href="#5-1-学习率衰减" class="headerlink" title="5.1 学习率衰减"></a>5.1 学习率衰减</h2><p>　　训练的epoch越多,学习率就会越小,否则很容易越过某个权重W使得损失函数错失最小值.</p>
-<h1 id="六-优化器"><a href="#六-优化器" class="headerlink" title="六.优化器"></a>六.优化器</h1><p>　　主要是优化<strong>学习率的增减幅度和更新速度</strong>.从而更快逼近全局最优解:W(min),使得损失函数最小</p>
-<h2 id="6-1-种类"><a href="#6-1-种类" class="headerlink" title="6.1 种类"></a>6.1 种类</h2><h3 id="6-1-1-SGD"><a href="#6-1-1-SGD" class="headerlink" title="6.1.1 SGD"></a>6.1.1 SGD</h3><p>　　Momentum=0的特殊情况.</p>
-<h3 id="6-1-2-Momentum"><a href="#6-1-2-Momentum" class="headerlink" title="6.1.2 Momentum:"></a>6.1.2 Momentum:</h3><p>　　全称：Gradient Descent with Momentum:动量梯度下降算法<br>　　作用：<strong>加快对权重参数调整的学习率</strong>.对前几次的梯度进行加权平均,减少震荡,同时使用动能这个参数,如果没有阻力,增大学习率,反之减少学习率;<br>　　参数:有动能η</p>
-<h3 id="6-1-3-RMSprop"><a href="#6-1-3-RMSprop" class="headerlink" title="6.1.3 RMSprop"></a>6.1.3 RMSprop</h3><p>　　作用：<strong>实现为不同权重参数W设置不同的学习率</strong>.主要是哪个方向振荡幅度大,就减少该方向的更新速度,反之则相反,使得梯度下降平缓.<br>　　参数:有beta/β,epsilon/ε参数,防止分母为0;</p>
-<h3 id="6-1-4-Adam"><a href="#6-1-4-Adam" class="headerlink" title="6.1.4 Adam"></a>6.1.4 Adam</h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128180524.png" alt="ADAM"><br>　　全称：Adaptive Moment Estimation:自适应优化算法<br>　　Adam算法则是结合Momentum与RMSprop算法的优点.<strong>允许你使用Momentum算法使用β调节学习率(其实就是Momentum算法中的Momentum参数)，从而加快你的算法学习速度。同时RMSprop算法为不同的参数计算不同的自适应学习率.</strong><br>　　参数:β1通常设置为0.9,β2通常设置为0.999，ε一般为10^(−8),V是学习率,S是震荡幅度.</p>
-<h2 id="6-2-算法代码"><a href="#6-2-算法代码" class="headerlink" title="6.2 算法代码"></a>6.2 算法代码</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">opt_SGD = torch<span class="selector-class">.optim</span><span class="selector-class">.SGD</span>(net_SGD.parameters(), lr=LR)</span><br><span class="line"> <span class="selector-id">#momentum</span>:学习率的增减幅度参数</span><br><span class="line">opt_Momentum = torch<span class="selector-class">.optim</span><span class="selector-class">.SGD</span>(net_Momentum.parameters(), lr=LR, momentum=<span class="number">0.8</span>)</span><br><span class="line"> <span class="selector-id">#alpha</span>:学习率更新速度的影响参数</span><br><span class="line">opt_RMSprop = torch<span class="selector-class">.optim</span><span class="selector-class">.RMSprop</span>(net_RMSprop.parameters(), lr=LR, alpha=<span class="number">0.9</span>)</span><br><span class="line"> #betas=(<span class="number">0.9</span>, <span class="number">0.99</span>):学习率的增减幅度,学习率更新速度的影响参数</span><br><span class="line">opt_Adam = torch<span class="selector-class">.optim</span><span class="selector-class">.Adam</span>(net_Adam.parameters(), lr=LR, betas=(<span class="number">0.9</span>, <span class="number">0.99</span>))</span><br></pre></td></tr></table></figure>
+<h1><span id="yi-xun-lian-bu-zou">一.训练步骤</span></h1><p>（１）单个样本<br>（２）根据前向算法,得到误差<br>（２）反向传播得到梯度<br>（３）根据之前设定的学习率,结合公式:<code>new_weight = existing_weight — learning_rate * gradient</code>,调整权重参数<br>（４）循环往复,训练完全部样本<br>（５）得到损失函数(损失函数L = 1/N ∑ Li （每个样本损失函数的叠加求均值）。这个损失函数L变量就是θ，其中L中的参数是整个训练集,损失函数是通过整个训练集的训练叠加得到的)</p>
+<h1><span id="er-you-hua-wen-ti">二.优化问题</span></h1><p>　　主要是通过优化减少误差,优化的方法主要有三个系列:牛顿法 (Newton’s method), 最小二乘法(Least Squares method), 梯度下降法 (Gradient Descent) ,其中梯度下降法 (Gradient Descent)在神经网络当中较为常用.主要方法有(Stochastic gradient descent)随机梯度下降,MSProp,Adam等方法.其中梯度就是某点的导数<br>　　优化问题就是减少误差问题，减少误差问题在NN中主要是使用梯度下降法，因此误差问题本质上就是找出使得梯度为0的权重W解.<strong>该解若为局部最优解也可以出色地完成任务</strong>.</p>
+<h1><span id="san-wu-chai">三.误差</span></h1><h2><span id="3-1-er-wei-ping-mian-de-wu-chai">3.1 二维平面的误差</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125210957.png" alt="二维平面的误差曲线"><br>　　误差就是实际值与预测值的差距,其中x是输入数据,<code>ωx</code>则是预测值,y是实际值。因为只需要求出cost最小，加上x，y都是固定的，所以为了简化，大胆假设把x，y去掉，留下ω，之后进行求导，图中可以看出，最低点时，也就是误差最小的时候，也就是导数、梯度为0。<strong>因此求cost最小就演变成梯度等于0即找到梯度线躺平的问题。其中梯度线则是沿着梯度下降的方向移动的，直至梯度线躺平</strong>。</p>
+<h2><span id="3-2-san-wei-ji-qi-yi-shang-de-wu-chai">3.2 三维及其以上的误差</span></h2><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125212910.png" alt="三维及其以上的误差曲线"><br>　　三维及其以上的梯度线则是不那么好找，因为W的参数个数也会增加，导致<strong>对应的误差曲线也会变复杂</strong>，会不止有一个小山沟，这就容易会导致有多个躺平的梯度线，同时 不同的 W 初始化的位置, 将会带来不同的下降区域. 不同的下降区域, 又会带来不同的 W 解，得到误差曲线值的局部最小. 从而有多个局部最优解（简化为关于权重W的）和一个全局最优解（简化为关于权重W的）。于是就有了全局最优解与局部最优解的问题。</p>
+<h1><span id="si-quan-ju-zui-you-yu-ju-bu-zui-you">四.全局最优与局部最优</span></h1><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181125214038.png" alt="全局最优与局部最优"><br>　　鉴于时间与成本的压力，神经网络的局部最优解一般也能出色的完成任务。</p>
+<h1><span id="wu-xue-xi-lu">五.学习率</span></h1><p>　　主要是用在参数更新的速度上,结合公式:<code>new_weight = existing_weight — learning_rate * gradient</code><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128123226.png" alt="学习率使用"><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128123706.png" alt="学习率评判标准"></p>
+<h2><span id="5-1-xue-xi-lu-shuai-jian">5.1 学习率衰减</span></h2><p>　　训练的epoch越多,学习率就会越小,否则很容易越过某个权重W使得损失函数错失最小值.</p>
+<h1><span id="liu-you-hua-qi">六.优化器</span></h1><p>　　主要是优化<strong>学习率的增减幅度和更新速度</strong>.从而更快逼近全局最优解:W(min),使得损失函数最小</p>
+<h2><span id="6-1-chong-lei">6.1 种类</span></h2><h3><span id="6-1-1-sgd">6.1.1 SGD</span></h3><p>　　Momentum=0的特殊情况.</p>
+<h3><span id="6-1-2-momentum">6.1.2 Momentum:</span></h3><p>　　全称：Gradient Descent with Momentum:动量梯度下降算法<br>　　作用：<strong>加快对权重参数调整的学习率</strong>.对前几次的梯度进行加权平均,减少震荡,同时使用动能这个参数,如果没有阻力,增大学习率,反之减少学习率;<br>　　参数:有动能η</p>
+<h3><span id="6-1-3-rmsprop">6.1.3 RMSprop</span></h3><p>　　作用：<strong>实现为不同权重参数W设置不同的学习率</strong>.主要是哪个方向振荡幅度大,就减少该方向的更新速度,反之则相反,使得梯度下降平缓.<br>　　参数:有beta/β,epsilon/ε参数,防止分母为0;</p>
+<h3><span id="6-1-4-adam">6.1.4 Adam</span></h3><p><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181128180524.png" alt="ADAM"><br>　　全称：Adaptive Moment Estimation:自适应优化算法<br>　　Adam算法则是结合Momentum与RMSprop算法的优点.<strong>允许你使用Momentum算法使用β调节学习率(其实就是Momentum算法中的Momentum参数)，从而加快你的算法学习速度。同时RMSprop算法为不同的参数计算不同的自适应学习率.</strong><br>　　参数:β1通常设置为0.9,β2通常设置为0.999，ε一般为10^(−8),V是学习率,S是震荡幅度.</p>
+<h2><span id="6-2-suan-fa-dai-ma">6.2 算法代码</span></h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">opt_SGD = torch<span class="selector-class">.optim</span><span class="selector-class">.SGD</span>(net_SGD.parameters(), lr=LR)</span><br><span class="line"> <span class="selector-id">#momentum</span>:学习率的增减幅度参数</span><br><span class="line">opt_Momentum = torch<span class="selector-class">.optim</span><span class="selector-class">.SGD</span>(net_Momentum.parameters(), lr=LR, momentum=<span class="number">0.8</span>)</span><br><span class="line"> <span class="selector-id">#alpha</span>:学习率更新速度的影响参数</span><br><span class="line">opt_RMSprop = torch<span class="selector-class">.optim</span><span class="selector-class">.RMSprop</span>(net_RMSprop.parameters(), lr=LR, alpha=<span class="number">0.9</span>)</span><br><span class="line"> #betas=(<span class="number">0.9</span>, <span class="number">0.99</span>):学习率的增减幅度,学习率更新速度的影响参数</span><br><span class="line">opt_Adam = torch<span class="selector-class">.optim</span><span class="selector-class">.Adam</span>(net_Adam.parameters(), lr=LR, betas=(<span class="number">0.9</span>, <span class="number">0.99</span>))</span><br></pre></td></tr></table></figure>
 
         
         </div>
@@ -503,7 +532,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

@@ -267,17 +267,59 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　本文主要是对maven与pom进行了初探,maven是项目管理工具,具体实现方式是以pom文件的形式实现的,本文首先讲述了maven的生命周期和命令规范.之后讲述了pom的组成部分.重点讲述了pom的依赖管理、parent与models标签。<a id="more"></a></p>
+            <p>本文主要是对maven与pom进行了初探,maven是项目管理工具,具体实现方式是以pom文件的形式实现的,本文首先讲述了maven的生命周期和命令规范.之后讲述了pom的组成部分.重点讲述了pom的依赖管理、parent与models标签。<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-maven">一.Maven</a><ul>
+<li><a href="#1-1-maven-han-yi">1.1 MAVEN含义</a></li>
+<li><a href="#1-2-maven-de-xiang-mu-jie-gou">1.2 maven的项目结构</a></li>
+<li><a href="#1-3-maven-ming-ling">1.3 MAVEN命令</a><ul>
+<li><a href="#1-3-1-maven-ming-ling-gui-fan">1.3.1 Maven命令规范</a></li>
+<li><a href="#1-3-2-chuang-jian-maven-xiang-mu">1.3.2 创建Maven项目</a><ul>
+<li><a href="#1-cmd-jiao-hu-mo-shi-chuang-jian">(1)cmd交互模式创建</a></li>
+<li><a href="#2-pi-chu-li-mo-shi-chuang-jian">(2)批处理模式创建</a></li>
+<li><a href="#3-ide-gong-ju-chuang-jian">(3) IDE工具创建</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#1-4-maven-sheng-ming-zhou-qi-lifecycle">1.4 MAVEN生命周期lifecycle</a></li>
+<li><a href="#1-5-cha-jian">1.5 插件</a></li>
+</ul>
+</li>
+<li><a href="#er-pom-xml">二.POM.xml</a><ul>
+<li><a href="#2-1-pom-de-han-yi">2.1 POM的含义</a></li>
+<li><a href="#2-2-pom-xml-zu-cheng-bu-fen">2.2 Pom.xml组成部分</a><ul>
+<li><a href="#2-2-1-xiang-mu-de-ji-ben-xin-xi">2.2.1 项目的基本信息</a></li>
+<li><a href="#2-2-2-repositories">2.2.2 repositories</a></li>
+<li><a href="#2-2-3-parent-yu-modules">2.2.3 parent与modules</a><ul>
+<li><a href="#1-relativepath">(1)relativePath/</a></li>
+</ul>
+</li>
+<li><a href="#2-2-4-dependencies">2.2.4 dependencies</a></li>
+<li><a href="#2-2-5-dependencymanagement">2.2.5 dependencyManagement</a></li>
+<li><a href="#2-2-6-properties">2.2.6 properties</a></li>
+<li><a href="#2-2-7-build">2.2.7 build</a></li>
+<li><a href="#2-2-8-plugin">2.2.8 plugin</a></li>
+<li><a href="#2-2-9-pluginmanagement">2.2.9 pluginManagement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h1 id="一-Maven"><a href="#一-Maven" class="headerlink" title="一.Maven"></a>一.Maven</h1><h2 id="1-1-MAVEN含义"><a href="#1-1-MAVEN含义" class="headerlink" title="1.1 MAVEN含义"></a>1.1 MAVEN含义</h2><p>　　Maven，发音是meivn,”专家”的意思。它是一个很好的项目管理工具。它负责管理项目开发过程中的几乎所有的东西.<br>　　Maven的仓库有本地与远程之分:<br>　　实际上可将本地仓库理解“缓存”，因为项目首先会从本地仓库中获取 jar 包，当无法获取指定 jar 包的时候，本地仓库会从 远程仓库（或 中央仓库） 中下载 jar 包，并放入本地仓库中以备将来使用。这个远程仓库是 Maven 官方提供的，可通过 <a href="http://search.maven.org/" target="_blank" rel="noopener">http://search.maven.org/</a> 来访问。</p>
+<h1><span id="yi-maven">一.Maven</span></h1><h2><span id="1-1-maven-han-yi">1.1 MAVEN含义</span></h2><p>　　Maven，发音是meivn,”专家”的意思。它是一个很好的项目管理工具。它负责管理项目开发过程中的几乎所有的东西.<br>　　Maven的仓库有本地与远程之分:<br>　　实际上可将本地仓库理解“缓存”，因为项目首先会从本地仓库中获取 jar 包，当无法获取指定 jar 包的时候，本地仓库会从 远程仓库（或 中央仓库） 中下载 jar 包，并放入本地仓库中以备将来使用。这个远程仓库是 Maven 官方提供的，可通过 <a href="http://search.maven.org/" target="_blank" rel="noopener">http://search.maven.org/</a> 来访问。</p>
 <p>　MAVEN的意义:</p>
 <p>​       ❋ 统一开发规范与工具(大家都通过配置进行开发,版本规范)</p>
 <p>​       ❋ 统一管理 jar 包</p>
-<h2 id="1-2-maven的项目结构"><a href="#1-2-maven的项目结构" class="headerlink" title="1.2 maven的项目结构"></a>1.2 maven的项目结构</h2><p>maven默认的文件存放结构如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/项目目录</span><br><span class="line">    pom.xml 用于maven项目的配置文件</span><br><span class="line">    /src 源代码目录</span><br><span class="line">        /src/main 工程源代码目录</span><br><span class="line">            /src/main/java 工程java源代码目录</span><br><span class="line">        	/src/main<span class="built_in">/resource </span>工程的资源目录</span><br><span class="line">        	/webapp 目录下存放 Web 应用相关代码。</span><br><span class="line">        		／WEB-INF WEB-INF是Java的WEB应用的安全目录,</span><br><span class="line">        				  访问该里面的网页,必须通过映射才可以访问,不能直接地址栏访问.</span><br><span class="line">        /src/test 单元测试目录</span><br><span class="line">            /src/test/java  测试代码</span><br><span class="line">            /src/test<span class="built_in">/resource </span> 测试资源文件</span><br><span class="line">    /target 输出目录，所有的输出物都存放在这个目录下</span><br><span class="line">        /target/classes 编译之后的class文件</span><br></pre></td></tr></table></figure></p>
+<h2><span id="1-2-maven-de-xiang-mu-jie-gou">1.2 maven的项目结构</span></h2><p>maven默认的文件存放结构如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/项目目录</span><br><span class="line">    pom.xml 用于maven项目的配置文件</span><br><span class="line">    /src 源代码目录</span><br><span class="line">        /src/main 工程源代码目录</span><br><span class="line">            /src/main/java 工程java源代码目录</span><br><span class="line">        	/src/main<span class="built_in">/resource </span>工程的资源目录</span><br><span class="line">        	/webapp 目录下存放 Web 应用相关代码。</span><br><span class="line">        		／WEB-INF WEB-INF是Java的WEB应用的安全目录,</span><br><span class="line">        				  访问该里面的网页,必须通过映射才可以访问,不能直接地址栏访问.</span><br><span class="line">        /src/test 单元测试目录</span><br><span class="line">            /src/test/java  测试代码</span><br><span class="line">            /src/test<span class="built_in">/resource </span> 测试资源文件</span><br><span class="line">    /target 输出目录，所有的输出物都存放在这个目录下</span><br><span class="line">        /target/classes 编译之后的class文件</span><br></pre></td></tr></table></figure></p>
 <p>　　项目的生命周期的编译阶段:就是将/src/main/java下的java文件,编译成classes文件夹下,输出在target这个输出目录下.</p>
-<h2 id="1-3-MAVEN命令"><a href="#1-3-MAVEN命令" class="headerlink" title="1.3 MAVEN命令"></a>1.3 MAVEN命令</h2><h3 id="1-3-1-Maven命令规范"><a href="#1-3-1-Maven命令规范" class="headerlink" title="1.3.1 Maven命令规范"></a>1.3.1 Maven命令规范</h3><p>　　例如:<code>mvn archetype:generate，mvn tomcat7:run-war</code> 。其实，可使用两种不同的方式来执行 Maven 命令：<br>　　方式一：<strong>mvn &lt;插件&gt;:&lt;目标&gt; [参数]</strong><br>　　方式二：<strong>mvn &lt;阶段&gt;</strong></p>
+<h2><span id="1-3-maven-ming-ling">1.3 MAVEN命令</span></h2><h3><span id="1-3-1-maven-ming-ling-gui-fan">1.3.1 Maven命令规范</span></h3><p>　　例如:<code>mvn archetype:generate，mvn tomcat7:run-war</code> 。其实，可使用两种不同的方式来执行 Maven 命令：<br>　　方式一：<strong>mvn &lt;插件&gt;:&lt;目标&gt; [参数]</strong><br>　　方式二：<strong>mvn &lt;阶段&gt;</strong></p>
 <p>　　现在我们接触到的都是第一种方式，而第二种方式才是我们日常中使用最频繁的，例如：</p>
 <ul>
 <li><strong>mvn clean</strong>：清空输出目录（即 target 目录）</li>
@@ -287,7 +329,7 @@
 <li><strong>mvn deploy</strong>：将构件包部署到远程仓库</li>
 </ul>
 <p>　　执行 Maven 命令需要注意的是：<strong>必须在 Maven 项目的根目录处执行</strong>，也就是当前目录下一定存在一个名为 pom.xml 的文件</p>
-<h3 id="1-3-2-创建Maven项目"><a href="#1-3-2-创建Maven项目" class="headerlink" title="1.3.2 创建Maven项目"></a>1.3.2 创建Maven项目</h3><h4 id="1-cmd交互模式创建"><a href="#1-cmd交互模式创建" class="headerlink" title="(1)cmd交互模式创建"></a>(1)cmd交互模式创建</h4><p>　　我们不妨创建一个 Java Web 项目，只需在 cmd 中输入：</p>
+<h3><span id="1-3-2-chuang-jian-maven-xiang-mu">1.3.2 创建Maven项目</span></h3><h4><span id="1-cmd-jiao-hu-mo-shi-chuang-jian">(1)cmd交互模式创建</span></h4><p>　　我们不妨创建一个 Java Web 项目，只需在 cmd 中输入：</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:<span class="keyword">generate</span></span><br></pre></td></tr></table></figure>
 <p>　　随后 Maven 将下载 Archetype 插件及其所有的依赖插件，这些插件其实都是 jar 包，它们存放在您的 Maven 本地仓库中。</p>
 <p>　　在 cmd 中，您会看到几百个 <strong>Archetype（原型）</strong>，可将它理解为项目模板，您得从中选择一个。</p>
@@ -300,11 +342,11 @@
 <li>项目 package（包名）是什么？—— 可输入 com.smart.demo</li>
 </ul>
 <p>　　以上这种方式称为 <strong>Interactive Mode**</strong>（交互模式）**。</p>
-<h4 id="2-批处理模式创建"><a href="#2-批处理模式创建" class="headerlink" title="(2)批处理模式创建"></a>(2)批处理模式创建</h4><p>　　如果您是一位高效人士，或许觉得这样的交互过于繁琐，那么您也可以尝试仅使用一条命名，来完成同样的事情：</p>
+<h4><span id="2-pi-chu-li-mo-shi-chuang-jian">(2)批处理模式创建</span></h4><p>　　如果您是一位高效人士，或许觉得这样的交互过于繁琐，那么您也可以尝试仅使用一条命名，来完成同样的事情：</p>
 <p><code>mvn archetype:generate -DinteractiveMode=false -DarchetypeArtifactId=maven-archetype-webapp -DgroupId=com.smart -DartifactId=smart-demo -Dversion=1.0</code></p>
 <p>　　以上这种方式成为 <strong>Batch Mode**</strong>（批处理模式）**。</p>
-<h4 id="3-IDE工具创建"><a href="#3-IDE工具创建" class="headerlink" title="(3) IDE工具创建"></a>(3) IDE工具创建</h4><p>　　当然，还有第三种选择，使用 IDE 来创建 Maven 项目，您可以使用 Eclipse、NetBeans、IDEA 来创建 Maven 项目，操作过程应该是非常简单的</p>
-<h2 id="1-4-MAVEN生命周期lifecycle"><a href="#1-4-MAVEN生命周期lifecycle" class="headerlink" title="1.4 MAVEN生命周期lifecycle"></a>1.4 MAVEN生命周期lifecycle</h2><p>　　maven把项目的构建划分为不同的生命周期(lifecycle)：编译、运行测试、打包、集成测试(test)、验证、部署。具体来分的有如下９个阶段（phase）．</p>
+<h4><span id="3-ide-gong-ju-chuang-jian">(3) IDE工具创建</span></h4><p>　　当然，还有第三种选择，使用 IDE 来创建 Maven 项目，您可以使用 Eclipse、NetBeans、IDEA 来创建 Maven 项目，操作过程应该是非常简单的</p>
+<h2><span id="1-4-maven-sheng-ming-zhou-qi-lifecycle">1.4 MAVEN生命周期lifecycle</span></h2><p>　　maven把项目的构建划分为不同的生命周期(lifecycle)：编译、运行测试、打包、集成测试(test)、验证、部署。具体来分的有如下９个阶段（phase）．</p>
 <table>
 <thead>
 <tr>
@@ -361,7 +403,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="1-5-插件"><a href="#1-5-插件" class="headerlink" title="1.5 插件"></a>1.5 插件</h2><p>　　上节表格中所出现的插件名称实际上是插件的别名（或称为前缀），比如：compiler 实际上是 org.apache.maven.plugins:maven-compiler-plugin:2.3.2，这个才是 Maven 插件的完全名称。</p>
+<h2><span id="1-5-cha-jian">1.5 插件</span></h2><p>　　上节表格中所出现的插件名称实际上是插件的别名（或称为前缀），比如：compiler 实际上是 org.apache.maven.plugins:maven-compiler-plugin:2.3.2，这个才是 Maven 插件的完全名称。</p>
 <p>每个插件又包括了一些列的 <strong>Goal（目标）</strong>，以 compiler 插件为例，它包括以下目标：</p>
 <ul>
 <li>compiler:help：用于显示 compiler 插件的使用帮助。</li>
@@ -377,15 +419,15 @@
 <li>provided：对于编译、测试时有效，但在运行时无效</li>
 <li>system：与 provided 类似，但依赖于系统资源–表示使用本地的依赖</li>
 </ol>
-<h1 id="二-POM-xml"><a href="#二-POM-xml" class="headerlink" title="二.POM.xml"></a>二.POM.xml</h1><h2 id="2-1-POM的含义"><a href="#2-1-POM的含义" class="headerlink" title="2.1 POM的含义"></a>2.1 POM的含义</h2><p>　　POM（Project Object Model–项目对象模型）是 Maven 工程的工作基础，以 pom.xml 的形式存在于项目中，在这里配置构建工程的详细信息。 pom.xml用于描述整个 Maven 项目，所以也称为 Maven 描述文件</p>
-<h2 id="2-2-Pom-xml组成部分"><a href="#2-2-Pom-xml组成部分" class="headerlink" title="2.2 Pom.xml组成部分"></a>2.2 Pom.xml组成部分</h2><h3 id="2-2-1-项目的基本信息"><a href="#2-2-1-项目的基本信息" class="headerlink" title="2.2.1 项目的基本信息"></a>2.2.1 项目的基本信息</h3><p>　　一个依赖至少包括 groupId、artifactId、version 三个元素，如果该依赖不是 jar 类型，则需要指定 。<br>　　1.modelVersion：这个是 POM 的版本号，现在都是 4.0.0 的，必须得有，但不需要修改。<br>下面三个是组织名、构件名、版本号，它们三个合起来就是 Maven 坐标:<br>　　2.groupId - 项目组 id–可以代表一个公司,例如–org.apache<br>artifactId - 项目 id,正在开发中的项目可以用一个特殊的标识，这种标识给版本加上一个”SNAPSHOT”的标记.<br>　　3.version - 项目版本,maven在版本管理时候可以使用几个特殊的字符串 SNAPSHOT (开发测试版),LATEST(最新版) ,RELEASE (最新发布版)。<br>　　4.scope 作用域限制,LifeCycle(项目构建的生命周期)<br>　　5.packaging 项目的打包类型，默认是jar，描述了项目打包后的输出。类型为jar的项目产生一个JAR文件，类型为war的项目产生一个web应用。</p>
+<h1><span id="er-pom-xml">二.POM.xml</span></h1><h2><span id="2-1-pom-de-han-yi">2.1 POM的含义</span></h2><p>　　POM（Project Object Model–项目对象模型）是 Maven 工程的工作基础，以 pom.xml 的形式存在于项目中，在这里配置构建工程的详细信息。 pom.xml用于描述整个 Maven 项目，所以也称为 Maven 描述文件</p>
+<h2><span id="2-2-pom-xml-zu-cheng-bu-fen">2.2 Pom.xml组成部分</span></h2><h3><span id="2-2-1-xiang-mu-de-ji-ben-xin-xi">2.2.1 项目的基本信息</span></h3><p>　　一个依赖至少包括 groupId、artifactId、version 三个元素，如果该依赖不是 jar 类型，则需要指定 。<br>　　1.modelVersion：这个是 POM 的版本号，现在都是 4.0.0 的，必须得有，但不需要修改。<br>下面三个是组织名、构件名、版本号，它们三个合起来就是 Maven 坐标:<br>　　2.groupId - 项目组 id–可以代表一个公司,例如–org.apache<br>artifactId - 项目 id,正在开发中的项目可以用一个特殊的标识，这种标识给版本加上一个”SNAPSHOT”的标记.<br>　　3.version - 项目版本,maven在版本管理时候可以使用几个特殊的字符串 SNAPSHOT (开发测试版),LATEST(最新版) ,RELEASE (最新发布版)。<br>　　4.scope 作用域限制,LifeCycle(项目构建的生命周期)<br>　　5.packaging 项目的打包类型，默认是jar，描述了项目打包后的输出。类型为jar的项目产生一个JAR文件，类型为war的项目产生一个web应用。</p>
 <p>　　6.type:type ，默认是 jar。如果是 war ，则需指定 <type>war<type> ，一般在pom引用依赖时候出现，其他时候不用.</type></type></p>
 <p>　　7.optional:是否可选依赖</p>
 <p>　　8.name,url,description</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>banseon-maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 哪个网站可以找到这个项目,提示如果 Maven 资源列表没有，可以直接上该网站寻找, Maven 产生的文档用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">url</span>&gt;</span>http://www.baidu.com/banseon<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 项目的描述, Maven 产生的文档用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">description</span>&gt;</span>A maven project to study maven.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-2-2-repositories"><a href="#2-2-2-repositories" class="headerlink" title="2.2.2 repositories"></a>2.2.2 repositories</h3><p>　　在很多情况下，默认的中央仓库无法满足项目的需求，可能项目需要的jar包存在另一个远程仓库中，这时就可以在pom.xml文件中配置仓库，代码如下：</p>
+<h3><span id="2-2-2-repositories">2.2.2 repositories</span></h3><p>　　在很多情况下，默认的中央仓库无法满足项目的需求，可能项目需要的jar包存在另一个远程仓库中，这时就可以在pom.xml文件中配置仓库，代码如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id</span></span><br><span class="line"><span class="comment">        就会覆盖中央仓库的配置 --&gt;</span> </span><br><span class="line">　　　　  <span class="tag">&lt;<span class="name">id</span>&gt;</span>mvnrepository<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mvnrepository<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://www.mvnrepository.com/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">layout</span>&gt;</span>default<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-2-3-parent与modules"><a href="#2-2-3-parent与modules" class="headerlink" title="2.2.3 parent与modules"></a>2.2.3 parent与modules</h3><p>　　由于maven的<strong>多模块聚合结构</strong>,父模块的&lt;<strong>modules</strong>&gt;记录着所有的子模块,在每一个子模块中也都标明了自己的父模块的配置信息.例如</p>
+<h3><span id="2-2-3-parent-yu-modules">2.2.3 parent与modules</span></h3><p>　　由于maven的<strong>多模块聚合结构</strong>,父模块的&lt;<strong>modules</strong>&gt;记录着所有的子模块,在每一个子模块中也都标明了自己的父模块的配置信息.例如</p>
 <ul>
 <li><p>qmxbb-platform为<strong>父模块</strong>  </p>
 </li>
@@ -412,7 +454,7 @@
 <p>​</p>
 </li>
 </ul>
-<h4 id="1-relativePath"><a href="#1-relativePath" class="headerlink" title="(1)relativePath/"></a>(1)relativePath/</h4><p>1.作用:</p>
+<h4><span id="1-relativepath">(1)relativePath/</span></h4><p>1.作用:</p>
 <p>　　指定父工程 pom 文件(相对于子模块/工程的文件路径)的路径</p>
 <p>2.默认值:</p>
 <p>　　为../pom.xml<br>3.查找顺序：</p>
@@ -425,14 +467,14 @@
 <p>则 my-module 工程的 pom 配置如下</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;project&gt;</span></span><br><span class="line">  <span class="params">&lt;parent&gt;</span></span><br><span class="line">    <span class="params">&lt;groupId&gt;</span>com.mycompany.app<span class="params">&lt;/groupId&gt;</span></span><br><span class="line">    <span class="params">&lt;artifactId&gt;</span>my-app<span class="params">&lt;/artifactId&gt;</span></span><br><span class="line">    <span class="params">&lt;version&gt;</span><span class="number">1</span><span class="params">&lt;/version&gt;</span></span><br><span class="line">    <span class="params">&lt;relativePath&gt;</span>..<span class="meta-keyword">/parent/</span>pom.xml<span class="params">&lt;/relativePath&gt;</span></span><br><span class="line">  <span class="params">&lt;/parent&gt;</span></span><br><span class="line">  <span class="params">&lt;modelVersion&gt;</span><span class="number">4.0</span><span class="number">.0</span><span class="params">&lt;/modelVersion&gt;</span></span><br><span class="line">  <span class="params">&lt;artifactId&gt;</span>my-module<span class="params">&lt;/artifactId&gt;</span></span><br><span class="line"><span class="params">&lt;/project&gt;</span><span class="number">12345678910</span></span><br></pre></td></tr></table></figure>
 <p>　　通过 <code>&lt;relativePath&gt;</code> 元素指定父工程 pom 文件的路径</p>
-<h3 id="2-2-4-dependencies"><a href="#2-2-4-dependencies" class="headerlink" title="2.2.4 dependencies"></a>2.2.4 dependencies</h3><p>　　内部包含若干<dependency></dependency></p>
+<h3><span id="2-2-4-dependencies">2.2.4 dependencies</span></h3><p>　　内部包含若干<dependency></dependency></p>
 <p>{              groupId, artifactId,version 三个基本属性</p>
 <p>​                 type :默认jar类型</p>
 <p>​                 scope： 当前包依赖类型</p>
 <p>​                 optional： false时， 继承这个项目所有的子项目。 true时， 该项目的子项目需要显式引入</p>
 <p>​                 exclusion ：排除某项</p>
 <p>}</p>
-<h3 id="2-2-5-dependencyManagement"><a href="#2-2-5-dependencyManagement" class="headerlink" title="2.2.5 dependencyManagement"></a>2.2.5 dependencyManagement</h3><p>作用: </p>
+<h3><span id="2-2-5-dependencymanagement">2.2.5 dependencyManagement</span></h3><p>作用: </p>
 <p>　　方便继承父pom的部分依赖,如果需要继承父pom的全部配置(插件,依赖),则可以不需要<dependencymanagement>.</dependencymanagement></p>
 <p><strong>注意:</strong></p>
 <p>　　<strong>dependencyManagement只共享dependencyManagement元素里面的依赖.</strong></p>
@@ -444,13 +486,13 @@
 <p>　　在<code>&lt;dependencyManagement&gt;</code> 中的依赖，只是进行管理，但并不引入(子模块A，B负责引入)。比如我们工程 A，B 需要使用 JUnit，则配置</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>A(or B)<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">&lt;!--这个是重点--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--父pom文件的相对路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span>123456789101112131415161718</span><br></pre></td></tr></table></figure>
 <p>　　这里不需要为依赖制定版本号，因为已经在父工程指定。 而 C 工程只要不配置 JUnit 依赖，就不会引入 JUnit.</p>
-<h3 id="2-2-6-properties"><a href="#2-2-6-properties" class="headerlink" title="2.2.6 properties"></a>2.2.6 properties</h3><p>声明一些常量。如：</p>
+<h3><span id="2-2-6-properties">2.2.6 properties</span></h3><p>声明一些常量。如：</p>
 <p>​　　　　&lt;file.encoding&gt;UTF-8&lt;file.encoding&gt;     </p>
 <p>　　　　引用时 ：  ${file.encoding}</p>
 <p>​ 　　　也可以通过project.xx引用项目的定义的属性，例如： ${project.groupId} 引用当前pom定义的groupId</p>
-<h3 id="2-2-7-build"><a href="#2-2-7-build" class="headerlink" title="2.2.7 build"></a>2.2.7 build</h3><p>　　build<strong>：</strong>包括项目的源码目录配置、输出目录配置、插件配置、插件管理配置等</p>
-<h3 id="2-2-8-plugin"><a href="#2-2-8-plugin" class="headerlink" title="2.2.8 plugin"></a>2.2.8 plugin</h3><p>　　声明项目中所使用的插件</p>
-<h3 id="2-2-9-pluginManagement"><a href="#2-2-9-pluginManagement" class="headerlink" title="2.2.9 pluginManagement"></a>2.2.9 pluginManagement</h3><p>　　pluginManagement作用类似于dependencyManagement， 定义子项目中的插件。 这样在子项目中使用插件时，可以不用指定其版本，由父项目统一进行管理.详情<a href="https://www.zhongxiaoping.cn/2018/10/10/pom%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86/#more" target="_blank" rel="noopener">插件配置</a>：</p>
+<h3><span id="2-2-7-build">2.2.7 build</span></h3><p>　　build<strong>：</strong>包括项目的源码目录配置、输出目录配置、插件配置、插件管理配置等</p>
+<h3><span id="2-2-8-plugin">2.2.8 plugin</span></h3><p>　　声明项目中所使用的插件</p>
+<h3><span id="2-2-9-pluginmanagement">2.2.9 pluginManagement</span></h3><p>　　pluginManagement作用类似于dependencyManagement， 定义子项目中的插件。 这样在子项目中使用插件时，可以不用指定其版本，由父项目统一进行管理.详情<a href="https://www.zhongxiaoping.cn/2018/10/10/pom%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86/#more" target="_blank" rel="noopener">插件配置</a>：</p>
 <p>参考文献</p>
 <p>　　❋ <a href="https://blog.csdn.net/zsensei/article/details/77624596" target="_blank" rel="noopener">Maven POM文件中依赖与插件的配置</a><br>　　❋ <a href="https://blog.csdn.net/zhejingyuan/article/details/50971764" target="_blank" rel="noopener">maven POM.xml内的标签大全详解</a><br>　　❋ <a href="https://blog.csdn.net/ltianchao/article/details/43492743" target="_blank" rel="noopener">maven 工程pom文件详解</a><br>　　❋ <a href="https://blog.csdn.net/yeguxin/article/details/77109725" target="_blank" rel="noopener">Maven学习–<parent></parent></a></p>
 <p>　　❋ <a href="https://my.oschina.net/huangyong/blog/194583?fromerr=Dmf7HPwX#OSC_h1_5" target="_blank" rel="noopener">Maven 那点事儿</a></p>
@@ -673,7 +715,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

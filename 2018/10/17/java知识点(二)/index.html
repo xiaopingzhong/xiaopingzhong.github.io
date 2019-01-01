@@ -267,13 +267,28 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　java知识点的第二篇,内容都是一些比较易混淆的知识点，主要有：java的实例化对象的顺序,内存的分区,还有静态变量与对象变量的区别,POJO,class,JavaBean关系(重点),最后还说了下公有与私有的区别.<a id="more"></a></p>
+            <p>java知识点的第二篇,内容都是一些比较易混淆的知识点，主要有：java的实例化对象的顺序,内存的分区,还有静态变量与对象变量的区别,POJO,class,JavaBean关系(重点),最后还说了下公有与私有的区别.<a id="more"></a></p>
 <hr>
+<div class="toc">
+
 <!-- toc -->
+<ul>
+<li><a href="#yi-java-shi-li-hua-dui-xiang-jia-zai-shun-xu">一.java实例化对象加载顺序</a></li>
+<li><a href="#er-pojo-class-javabean-guan-xi">二.POJO,class,JavaBean关系</a></li>
+<li><a href="#san-jing-tai-bian-liang-yu-dui-xiang-bian-liang">三.静态变量与对象变量</a></li>
+<li><a href="#si-yin-shen">四.引申:</a><ul>
+<li><a href="#4-1-nei-cun-de-fen-qu">4.1 内存的分区:</a></li>
+<li><a href="#4-2-gong-you-yu-si-you-de-li-jie">4.2 公有与私有的理解</a></li>
+</ul>
+</li>
+<li><a href="#wu-suppresswarnings">五.@SuppressWarnings</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
 <hr>
-<h2 id="一-java实例化对象加载顺序"><a href="#一-java实例化对象加载顺序" class="headerlink" title="一.java实例化对象加载顺序"></a>一.java实例化对象加载顺序</h2><p>实例化某一个类的对象的时，块和构造器的相对运行顺序:<br>　　(1)配置文件–&gt;<br>　　(2)父类静态块(含有静态成员的变量或者方法)–&gt;<br>　　(3)子类静态块–&gt;<br>　　(4)父类普通块–&gt;<br>　　(5)父类构造器–&gt;<br>　　(6)子类普通块(普通变量定义/声明)–&gt;<br>　　(7)子类构造器(优先调用父类的构造方法)–&gt;<br>　　(8)@autowired(这个时候是生成普通变量所属类的bean对象,给注解对应的普通变量进行赋值,帮助子类构造器完成实例化对象)–&gt;<br>　　(9)普通方法(因为生成了类的对象–使用构造方法).</p>
-<h2 id="二-POJO-class-JavaBean关系"><a href="#二-POJO-class-JavaBean关系" class="headerlink" title="二.POJO,class,JavaBean关系"></a>二.POJO,class,JavaBean关系</h2><p>1.POJO:不包含业务逻辑的单纯用来存储数据的java类;<br>2.javabean/bean:遵循以下约定的java类:<br>　　(1)要有无参构造方法,可以不需要有参构造方法(对属性进行实例化赋值);<br>　　(2)属性获取设置只可以使用setter,getter方法实现;<br>　　(3)可序列化(实现java.io.Serializable接口)<br>　　(4)具体的;<br>3.class:单纯的表示一个类,可以是抽象的,具体的;是无约束条件的Bean<br>4.范围:POJO&lt;javaBean&lt;class</p>
-<h2 id="三-静态变量与对象变量"><a href="#三-静态变量与对象变量" class="headerlink" title="三.静态变量与对象变量"></a>三.静态变量与对象变量</h2><table>
+<h2><span id="yi-java-shi-li-hua-dui-xiang-jia-zai-shun-xu">一.java实例化对象加载顺序</span></h2><p>实例化某一个类的对象的时，块和构造器的相对运行顺序:<br>　　(1)配置文件–&gt;<br>　　(2)父类静态块(含有静态成员的变量或者方法)–&gt;<br>　　(3)子类静态块–&gt;<br>　　(4)父类普通块–&gt;<br>　　(5)父类构造器–&gt;<br>　　(6)子类普通块(普通变量定义/声明)–&gt;<br>　　(7)子类构造器(优先调用父类的构造方法)–&gt;<br>　　(8)@autowired(这个时候是生成普通变量所属类的bean对象,给注解对应的普通变量进行赋值,帮助子类构造器完成实例化对象)–&gt;<br>　　(9)普通方法(因为生成了类的对象–使用构造方法).</p>
+<h2><span id="er-pojo-class-javabean-guan-xi">二.POJO,class,JavaBean关系</span></h2><p>1.POJO:不包含业务逻辑的单纯用来存储数据的java类;<br>2.javabean/bean:遵循以下约定的java类:<br>　　(1)要有无参构造方法,可以不需要有参构造方法(对属性进行实例化赋值);<br>　　(2)属性获取设置只可以使用setter,getter方法实现;<br>　　(3)可序列化(实现java.io.Serializable接口)<br>　　(4)具体的;<br>3.class:单纯的表示一个类,可以是抽象的,具体的;是无约束条件的Bean<br>4.范围:POJO&lt;javaBean&lt;class</p>
+<h2><span id="san-jing-tai-bian-liang-yu-dui-xiang-bian-liang">三.静态变量与对象变量</span></h2><table>
 <thead>
 <tr>
 <th></th>
@@ -309,9 +324,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="四-引申"><a href="#四-引申" class="headerlink" title="四.引申:"></a>四.引申:</h2><h3 id="4-1-内存的分区"><a href="#4-1-内存的分区" class="headerlink" title="4.1 内存的分区:"></a>4.1 内存的分区:</h3><p> 　　(1)栈区:<strong>函数的参数与局部变量值</strong>,由编译器分配与释放(对应的方法结束后,对其进行回收);<br> 　　(2)堆区:存放的是<strong>实例变量</strong>之类的值,可以由程序员分配(自己设定何种变量),待程序结束之后,程序员手动释放或者系统定时自动回收;<br> 　　(3)全局区/静态区:未初始化,全局变量与静态变量是相邻的,初始化后放在一块;由程序员分配(自定义).<br> 　　(4)常量区:存放<strong>字符串常量</strong>;<br> 　　(5)代码区:存放<strong>函数体</strong>;<br>说明:(1)到(5)生命周期越来越长.</p>
-<h3 id="4-2-公有与私有的理解"><a href="#4-2-公有与私有的理解" class="headerlink" title="4.2 公有与私有的理解"></a>4.2 公有与私有的理解</h3><p>其实私有与公有的定义可以这样理解,以属性值的公有与私有说明:<br>  私有:获取的属性值,因对象的不同而不同;<br>  公有:获取的属性值,所以对象都是一样的﻿</p>
-<h2 id="五-SuppressWarnings"><a href="#五-SuppressWarnings" class="headerlink" title="五.@SuppressWarnings"></a>五.@SuppressWarnings</h2><p>@SuppressWarnings(“resource”)–用来压制资源泄露警告的。比如使用io类，最后没有关闭<br>@SuppressWarnings(“unused”)–在使用IDE如eclipse的时候，当定义了一个变量如int a=0;但是你后面根本就没有使用到这个变量，这一行的前面会有一个黄色的警告标志，将鼠标移动到上面会提示“这个变量从未被使用”，用上面的标注后就没有这个提示了<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">all</span><span class="comment">----抑制所有警告</span></span><br><span class="line">boxing<span class="comment">----抑制装箱、拆箱操作时候的警告</span></span><br><span class="line">cast<span class="comment">----抑制映射相关的警告</span></span><br><span class="line">dep-ann<span class="comment">----抑制启用注释的警告</span></span><br><span class="line">deprecation<span class="comment">----抑制过期方法的警告</span></span><br><span class="line">fallthrough<span class="comment">----抑制在switch中缺失breaks的警告</span></span><br><span class="line">finally<span class="comment">----抑制finally模块没有返回的警告</span></span><br><span class="line">hiding<span class="comment">----</span></span><br><span class="line">incomplete-switch<span class="comment">----忽略没有完整的switch语句</span></span><br><span class="line">nls<span class="comment">----忽略非nls格式的字符</span></span><br><span class="line"><span class="keyword">null</span><span class="comment">----忽略对null的操作</span></span><br><span class="line">rawtypes<span class="comment">----使用generics时忽略没有指定相应的类型</span></span><br><span class="line">restriction<span class="comment">----</span></span><br><span class="line">serial<span class="comment">----忽略在serializable类中没有声明serialVersionUID变量</span></span><br><span class="line">static-<span class="keyword">access</span><span class="comment">----抑制不正确的静态访问方式警告</span></span><br><span class="line">synthetic-<span class="keyword">access</span><span class="comment">----抑制子类没有按最优的方法访问内部类的警告</span></span><br><span class="line">unchecked<span class="comment">----抑制没有进行类型检查操作的警告</span></span><br><span class="line">unqualified-field-acces<span class="comment">----抑制没有权限访问的域的警告</span></span><br><span class="line">unused<span class="comment">----抑制没被使用过的代码额警告</span></span><br></pre></td></tr></table></figure></p>
+<h2><span id="si-yin-shen">四.引申:</span></h2><h3><span id="4-1-nei-cun-de-fen-qu">4.1 内存的分区:</span></h3><p> 　　(1)栈区:<strong>函数的参数与局部变量值</strong>,由编译器分配与释放(对应的方法结束后,对其进行回收);<br> 　　(2)堆区:存放的是<strong>实例变量</strong>之类的值,可以由程序员分配(自己设定何种变量),待程序结束之后,程序员手动释放或者系统定时自动回收;<br> 　　(3)全局区/静态区:未初始化,全局变量与静态变量是相邻的,初始化后放在一块;由程序员分配(自定义).<br> 　　(4)常量区:存放<strong>字符串常量</strong>;<br> 　　(5)代码区:存放<strong>函数体</strong>;<br>说明:(1)到(5)生命周期越来越长.</p>
+<h3><span id="4-2-gong-you-yu-si-you-de-li-jie">4.2 公有与私有的理解</span></h3><p>其实私有与公有的定义可以这样理解,以属性值的公有与私有说明:<br>  私有:获取的属性值,因对象的不同而不同;<br>  公有:获取的属性值,所以对象都是一样的﻿</p>
+<h2><span id="wu-suppresswarnings">五.@SuppressWarnings</span></h2><p>@SuppressWarnings(“resource”)–用来压制资源泄露警告的。比如使用io类，最后没有关闭<br>@SuppressWarnings(“unused”)–在使用IDE如eclipse的时候，当定义了一个变量如int a=0;但是你后面根本就没有使用到这个变量，这一行的前面会有一个黄色的警告标志，将鼠标移动到上面会提示“这个变量从未被使用”，用上面的标注后就没有这个提示了<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">all</span><span class="comment">----抑制所有警告</span></span><br><span class="line">boxing<span class="comment">----抑制装箱、拆箱操作时候的警告</span></span><br><span class="line">cast<span class="comment">----抑制映射相关的警告</span></span><br><span class="line">dep-ann<span class="comment">----抑制启用注释的警告</span></span><br><span class="line">deprecation<span class="comment">----抑制过期方法的警告</span></span><br><span class="line">fallthrough<span class="comment">----抑制在switch中缺失breaks的警告</span></span><br><span class="line">finally<span class="comment">----抑制finally模块没有返回的警告</span></span><br><span class="line">hiding<span class="comment">----</span></span><br><span class="line">incomplete-switch<span class="comment">----忽略没有完整的switch语句</span></span><br><span class="line">nls<span class="comment">----忽略非nls格式的字符</span></span><br><span class="line"><span class="keyword">null</span><span class="comment">----忽略对null的操作</span></span><br><span class="line">rawtypes<span class="comment">----使用generics时忽略没有指定相应的类型</span></span><br><span class="line">restriction<span class="comment">----</span></span><br><span class="line">serial<span class="comment">----忽略在serializable类中没有声明serialVersionUID变量</span></span><br><span class="line">static-<span class="keyword">access</span><span class="comment">----抑制不正确的静态访问方式警告</span></span><br><span class="line">synthetic-<span class="keyword">access</span><span class="comment">----抑制子类没有按最优的方法访问内部类的警告</span></span><br><span class="line">unchecked<span class="comment">----抑制没有进行类型检查操作的警告</span></span><br><span class="line">unqualified-field-acces<span class="comment">----抑制没有权限访问的域的警告</span></span><br><span class="line">unused<span class="comment">----抑制没被使用过的代码额警告</span></span><br></pre></td></tr></table></figure></p>
 <p>抑制单类就@SuppressWarings（“XXX”）<br>抑制多类就@SuppressWarings（value={“XXX”,“XXX”}）</p>
 
         
@@ -532,7 +547,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 

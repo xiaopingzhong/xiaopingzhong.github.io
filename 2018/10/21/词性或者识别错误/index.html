@@ -267,7 +267,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>　　词性纠正和识别错误是NLP处理当中是很平常的,一般主要的方法有两种:直接修改词所在词典的词性,还有一种就是使用优先级更高的词典进行覆盖,第二种带来的后遗症少,通常采用第二种.<a id="more"></a><br>操作步骤：<br>　　(1)词性分类不正确的–看该词所在的词典,之后进行修改,或者直接修改核心词典CoreNatureDictionary.txt<br>　　(2)不能识别的–增加自定义词典辅助识别,设置词性(在内置自定义词典中);<br>　　(3)修改词典后,删除缓存(主要是为了加快读取速度的,不能实现实时更新缓存)出现如下情况:<br>    <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/5.png" alt="等待情况1"><br>    <img src="http://pajvtp3wd.bkt.clouddn.com/blog/181018/3gb5D7Hh3J.png" alt="等待情况2"><br>注意事项：<br>　　词性最好转换成String类型来进行比对;<br>　　字符串最好以””方式初始化,否则在分词的时候会出现”Nullzxpp   今年 多大了”系统获取不到zzxp的词性</p>
+            <p>词性纠正和识别错误是NLP处理当中是很平常的,一般主要的方法有两种:直接修改词所在词典的词性,还有一种就是使用优先级更高的词典进行覆盖,第二种带来的后遗症少,通常采用第二种.<a id="more"></a><br>操作步骤：<br>　　(1)词性分类不正确的–看该词所在的词典,之后进行修改,或者直接修改核心词典CoreNatureDictionary.txt<br>　　(2)不能识别的–增加自定义词典辅助识别,设置词性(在内置自定义词典中);<br>　　(3)修改词典后,删除缓存(主要是为了加快读取速度的,不能实现实时更新缓存)出现如下情况:<br>    <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/5.png" alt="等待情况1"><br>    <img src="http://pajvtp3wd.bkt.clouddn.com/blog/181018/3gb5D7Hh3J.png" alt="等待情况2"><br>注意事项：<br>　　词性最好转换成String类型来进行比对;<br>　　字符串最好以””方式初始化,否则在分词的时候会出现”Nullzxpp   今年 多大了”系统获取不到zzxp的词性</p>
 
         
         </div>
@@ -487,7 +487,7 @@
         <footer id="footer">
      <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 不负韶华不负己<br>
+            &copy; 2019 不负韶华不负己<br>
         </div>
     </div>
 
