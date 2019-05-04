@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>版本比对之性能测试(四) | iVEGA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="The article has been encrypted, please enter your password to view.">
+<meta name="keywords" content="版本比对,jmeter,docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="版本比对之性能测试(四)">
+<meta property="og:url" content="http://yoursite.com/2019/05/05/版本比对之性能测试(四)/index.html">
+<meta property="og:site_name" content="iVEGA">
+<meta property="og:description" content="The article has been encrypted, please enter your password to view.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1G120144555-1.jpg">
+<meta property="og:updated_time" content="2019-05-04T17:13:40.080Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="版本比对之性能测试(四)">
+<meta name="twitter:description" content="The article has been encrypted, please enter your password to view.">
+<meta name="twitter:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1G120144555-1.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="../../../../css/images/favicon.png">
+    
+    <link rel="stylesheet" href="../../../../libs/song-ke-fan/styles.css">
+    <link rel="stylesheet" href="../../../../libs/shui-yun/styles.css">
+    <link rel="stylesheet" href="../../../../libs/deng-xian/styles.css">
+    <link rel="stylesheet" href="../../../../libs/Microsoft-JhengHei/styles.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="../../../../libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="../../../../libs/open-sans/styles.css">
+    <link rel="stylesheet" href="../../../../libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="../../../../css/style.css">
+
+    <script src="../../../../libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="../../../../libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="../../../../libs/justified-gallery/justifiedGallery.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+    
+    
+
+
+    
+
+
+</head>
+
+</html>
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="../../../../index.html" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">iVEGA</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="../../../../.">首页</a>
+                
+                    <a class="main-nav-link" href="../../../../archives">归档</a>
+                
+                    <a class="main-nav-link" href="../../../../categories">分类</a>
+                
+                    <a class="main-nav-link" href="../../../../tags">标签</a>
+                
+                    <a class="main-nav-link" href="../../../../about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="../../../../css/images/avatar.png">
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '../../../../content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="../../../../js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="../../../../.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="../../../../about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="../../../../css/images/avatar.png">
+            <h2 id="name">iVEGA</h2>
+            <h3 id="title">一个小确幸的地方</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>天津大学, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/xiaopingzhong/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                136
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                227
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/xiaopingzhong/" target="_blank" title="github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://weibo.com/u/5124024867" target="_blank" title="weibo">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://blog.csdn.net/fbsxghvudk" target="_blank" title="linux">
+                            <i class="fab fa-linux"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://mail.tju.edu.cn" target="_blank" title="angellist">
+                            <i class="fab fa-angellist"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1G120144555-1.jpg-版本比对之性能测试(四)" class="article article-type-https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1G120144555-1.jpg" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1G120144555-1.jpg" class="article-banner">
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            版本比对之性能测试(四)
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="">
+            <time datetime="2019-05-04T16:53:28.000Z" itemprop="datePublished">2019-05-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/实习/">实习</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="../../../../tags/docker/">docker</a>, <a class="tag-link" href="../../../../tags/jmeter/">jmeter</a>, <a class="tag-link" href="../../../../tags/版本比对/">版本比对</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div id="hbe-security">
+  <div class="hbe-input-container">
+  <input type="password" class="hbe-form-control" id="pass" placeholder="输入密码，查看文章">
+    <label for="pass">输入密码，查看文章</label>
+    <div class="bottom-line"></div>
+  </div>
+</div>
+<div id="decryptionError" style="display: none;">Incorrect Password!</div>
+<div id="noContentError" style="display: none;">No content to display!</div>
+<div id="encrypt-blog" style="display:none">
+U2FsdGVkX19AhraTQEGZGB1fJd4IXkekvzcxu211D0o9aTp3FuAl3bslUICN58p1BseHwjjBF2STFJxpeCdWNLW+MLi+mObLHV/tED8UWjtYmQ2fR17zCKi2AhESEgs+JQPovm+yrwS8tIxHO0Iq5QwnwuABmaH5vfGOzApuPhc7UZOVAOiCzizsrosG2oooZaUvG7gitF7onzjpup7LYIb9lxbF1lyEtzA4BwjAyl+vVut3UT1CMrUPXYDys+cCM06UDKZ/0txVuS5YfaewRt8p6PdNvzSOknAA5LQt4qmC+mdWSzIL7zhFrxTEyi+Qg71Wzto+6CtslEdX1fCf8DaV58M64OP91D8/OnlvdrkUiWuf0SjtGD6q8g1Am707AghHHzaSyUXkrBEaDVYTUCrXOyoNScUeyULYl7JNEZV/RM/QfDsEBEb675H62FvW9SceeDSTaiK5l8vZQiknGsux4rTZR/R7wF27csaFk27AmP6FW72Y9wzpnfmOhsJbZkMmlvfZ/xStWsWWIKpAlVQwLgCZZDga+YWOcbOUXERi6yak4we3Ld/eIOzEkBh7x4Uh/sdiBZ/jWVhW8VQTZDpzW2fGHaqS5SpjHCU3yMm8+Rwsyv76+7PlSaEThYHWkJGUw4ksq3Hu+VrdLFA5pzPjBo4HZPDJQJ+nR3zyYqj4Bqh9ver/MVjEhHXTczTeKpjpBmGy4kdUE3YLEs5FLLttQSRE1T7iqJVzoJviPB4xTkh6g6lft5l2Q0ZFeBAHKqm8YA80R4yaJmy870H8NaBUmc4FF/m4u9pudLExy4DnKfTrJ45Gk6o3G7kNiFyEIo7GYGCXcVCfJI9uE4Rrd4kN/CM2mIFlsVDduk+SI1hCIgBlnwqLcR04RlWhbSC6EEwOeZ9n2CMIWpTsZ4OvYoakeCilo6031eeW/Jym/0B22u37t3Wc00k4kQEjaEqs/O4PFjaFc52gQuVqGCwen/Vrcok0Qcj1kR33h3KRpawiWx/tkXACOxHIGp0JbIke2CrQq7UTWpXQeFBaumcETUhscHFMCrVKUJoBmcOlWXkltaPnVgotZKvxigBCp7NfWItatq7pBMN0AmzDUnzBlLl1p+2JObqeuibpGDwEEF+mYHOADFn4vIYj8uRx8AltJHXQ716UNoL2/OWQmBMAOcEBGUOL4GclPwzpziuIAlDtHGnj2U+uX7SggAV4fiWmqE0oonAr9u2A7Q5GBxqe3dkvjXzylIN4ar3sZRyY4iMtHDvWl6OLcWS8qtqNuu+PuPL2vOp3+S7fR8AuWmFHvVtv4VzYZxYGgVUidsM0Hl5sHJIYIOgihQDmLlsVdIUVIyCSPGkPn/nKy3zlYCfWpDADXhtwuoojbI7JcDcA3d/3iVNR+/T/DPzl3OL945rZyu0o094rIxrnlKysT0L/sxycdkAxhhxJ0d5QF6vFo0lC6caOYz18WPux7LPZtsftdMBMo3MUkhu/seeGE6nOcMcYEl3fUHbkUzX5KS9dcRQEvdrcnKwUGpXXUMM8NJbiWcXWMe6HPRF1wgN+d8drA3JZbBvNCdS8+Odvyb+ql4qvN1OKpNWLQSiwIQaN4kTf/Gz0ZpT1CIXK2HVnBg+WF/3j/Iac7tkNtNs1tqvb7rQ6CfgKNQrqV4xiw2ZSWVYMJnOY2fY8bXENVOKEPlmx4iUs3C5/FxigLbRA2AFBcpNl3wnjp5gGtrwERERbfv7cCIwJroZoDfdI3BZrMu3O26dHYA771tXDMfYGSvK6e9noMkCzOhPJLVDA+XlvL168A99zslSNh/dHOjCaGNTGmCG8q+TCqv3iavIHXXT1rV0lIfvHIEh/f7BRSgtZTf7yKgMZ+m7VqmYp3eLtncN03G0Qw+ml/18Y1plMjjDnAPeD1VkBiqHnJ2VV7rEbPYT9OcqrGhqQQs5e9VLbDD6RPAyoR0UEaxw20XvuiS+GXEMsua6XVEzCqkoEdKZ4v4upWKM+5Ki3WP9mbXhjQY1kNUewIwCRcLSwwniYpiZvPYUGP3Dj8/3Jrke48MsLOpQujAlzaFjijr3uLse0GRRwSLf7QbHyZGwYSJwB7kyAzujKGjj8fzZt7BWYcF1D0/U8Nat7SI0lhnTFoEYF4dlGlxyN4oPu1OCyLW2qxYu7mBwC+2thmXH70LKK1Nua36MSJFSJtBGkktjQdhv83huN7HQKvZeH+HxhIfeCoIuNISXodTwQ8tufpuyvSIXEGE2ijdLMy8YGJhcewPA9aA1cqiXf9oqztMTo61TKmlA0szswcZwmBSLiRrVnRXI0Ru5X9sjXhVMCwKvrluA7FlfJDwVcm6JyN5KD0xJHbjqatQHopaKbpQ32mSTSuF6UcySNPJMRn86fqVF+GRic4Vp9K+vjU2gV5JmGT//bpZGUAAF+0FHR5mjhP59GP91yXD7Sldt8uIkf2IStxykS6fJaHz+mvyEaX4h3QHxvPAJQTMDFkg8lPMhLc2hL8W5KyNsTVmDOw1NCPqFDuMZ0ZGW2Q1pw2ubkliK8UPQyp84Uw3CFBp2Dq0XxKzYRE0HzJfNPYELkxI8y3qOMvnuRHa0FyKxQkmbrrxevChNI9IUyc485rN+j7GtdE1/hZixzyeGjhqgdwI2UUrZyj6yOEev7mp3F86JQZny7SOTPWYH6e10C1cdLSZIIRCARRewRkMoEDwUxSlboTbsH/vrZ6K4ivWV02yOyA9U1lO3zqFLy8455lqsyHJMnGNECpYqpPzNESj2yMRP/xhMDBFbU4CR6eboquFUO43OhFN0ZF7qdNVmd2V4TERDahW6PLCozfx22Ryj6b0nNP/orD4T6xe6yGWPGJDeOxq+1F53fISjklpbHqRYoZfpJpknpZmpup6K4LEQTsU/R1X8+Mx5pd7NZXh5CnA+AcrXX/ydwqK8TXNxbI9zoJ2nNV69ckrBK0FjuTwvn8xE4kx1KL7zr5L6BG65rIGvlYIbQ/B78ML7vb+yGL2I7/PJexXWRMZxxmsbttedo87S2IcgxMDyK2iUxhTrExBTz6VhQo2ioRyEig83tmwSFklZiJxr2vOE2kWo0hZvGICzJCwOZR9k2A4ZwB6DBa9yYejyjouUS8HbwuNNWuWQcM79dytRjlPWcyDetDKXDQy0VdAFUB6w5VepfIpLEbGNM5b+7tuDCXuXrDv8656qc861XDeaA3A1e35j99mb9e3FXIK+MIeeLuKz8/v32Z7JjH+FlkI+T+SJuIRm8eK3FnOMKrQDcEEV7jKZhFlANTkzZXE/JZ1BEaheKInnHVISghu9LqFtOursEXUB7RWeKfEdXnkHjZYWk4LOxI02x+dsHpNcYGoSGP4t535mduApMvQgJLjD8rMzY5UX8CeDT9KrGndr9Ib5jKszDcurcON2RUaGRdgYaKJ8E5O3qfSpq9CjX2iIn3YJLrlPwiTJ/MR9dClA4mnxEVCe/KtJYEcNrn3UpeSseJjEULYU4u1jxlCmehMQR8OaZGF5ewSxIhoGsMy/6sCJo+rTZ4MdrW7IvCUOGiEbT6Pa0nwiMRw/m7ZQOigXNem0nTsqk6E0vVRO6l56jplokGr1kRbL+D9pbqsc1dRFCJL1DdQ8wEE2fFZocSleZgw+6vSHeODJVcy40+pxGjZ7WkECeD5sRqAtckp4f4+LgxGDgTMrJlauVakvtWV9eAYxpwh+0lXCir6c31TLlYJpmzikI60vBWt76+43V527rcDGtJPwfGyW++sMC3mXCJXgzVtvNSCLVg2XtrV+i21hc2liQaMjtCd+3ywFhC7tzhQ4lkPG+4Cxpy1D/vW8Ylp10+Iu/QVyTJL6ZdhCMZPRU3lS2g1ZEfKDXOka/HuU1uRC/5A5/CYXsvStwR44f2HiW7rjZsy7RAMPTxjt5596Bsf1vbgaOx9mNmHjVhiv0Jtoln6x5nLgHCsI3SEjE/IAVZ6NeMiL7j2o/kOeRxMOEXH/TtfOtbP6q96gGFKfoh62UE6lqSLSgpXiKryKwdug8AbwGvbmZ/i38BhnL1bOB/ZumuK921UsyttQN+PJOd3OGXB0RfHMLYULGkh3OPTI/ON72TNTayLl9wOZRbf6XVp81Yy+DrDYVjQdiDXPQ8E5cti4FM4fMvavovUiH8jEySHXBO2CHqs0RqmhIiM3xUrrZIIMSpGBjrv4EylCyNDxUX1eDRjwSVUoZ1+iNn1m7xg8XgjNN25UkEbgK+jYxVGybhbUPKLgTKbwrrOF0Mz7iWsi6Ezu1yoyc3tE4wha/V4oyMLMeO+pcoYu23UdeW3vf7yzxLLktO7LYgp+lju05jai10UeeqDFcoTLw0NvKxnIIB4kVN/rxCd1PFxsc5h2FNziF2aqbv+dgZy0civYhAu+dmO1aO6jivUA7yizpXVmQDTNyzvhXruM53/ZS5M3+4IdeGKw2K8MHvnqgB6UOzBPp+EkrJ3CN5O+s9SAXZXL5JW+3yR3EPAGoN+kPtJQ9HgKp0s4mxqmWNqhbNexF3P8nLNouKPJ6LSYxeflTYTADjYoWqlQTUQyctTMTPWTldJam7Wy2vM6jz+YBM7wrmLhQshrSoSqi12G23R/t78ULZuIwPV8m/6426YbBz3v73NdJFCAmpjb1OqQQ2rTVCjTxdeWHXfZNUul8qkTrglFHfIrUtFwQtMX+Jkomt0oObNA9ygdlPxnJnhogOQn6dufc7wVcbgYh8rFVcpSkbx/ujLMzPXIXG9vKPhu3QoUgbudqyOGeElsvaWy/ExZQdmDKRuiUgcZiv0OuK/GmkhxiQyAF7yf8yg29hy5+Rpbma+2oI1g6FUUXq1oSzyyIzeJYIg0Q1UZkuRE/aRJkTuQ6/A5BPQbHsjYs8S9xctia735AW6Gry5fBR5miwrpOM9b9hfx8Lfa5OCe+fxIW4vCI4g7PDyqdwPaTp8s9fj0IU11A9wTwQYuk7UAJDkwcUn4X68BZQWCflPjkJAy61TSix70wIIm45zFwbl86HU0o1MQNSars3Y/kaO6n1lj0KaEzFdsan52S10+nf4NtID3tQbeRIxyjOD3ixPe6jhiarduIVI1yMkTh4LIt6f1PlxJDESig4OS85EKQso4gEU63Y5ltuyc8JQuWfkjsnsmHbsZiTWa2p7s4RJHUwabp30u80YbIQQ6le9DLwQSvUGzGGzg294jZlS4Mz5ddFAfWAeMosmei3I1K1Haxz3C+VrkoM1RVXPIHkOIT6NTBRIJ1CZ+gFCMUJ8YdzAIQrGqEk1P+06EcTdhUvGyRCG7I9FlaJ4tZ+oQbeeIR/5PcoKfRPw/mHCbM5mdwZz5ljvPP88UNoqA+kxm7z0tVtbvgzazCok80rL+0L58zYzXUDKhY52FjqSASkqoreJBndtP6+o4qsJSsE3V6nu4Yvuhot2fAcoQ4ImhvlZQ1Rl5HA36Pauwp820AW84crnUrfjm5dvy8rRQXMwOJ0QeV5E/3IZPzuY6OhJGg1eKUBhRKManz/SG2F4SUj0BTCvLzCv+i6bPlPn2Gk7WPvN2QA2P+t+TAB/xNYcy1APzrqA1L86u7QJxLaxwCtfgKrleb4w1o187CHXlSGs5Hf/rzx/oYDeqDpg2GDOfn8yhcgV5pI2NaEaiMyViRN13ov69r+vjHxKF3nBEd7mH2Cjjrnetjl1jWf6AcXdsYNvgs2GbRG8Cy8PqvKPnPlJnQ2iN8uff+JfZeiYeMSezdulUl7F9EGuDL27VqxJ4Aug/M/Kkz2/LIZz2xos89G+LOlXt+HUBgkkdC+bOAmHemFlvJFPeOE8MoKQteqc3ZwLfX3SI/S8eQ+D90n+MgOKXmQs4Nmug2VKvQj1Brrg9DKahXhJlQqVuXZ87I77+zK1geuo62qSdMXBBhtL/FVTKxZ0mZtYJIZhjOEmoSnuQgoW3GbI9s46EmL4LINFGhMKWW8p+3TqnASiLDOEEIvUpfgS5ekXh3sZYj4HpSG3aZsn45VvymQ0IxU/gym6LPRozAxfx4dZIqtg/uQ2Dd0giVl0dXcZlvr3JsWcXlso3AUmir3Im8ifdWrKDU4LEXIG4VrNjzT2mkSuMCxcVfxXBwjENtRz1uDHcwPUB/5fHKH8u7LTE1F7yTmVf8UugIzHpc2lGkloVG4yo/MqzDhtuUMyC//ekrWYVUVJq4cX43i6k5/pI7TOPAfLmL3ZvTqPYM/Ra0xiBPw00HSOsuacV/nM4KXNmjSbBTFZiJx+NoB+s4MdGLtFbAjcZZEwNUtDDH2fAK2K8z12m965ZKqsHc1AsvWvdofTZtyBDAvqrlRl6eD/bzdfbKbvHlWTxCRUe3oL9BCGN22Jrf4Bq/sc9tCiPPJR7nFzQLQvvGfthpT7SZjyqDXCSs0K8zcOBkrVgnM4InOrYYZlqwldcQar8ditUyFcRXQIHMZfQti+aZKE0qmv3u7pH8y8kaEh+3P9m+tbKCoQtOd9i8pIPha3mXy9tchi0MCjkgWMwfz0VSeb3n00xV5ZTgd7X0S7KMU5rI57Pi1dNInmwtjN8xDQWyzOS1MjQr3CZf/bJuZwSxrtcs5llHT91Jr/uENe52yKGila6JvRZknaM2+sDU0AzzqR4CFf+RhqRQtWbo+Z4Z4zat/i3drPtADkcFPmdDZ1mk4hXGnZT4c5nb80pgtIPe1fdMRlESaEkrfqJneAeqI4cv+90IyRfD+YCb/fCJ9U3SG2dupxnzV/rFyqN9SayTLxXat7DpsmC0CefKbpEqWEaXf1ETbwpRpCiTj8PMVxwBEFnBUJ6MsIWpJesLZJR/QoqfZEqXek9S+N5e1fAlzV6har5Mal+v14AdRoFXreQOgk6UnwbZGSCgKnGXRbHLWEPaDDCUGG/FB3b9A6adtV4Ty9Ff67C/diHfrA50KnoY2sJW285hCUGj4EbpL0myACgo0PrPshhBUcP5eMnTibq37g0T2CQIiH4Pw2hq8SKFBdpJa4s5GGGvgrY4Cfc0+zN0gl/uUMvDvTVdY29EiU18/24ujL+6WdxIHPNHIhakqHXes04SgjqcPtfk5TXpvwD4wonmwRzk74MfcKuoXw5yd+GkuglqJRH7uHvaqFNzCY51eowrl5dxCtE5JGaAwKEm5UipOj1jawuk+F+C8/5KqnMQxDVfqQmTfYVxEv9xTJTa+b3zL7yC33gZECnzzq1J+Gs/lE1SRnCNWhGTdX0WQSrJznjkrU4WSzqssiUhJyAFGJ4vnFYJP091p/prpctV6HMU4t00alzSdGWeLMETGJwGeruyB1pevblT9CG04k0D/qK2Oyhh2Bc53QxiQSOtQ7SrDbJ6sCv7GzDdf4+YwVlr6zcWtIdIif7QCZdOlVXnOrRyTucG/aTlcgKwOBuMh7+so0hEipnk4TCtbgEUGmHDA0Z48g32s3HPnWOFSTpMnztiWaIhWsgZqEd5HzRS/pwfjKMQQaEr4AlDybgpdZJ1cTOEsaF+AJMaZVygU8yCAIOwO3mXwoAyiCve0NOobvcNZeUBziCWJ5h09QkkmxZuV3J/yd3AmJsHVRzf26QycMFuk8OYJmkEnjNv3hTUftGw2TWG8kIvX90lb5dYBAzr8KnAsfvJ8U3KbmrCb4zGM4sX034+7mcU6LMsc5LJJ+yvim4yBK7iRl3vxCZcNFKyAd3+jrxJJ8iJKvA+SuQDld9VExUKx3zfmgIrH3DN4i7obBCIsbHaWt4gkvQE2SAFwbKCFCiQwaO0RieMQfPyoYCfhmLqMmwfzk1lh0DizD/xcOcLEkKY7Ana7B70P9XYdw2jjA4ABiYworNxMCjTrpmycQZ8S+EMwhEjOPyrT3oB37ImX9hZlwKK2ZC5OpDCm7zPGaeg5rmp0mwVunPB/s8GMgdH5T6ZN4nD+G8E6sldSJAIUnaA2p+WhoofXfF2Y7zmrCHIXhWdhVz6a3MN+7FABI4UsJPDj48vfCqbIKiBVFYFcn798/7HcyynDPeSMxBgQDrCHXMMzRVuDdvetJtFX/sGc3cpo10gHDiYrMSAvw7FUM7Pf9A1/GcrmwRQ8qK4edREPJGzO7SsHpw0t5bCkCpouklHKse3G+DxBls0MUtx2tPu4ajh3KNaK97qR+uCaaD8AFuPVX86jARz9wXV6NyzmtfIqBDPAT8NP8PSAlZsGS69BlYBsiw5sgD8YqlBNO9rKwkz+kXTUYHxyTS/0327GGD43Dv2ysV+wqgT+j0Q7/DZFkwFmfZ+WRiYEXiFtQbsSUsVzWlG1dcr8AunsiViFtKwchGqH/qQ2YM7AO8x38ghX7etdzEbdZW8vH5MDvCkqH+KfjfkXXANKhGnkdsV1xLLfxURRKzn8YW15tSrtur8NtxrjonLbOuA2tNFRSrlPoali4eqwea3Fe1b5ynj3i3nBOh6AAv9GeEmWUJNDE3SdMtOzZ9duUunRxD3hW45LNJlkAjcU8kd532XQ9QQAE0hR5rBt+0cqGeXVUa+us8w6XkKqp56r2qxYAELHmtFwyg3t6gJI+uwjXmgBGZXATNeO5ZjHKlB0RpBAqsrNAkG7kgTG/KwjZyGoJQbAyXwJerhaWT9FmommuEkf/UxTChS5cLswrhmLc1Kf0d910nAV1DN2nWtMBpNiAxvi1QyUwvb1FyGrI+5OKXqYc1a51cK11IQO08oCWBYFHtNUnvbOS76muQ8xRiZFRt4CcJRbCGfnKuoV9emGoZIiRb3Us2wGo+Li573IcucGKT2M5lsRtDzlnwaCZu86nhJ2xrOE6J08dm7osXNEZy+dUOPzy1iR2f82S5IW10yI9A1aTgZDOoy6WVzC5/sVJ+FIbnuRLDle5GgnLyc7ygBMVfugsz8wbC4CJwfy+q61/XTZvBgcIgfOMxT0/9Yvid5j7IgH/5TtpSd3iMJB8ffB6jDWRB+NOscu3qCcOgwOuHVXAY4Pp5n90z2F43PPOHmjTrjgxLG4VO8gScNU9OyCrCqSCu+L6sIAq2Dl8pcwDkY8qejiTlfBYecK0hMZ+m6I9iISw0+4x4+DEK2jNm0mISaSaqIfb3BfV/dgxXexIShbP3qAc+j9X1wnlbvGGTAy50NjhNZXKsVAf7NUfYBetQjSboWLrThzV1gfGk52/7IINUcrbCAv3j9uXaKZdV/zqOyUZ9/YTv8vw1bazZciZfgqMURH20NAIYv+b6MVmYsr8qwK2K7AS7XlVuAB/bGYgdZOcmt0xrHBPpNyichjiAc7gjVdmzrNVzV2yV2EPInheTq6OFoVnjm5hwW7ZQUZUBWTd5marsklcBCo4BHTQN8jLSmn1pD+rev3Xl4Yvd8qNGbWCQQm8I3vi7xYxxw1psNVuPvtB0rO/XB66gVFeL8EOexmAxS1nn162FOOTmtgiXUw+W8e4sdjFgHh9xC0WWUjARGA7rMWzz4fNnJGLW1/Uxlln0ONiZVIrlSK2AncNh5ic9YCZizfuwwyGpQv/+hBeHGIxxyK8uWcUkyo68F0jH9sbN1wUZ7XHMO6lmpfb9wfVmbJQdadF3YVf2ziFdp8Jz1mCspz6bIrdqx10dDHXkPlVxBQ5Lr8YxHF8t4AdC13HUXSzd5MkObjis7X1koiPTSI4Bnu5TGbJBaJmrmR//FasNR7C5LR1CYsSmEFn3FPSOyTMvEe9LhIXdMS9isaP8t6+xueiIuG5PjNv2/GGNu02VnfIg7RJ2GbOT+UYzLE1t10tUQ7RW55JOYGrza8WtsWo2QxEDNWPTr3jiQnDXpj3cQs04yWk22AbzsnCbyUMQon2yz7fINZzSdieg/029BmozBvVkDjEGIWCusWWSK7LMo8z86jb9WlbUcvG67G1mCTRAFniglNeho+SINF5gF8NQWrzynlaSOWx5thSlHriEwiDiB6YcgRLXJ6C10iCnSXPrryrmj8WOG9B0r1pY/dNIyBhpGF+lyTpsXni/juwYJeaY3u66Ob9QkIqhk5Zv3odTy/dNYWJbs1ZR7+8yO8x11OQo9unbs9ex4MUe8B0o9co1A2iaSTk49knbY1a/VVRpRza+Wm/Lz0nurT1tW/z+mR0vmO75oGF75eAEiwLPp3F9+bhc/+avsR1jhQsPCdv8UmVjNClHj+rCbV7szGbsMkni9zifI9kMzgjamdx9UiFIgf9kIkrnXj/r06SifkYt51mUcvlojIJamJquMALwAytx3Q3199KI8RtuOXmIiJbPvQ8ZYcL79424YU3kmTTC7t6HjuOyKXbj7945oJX3mzmr8qBR4G/H+PC/SCeUAloRiv3DV61WVBxw67Fz8gCU6iufOKAbfwVkY8h63Tp0NZHCjuZjHAmbfx+oZL+SEo0QryWctlbIsYbrCJPWEBAhlHGFHvuzi3jJoFNd+Oxq3tpjRacSY0RNh4rhhmmRSxJLOIo9JzzZovI6CwGxKdLrESgW0Q++HxAKEyA0auYgjTMAy2JmLnL3HujtJNVJyNDZhfdeDdvinpcMZS7hg6q705i+cruESEQ12XwcutB1ugoSlivd0imsIkfBsQ8maYrAN98eI7WLHa2lppaA6KmnnBNHzxuArNZ9lF7k1uPMlasd0lelZEWYGlgS5sOKJS6W8JwXyEHM6kUOYOEyFtC5zyumv13MwYkk8ynV1TAN+ORm3FhMWcMGg5dM62PAUj8pgmgm8J8hYJaQS3ImncZ2J5mZmDqx7sFgMzzzURSgbq8avXWqu+zvhmY25OMrMb1zhCKWxlBv44mhEY0TlzBZ1h+Szixejc62NotRnmMlxnl6xEAKm3HBpwt7Vu8uaxG6pkb6vSEj/C1EWqlGUiIOU+oBmxWb8oq8as6zRnmXR87ON/OYQVjiToymktl46s20gSftHpKQnenxuoxSGWZ/Yh10IWnz91irat/oPK8IlJThQQqCH3Xw9BsK/Ks4sUZDIgZP+addsLVMOfQ8NZ5wKIxqUUu/eUssxCjTnLOyHrKdt1ga7ViVbQjiVSBnENaktIX1SKTJksyIjPKFV8L8r9aA/TGWaR0yGkcN9m6Lp9V/75Fdxme4E+Cw3CUlCOI4aAg2zOtGD9aoE0Sc1n5f4rhj+P9YXfq/pqsS+BSaW4Z9qlw5ZtMTOOkzZl5aFq3D3eHe9tfDO3iYFQeGd18Ztf5CpkYltFLaKnmYiHeAxFPPaF7YqVXnrlPZQpH+92VaYzCXWX2e3GZPagdxa6m8um2FuJMOC80oLN59bGODh7C0yDjvMchRfYzLSR5dcbS0bnBDYlAwedLL0V17bpJNNbaaMhTti7tBHi/T91qnmBY7x49bIGPf/IO8Wj0agMlvBEQB+0BTiaYdtx1lAPplh+VlD/6corqw3mh3gEEiW3EyPN1RefLhJy3N7xhClZuQSnFIyyTue5YOGBotclaIfmA9/qJI+YhOu6gWOM4YyfhyoVLG9z/V6+n9Z3LWWl//0pygbhV/GXrWFgyFeZpQuIDWN70hkSpRSn7Ags/O2mmLMz6IduVhdNkZTxVn8XtXRmXAGuIJJ3tXAj82wfKTUqjqxyavAJ2PgwNTM+HRmQk3Mjnz+drHHrjJVR0dt7fK3kUCETj6fm4doHoS1ITWbAjhtQuLDnK04feKuYDvZi6gRZtShMTeXR1kmHZxr9FNn/SkaJb36zfXqYoJorVEPZeaK7/e0qRNwszRZM5g091zfKDh05F5btezmw3UPErGKs3ZTspjapcq5NItxhWXLZVKSKHQqN5X4GDuCppcjwtkr+fbYWuG5uuYVNGTDJI4X2GVtPiUsIbg/5TN279yKbpZ+pxjwxxcDXubovSrIJnn1riRpgWUcee7OPbpQ9Y2kMsi4YvncQWQcbd+A13r0ZODczaICJs18/o5RwFcow1VV+Bv0KlwSB2JboXFR0PiC/haCmR8VIunhAl2br9GqpmAzcRaIDv7ZzbKxB4g5gEgKLR0l0sEw6yx2Il3fNgVzArjuc13J9TaqOY1Ski39qENDFzEyF0t8Wtmp1mLzyClvp9Jn4tV5v5DsqLl/AwOBl8Aft5ZQ0KytLuAkxZBP4h/vsnEWGsy+BHJl025IJTzOUZuoWenx8ZzVRLBrJhVr7gL003z06/AvrhXDuSH92Xj07FhKsLOU35U4cgWNCC0Onp+HnSnTICeHyJ62VnHPrG8w26EgsP2RHjVlSqymdIhlxH/nV0D/XYO++82JwBVGpC6GviLvrWSRAmgGtsXqtQIoyhfiNG8imA9hYwlJQ5S+IztJKZisci6EsTtQ77iiKud1NKPANM1Sq17py21Ry8yMECNyQyojqG+byLXCXplFAreNzAJC98apFob6c1iLjjIDERtbnRBuu7oU8jXLldZPXROF1VmXtBfuTrh6Y3r8fSUcpRclfKyK7/1CSKIjnnDqbtEbVjtHnLjF+QdI61uukIxMd4qBvG7PEmhBlJUujRke16YNpzi8qQr9U4rDDoH1CAJPy2LmjHsDFx77PM4zwuUZHZ+igqvlI4uqhyzM5/gx60ZidVbMMPESAg+IhJZIQ1gt2HTpoSUtNF2u6zoTBB3q5q4KvTLdWMhPdBl9TlsA8lcADHERVTNykO5B74DX2qJ1oWD8EcjphXDnYlXKBiq0emOzp4t8y6f4K7IAZ0GmHEyoARSJ2P7pY/QpYywhogHLRaxcpVNhSFApKRtZA8tMJtqxH7HhlHw17KYgowhs+nswtvj0Kr56T/wyBYGww02V5YLBVBdgppOJTxTkY+YDx2Hgb2PGQwA9M0ee+4+eDrsBQz54KICQG+A6Xwgc/AC5WUosgMAWWKucKchu0uFb0MieHug0SiBLpKV060rzNEyUQY9H/w1Jb+8YYBOMyMIAUBct32zGl46uVp70jtaAiv1hK9QkVTnQjqecYAgazsCAyXOvd/e7wtiHypydsbC+LrvrRtE4QSYAZUeK/f2J+PsBnZN1UL/CuPfErQT/yLzc2TKpx9kgtV2+kA9IKP9qvuJrOYNGHMYnhK6ZCJQo2NsQFDvccF8Nlr/4TUUWSkbsqQvkzs5BCiuwTdYfv0MXU4GEeHayGd0tFEeh1SjHMiepiKTg5UXpKF70KODjHQ04cM7nyWx8tN0Et9XDqhRtyhXoWMer6TA3nJnyOzOsuY8SJ4hbRAXn5l1eBYl7l4gfcLTBdZKbnSyXJzdcwjkI2bDpvaLDn1bKZjfv6PLZNjwV45wYTajLC2g/daHykRu6qz15AnzSfg5Zw3a4khy83B3SUvQ5N4BChxldtj69zX2Wpe3p9bf4GiUDMh+s+LD8h3fOrQfRQGIEbu6UVbASB846swBLFvw+2/8q9tJlzFMUMG/18G9l1tkbTgNyRwarFOLQ0wva0cYndx9tfzVOyNXPcg/ZjTKqsS92WGGHAznmmoL+uN+olJ382+ZXURjmsQWZgiZapBnz21VrzLDbSwwixPWquwn5Q70CyK0/t2bYUG42MqqDA2mQyxnvTtQ0jtlkZofLjXgQQA4KYvteZ6Bdlzv7C8FTFLVMAy7RSUmGFa63j7Sw/wfvenmydTU3fX50XUrR3ilYn2NpdXFceSEK24h+RKbPA6gSHbog31eXQv8mAtuJcKOXVwy6ZNLKXnAOYg6zKeZfY5Xd50YPolGRswcmIhlJ8EsTps5yOmgZ8n1L71ciduzYrNO0OE4jepmylnx9NOsHUcj5decooBcPcxV3oRAZIKYp98K1qHPEcHEMdUUgzQwzWnXYOIBR/+bGsILx8XFd+HdCLh8RabxLsVDhnyTYetjWR2ccagJ1ZfomgAmONqtan6+znA4QKfFIUkPNVFuN0H9WbEaYZhqnJqSG8iCgSdALaHnE+KkAIuZPIqaq/3sfPki+ZWk/9lAqMOI2Gvq1nOVDDuoycIrFi2k4n6p0W4184aSz+mHjVG0eqfe8rlHS+v7R0v1aHoeiLNwR6GBfAMVFwYR8lJqSVuX49A5hrju9wwb2fbLFQshT5Ur+J+FMHXk5QaYinV9gfAFxCPRxLGN5oNwbgQ92xvge5O66ANVLLgPGUgksVn3iGiF3wcZPGfN2Kz1w17rUOqOEcGeRtwFT9+HN7o4VlDXu87dcMOge8vaY+mnBsIhK8JPlBZ+HVm9uTOAIKCv1QxiTrROPyvLNtTRRcvzvNYk0ncjjhk8WXuV8glCcClzGprnVFW5qaF8N1jbAtFUUrU5gK5SGlVGV5sWLR8OhXvHEYZn3Ypn6boJexqSGmKUUED1w7OkrGlHdlXTZDAjgG7Tlg0Bdd2QbtRUDYFL0SrMRYsrFqwmRzQ4OR85mG0w91TNDRB6sG0keO6rUudcnZeuSRNxtg7b4WfR+E1rIJM/FxXDmLA7Fy5Zxa5WwCnc/LIbf2WghG2us/8ZxVJREMGWvjRhlFdkL4ycsq3jw/BUp+5A4+E84N1Xl/YshfxX0FNJpbY8v4aTYmCh2EEnEbiortgRs7fqFWOjSfr0GgZ1Dw7YoI24/D/FgtK4GItm2M8vXo6SF2YLe5q0AVc0bzi6RMdg1899b/yCjFJ11UPPvoWY/XCLhVFjYUuDIu5oTY9VaXYd2UVoHqCMUmqIzCPml/cHGnaU7nqJCDInOQt4kgmYDc6KkuIY4h9DVPC2C4HG8+tCXyYl6N7/FcTdaMGCfX8DURsqcWog3FY4aF7M+3mX6RqJILgnbw5yH8KcoxzEPjfIw9rfTL4bPSJYkOpWT0sQClbKvrqsmPbDNuZm/jXkstd7ojk8vPNbvaemyuQcxSa4rPa5YvnyDobFqk/2R8wQldvx9NfIQ2eXnjd532Akc+YzdDqTYFN02BQvyPG737NaCt9yDRz2l/gNJT3Sg/LzZrlCnl6RtlfIU3bq1LboufWMBRTKUVL2fsUUkb7jHPnubD6OvayeLLYo0nsg2DxAfmP3r2gRyjjlDT+zIghxHnNgcg01pq7GoqVK80/v8uA0m580L1EHCYkHggfOwPr9DMtZJBTp19SmZZOK5nAdxH2+c/y0Z2OymA9Ze9GEUd2/9zboMwTGGzXzGMT5rtdzJe628QoP+6GVd4wf3ZDkdTtpWa0Xh8LecNyPFGxhStmEmB0eOTCcDvvFpc9Hu3rTLDNcgfIECz7ptKMOTIuNgZj989/OIZWI/VxgcRRxN/i9i3SB1P9mXR98H1+gqACQ2X5lVIIsdBhpNCcoqFyfggdV9ZxKBPK7iPwC1dVlutuYQ5NF0pxaQx9V4uL2wVJxeoq4NHq+vwkAEV+Sm8KOysUwTHQBnqzzhe89V8Rs2yVDTjUuMRCu5VjlCxLmHTsNKxx4mpHDUxzNMZPFDbe2RntSjrapC/xZEbrAlJLy59FpHs/klGg2xI/293cnyqGfA+9gU0L4BY8H3+kfGigVH4nytHRoR0nuZWs/komgWbDteof3WvLvtkgpphKxFPT7EaYY6MwHvt+YmOs51V4NIXXzcWYxpTlJfZXLHzc1cfwmJ8+jG+3hxkTYmW3UbseOVpJJCCcapyG1jMmrNUHzJKQ/2mpDKVkBhDUmV/YDrPV2DshVt78B/1YqHNsOpCTHiqtPLpj1UpJZ/zkLp24aot9E3uKCl5ePls/ABqVOyxKorXK7AeQfZV8y11YB6Ry7cIidzrG4atIS9d+NYLcJgfHRCSVerwyHGGZRi2g6/FoSonD+v1zxtffosKzBliJDWv6hZHP/XJvqGI1Uv35VYX7sr78FdSyjcCFAxM5+/PttcHCyveNHJMMz19hSZLzk+dzufBNw7dX0NbZKiJ4MMnnxt8VDqDu5WErc8QTxwaQgf4VJ8+b7wsATUNHlMV4giJS6t45cJ+tfIfqEUeEB/n5B4M3myFurnHiG2fZblogVkljqeiSwnkwuluWQvkLJ+3vIyiWgsVJkYx+S2S6NJZwuTr273DpXFgb2jt5Tlavpk5FBfjhmJdTOf0wgMCGfy7lQ2mfHC/IyZtxs1cIB2W67laJ8ZSvOeXCGjcs50WG5SYvfzMDe+89FIeNJKBVPgjf5mxzKfsIwy8rnp9CfriBwtcnBsAFGCllnwq0mP0F6Rage0MfsUYX5XDeyOY4nSac2JDEJsgs79aG9rkzyRIjBLI2VrVwipBU1OGoU0dbwf3AD6K8+RYdIbTKEeARcV+Ra1WlRRFCg47Biu+0OqQqTM9xpHk37SqWrGmLBVj7WKfJUJ+6VHmGmNZ8PaYt5h9s1a8tr2KOOrnahYUhS3NhqkmvLhK4Zf+LORMZvgWobunCM5K3Isc3YXiTlS4KujVoPCgAAL4NcPvqKcm5wTe+nMehfdAalofBjPCi4SF5t0SICxz+tXAZnC6At8N9d+x0Y3nO+ppccr04KDeZrc4VvUysCLWvdBhAtQtzQkwZHTD66ODZ9fJGz86o+HjO1S+2ueznV/nkHegzea7ILUwg1SUUrYDUH+ICupL8XvhY2FMHBATpN/QgGO1gJoVPHsVwKoBIksjzUwC2VvWLaZXSVjygpEsFk2+0ndQ39cVEyWN60E83p0phG3idTGSqVkkv1kWFVkYbFWc1esblnmVqymxm9nzw6sKXmEFQHfKEgZp9zO2HlV0AzK2DWA2o/np204fX74yLuK8o6US68S9ZsLDZX+fZR31Q4D7nXRb3kcLZlZA489xLT3AMsXSH8bE5F5keL9MTpQgKkCT4veIl2T8Qc/IiJf6gT1seIlkB/9O82+vbiJO1MLfudSToS3cix9XXdK5R9AZMBIteV08oqmAChbxpRfrzgSkVGneksl3fxGFCeQTxsSN783PGTVjRrPSTX4OQvafOTJ2Dy9kUH3eV1gHuHbIWi8nKp6+ReU4B1RlVhHa7AatBObtFXBTo7MQf966dKc3+dX8OTKVRhapZAQrkDxRJUY7Zgmfz5j7l/NHM1/5az5+riFD+ZXVz/Chb6oyatWRr6ZLOYYmdGfpBROJD11SDeB0+WMnIOcY20ADzi4WWKmo9+Gs3SPtGUrZG35Io5VealC1jbwLCEwDkdt/4XwCU0MRA6cHgbond5EQ3eNWJ8dmlEOvEE4e8L2cSgxHuez5w4TXlLEkfnYZ3ZnIlyT8kai325qcKANX9lMFTgqZ6poJpA8O7wLM/tOZaNH4rbotHgoHnl1XZCkrefyU4aOvXNSIHcivXSujoEJc6ofQ+qnpIgZ83ThNijKOxmH+p4D/bQcNlNTu2SPqFb+c/wYCY1mlZkrk11Rqp4IM9WbqbMw+QnHfJAwLRPn6T5kIWU/CeyLZcyfgs4iRa3eiZZFdpbeYk6iW6FAuiNRCawXE2zHrzQGrdwpgFBwlP6fbqxfJxqdZWzL7ZhWvlhSwU2yQAKYLGn7HGGRQQ45FfdWxc5L5001YjFEGr8JI94lHRjkICATgAjrQAdeGqpADj0xNhKryoEM77z8yvscadRDQ7LJs6V6TlsVTYJ2ZUB72FhdbX1u7kXyAkfZKAlXnn4ukascXpO/la0N06QJGEjyf7f/zM24undjeuhiP24gbGw9S1eN2CJk1z+wiAiW2aPgb9TWW2wJGGZ/DjSFF7ttac2V0KUVVMOq0Xt2X3vjeUlgTriZkslENt4hWgv6LUZWTEglmzUESyeIOXrLCu9iZP3xsJV1ngmT+EnSI/RYc3w4Vpj1dA8MgZr6lBxJ+I8uWzagtGqjpBsyxZHIY7PvHFnc4cUs+MAtPnh1/k6vR1IGUVNxevK3Z3nGFj1iTmGoWQY+NkraASu1MuR1491Sut1zA18+iz0iqAQ4wTYYSaBa4//bw0B9d/gT8oFYabA61xbogBjF6m9iE/P7TRHW1fDMZTPIbcgoO56rtBwCEHKaqj+VwVFEa46Ruz7dr3GuB3ymEkrpv6BXMw2UDraDL5tNFowuL2IUYKne6OQpb30KugtxnNXOx1lSr7DRhmhcMKXhMLea0Kbak6hibwhe7I0kkgzTpROo9vb1gAW2jZE3JNMAlCi6GhKpqn3V1WBvRMowtpxdAneSRw0amgjtg6UNJBKg/sDWCnZveOSNk9KA0CxppwbLr697UT9ckF/VGg+dfmC9Qphwg4XKMV5i8Qp78aOfNZpGpbuGJoyIhhpw+XKtuHSo0qnC7RgJOxSeeGdl4RQ2fv1U85kYMWu4SIUmKycH/497FDSO/7+YE/7NXCKm2C+uEcEkwYt5nRkw8+MMjM4ODdMgc5muqZGNe+4eMawfFitCuKkU/2b46MTdQuJfdHpLdWoUuE4pLFSFjLK6O1768FmlDkf3l1rB9y+nSMNEkVXkK47ZLiOy3vu1vjpT4JcZZHnCTeEMfl7kggiXTYUbE3fVKLkA2j0280sOPZtw+UHbLStziqr9lL8IIEgkCsWADmt8lOtTCQrJAqT+JsZ4KT9uujN/oz0eoNoBW0bp5+1Dc7pnx7x0BfRzpNBaZhlRRsWGBmhk3vioVPxchh8lgDCnjsl0eQzzwJwOOFDfIY0+I2e5/IDiv5BxWhoqMjG7g3v9MyAAql9YKLjpvaX/kr5nkrtZI6VRI1Z/Fqsrp78dPXVgJJKoU3KRbKMW9rlPWUgViBWfrVGLG3rIAkllpORuTTXpggxXJe07h5+ijgzUFflHy8fDA7fUvUTCsXjkDV/jG27GbvO3935ES4oSspxi+bqrwgBzNLzg/zDUMTfxD+MiyqctuKeZLj/uCwSnZHXh7DUC46JOlGvps0ZPq64y5etNuzfIrm8FEtFn/U6/67E/mMXUcDkCOz7WA7qlt+IZQ8bSREviE7fI+wUebeRRkZwnkivM78hTwbWUhOb2v+2JvgC4/nSCdJHqUoZmXXoWzFsqcL43MNjnfDTHGEtmy7o5cJb6wLbqNJ9OidODUVf8UcDRRvN7Fft6Y66sr5ZBfDYetSxq+vnZZ/WyTEM3KUs5nxpqnV9WLY9PhmZOyw4m03f19cs+eVbHSLypqThAt9O/pMqXlnYubjj7/lEptrx+LnmBCznLyQ24aPYvCTlodn7HhD8OCmiKCV4rFzaiyLnoPJmroM3WlQC9vp/NfJumL+LgS5TqRnPIi1LX6Ov6EAql1ISC8UNav4J+tf5mprUgWaEEbHQHOFAt5UBHgQjuWSvJMoq4POO1Iijqhp1euSbJ3ZPGVUk1fHpketJYcvWfWXe9PZoYpVdKTx5nHEmc/cLCox1ZqQTb37gw1j89mkeic8ejRstnFCIJDz8qCJJNiOtLgeLVYwShv2FZnXxwNT8akXl7gon1M40UWRVT4bLXeKlQll4YiTJ9AgUtqK+O6Yx0IHV00J1X3jcHIiE1Wp5HAuYuB7zkOHxMx91/CWe1HD49tpzqgkfWMzJdPlar3pt5NkK2B1js6jmtHuc1nuSMXLXCFrlPcjHGkhoD31is+xHN/qUD5pOmTi4Zg0YhCCYOurg4kRP2ElNqsknAtcx+R1DIkq87jOoVKr4mQJXXnfpVULVdNkhx9KHkrw9EiCDHWCOZjpzYgdHt6T4YmXjkb70/qmwwjgDliKx/fS38biLUHsbdYMdFZky/zjja8/4bqtTVD5z/qiNViS0zEgYGt2rHJj+V1ZmUw9QuROwg4UZbe5Ges1+JWVWyB0G2uAGuuc4QzPanDJYJXJMYBJi2yohOMCQ+cP05fnmX3GW1nziLqOoeY5UwsA/DbcRsD+Kw/au+iH5mGxuKc5r3fTEYFotFc0tUNqsum+kK3sWChPThBFAc0trSnX0fChsZZBwGX/L70LSlQf/GF1qc5sKrLCDi4cmgLEd4+sWQSja3ezfab3ASoqQV+IA4pt7Cdoh7YhO0DFdC3PxP8mDyejLbiKMvIGBS3+HY9Yi9C4ae5guvb5kzVFVz/cpFZ2n3xsFFbB28GyzFGrAvDqfhmHCd2TYi441kyEc3x2Psyy/a7YL0RvZJSTcj+3iYbot3JkAE7PRfs5NokS1CBn5G7pmWS/HJ8ap0pxp/dK1k5kLQEG1rCayJaz274lJMPyPiftiNlnLI3tM3pA/Mb7hNkT/g8efdHwKQyx3la6XmHuYcF9pmvpNjBrk+/8yXdydRuegfeZd3mj3GhNMmtQLM/SVv68rYKutRMoKnTfV/ys7oBlBAo0trLFfc+SXzk7EfyAfWha8uiz8pbHgUOxukxEXJK8SwAmpt2P0RficAmv+RqkAat9Uc6muaQkMtH+SPhsocPLntuTEscXsdCyArp1/5rgE5fBbNFxMkF6uqJL2Nfn75FAjlrELTTpw+5rQhMladEarVqCkluXgtLIh2pSBXd+tRuuAlCzVIhJy8mEmecgBfqayVPRyg/UtuZIxklxXqFC1IHjDxaVQBhaBgWpF7hNqn1hgnJvNUfPuyBB4ECpB63d85nEG9LpNgc97ktSk3KkmJw6w/C8CBYg8CjjoY3UrYkEtdNnFsXLlFGRrWF0I8NjbKFqfCCCrHMzan3aEngF1MAcrjcc0ImpiHMhh0DXArY+vYInbNKV4XnnsspyN1pRizJAVhxwtLh7oDlJdiOrBEydiDqx+PigvRLCKHkCwAfHbJoC92AcEmU2IiqBtlA55oZO2+hTSsVHyx1wRrueeJvJdDujh6QmYN7G7B92D8wm/rW+x/GAKpah8lLnTyVhwmBlKPKT4W5rewkY4w9+7kJiOIOMGtB9sLRMo8w2yH29h73Jr7z5c3UdtwTnX7t7CkgCMXLLpyd0qSvMRuYpXpa+/xNtJOLc+j17jfhoL/8X76wJk/TK5dF657Xmh6UUJ+BFIS9sumkJns11x3/yWfpLOsiOq2KOl0Hbs2NpXcBFv3z/kxXj1Kkf0/hR3GajO4rWnl15oEV2ebBkiwcHvVFoThxohwVBxeVuftLZ4u4piDje958dIbYcnuFa73z3aCjTD7ssmnpEVvOEZvCJlpEap3enrbAQ+gnos79HFxfDU9k5GhdauaxphQmhInBzzBFqy97cquIY8GSgN1GfXNOuL7krr0bn/s1mcf/iEluOPkF5M8nZFfZ6jDKTcjgMzH4Z9FNQ1NX62D5Fbfi3nvwfyGNzd9bkqA96TKHYdRkNN9GAi4M9gcMpKvKCfxV7pGA7/oLjnC9gfyj72u/wIvA04oiHfXh+E0fQ9UinxhL27wrSfqUeBljWArqUhmaE+ynWgWONs/W2Xy9jAb0NiLOVcmi5viPQqowFyinJuYW9v8TFiGRE2yJ+0X5DL52jIeBJu3NrA9KXp3Wp2nhOPr8bCJg0iQIrUbF/Q6bGL4aik36xZhVafZAYFesYF+JvSHmgTzaBgf1+cQcGWbsCVvaN8N7f1dYoluEWZLxuASAIjNFDaIOz5joLNxMQpIhyfl/zmEisPN+vMh3dh9b763bFwpMNBNcCW6HoHEc1oZ0YsXWvLxueFJHqCMqFR6VD0c4OVDc49swSfej47B8JFwKo56Sd2Le901EVG/XELy0TohBFLYhxSgRQS+SS3g3Evk7oinU6hUw3jPcoenOJuZnWo3GREJJZ5ZxgOi1dv0xwRTiKULkbnG3NWLl+LhxDQQFEK3D9jv+VjjpD7rhOuJYaklNFaEbo2HCfNMqEA6RP6NZ+IsPfo9yuXSVGVtgiA1YYV5eQKEyczu2lb/s1WyxdphQaFN14FeeA1Vh4dVXqsALoXnuIrps7RKr54u+GUSFKGhYkb0b+JONu4wqQuT4hyR755W/fzBPfsGxrC9syxqFEfygSf9Fycq1RSGG+umcxvpOMWq6AwpY+Gx6rvvLvAeM7/naGXVd5Xh6sQggZ2Oi76FUFzkPPa63Q+qHtwUJWivcp+Xt+c2b7oe4ORPeI/uzXjcbK6NHf8XgBTSVKbkI7ISu2s8dKl3qQu5rmP/7R1HCT7NdT9IHoCn4m3DNwuHK2ymkr/pJXbw9fmmo+Giai8pD6sg+dWKsSQB18QXChD2tJ17AsgsmRN3LucGENU7y13Iun/EQuGffY5+0C5bE2aJQhzjfuRV0GWwbja6BwdRKOk/J0x9by17URX2HBdo+HMMRrATHPX/8FOK+NXzNT4CqyHpSOW2UOLf+fwfnWf1Do4N59YybkhNiiBa0ffAyQk9k68LAmnIdS4U2miFhsW4gS4a2puzDgrrajOsfxga9wPsEVyPu8eRy43Zb22TxAAGc1FC/ootXQkPz7qFlbDItz6bUnIBUju+eY9OGKh/B+CmscVdArpuDtyrrtQ8rZuxClsS/JZRe38WyHMCGCjaK8w+CoUt5s9Z3q2Ohu6HoNHKS6yCzvZRAna/6yg3VUz2uhu3YLoqsi30syHa6sh/iG+cPJLdJcsE4U+USfGlji673/soQ+QdqFw+QOS2lLfBGbsCNMMeCeXL+Bv2KIQGxNufjbr76eNLPBsFjdvSW6pZC4ZA8pisLd9J741kUJBUNUltw5ugyqVUTHFa5ohvypxu0MuGZZWop8eIGRyhb7iIiz6q43KyPGv49huTCjCviw1C3YQaPFA2DzN/S7bkKZ90Ajf/CkmGDGjtiIhPM6YtwkGORZMr/IvJ6yJnq9J5jAm+45ZAFlNeJkLOJHfLPAQdz8rwbAeTTwArT6wJonuQ2WRcB/Yvc0jCiCjYmHLXJxmXhXVEcrlJxUmP1nhK1MO/WKssYCx0u8Et5M1/dvK/IZ25b6pkFRzsf1wDQ2nyEDoht+oYDVyYVYahkjdXA36+XgH0rLTq/OwfqeRUnCJagHGZPYs6cZXg+N/T038TXWU0ysowkILK0ftDmYCEnY3vEcy04BuMwyMJpHy9dFlW4BhPk9qMWBxRMWEBTLh2hhLB637ldDBhSZD3V5sK4XZDNa/KNyNzTV9iXCU1tFsRJ7FizVLMBy1bKixbl3hDvvXgYg5RaHMCbic+6X2obWwegEnEn8+4bx+IdXNvSgWA7bZRDkAp4cuWVWT8CpvoatnkFaPWEL7l2awweVU1Nb5NuijsUfravNr5pgWm4LUNuROJf/3T3AR/KoPMj5lbHUTeqtbM2cOXVFNVKzvmCnqTnwwEk8H/tkkM66VgDY0nR9CZnYWF89UC/HS+hVsPmp5YzvS+KwmX+qK14iPaIGDzdEWUTZWPJnD9BEMa1mbzAvIvW9nUdai/a+xla22aDFCSzX1LVh5ULIXYz6ObzSseCI5dIlDvfg2P5tAcUkBbCH1pxX3bYlnGWfyRY6JBpxD06tK7RIAds0P8n0Y2BGWDGm0sg4YzDod+H+JYaB6pG5CRdxu2KXAecyD7mb6M1iQaB/XHZ52/BpO54WhqNnsfQBE/k+PqNeeAgdVEYjUo0SR6ljnXQZhCovvQrHakGsMJSM0Sm1RQW0zSBMyXP4zKWTR6fCoNdhIZT/zpqqmM
+</div>
+<script src="/lib/crypto-js.js"></script><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="../../03/版本比对之服务启动(三)/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">版本比对之服务启动(三)</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1G120144555-1.jpg)" alt="版本比对之性能测试(四)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/实习/">实习</a></p>
+                            <p class="item-title"><a href="" class="title">版本比对之性能测试(四)</a></p>
+                            <p class="item-date"><time datetime="2019-05-04T16:53:28.000Z" itemprop="datePublished">2019-05-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../03/版本比对之服务启动(三)/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1G120144555-4.jpg)" alt="版本比对之服务启动(三)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/实习/">实习</a></p>
+                            <p class="item-title"><a href="../../03/版本比对之服务启动(三)/" class="title">版本比对之服务启动(三)</a></p>
+                            <p class="item-date"><time datetime="2019-05-03T15:32:55.000Z" itemprop="datePublished">2019-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../02/版本比对(二)/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/141026115Q1-1.jpg)" alt="版本比对之映射本体(二)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/实习/">实习</a></p>
+                            <p class="item-title"><a href="../../02/版本比对(二)/" class="title">版本比对之映射本体(二)</a></p>
+                            <p class="item-date"><time datetime="2019-05-02T14:14:35.000Z" itemprop="datePublished">2019-05-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../02/版本比对(一)/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/1Z124123007-1.jpg)" alt="版本比对之功能实现(一)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/实习/">实习</a></p>
+                            <p class="item-title"><a href="../../02/版本比对(一)/" class="title">版本比对之功能实现(一)</a></p>
+                            <p class="item-date"><time datetime="2019-05-02T10:26:16.000Z" itemprop="datePublished">2019-05-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="../../../03/28/tf创建变量及其范围/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/79-picture.jpg)" alt="tf创建变量及其范围" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/tensorflow/">tensorflow</a></p>
+                            <p class="item-title"><a href="../../../03/28/tf创建变量及其范围/" class="title">tf创建变量及其范围</a></p>
+                            <p class="item-date"><time datetime="2019-03-28T15:42:14.000Z" itemprop="datePublished">2019-03-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/">IDEA</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/IDEA/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Linux/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/">Maven</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Maven/Pom/">Pom</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/">NLP</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/tensorflow/">tensorflow</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/交互/">交互</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/名词辨析/">名词辨析</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/实习/">实习</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/实体识别/">实体识别</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/训练营/">训练营</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/词性标注/">词性标注</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP/语义解析/">语义解析</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/NLP，实习/">NLP，实习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/">Neo4j</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/Neo4j/Spring-boot/">Spring-boot</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/">UML</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/UML/时序图/">时序图</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/">janusgraph</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/环境搭建/">环境搭建</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/janusgraph/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/">java</a><span class="category-list-count">30</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/I-O流/">I/O流</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/乱码/">乱码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/异常处理/">异常处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/数据类型/">数据类型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/泛型/">泛型</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/注解/">注解</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/知识点/">知识点</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/编码/">编码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/java/集合/">集合</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">linux</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/知识点/">知识点</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/">maven</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/pom/">pom</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/maven/配置/">配置</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/">navicat</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/navicat/导出/">导出</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/">python</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/python/基础知识/">基础知识</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/">windows</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/windows/环境变量/">环境变量</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/博客建站/">博客建站</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/历史/重庆/">重庆</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/">命令行</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/命令行/mysql/">mysql</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/">工具</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/IDEA/">IDEA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/工具/小问题/">小问题</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/">快捷方式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/快捷方式/Navicat/">Navicat</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/">每周报告</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/每周报告/2018/">2018</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/">深度学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/LSTM/">LSTM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/优化/">优化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/基础/">基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/深度学习/概念/">概念</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/">知识图谱</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/异常问题/">异常问题</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/知识点/">知识点</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/综述/">综述</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/软件安装/">软件安装</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/">项目实战</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/知识图谱/项目实战/数据建模/">数据建模</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/行业/">行业</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/行业/思考/">思考</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/">计算机网络</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/计算机网络/知识点/">知识点</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/">随笔</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/开发心得/">开发心得</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/认识/">认识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/随笔/读后感/">读后感</a><span class="category-list-count">2</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/05/">五月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/03/">三月 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/02/">二月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/01/">一月 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ANSI/">ANSI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AUC/">AUC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AllenNLP/">AllenNLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/AsList/">AsList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/BERT/">BERT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/BN/">BN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Bean/">Bean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/CBOW/">CBOW</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/CNN/">CNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Colab/">Colab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Collection/">Collection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/CrudRepository/">CrudRepository</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/D2RQ/">D2RQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Documented/">Documented</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/EMLO/">EMLO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/EM算法/">EM算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/F1/">F1</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/FastText/">FastText</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/GLOVE/">GLOVE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Guava/">Guava</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/HANLP/">HANLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Hessian矩阵/">Hessian矩阵</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/I-O流体系结构/">I/O流体系结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IDEA/">IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/IOC/">IOC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Inherited/">Inherited</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/InputStreamReader/">InputStreamReader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/JPA/">JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Jacobian/">Jacobian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Jasen不等式/">Jasen不等式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/LN/">LN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/LSTM/">LSTM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Map/">Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelAndView/">ModelAndView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ModelMap/">ModelMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/N-GRAM/">N-GRAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/N-Gram/">N-Gram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/N-gram-embeding/">N-gram-embeding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Navicat/">Navicat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Neo4j/">Neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Numpy/">Numpy</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/OGM/">OGM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ORM/">ORM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/PCA/">PCA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/POJO/">POJO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/PPMI/">PPMI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/PR/">PR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pom/">Pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Pytorch/">Pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/RNN/">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ROC/">ROC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SDN/">SDN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SGD/">SGD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/SVD/">SVD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Skip-Gram/">Skip-Gram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Spring-boot/">Spring-boot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Tensor/">Tensor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Torch/">Torch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Transformer/">Transformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/UML/">UML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/attention/">attention</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/doc2vec/">doc2vec</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/fuseki/">fuseki</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/glove/">glove</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/icarus主题/">icarus主题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph/">janusgraph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/janusgraph-hbase-hadoop/">janusgraph,hbase,hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/jar包/">jar包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/jmeter/">jmeter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/latex/">latex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/mathjax/">mathjax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/model/">model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat/">navicat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/navicat异常问题/">navicat异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/neo4j/">neo4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/parseInt/">parseInt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/pom/">pom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/readLine/">readLine()</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/restful/">restful</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/seq2seq/">seq2seq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/softmax/">softmax</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/sourceTree/">sourceTree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/">spark</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spring-boot/">spring-boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/tensorflow/">tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/thymeleaf/">thymeleaf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/torch函数/">torch函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/viterbi，约束搜索，贪心搜索/">viterbi，约束搜索，贪心搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/windows/">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word-embeding/">word embeding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/word2vec/">word2vec</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/xshell/">xshell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/三层架构/">三层架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/中值定理/">中值定理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/主成分/">主成分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/云服务器/">云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/交叉熵/">交叉熵</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/人工智能/">人工智能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/人文/">人文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/全连接层/">全连接层</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键字/">关键字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键词/">关键词</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/关键词抽取/">关键词抽取</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分类/">分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/分词/">分词</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/初始化/">初始化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/删除/">删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/协方差/">协方差</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/参数维度/">参数维度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/反向传播/">反向传播</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/反射/">反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/变量/">变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/变量创建/">变量创建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/句子向量/">句子向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/可视化界面/">可视化界面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/后向传播/">后向传播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/向量范数/">向量范数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/命令行/">命令行</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/回退/">回退</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/域名/">域名</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/奇异值分解/">奇异值分解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/套接字/">套接字</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/学习率/">学习率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/实例化/">实例化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/容器/">容器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象数组/">对象数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/对象类型/">对象类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/导出/">导出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/导数/">导数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/小问题/">小问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/层次化softmax/">层次化softmax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工作流程/">工作流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/工具/">工具</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/差值/">差值</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/异常问题/">异常问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/归一化/">归一化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/微分/">微分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/微调/">微调</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/快捷键/">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/抽象类/">抽象类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/拉普拉斯/">拉普拉斯</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/指针网络/">指针网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/损失函数/">损失函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据建模/">数据建模</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/数据长度/">数据长度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/时序图/">时序图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/服务启动/">服务启动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/本体映射/">本体映射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/标准化/">标准化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/栈内存/">栈内存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/梯度/">梯度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/梯度下降/">梯度下降</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/梯度平均/">梯度平均</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/模型构建/">模型构建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/模型病态/">模型病态</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/正则化/">正则化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/残差网络/">残差网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/求职/">求职</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/泛型/">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解/">注解</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/注解注入/">注解注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/泰勒/">泰勒</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/激励函数/">激励函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/版本比对/">版本比对</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/特征值分解/">特征值分解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/特征提取/">特征提取</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/生成模型/">生成模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/目录结构/">目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/相似度/">相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识图谱/">知识图谱</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/知识点/">知识点</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/矩阵/">矩阵</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/矩阵范数/">矩阵范数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/神经网络/">神经网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/综述/">综述</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/编码/">编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/编码器/">编码器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/职业规划/">职业规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/自定义词典/">自定义词典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/艺术/">艺术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/认识/">认识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/设计思想/">设计思想</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词向量/">词向量</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性标注/">词性标注</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词性纠正/">词性纠正</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/词汇表/">词汇表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义网/">语义网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/语义解析/">语义解析</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/误差δ/">误差δ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/读后感/">读后感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/超参数/">超参数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/返回问题/">返回问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/迭代器输出/">迭代器输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/逐层预训练/">逐层预训练</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/通配符/">通配符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置/">配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/配置注入/">配置注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句分类/">问句分类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句向量/">问句向量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问句还原/">问句还原</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/问题转换/">问题转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/降维/">降维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合关系/">集合关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合工具类/">集合工具类</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合形式/">集合形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合类型/">集合类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合转换/">集合转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/集合输出/">集合输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/非法字符/">非法字符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/高斯模型/">高斯模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/高斯混合模型/">高斯混合模型</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="../../../../tags/ANSI/" style="font-size: 10px;">ANSI</a> <a href="../../../../tags/AOP/" style="font-size: 10px;">AOP</a> <a href="../../../../tags/AUC/" style="font-size: 10px;">AUC</a> <a href="../../../../tags/AllenNLP/" style="font-size: 10px;">AllenNLP</a> <a href="../../../../tags/AsList/" style="font-size: 10px;">AsList</a> <a href="../../../../tags/BERT/" style="font-size: 15px;">BERT</a> <a href="../../../../tags/BN/" style="font-size: 10px;">BN</a> <a href="../../../../tags/Bean/" style="font-size: 10px;">Bean</a> <a href="../../../../tags/CBOW/" style="font-size: 10px;">CBOW</a> <a href="../../../../tags/CNN/" style="font-size: 10px;">CNN</a> <a href="../../../../tags/Colab/" style="font-size: 10px;">Colab</a> <a href="../../../../tags/Collection/" style="font-size: 10px;">Collection</a> <a href="../../../../tags/CrudRepository/" style="font-size: 10px;">CrudRepository</a> <a href="../../../../tags/D2RQ/" style="font-size: 10px;">D2RQ</a> <a href="../../../../tags/Docker/" style="font-size: 10px;">Docker</a> <a href="../../../../tags/Documented/" style="font-size: 10px;">Documented</a> <a href="../../../../tags/EMLO/" style="font-size: 10px;">EMLO</a> <a href="../../../../tags/EM算法/" style="font-size: 10px;">EM算法</a> <a href="../../../../tags/F1/" style="font-size: 10px;">F1</a> <a href="../../../../tags/FastText/" style="font-size: 10px;">FastText</a> <a href="../../../../tags/GLOVE/" style="font-size: 10px;">GLOVE</a> <a href="../../../../tags/Guava/" style="font-size: 10px;">Guava</a> <a href="../../../../tags/HANLP/" style="font-size: 10px;">HANLP</a> <a href="../../../../tags/Hessian矩阵/" style="font-size: 10px;">Hessian矩阵</a> <a href="../../../../tags/I-O流体系结构/" style="font-size: 10px;">I/O流体系结构</a> <a href="../../../../tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="../../../../tags/IOC/" style="font-size: 10px;">IOC</a> <a href="../../../../tags/Inherited/" style="font-size: 10px;">Inherited</a> <a href="../../../../tags/InputStreamReader/" style="font-size: 10px;">InputStreamReader</a> <a href="../../../../tags/JPA/" style="font-size: 10px;">JPA</a> <a href="../../../../tags/Jacobian/" style="font-size: 10px;">Jacobian</a> <a href="../../../../tags/Jasen不等式/" style="font-size: 10px;">Jasen不等式</a> <a href="../../../../tags/LN/" style="font-size: 10px;">LN</a> <a href="../../../../tags/LSTM/" style="font-size: 10px;">LSTM</a> <a href="../../../../tags/MVC/" style="font-size: 10px;">MVC</a> <a href="../../../../tags/Map/" style="font-size: 10px;">Map</a> <a href="../../../../tags/Maven/" style="font-size: 10px;">Maven</a> <a href="../../../../tags/ModelAndView/" style="font-size: 10px;">ModelAndView</a> <a href="../../../../tags/ModelMap/" style="font-size: 10px;">ModelMap</a> <a href="../../../../tags/N-GRAM/" style="font-size: 10px;">N-GRAM</a> <a href="../../../../tags/N-Gram/" style="font-size: 10px;">N-Gram</a> <a href="../../../../tags/N-gram-embeding/" style="font-size: 10px;">N-gram-embeding</a> <a href="../../../../tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="../../../../tags/Neo4j/" style="font-size: 10px;">Neo4j</a> <a href="../../../../tags/Numpy/" style="font-size: 15px;">Numpy</a> <a href="../../../../tags/OGM/" style="font-size: 10px;">OGM</a> <a href="../../../../tags/ORM/" style="font-size: 10px;">ORM</a> <a href="../../../../tags/PCA/" style="font-size: 10px;">PCA</a> <a href="../../../../tags/POJO/" style="font-size: 10px;">POJO</a> <a href="../../../../tags/PPMI/" style="font-size: 10px;">PPMI</a> <a href="../../../../tags/PR/" style="font-size: 10px;">PR</a> <a href="../../../../tags/Pom/" style="font-size: 10px;">Pom</a> <a href="../../../../tags/Pytorch/" style="font-size: 10px;">Pytorch</a> <a href="../../../../tags/RNN/" style="font-size: 10px;">RNN</a> <a href="../../../../tags/ROC/" style="font-size: 10px;">ROC</a> <a href="../../../../tags/SDN/" style="font-size: 10px;">SDN</a> <a href="../../../../tags/SGD/" style="font-size: 10px;">SGD</a> <a href="../../../../tags/SVD/" style="font-size: 10px;">SVD</a> <a href="../../../../tags/Skip-Gram/" style="font-size: 10px;">Skip-Gram</a> <a href="../../../../tags/Spring-boot/" style="font-size: 15px;">Spring-boot</a> <a href="../../../../tags/Tensor/" style="font-size: 10px;">Tensor</a> <a href="../../../../tags/Torch/" style="font-size: 10px;">Torch</a> <a href="../../../../tags/Transformer/" style="font-size: 10px;">Transformer</a> <a href="../../../../tags/UML/" style="font-size: 10px;">UML</a> <a href="../../../../tags/attention/" style="font-size: 10px;">attention</a> <a href="../../../../tags/doc2vec/" style="font-size: 10px;">doc2vec</a> <a href="../../../../tags/docker/" style="font-size: 10px;">docker</a> <a href="../../../../tags/fuseki/" style="font-size: 10px;">fuseki</a> <a href="../../../../tags/git/" style="font-size: 15px;">git</a> <a href="../../../../tags/glove/" style="font-size: 10px;">glove</a> <a href="../../../../tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="../../../../tags/icarus主题/" style="font-size: 10px;">icarus主题</a> <a href="../../../../tags/janusgraph/" style="font-size: 10px;">janusgraph</a> <a href="../../../../tags/janusgraph-hbase-hadoop/" style="font-size: 10px;">janusgraph,hbase,hadoop</a> <a href="../../../../tags/jar包/" style="font-size: 10px;">jar包</a> <a href="../../../../tags/java/" style="font-size: 15px;">java</a> <a href="../../../../tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="../../../../tags/latex/" style="font-size: 10px;">latex</a> <a href="../../../../tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="../../../../tags/maven/" style="font-size: 15px;">maven</a> <a href="../../../../tags/model/" style="font-size: 10px;">model</a> <a href="../../../../tags/navicat/" style="font-size: 15px;">navicat</a> <a href="../../../../tags/navicat异常问题/" style="font-size: 10px;">navicat异常问题</a> <a href="../../../../tags/neo4j/" style="font-size: 10px;">neo4j</a> <a href="../../../../tags/parseInt/" style="font-size: 10px;">parseInt</a> <a href="../../../../tags/pom/" style="font-size: 10px;">pom</a> <a href="../../../../tags/python/" style="font-size: 10px;">python</a> <a href="../../../../tags/readLine/" style="font-size: 10px;">readLine()</a> <a href="../../../../tags/restful/" style="font-size: 10px;">restful</a> <a href="../../../../tags/seq2seq/" style="font-size: 10px;">seq2seq</a> <a href="../../../../tags/socket/" style="font-size: 10px;">socket</a> <a href="../../../../tags/softmax/" style="font-size: 15px;">softmax</a> <a href="../../../../tags/sourceTree/" style="font-size: 10px;">sourceTree</a> <a href="../../../../tags/spark/" style="font-size: 20px;">spark</a> <a href="../../../../tags/spring-boot/" style="font-size: 10px;">spring-boot</a> <a href="../../../../tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="../../../../tags/thymeleaf/" style="font-size: 10px;">thymeleaf</a> <a href="../../../../tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="../../../../tags/torch函数/" style="font-size: 10px;">torch函数</a> <a href="../../../../tags/viterbi，约束搜索，贪心搜索/" style="font-size: 10px;">viterbi，约束搜索，贪心搜索</a> <a href="../../../../tags/windows/" style="font-size: 10px;">windows</a> <a href="../../../../tags/word-embeding/" style="font-size: 10px;">word embeding</a> <a href="../../../../tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="../../../../tags/xshell/" style="font-size: 10px;">xshell</a> <a href="../../../../tags/三层架构/" style="font-size: 10px;">三层架构</a> <a href="../../../../tags/中值定理/" style="font-size: 10px;">中值定理</a> <a href="../../../../tags/主成分/" style="font-size: 10px;">主成分</a> <a href="../../../../tags/云服务器/" style="font-size: 10px;">云服务器</a> <a href="../../../../tags/交叉熵/" style="font-size: 10px;">交叉熵</a> <a href="../../../../tags/人工智能/" style="font-size: 10px;">人工智能</a> <a href="../../../../tags/人文/" style="font-size: 10px;">人文</a> <a href="../../../../tags/全连接层/" style="font-size: 10px;">全连接层</a> <a href="../../../../tags/关键字/" style="font-size: 10px;">关键字</a> <a href="../../../../tags/关键词/" style="font-size: 10px;">关键词</a> <a href="../../../../tags/关键词抽取/" style="font-size: 10px;">关键词抽取</a> <a href="../../../../tags/分类/" style="font-size: 10px;">分类</a> <a href="../../../../tags/分词/" style="font-size: 10px;">分词</a> <a href="../../../../tags/初始化/" style="font-size: 10px;">初始化</a> <a href="../../../../tags/删除/" style="font-size: 10px;">删除</a> <a href="../../../../tags/协方差/" style="font-size: 10px;">协方差</a> <a href="../../../../tags/博客/" style="font-size: 10px;">博客</a> <a href="../../../../tags/参数维度/" style="font-size: 10px;">参数维度</a> <a href="../../../../tags/反向传播/" style="font-size: 20px;">反向传播</a> <a href="../../../../tags/反射/" style="font-size: 10px;">反射</a> <a href="../../../../tags/变量/" style="font-size: 10px;">变量</a> <a href="../../../../tags/变量创建/" style="font-size: 10px;">变量创建</a> <a href="../../../../tags/句子向量/" style="font-size: 10px;">句子向量</a> <a href="../../../../tags/可视化界面/" style="font-size: 10px;">可视化界面</a> <a href="../../../../tags/后向传播/" style="font-size: 10px;">后向传播</a> <a href="../../../../tags/向量范数/" style="font-size: 10px;">向量范数</a> <a href="../../../../tags/命令行/" style="font-size: 15px;">命令行</a> <a href="../../../../tags/回退/" style="font-size: 10px;">回退</a> <a href="../../../../tags/域名/" style="font-size: 10px;">域名</a> <a href="../../../../tags/奇异值分解/" style="font-size: 10px;">奇异值分解</a> <a href="../../../../tags/套接字/" style="font-size: 10px;">套接字</a> <a href="../../../../tags/学习率/" style="font-size: 10px;">学习率</a> <a href="../../../../tags/实例化/" style="font-size: 15px;">实例化</a> <a href="../../../../tags/容器/" style="font-size: 10px;">容器</a> <a href="../../../../tags/对象数组/" style="font-size: 10px;">对象数组</a> <a href="../../../../tags/对象类型/" style="font-size: 10px;">对象类型</a> <a href="../../../../tags/导出/" style="font-size: 10px;">导出</a> <a href="../../../../tags/导数/" style="font-size: 10px;">导数</a> <a href="../../../../tags/小问题/" style="font-size: 15px;">小问题</a> <a href="../../../../tags/层次化softmax/" style="font-size: 10px;">层次化softmax</a> <a href="../../../../tags/工作流程/" style="font-size: 10px;">工作流程</a> <a href="../../../../tags/工具/" style="font-size: 20px;">工具</a> <a href="../../../../tags/差值/" style="font-size: 10px;">差值</a> <a href="../../../../tags/异常问题/" style="font-size: 10px;">异常问题</a> <a href="../../../../tags/归一化/" style="font-size: 10px;">归一化</a> <a href="../../../../tags/微分/" style="font-size: 10px;">微分</a> <a href="../../../../tags/微调/" style="font-size: 10px;">微调</a> <a href="../../../../tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="../../../../tags/抽象类/" style="font-size: 10px;">抽象类</a> <a href="../../../../tags/拉普拉斯/" style="font-size: 10px;">拉普拉斯</a> <a href="../../../../tags/指针网络/" style="font-size: 10px;">指针网络</a> <a href="../../../../tags/损失函数/" style="font-size: 10px;">损失函数</a> <a href="../../../../tags/接口/" style="font-size: 10px;">接口</a> <a href="../../../../tags/数据建模/" style="font-size: 10px;">数据建模</a> <a href="../../../../tags/数据长度/" style="font-size: 10px;">数据长度</a> <a href="../../../../tags/时序图/" style="font-size: 10px;">时序图</a> <a href="../../../../tags/服务启动/" style="font-size: 10px;">服务启动</a> <a href="../../../../tags/本体映射/" style="font-size: 10px;">本体映射</a> <a href="../../../../tags/标准化/" style="font-size: 10px;">标准化</a> <a href="../../../../tags/栈内存/" style="font-size: 10px;">栈内存</a> <a href="../../../../tags/梯度/" style="font-size: 10px;">梯度</a> <a href="../../../../tags/梯度下降/" style="font-size: 10px;">梯度下降</a> <a href="../../../../tags/梯度平均/" style="font-size: 10px;">梯度平均</a> <a href="../../../../tags/模型构建/" style="font-size: 10px;">模型构建</a> <a href="../../../../tags/模型病态/" style="font-size: 10px;">模型病态</a> <a href="../../../../tags/正则化/" style="font-size: 10px;">正则化</a> <a href="../../../../tags/残差网络/" style="font-size: 10px;">残差网络</a> <a href="../../../../tags/求职/" style="font-size: 10px;">求职</a> <a href="../../../../tags/泛型/" style="font-size: 10px;">泛型</a> <a href="../../../../tags/注解/" style="font-size: 15px;">注解</a> <a href="../../../../tags/注解注入/" style="font-size: 10px;">注解注入</a> <a href="../../../../tags/泰勒/" style="font-size: 10px;">泰勒</a> <a href="../../../../tags/测试/" style="font-size: 10px;">测试</a> <a href="../../../../tags/激励函数/" style="font-size: 10px;">激励函数</a> <a href="../../../../tags/版本比对/" style="font-size: 20px;">版本比对</a> <a href="../../../../tags/特征值分解/" style="font-size: 10px;">特征值分解</a> <a href="../../../../tags/特征提取/" style="font-size: 10px;">特征提取</a> <a href="../../../../tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="../../../../tags/生成模型/" style="font-size: 10px;">生成模型</a> <a href="../../../../tags/目录结构/" style="font-size: 10px;">目录结构</a> <a href="../../../../tags/相似度/" style="font-size: 10px;">相似度</a> <a href="../../../../tags/知识图谱/" style="font-size: 15px;">知识图谱</a> <a href="../../../../tags/知识点/" style="font-size: 15px;">知识点</a> <a href="../../../../tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="../../../../tags/矩阵范数/" style="font-size: 10px;">矩阵范数</a> <a href="../../../../tags/神经网络/" style="font-size: 15px;">神经网络</a> <a href="../../../../tags/综述/" style="font-size: 20px;">综述</a> <a href="../../../../tags/编码/" style="font-size: 10px;">编码</a> <a href="../../../../tags/编码器/" style="font-size: 10px;">编码器</a> <a href="../../../../tags/职业规划/" style="font-size: 10px;">职业规划</a> <a href="../../../../tags/自定义词典/" style="font-size: 10px;">自定义词典</a> <a href="../../../../tags/艺术/" style="font-size: 10px;">艺术</a> <a href="../../../../tags/认识/" style="font-size: 10px;">认识</a> <a href="../../../../tags/设计思想/" style="font-size: 10px;">设计思想</a> <a href="../../../../tags/词向量/" style="font-size: 15px;">词向量</a> <a href="../../../../tags/词性标注/" style="font-size: 15px;">词性标注</a> <a href="../../../../tags/词性纠正/" style="font-size: 10px;">词性纠正</a> <a href="../../../../tags/词汇表/" style="font-size: 10px;">词汇表</a> <a href="../../../../tags/语义网/" style="font-size: 10px;">语义网</a> <a href="../../../../tags/语义解析/" style="font-size: 15px;">语义解析</a> <a href="../../../../tags/误差δ/" style="font-size: 10px;">误差δ</a> <a href="../../../../tags/读后感/" style="font-size: 10px;">读后感</a> <a href="../../../../tags/超参数/" style="font-size: 10px;">超参数</a> <a href="../../../../tags/返回问题/" style="font-size: 10px;">返回问题</a> <a href="../../../../tags/迭代器输出/" style="font-size: 10px;">迭代器输出</a> <a href="../../../../tags/逐层预训练/" style="font-size: 10px;">逐层预训练</a> <a href="../../../../tags/通配符/" style="font-size: 10px;">通配符</a> <a href="../../../../tags/配置/" style="font-size: 15px;">配置</a> <a href="../../../../tags/配置注入/" style="font-size: 10px;">配置注入</a> <a href="../../../../tags/问句分类/" style="font-size: 10px;">问句分类</a> <a href="../../../../tags/问句向量/" style="font-size: 10px;">问句向量</a> <a href="../../../../tags/问句还原/" style="font-size: 10px;">问句还原</a> <a href="../../../../tags/问题转换/" style="font-size: 10px;">问题转换</a> <a href="../../../../tags/降维/" style="font-size: 10px;">降维</a> <a href="../../../../tags/集合关系/" style="font-size: 10px;">集合关系</a> <a href="../../../../tags/集合工具类/" style="font-size: 10px;">集合工具类</a> <a href="../../../../tags/集合形式/" style="font-size: 10px;">集合形式</a> <a href="../../../../tags/集合类型/" style="font-size: 10px;">集合类型</a> <a href="../../../../tags/集合转换/" style="font-size: 10px;">集合转换</a> <a href="../../../../tags/集合输出/" style="font-size: 10px;">集合输出</a> <a href="../../../../tags/非法字符/" style="font-size: 10px;">非法字符</a> <a href="../../../../tags/高斯模型/" style="font-size: 10px;">高斯模型</a> <a href="../../../../tags/高斯混合模型/" style="font-size: 10px;">高斯混合模型</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://xueshu.baidu.com/">百度学术</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.appinn.com/category/windows/">小众软件</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+     <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 不负韶华不负己<br>
+        </div>
+    </div>
+
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("06/18/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+</footer>
+        
+
+
+    
+        <script src="../../../../libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="../../../../libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="../../../../libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+    <!-- Edit here -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    <!-- MathJax **处理 HTML/CSS 输出的配置**-->
+    "HTML-CSS": { 
+    <!--设置字体（preferredFont、availableFonts）-->
+        preferredFont: "TeX", 
+        availableFonts: ["STIX","TeX"], 
+        <!--换行（linebreaking）-->
+        linebreaks: { automatic:true }, 
+        <!--渲染延迟（EqnChunk）-->
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) 
+    },
+    <!--这部分是 tex2jax.js 预处理程序需要的配置-->
+    tex2jax: { 
+    <!--设置为可以使用“公式”或“\\( 公式 )\\”在行内内联公式-->
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ], 
+        <!--设置是否允许使用 \$ 来 escape 一些信息。-->
+        processEscapes: true, 
+        <!--　ignoreClass 用于设置具有哪些 css class 的标签不用 tex2jax 预处理。-->
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    <!--处理 TeX 及相关插件的输入的-->
+    TeX: {  
+    <!--加上公式编号和宏的功能（noUndefined）-->
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, 
+        Macros: { href: "{}" } 
+    },
+    <!--属于通用配置，用于控制是否显示加载信息。-->
+    messageStyle: "none"
+    }); 
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载最新的MathJax的js代码 -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<!-- Custom Scripts -->
+<script src="../../../../js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
