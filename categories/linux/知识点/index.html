@@ -530,27 +530,26 @@ setInterval("createtime()",250);
 <!-- Custom Scripts -->
 <script src="../../../js/main.js"></script>
 
-    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</body>
-</html>script>
-        <script src="../../../libs/lightgallery/js/lg-video.min.js"></script>
-    
-    
-        <script src="../../../libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
-    
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
 
-    <!-- Edit here -->
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    <!-- MathJax **处理 HTML/CSS 输出的配置**-->
-    "HTML-CSS": { 
-    <!--设置字体（preferredFont、availableFonts）-->
-        preferredFont: "TeX", 
-        availableFonts: ["STIX","TeX"], 
-        <!--换行（linebreaking）-->
-        linebreaks: { automatic:true }, 
-        <!--渲染延迟（EqnChunk）-->
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html> 
     },
     <!--这部分是 tex2jax.js 预处理程序需要的配置-->
     tex2jax: { 
@@ -591,6 +590,23 @@ setInterval("createtime()",250);
 <!-- Custom Scripts -->
 <script src="../../../js/main.js"></script>
 
-    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>

@@ -262,7 +262,7 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p></p><p>本文是版本比对的第二篇,主要是实现修改部分与本体之间的映射,需要通过标题id作为中介,将标题id映射到本体.</p>
+            <p>The article has been encrypted, please enter your password to view.<br></p>
             <p class="article-more-link">
                 <a href="2019/05/02/版本比对(二)/#more">查看更多</a>
             </p>
@@ -1240,6 +1240,23 @@ setInterval("createtime()",250);
 <!-- Custom Scripts -->
 <script src="js/main.js"></script>
 
-    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>
