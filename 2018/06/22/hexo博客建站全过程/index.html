@@ -14,7 +14,7 @@
 <meta property="og:description" content="本文主要是讲了hexo建站的全过程,包括软件安装,域名绑定,主题优化,异常问题这四个模块.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181113102258.png">
-<meta property="og:updated_time" content="2019-01-01T01:50:56.000Z">
+<meta property="og:updated_time" content="2019-12-24T11:19:42.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo博客构建的全过程">
 <meta name="twitter:description" content="本文主要是讲了hexo建站的全过程,包括软件安装,域名绑定,主题优化,异常问题这四个模块.">
@@ -164,8 +164,8 @@
         <div class="base-info profile-block">
             <img id="avatar" src="../../../../css/images/avatar.png">
             <h2 id="name">iVEGA</h2>
-            <h3 id="title">一个小确幸的地方</h3>
-            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>天津大学, 中国</span>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Tianjin University , China</span>
             <a id="follow" target="_blank" href="https://github.com/xiaopingzhong/">关注我</a>
         </div>
         <div class="article-info profile-block">
@@ -306,8 +306,10 @@
 <li><a href="#wu-chang-jian-wen-ti">五.常见问题</a><ul>
 <li><a href="#5-1-biao-qian-yu-fen-lei-yi-chang">5.1 标签与分类异常</a></li>
 <li><a href="#5-2-hexo-mu-lu-jie-xi">5.2 hexo目录解析</a></li>
+<li><a href="#liu-supplement">六.Supplement</a></li>
 </ul>
 </li>
+<li><a href="#qi-reference">七.Reference</a></li>
 </ul>
 <!-- tocstop -->
 <p></p></div><p></p>
@@ -369,6 +371,19 @@
 <h1><span id="wu-chang-jian-wen-ti">五.常见问题</span></h1><h2><span id="5-1-biao-qian-yu-fen-lei-yi-chang">5.1 标签与分类异常</span></h2><p>　标签异常的话,本人的搭建的是icarus主题,情况比较特殊,有需要的可以参考下:如果出现<br> <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">can<span class="symbol">'t</span> get tags</span><br></pre></td></tr></table></figure></p>
 <p>　这种类似情况,直接将icarus主题下的_source子文件夹的三个文件夹复制到hexo的source进行覆盖,之后清除缓存重启,一般都能解决.</p>
 <h2><span id="5-2-hexo-mu-lu-jie-xi">5.2 hexo目录解析</span></h2><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">|-- _config.yml  #对应站点配置文件</span></span><br><span class="line"><span class="string">|-- package.json #对应全局依赖组件,类似java的pom</span></span><br><span class="line"><span class="meta">#scaffolds---骨架的含义,模版,主要有三个,post(正式文章),page(new page的时候会生成一个文件夹及其相同的名字的文件,而不是一个文件),</span></span><br><span class="line"><span class="meta">#draft草稿是不显示在博客当中,但是可以使用publish让其变为正式文章</span></span><br><span class="line"><span class="string">|-- scaffolds  </span></span><br><span class="line"><span class="meta">#资源文件,_post主要是放文章的</span></span><br><span class="line"><span class="string">|-- source</span></span><br><span class="line">   <span class="string">|-- _posts</span></span><br><span class="line"><span class="meta">#主题文件</span></span><br><span class="line"><span class="string">|-- themes</span></span><br><span class="line"><span class="meta">#.gitignore”文件，这个文件的作用就是告诉GIT哪些文件不需要添加到版本管理中，比如Android项目中的iml文件及build目录下面编译生成的文件</span></span><br><span class="line"><span class="string">|-- .gitignore</span></span><br><span class="line"><span class="meta">#就是hexo的版本信息</span></span><br><span class="line"><span class="string">|-- package.json</span></span><br></pre></td></tr></table></figure>
+<h2><span id="liu-supplement">六.Supplement</span></h2><ul>
+<li>本文阅读量</li>
+<li>访客人数，访问次数</li>
+<li>删除文章标签前面的#号标识</li>
+<li>署名标记结束</li>
+<li>修改文章分类和侧边栏中的分类名称转为小写</li>
+<li>增加文章评论功能</li>
+</ul>
+<h1><span id="qi-reference">七.Reference</span></h1><ul>
+<li><a href="http://blog.kimzing.com/2018/08/30/blog/Hexo%E4%B9%8Bicarus%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">Hexo：icarus主题个性化配置</a></li>
+<li><a href="https://susreal.coding.me/article/2019/hexo-theme-icarus-1/" target="_blank" rel="noopener">增加文章评论功能</a></li>
+</ul>
+
             
             
 <div style="padding: 15px;
@@ -624,7 +639,7 @@
         <footer id="footer">
 <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2019 不负韶华不负己<br>
+            &copy; 2019 Don&#39;t let down beauty and oneself<br>
                <!-- 首先引入统计用的js，然后编写相应的统计代码 -->
                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                访问量<span id="busuanzi_value_site_pv"></span>次(◕ܫ◕)访客数<span id="busuanzi_value_site_uv"></span>人
