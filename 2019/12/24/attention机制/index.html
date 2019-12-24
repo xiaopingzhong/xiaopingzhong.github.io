@@ -9,12 +9,12 @@
 <meta name="keywords" content="attention,seq2seq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="attention机制通俗解释">
-<meta property="og:url" content="http://yoursite.com/2019/03/09/attention机制/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/12/24/attention机制/index.html">
 <meta property="og:site_name" content="iVEGA">
 <meta property="og:description" content="本文主要讲述的是attention机制的主要思想及其流程,思想较为简单,其主要应用在编码器-解码器当中(seq2seq模型居多),最初主要是解决seq2seq机器翻译的弊端而出现的,之后发现该机制可以运用到很多地方.由于本人对attention机制理解不够透彻,因此此次对其进行了新的梳理,便于日后的回忆.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/99-picture.jpg">
-<meta property="og:updated_time" content="2019-03-15T09:13:12.970Z">
+<meta property="og:updated_time" content="2019-12-24T09:21:18.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="attention机制通俗解释">
 <meta name="twitter:description" content="本文主要讲述的是attention机制的主要思想及其流程,思想较为简单,其主要应用在编码器-解码器当中(seq2seq模型居多),最初主要是解决seq2seq机器翻译的弊端而出现的,之后发现该机制可以运用到很多地方.由于本人对attention机制理解不够透彻,因此此次对其进行了新的梳理,便于日后的回忆.">
@@ -242,7 +242,7 @@
     <div class="article-date">
         <i class="fas fa-calendar-alt"></i>
         <a href="">
-            <time datetime="2019-03-09T10:12:31.000Z" itemprop="datePublished">2019-03-09</time>
+            <time datetime="2019-12-24T09:21:11.000Z" itemprop="datePublished">2019-12-24</time>
         </a>
     </div>
 
@@ -317,19 +317,10 @@
         
 <nav id="article-nav">
     
-        <a href="../BN与LN/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    BN与LN
-                
-            </div>
-        </a>
     
-    
-        <a href="../EMLO模型的简单理解/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="../../../05/18/正则表达式初探/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">EMLO模型的简单理解</div>
+            <div class="article-nav-title">正则表达式初探</div>
         </a>
     
 </nav>
@@ -352,6 +343,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/99-picture.jpg)" alt="attention机制通俗解释" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/训练营/">训练营</a></p>
+                            <p class="item-title"><a href="" class="title">attention机制通俗解释</a></p>
+                            <p class="item-date"><time datetime="2019-12-24T09:21:11.000Z" itemprop="datePublished">2019-12-24</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -429,25 +439,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="../../../05/02/版本比对(二)/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/141026115Q1-1.jpg)" alt="版本比对之映射本体(二)" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="../../../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../../../categories/NLP/实习/">实习</a></p>
-                            <p class="item-title"><a href="../../../05/02/版本比对(二)/" class="title">版本比对之映射本体(二)</a></p>
-                            <p class="item-date"><time datetime="2019-05-02T14:14:35.000Z" itemprop="datePublished">2019-05-02</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -466,7 +457,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/03/">三月 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/02/">二月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/01/">一月 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/03/">三月 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/02/">二月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/01/">一月 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
         </div>
     </div>
 

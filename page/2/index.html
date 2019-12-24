@@ -210,6 +210,81 @@
 
             
             <section id="main">
+    <article id="post-BERT模型解释" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="../../2019/03/10/BERT模型解释/" itemprop="url">
+            <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/96-picture.jpg" class="article-banner">
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="../../2019/03/10/BERT模型解释/">BERT模型解释</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="../../2019/03/10/BERT模型解释/">
+            <time datetime="2019-03-10T04:42:33.000Z" itemprop="datePublished">2019-03-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../categories/NLP/训练营/">训练营</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="../../tags/BERT/">BERT</a>, <a class="tag-link" href="../../tags/Transformer/">Transformer</a>, <a class="tag-link" href="../../tags/残差网络/">残差网络</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p></p><p>本文主要是对BERT模型进行说明,主要分成两个部分:输入部分和特征提取部分,其中输入部分创新点在同时将词向量,位置向量,分割向量三者相加,作为Transformer的输入,同时采用Mask模型来实现随机预测mask单词,并且对判断是否是下一句进行了说明.Transformer本质上是编码器-解码器类型.其最主要的就是attention机制,主要是self attention,同时还使用残差网络和正则化对输入数据进行修正.最后以X+Z的向量类型作为解码器的输入.</p>
+            <p class="article-more-link">
+                <a href="../../2019/03/10/BERT模型解释/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-Mikolov三篇论文" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
@@ -490,81 +565,6 @@
             <p></p><p>本文主要讲述的是批量标准化与层次标准化的知识,其主要目的是为了减少梯度弥散和梯度爆炸,加快训练速度,增强模型鲁棒性.BN与LN的区别最主要区别就是基于不同量级上的均值和方差.</p>
             <p class="article-more-link">
                 <a href="../../2019/03/09/BN与LN/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-attention机制" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="../../2019/03/09/attention机制/" itemprop="url">
-            <img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/99-picture.jpg" class="article-banner">
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="../../2019/03/09/attention机制/">attention机制通俗解释</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="../../2019/03/09/attention机制/">
-            <time datetime="2019-03-09T10:12:31.000Z" itemprop="datePublished">2019-03-09</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../categories/NLP/训练营/">训练营</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="../../tags/attention/">attention</a>, <a class="tag-link" href="../../tags/seq2seq/">seq2seq</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p></p><p>本文主要讲述的是attention机制的主要思想及其流程,思想较为简单,其主要应用在编码器-解码器当中(seq2seq模型居多),最初主要是解决seq2seq机器翻译的弊端而出现的,之后发现该机制可以运用到很多地方.由于本人对attention机制理解不够透彻,因此此次对其进行了新的梳理,便于日后的回忆.</p>
-            <p class="article-more-link">
-                <a href="../../2019/03/09/attention机制/#more">查看更多</a>
             </p>
         
         </div>
@@ -977,6 +977,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="../../2019/12/24/attention机制/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/99-picture.jpg)" alt="attention机制通俗解释" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../categories/NLP/训练营/">训练营</a></p>
+                            <p class="item-title"><a href="../../2019/12/24/attention机制/" class="title">attention机制通俗解释</a></p>
+                            <p class="item-date"><time datetime="2019-12-24T09:21:11.000Z" itemprop="datePublished">2019-12-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="../../2019/05/18/正则表达式初探/" class="thumbnail">
     
     
@@ -1050,25 +1069,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="../../2019/05/02/版本比对(二)/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/141026115Q1-1.jpg)" alt="版本比对之映射本体(二)" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="../../categories/NLP/">NLP</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="../../categories/NLP/实习/">实习</a></p>
-                            <p class="item-title"><a href="../../2019/05/02/版本比对(二)/" class="title">版本比对之映射本体(二)</a></p>
-                            <p class="item-date"><time datetime="2019-05-02T14:14:35.000Z" itemprop="datePublished">2019-05-02</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1087,7 +1087,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/03/">三月 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/02/">二月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/01/">一月 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/03/">三月 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/02/">二月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/01/">一月 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/12/">十二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/11/">十一月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/10/">十月 2018</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/09/">九月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/07/">七月 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/06/">六月 2018</a><span class="archive-list-count">22</span></li></ul>
         </div>
     </div>
 
