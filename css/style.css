@@ -245,7 +245,6 @@ pre {
 .widget-title {
   line-height: 1em;
   text-decoration: none;
-  text-transform: uppercase;
 }
 #header,
 #profile .inner,
@@ -929,7 +928,7 @@ a.article-title:hover {
   margin: 0 5px;
 }
 .article-tag .tag-link:before {
-  content: "#";
+  content: "";
 }
 .article-entry {
   color: #565a5f;
@@ -1200,7 +1199,6 @@ a.article-title:hover {
   line-height: 1em;
   font-weight: bold;
   color: #565a5f;
-  text-transform: uppercase;
 }
 #article-nav-newer .article-nav-caption {
   margin-right: -2px;
@@ -1940,7 +1938,6 @@ a.article-title:hover {
 #recent-post li .item-inner a,
 #recent-post li .item-inner .item-category {
   font-size: 13px;
-  text-transform: uppercase;
 }
 #recent-post li .item-inner a a,
 #recent-post li .item-inner .item-category a {
@@ -1969,7 +1966,6 @@ a.article-title:hover {
 #recent-post li .item-inner .item-date {
   color: #aaa;
   font-size: 13px;
-  text-transform: uppercase;
 }
 #recent-post li:hover .item-thumbnail {
   opacity: 0.8;

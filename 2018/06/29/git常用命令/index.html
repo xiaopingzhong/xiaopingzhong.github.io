@@ -217,6 +217,7 @@
 
             
             <section id="main"><article id="post-git常用命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+
     <div class="article-inner">
         
             
@@ -264,6 +265,7 @@
             </header>
         
         
+   
         <div class="article-entry" itemprop="articleBody">
         
             
@@ -355,8 +357,38 @@
 <h2><span id="6-2-hu-lue-te-shu-wen-jian">6.2 忽略特殊文件</span></h2><p>　　在工作区创建一个.gitignore文件,在提交的时候用来来忽略某些不太总要的过程文件.例如编译时的中间文件.配置模版可以在<a href="https://github.com/github/gitignore" target="_blank" rel="noopener">https://github.com/github/gitignore</a><br>例如：下载一个关于java的忽略提交文件:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084809.jpg" alt="java.gitignore"></p>
 <h2><span id="6-3-pei-zhi-bie-ming">6.3 配置别名</span></h2><p>形式:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把status简称st</span></span><br><span class="line">git<span class="built_in"> config </span>--global alias.st status</span><br><span class="line"><span class="comment">#配置git日志的配色</span></span><br><span class="line">git<span class="built_in"> config </span>--global alias.lg <span class="string">"log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"</span></span><br></pre></td></tr></table></figure></p>
 <h1><span id="qi-ps">七.ps</span></h1><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">E:\Hexo\ivega&gt;git commit -m'the first version'</span><br><span class="line">#说明是匹配的问题,因此需要使用"",而不是单引号.这点需要特别注意.</span><br><span class="line"><span class="keyword">error: </span>pathspec 'first' did not match any file(s) known to git.</span><br><span class="line"><span class="keyword">error: </span>pathspec 'version'' did not match any file(s) known to git.</span><br></pre></td></tr></table></figure>
+            
+            
+<div style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #565a5f;
+    line-height: 2em;
+">
+        <div class="copyright-left">
+            <i class="fa fa-lightbulb"></i>
+           		 本文由 <a href="https://www.zhongxiaoping.cn/index.html">iVEGA</a> 创作，采用
+            <a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a> 进行许可。
+            可自由转载、引用，但需署名作者且注明文章出处 http://yoursite.com/2018/06/29/git常用命令/index.html <br>
+        </div>
+        <div style="clear:both;height:0px;"></div>
+</div>
+
         
         </div>
+        <span style="float:right">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    本文阅读量：<span id="busuanzi_value_page_pv"></span>次
+
+</span>
         <footer class="article-footer">
             <div class="share-container">
 
@@ -368,6 +400,8 @@
     
 
         </footer>
+        
+        
     </div>
     
         
@@ -392,10 +426,15 @@
 
 
     
+
 </article>
 
 
     
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
     
 
 </section>
@@ -571,18 +610,16 @@
             
         </div>
         <footer id="footer">
-     <div class="outer">
+<div class="outer">
         <div id="footer-info" class="inner">
             &copy; 2019 不负韶华不负己<br>
+               <!-- 首先引入统计用的js，然后编写相应的统计代码 -->
+               <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+               访问量<span id="busuanzi_value_site_pv"></span>次(◕ܫ◕)访客数<span id="busuanzi_value_site_uv"></span>人
+               <!-- 注释掉Powered by，Theme by的显示。-->
+               <!-- Powered by <a href="http://blog.kimzing.com/" target="_blank">Kim</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a> -->
         </div>
     </div>
-
-
-<div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
-
 
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
@@ -606,6 +643,21 @@ setInterval("createtime()",250);
 
 </footer>
         
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: 'z4tuSWjbVK2A9f5fL9X79TW3-gzGzoHsz',
+            app_key: 'MToHqxs5eJrVXM95jc5FAOgz',
+            placeholder: '输入问题,咱们共同交流,一起进步'
+        });
+    </script>
+
+
 
 
     

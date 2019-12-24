@@ -217,6 +217,7 @@
 
             
             <section id="main"><article id="post-NLP基础理论系列之词嵌入技术（一至三）" class="article article-type-post" itemscope="" itemprop="blogPost">
+
     <div class="article-inner">
         
             
@@ -264,6 +265,7 @@
             </header>
         
         
+   
         <div class="article-entry" itemprop="articleBody">
         
             
@@ -350,8 +352,38 @@
 <li>但是用途仅仅受限于相似度<h1><span id="jiu-glove-mo-xing">九.Glove模型</span></h1>　　Global Vector融合了预测型模型与统计型模型优势。实现在利用全局的先验统计信息下,加快模型的训练速度，又可以控制词的相对权重–&gt;f()。<br>　　我的理解是skip-gram、CBOW每次都是用一个窗口中的信息更新出词向量，但是Glove则是用了全局的信息（共线矩阵），也就是多个窗口进行更新<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181205204108.png" alt="Glove公式"><h1><span id="shi-elmo-mo-xing">十.ELMO模型</span></h1><h2><span id="10-1-zuo-yong">10.1 作用</span></h2>　　提供<strong>预训练</strong>的<strong>生成含有上下文词向量</strong>的语言模型;–源头上生成.<br>　　至此为止，词向量都是上下文无关的。也就是说，同一个词在不同的语境中总是相同的词向量，很明显这就导致词向量模型缺乏词义消歧（WSD）的能力。于是，人们为了让词向量变得上下文相关，开始在具体的下游任务中基于词向量sequence来做encoding–LSTM上下文。这就会导致模型的移植性非常差,会导致模型越来越复杂,既然发现在各个NLP任务中基本都有encoding的需要，那么为啥不在最开始就让词向量拥有上下文相关的能力呢？<br>　　因此ELMO模型则是使用Bi-LSTM模型,实现含有上下文向量的生成,ELMo在模型层上就是一个stacked bi-lstm（严格来说是训练了两个单向的stacked lstm），所以当然有不错的encoding能力。<br>　　不过话说回来，ELMo的目标也仅仅是学习到上下文相关的、更强大的词向量，其目的依然是为下游任务提供一个扎实的根基，而是其通过实验间接说明了在多层的RNN中，不同层学到的特征其实是有差异的，因此ELMo提出在预训练完成并迁移到下游NLP任务中时，要为原始词向量层和每一层RNN的隐层都设置一个可训练参数，这些参数通过softmax层归一化后乘到其相应的层上并求和便起到了weighting的作用，然后对“加权和”得到的词向量再通过一个参数来进行词向量整体的scaling以更好的适应下游任务。<br>　　ps:其实最后这个参数还是非常重要的，比如word2vec中，一般来说cbow和sg学出来的词向量方差差异比较大，这时那个方差跟适合下游任务后续层方差匹配的词向量就收敛更快，更容易有更好的表现<br>　　通过这样的迁移策略，那些对词义消歧有需求的任务就更容易通过训练给第二隐层一个很大的权重，而对词性、句法有明显需求的任务则可能对第一隐层的参数学习到比较大的值（实验结论）。总之，这样便得到了一份”可以被下游任务定制“的特征更为丰富的词向量，效果比word2vec好得多也就不足为奇了。<h2><span id="10-2-que-dian">10.2 缺点</span></h2>　　虽然ELMo有用双向RNN来做encoding，但是这两个方向的RNN其实是分开训练的，只是在最后在loss层做了个简单相加。这样就导致对于每个方向上的单词来说，在被encoding的时候始终是看不到它另一侧的单词的。<strong>而显然句子中有的单词的语义会同时依赖于它左右两侧的某些词，仅仅从单方向做encoding是不能描述清楚的.</strong>原因一想就很清楚了，毕竟传统的语言模型是以预测下一个词为训练目标的，然而如果做了双向encoding的话，那不就表示要预测的词已经看到了嘛，这样的预测当然没有意义了。<h1><span id="shi-yi-bert-mo-xing">十一.BERT模型</span></h1><h2><span id="11-1-si-xiang">11.1 思想</span></h2>　　BERT则是根据ELMO模型的启发,得到<code>预训练对迁移学习也是很有帮助</code>,因此BERT模型重在训练一个龙骨级的模型(不单单是语言模型),<strong>包含对单词,句子,句子对之间(也就包括段落了)的表示及其关系的判断</strong>,ELMO则仅仅是对词语的表示.表示部分则是使用Transformer这个框架来实现.<h2><span id="11-2-guo-cheng">11.2 过程</span></h2>　　它会先从数据集抽取两个句子，其中第二句是第一句的下一句的概率是 50%，这样就能学习句子之间的关系。其次随机去除两个句子中的一些词，并要求模型预测这些词是什么，这样就能学习句子内部的关系。最后再将经过处理的句子传入大型 Transformer 模型，并通过两个损失函数同时学习上面两个目标就能完成训练。<h2><span id="11-3-masked-lm">11.3 Masked LM</span></h2>　　模型会从数据集抽取两句话，其中 B 句有 50% 的概率是 A 句的下一句，然后将这两句话转化前面所示的输入表征。现在我们随机遮掩（Mask 掉）输入序列中 15% 的词，并要求 Transformer 预测这些被遮掩的词，以及 B 句是 A 句下一句的概率这两个任务<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181206203929.png" alt="BERT"><br>　　注意最后 10% 保留原句是为了将表征偏向真实观察值，而另外 10% 用其它词替代原词并不会影响模型对语言的理解能力，因为它只占所有词的 1.5%（0.1 × 0.15）。此外，作者在论文中还表示因为每次只能预测 15% 的词，因此模型收敛比较慢<h2><span id="11-4-transformer">11.4 Transformer</span></h2><h3><span id="11-4-1-he-xin-si-xiang">11.4.1 核心思想</span></h3>　　Transformer所使用的注意力机制的核心思想是去计算一句话中的每个词对于这句话中所有词的相互关系，然后认为这些词与词之间的相互关系在一定程度上反应了这句话中不同词之间的关联性以及重要程度。因此再利用这些相互关系来调整每个词的重要性（权重）就可以获得每个词新的表达。这个新的表征不但蕴含了该词本身，还蕴含了其他词与这个词的关系，因此和单纯的词向量相比是一个更加全局的表达。<br>　　Transformer无视距离长短建模两个词之间的关系。因此为了令 Transformer 感知词与词之间的位置关系，我们需要使用位置编码给每个词加上位置信息(位置编码)。<h4><span id="11-4-2-ping-jie">11.4.2 评价</span></h4>　　完全基于注意力机制:Transformer舍弃了RNN的循环式网络结构，(用位置编码标记单词位置)完全基于注意力机制来对一段文本进行建模,不需要循环，而是并行处理序列中的所有单词或符号，同时利用自注意力机制将上下文与较远的单词结合起来;<br>　　训练速度快;ransformer 的训练速度比 RNN 快很多，而且其翻译结果也比 RNN 好得多,可以并行处理。<br>　　更适合在大数据中;在更小、更加结构化的语言理解任务或简单的算法任务中（如拷贝一个字符串（如将输入「abc」转换为「abcabc」）），Transformer 则表现欠佳。相比之下，在这些任务中表现良好的模型（如神经 GPU 和神经图灵机）在大型语言理解任务（如翻译）中表现不好.<h1><span id="shi-er-ci-qian-ru-ju-zhen">十二.词嵌入矩阵</span></h1>　　(1)多个词的词向量组成的矩阵就是词嵌入矩阵<br>　　(2)词嵌入为单词的每个维度/特征赋予值.one-hot向量就是单词的位置,词嵌入矩阵就是每个单词的维度特征的汇总,词向量则是根据这个one-hot向量,也就是单词的位置,在词嵌入矩阵中提取出对应单词的每个维度/特征的情况,也就是词向量.<h1><span id="shi-san-sun-shi-han-shu-j-zhong-thde-li-jie">十三.损失函数J中θ的理解</span></h1>　　为了简化计算量,在word2vec中,我们只使用θ作为模型的参数<br>　　因为θ是词嵌入矩阵,θ是词嵌入矩阵,也就是各个单词的组成词向量,但是单词的词向量有两种形式:一种是本身向量形式,一种是单词的上下文形式的词向量<strong>.因此我们使用语言模型训练的单词词向量有两个词嵌入矩阵</strong>,也就分别是图中的W,W’(本身词向量矩阵,还有一个是单词的上下文矩阵),因此求微分的时候需要对中心词的词向量矩阵V,上下文的词向量矩阵U这两个矩阵求取.见SG模型图即可.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20181205174539.png" alt="模型参数Vc梯度求解"><br>　　第一红框是对模型参数–中心词的词向量求梯度,第二红框中的U0则是上下文的词向量,第二红框中的后面的一项(即期望),当(U0-期望)的值接近0向量,表明中心词的词向量与上下文的词向量越接近,然后梯度随之会变得越小,其中w则是1-V的随机数–&gt;就代表随机性<h1><span id="shi-si-jiao-cha-shang-sun-shi-han-shu">十四.交叉熵损失函数</span></h1>　　交叉熵使用在二分类的情况比较多，而使用Softmax进行多分类<h1><span id="shi-wu-can-kao-wen-xian">十五.参考文献</span></h1>　❋<a href="https://blog.csdn.net/red_stone1/article/details/80735068" target="_blank" rel="noopener">交叉熵损失函数的直观理解</a><br>　❋<a href="http://www.sohu.com/a/272639968_129720" target="_blank" rel="noopener">BERT模型详解</a><br>　❋<a href="http://www.dataguru.cn/article-14237-1.html" target="_blank" rel="noopener">NLP的游戏规则从此改写？从word2vec, ELMo到BERT</a><br>　❋<a href="https://blog.csdn.net/ww753951/article/details/79270184" target="_blank" rel="noopener">softmax函数</a><br>　❋<a href="https://www.jianshu.com/p/9161679c8d87" target="_blank" rel="noopener">词表征、Word2Vec、ELMo和BERT模型学习总结</a><br>　❋<a href="https://blog.csdn.net/liweibin1994/article/category/7206844" target="_blank" rel="noopener">NLP专题</a></li>
 </ol>
 
+            
+            
+<div style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #565a5f;
+    line-height: 2em;
+">
+        <div class="copyright-left">
+            <i class="fa fa-lightbulb"></i>
+           		 本文由 <a href="https://www.zhongxiaoping.cn/index.html">iVEGA</a> 创作，采用
+            <a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a> 进行许可。
+            可自由转载、引用，但需署名作者且注明文章出处 http://yoursite.com/2018/12/11/NLP基础理论系列之词嵌入技术（一至三）/index.html <br>
+        </div>
+        <div style="clear:both;height:0px;"></div>
+</div>
+
         
         </div>
+        <span style="float:right">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    本文阅读量：<span id="busuanzi_value_page_pv"></span>次
+
+</span>
         <footer class="article-footer">
             <div class="share-container">
 
@@ -363,6 +395,8 @@
     
 
         </footer>
+        
+        
     </div>
     
         
@@ -387,10 +421,15 @@
 
 
     
+
 </article>
 
 
     
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
     
 
 </section>
@@ -566,18 +605,16 @@
             
         </div>
         <footer id="footer">
-     <div class="outer">
+<div class="outer">
         <div id="footer-info" class="inner">
             &copy; 2019 不负韶华不负己<br>
+               <!-- 首先引入统计用的js，然后编写相应的统计代码 -->
+               <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+               访问量<span id="busuanzi_value_site_pv"></span>次(◕ܫ◕)访客数<span id="busuanzi_value_site_uv"></span>人
+               <!-- 注释掉Powered by，Theme by的显示。-->
+               <!-- Powered by <a href="http://blog.kimzing.com/" target="_blank">Kim</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a> -->
         </div>
     </div>
-
-
-<div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
-
 
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
@@ -601,6 +638,21 @@ setInterval("createtime()",250);
 
 </footer>
         
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: 'z4tuSWjbVK2A9f5fL9X79TW3-gzGzoHsz',
+            app_key: 'MToHqxs5eJrVXM95jc5FAOgz',
+            placeholder: '输入问题,咱们共同交流,一起进步'
+        });
+    </script>
+
+
 
 
     

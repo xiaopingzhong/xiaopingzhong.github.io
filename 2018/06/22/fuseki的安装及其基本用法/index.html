@@ -217,6 +217,7 @@
 
             
             <section id="main"><article id="post-fuseki的安装及其基本用法" class="article article-type-post" itemscope="" itemprop="blogPost">
+
     <div class="article-inner">
         
             
@@ -264,6 +265,7 @@
             </header>
         
         
+   
         <div class="article-entry" itemprop="articleBody">
         
             
@@ -292,8 +294,38 @@
 <h3><span id="2-3-shang-chuan-shu-ju-dao-shu-ju-ku-zhi-zhong">2.3上传数据到数据库之中</span></h3><p>　　(3) 点击uploaddata，可以上传数据。<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084719.jpg" alt=""><br>点击select files, 选择一个文件。比如yagoDataTest.ttl<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-84720.jpg" alt=""><br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084721.jpg" alt=""><br>单击updata now.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084722.jpg" alt=""><br>　　文件上传成功！可以上传多个文件。文件格式可以是多个支持RDF文件的格式。上传到我们后台数据库中了。<br>　　再看看命令终端显示Fuseki的信息，也是成功了.<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084723.jpg" alt=""></p>
 <h3><span id="2-4-jin-xing-zai-xian-ce-shi-cha-xun">2.4进行在线测试查询</span></h3><p>　　(4) 测试+查询:<br>　　点击query:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084728.jpg" alt=""><br>　　执行之后:<br>　　运行结果如图所示:<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/blog/2018-11-12-084729.jpg" alt=""><br>　　好了,开始你自己的查询吧!</p>
 
+            
+            
+<div style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #565a5f;
+    line-height: 2em;
+">
+        <div class="copyright-left">
+            <i class="fa fa-lightbulb"></i>
+           		 本文由 <a href="https://www.zhongxiaoping.cn/index.html">iVEGA</a> 创作，采用
+            <a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a> 进行许可。
+            可自由转载、引用，但需署名作者且注明文章出处 http://yoursite.com/2018/06/22/fuseki的安装及其基本用法/index.html <br>
+        </div>
+        <div style="clear:both;height:0px;"></div>
+</div>
+
         
         </div>
+        <span style="float:right">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    本文阅读量：<span id="busuanzi_value_page_pv"></span>次
+
+</span>
         <footer class="article-footer">
             <div class="share-container">
 
@@ -305,6 +337,8 @@
     
 
         </footer>
+        
+        
     </div>
     
         
@@ -329,10 +363,15 @@
 
 
     
+
 </article>
 
 
     
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
     
 
 </section>
@@ -508,18 +547,16 @@
             
         </div>
         <footer id="footer">
-     <div class="outer">
+<div class="outer">
         <div id="footer-info" class="inner">
             &copy; 2019 不负韶华不负己<br>
+               <!-- 首先引入统计用的js，然后编写相应的统计代码 -->
+               <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+               访问量<span id="busuanzi_value_site_pv"></span>次(◕ܫ◕)访客数<span id="busuanzi_value_site_uv"></span>人
+               <!-- 注释掉Powered by，Theme by的显示。-->
+               <!-- Powered by <a href="http://blog.kimzing.com/" target="_blank">Kim</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a> -->
         </div>
     </div>
-
-
-<div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
-
 
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
@@ -543,6 +580,21 @@ setInterval("createtime()",250);
 
 </footer>
         
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: 'z4tuSWjbVK2A9f5fL9X79TW3-gzGzoHsz',
+            app_key: 'MToHqxs5eJrVXM95jc5FAOgz',
+            placeholder: '输入问题,咱们共同交流,一起进步'
+        });
+    </script>
+
+
 
 
     

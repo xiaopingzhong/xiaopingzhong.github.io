@@ -217,6 +217,7 @@
 
             
             <section id="main"><article id="post-依赖注入系列之注入实现(二)" class="article article-type-post" itemscope="" itemprop="blogPost">
+
     <div class="article-inner">
         
             
@@ -264,6 +265,7 @@
             </header>
         
         
+   
         <div class="article-entry" itemprop="articleBody">
         
             
@@ -353,8 +355,38 @@
 <h2><span id="4-6-bean-de-zhu-ru-jie-guo-ce-shi">4.6 bean的注入结果测试</span></h2><p>　　那么如何测试依赖对象是否已经查找并注入成功,我们可以新建一个testUnit类进行测试,采用applicationContext的实例的getBean()方法获取bean的对象.<br><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> bjtu.wellhold.testSpring;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> testUnit &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</span><br><span class="line">        <span class="comment">//进行配置文件的加载</span></span><br><span class="line">        ApplicationContext cfg = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"Config.xml"</span>);</span><br><span class="line">        <span class="comment">//显式获取指定bean的对象</span></span><br><span class="line">        Person person = cfg.getBean(<span class="string">"person"</span>, Person.<span class="keyword">class</span>);</span><br><span class="line">        System.<span class="keyword">out</span>.println(person);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1><span id="wu-can-kao-wen-xian">五.参考文献</span></h1><p>　❋ <a href="https://www.cnblogs.com/qq78292959/p/3716827.html" target="_blank" rel="noopener">spring中scope作用域(转)</a><br>　❋ <a href="https://www.cnblogs.com/wangbin2188/p/9014400.html" target="_blank" rel="noopener">Spring之基于注解的注入</a><br>　❋ <a href="https://www.cnblogs.com/dannyyao/p/6644225.html" target="_blank" rel="noopener">使用spring注解——定义bean和自动注入</a><br>　❋ <a href="https://www.cnblogs.com/AnXinliang/p/5463598.html" target="_blank" rel="noopener">spring 四种依赖注入方式以及注解注入方式</a><br>　❋ <a href="https://segmentfault.com/a/1190000013907366" target="_blank" rel="noopener">spring bean scope简要说明，有代码示例</a><br>　❋ <a href="https://www.cnblogs.com/WellHold/p/6640463.html" target="_blank" rel="noopener">Spring：基于注解的依赖注入的使用</a></p>
 
+            
+            
+<div style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #565a5f;
+    line-height: 2em;
+">
+        <div class="copyright-left">
+            <i class="fa fa-lightbulb"></i>
+           		 本文由 <a href="https://www.zhongxiaoping.cn/index.html">iVEGA</a> 创作，采用
+            <a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a> 进行许可。
+            可自由转载、引用，但需署名作者且注明文章出处 http://yoursite.com/2018/10/17/依赖注入系列之注入实现(二)/index.html <br>
+        </div>
+        <div style="clear:both;height:0px;"></div>
+</div>
+
         
         </div>
+        <span style="float:right">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    本文阅读量：<span id="busuanzi_value_page_pv"></span>次
+
+</span>
         <footer class="article-footer">
             <div class="share-container">
 
@@ -366,6 +398,8 @@
     
 
         </footer>
+        
+        
     </div>
     
         
@@ -390,10 +424,15 @@
 
 
     
+
 </article>
 
 
     
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
     
 
 </section>
@@ -569,18 +608,16 @@
             
         </div>
         <footer id="footer">
-     <div class="outer">
+<div class="outer">
         <div id="footer-info" class="inner">
             &copy; 2019 不负韶华不负己<br>
+               <!-- 首先引入统计用的js，然后编写相应的统计代码 -->
+               <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+               访问量<span id="busuanzi_value_site_pv"></span>次(◕ܫ◕)访客数<span id="busuanzi_value_site_uv"></span>人
+               <!-- 注释掉Powered by，Theme by的显示。-->
+               <!-- Powered by <a href="http://blog.kimzing.com/" target="_blank">Kim</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a> -->
         </div>
     </div>
-
-
-<div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
-
 
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
@@ -604,6 +641,21 @@ setInterval("createtime()",250);
 
 </footer>
         
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: 'z4tuSWjbVK2A9f5fL9X79TW3-gzGzoHsz',
+            app_key: 'MToHqxs5eJrVXM95jc5FAOgz',
+            placeholder: '输入问题,咱们共同交流,一起进步'
+        });
+    </script>
+
+
 
 
     

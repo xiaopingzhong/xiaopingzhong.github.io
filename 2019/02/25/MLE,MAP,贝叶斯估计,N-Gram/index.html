@@ -216,6 +216,7 @@
 
             
             <section id="main"><article id="post-MLE,MAP,贝叶斯估计,N-Gram" class="article article-type-post" itemscope="" itemprop="blogPost">
+
     <div class="article-inner">
         
             
@@ -258,6 +259,7 @@
             </header>
         
         
+   
         <div class="article-entry" itemprop="articleBody">
         
             
@@ -387,8 +389,38 @@
 <li>数据稀疏:因为如果文档很长,如何以tri-gram为组合,就会有很多组合,这些组合在词库当中找不到,因此很多地方概率会为0,导致数据稀疏.<h2><span id="7-1-can-shu-kong-jian-guo-da">7.1 参数空间过大</span></h2>　　为此我们引入马尔科夫假设<strong>,让一个词的出现仅与它之前的若干个词有关:</strong><br>　　如果一个词的出现仅依赖于它前面出现的一个词，那么我们就称之为 Bi-gram：<br>$$p(S)=p(w_1w_2\cdots w_n)=p(w_1)p(w_2|w_1)\cdots p(w_n|w_{n-1})$$<br>　　如果一个词的出现仅依赖于它前面出现的两个词，那么我们就称之为 Tri-gram(效果最好)<br>$$p(S)=p(w_1w_2\cdots w_n)=p(w_1)p(w_2|w_1)\cdots p(w_n|w_{n-1}w_{n-2})$$<br>　　N-gram的 N 可以取很高，然而现实中一般 bi-gram 和 tri-gram 就够用了。<br>　　那么问题来了,如何求取式子里面的概率,方法就是MLE,具体例子如下:<br>　　以Bi-gram为例，我们有这样一个由三句话组成的语料库：<br><img src="https://blog-1-1256491104.cos.ap-chengdu.myqcloud.com/20190225204848.png" alt=""><br>  容易统计，“I”出现了3次，“I am”出现了2次，因此能计算概率:<br>  $$p(am|I)=\frac{2}{3}$$,以此类推<br>  $$\begin{matrix}p(I|<s>)=0.67 &amp; p(Sam | am)=0.5 &amp; p(<s>|Sam)=0.5 \ p(do|I)=0.33 &amp; p(not|do)=1 &amp; p(like|not)=1\end{matrix}$$<br>  ，$p(I|<s>)=0.25，p(<s>|food)=0.68$，于是：<br>$p(<s>I\ want\ chinese\ food<s>)\=0.25\times 0.33\times 0.0065 \times 0.52 \times 0.68=1.896\times 10^{-4}$<br>  我们算出了“I want chinese food”这句话的概率，但有时候这句话会很长，<strong>那么概率（都是小于1的常数）的相乘很可能造成数据下溢（downflow）</strong>，即很多个小于1的常数相乘会约等于0，此时可以使用<strong>log概率</strong>解决。<h2><span id="7-2-shu-ju-xi-shu">7.2 数据稀疏</span></h2>　　使用拉普拉斯平滑,<h3><span id="7-2-1-add-one">7.2.1 Add-one</span></h3>  拉普拉斯平滑，即强制让所有的n-gram至少出现一次，只需要在<strong>分子和分母上分别做加法即可</strong>。这个方法的弊端是，大部分n-gram都是没有出现过的，很容易为他们<strong>分配过多的概率空间</strong>。<br>$$p(w_n|w_{n-1})=\frac{C(w_{n-1}w_n)+1}{C(w_{n-1})+|V|}$$<h3><span id="7-2-1-add-k">7.2.1 Add-K</span></h3>  在Add-one的基础上做了一点小改动，原本是加一，现在<strong>加上一个小于1的常数K</strong>。但是缺点是<strong>这个常数仍然需要人工确定</strong>，对于不同的语料库K可能不同。<br>$$p(w_n|w_{n-1})=\frac{C(w_{n-1}w_n)+k}{C(w_{n-1})+k|V|}$$<h2><span id="7-3-yong-tu">7.3 用途</span></h2><h3><span id="7-3-1-ci-xing-biao-zhu">7.3.1 词性标注</span></h3>　　我们可以将词性标注看成一个<strong>多分类问题</strong>，按照Bi-gram计算每一个词性概率：<br>$$p(词性_i|”龙龙”的词性, “爱”)=\frac{前面是“名词”的“爱”作为词性_i 的出现次数}{前面是”名词”的”爱”的出现次数}$$<br>  <strong>选取概率更大的词性</strong>（比如动词）作为这句话中“爱”字的<strong>词性</strong>。<h3><span id="7-3-2-fen-ci-qi">7.3.2 分词器</span></h3>$X=”我爱深度学习”$<br>三种分类方案:Y1,Y2,Y3<br>$Y1={“我”,”爱深”,”度学习”}$<br>$Y2={“我爱”,”深”,”度学”,”习”}$<br>$Y3={“我”,”爱”,”深度学习”}$<br>$p(Y1)=p(我)p(爱深|我)p(度学习|爱深)$<br>$p(Y2)=p(我爱)p(深|我爱)p(度学|深)p(习|度学)$<br>$p(Y3)=p(我)p(爱|我)p(深度学习|爱)$<br>取概率最大的作为分类方案.<h1><span id="ba-can-kao-wen-xian">八.参考文献</span></h1><a href="https://blog.csdn.net/qq_22238533/article/details/79872452" target="_blank" rel="noopener">MLE与MAP</a><br><a href="https://blog.csdn.net/u011508640/article/details/72815981" target="_blank" rel="noopener">最大后验概率</a><br><a href="https://blog.csdn.net/Dod_Jdi/article/details/76285315" target="_blank" rel="noopener">朴素贝叶斯</a><br><a href="https://blog.csdn.net/songbinxu/article/details/80209197" target="_blank" rel="noopener">N-Gram</a><br><a href="https://blog.csdn.net/bitcarmanlee/article/details/81417151" target="_blank" rel="noopener">最大似然估计，最大后验估计，贝叶斯估计联系与区别</a><br><a href="https://blog.csdn.net/lvdan1/article/details/80241464" target="_blank" rel="noopener">MLP,MAP,贝叶斯估计在NLP中参数估计</a><br><a href="https://blog.csdn.net/songbinxu/article/details/80209197" target="_blank" rel="noopener">自然语言处理NLP中的N-gram模型</a></s></s></s></s></s></s></li>
 </ol>
 
+            
+            
+<div style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #565a5f;
+    line-height: 2em;
+">
+        <div class="copyright-left">
+            <i class="fa fa-lightbulb"></i>
+           		 本文由 <a href="https://www.zhongxiaoping.cn/index.html">iVEGA</a> 创作，采用
+            <a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a> 进行许可。
+            可自由转载、引用，但需署名作者且注明文章出处 http://yoursite.com/2019/02/25/MLE,MAP,贝叶斯估计,N-Gram/index.html <br>
+        </div>
+        <div style="clear:both;height:0px;"></div>
+</div>
+
         
         </div>
+        <span style="float:right">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    本文阅读量：<span id="busuanzi_value_page_pv"></span>次
+
+</span>
         <footer class="article-footer">
             <div class="share-container">
 
@@ -400,6 +432,8 @@
     
 
         </footer>
+        
+        
     </div>
     
         
@@ -424,10 +458,15 @@
 
 
     
+
 </article>
 
 
     
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
     
 
 </section>
@@ -603,18 +642,16 @@
             
         </div>
         <footer id="footer">
-     <div class="outer">
+<div class="outer">
         <div id="footer-info" class="inner">
             &copy; 2019 不负韶华不负己<br>
+               <!-- 首先引入统计用的js，然后编写相应的统计代码 -->
+               <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+               访问量<span id="busuanzi_value_site_pv"></span>次(◕ܫ◕)访客数<span id="busuanzi_value_site_uv"></span>人
+               <!-- 注释掉Powered by，Theme by的显示。-->
+               <!-- Powered by <a href="http://blog.kimzing.com/" target="_blank">Kim</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a> -->
         </div>
     </div>
-
-
-<div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
-
 
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
@@ -638,6 +675,21 @@ setInterval("createtime()",250);
 
 </footer>
         
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: 'z4tuSWjbVK2A9f5fL9X79TW3-gzGzoHsz',
+            app_key: 'MToHqxs5eJrVXM95jc5FAOgz',
+            placeholder: '输入问题,咱们共同交流,一起进步'
+        });
+    </script>
+
+
 
 
     

@@ -217,6 +217,7 @@
 
             
             <section id="main"><article id="post-IO流系列之文件读取(一)" class="article article-type-post" itemscope="" itemprop="blogPost">
+
     <div class="article-inner">
         
             
@@ -264,6 +265,7 @@
             </header>
         
         
+   
         <div class="article-entry" itemprop="articleBody">
         
             
@@ -339,8 +341,38 @@
 <h3><span id="2-2-bufferedreader-lei">2.2 BufferedReader类:</span></h3><p>   (1)作用:是InputStreamReader类的子类,用来设置字符流的缓冲区大小的，提高文件读取效率.<br>　　(2)从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。可以指定缓冲区的大小，或者可使用默认的大小。大多数情况下，默认值就足够大了。<br>　　(3)通常，Reader 所作的每个读取请求都会导致对底层字符或字节流进行相应的读取请求。因此，建议用 BufferedReader 包装所有其 read() 操作可能开销很高的 Reader（如 FileReader 和 InputStreamReader）。例如，<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader <span class="keyword">in</span>= <span class="keyword">new</span> <span class="type">BufferedReader</span>(<span class="keyword">new</span> <span class="type">FileReader</span>(<span class="string">"foo.in"</span>));</span><br></pre></td></tr></table></figure></p>
 <p>　　该方法将缓冲指定文件的输入。<strong>如果没有缓冲，**</strong>则每次调用 read() 或 readLine() 都会导致从文件中读取字节，并将其转换为字符后返回，而这是极其低效的**。<br>具体的一个文件读取代码如下:<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.qa.Process.Load;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.<span class="keyword">HashMap</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> com.example.qa.Process.Load.loadClassifyModel.rootPath;</span><br><span class="line"><span class="keyword">public</span> class loadIndexQuestion &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">String</span> getPattern(<span class="keyword">String</span> s, <span class="built_in">int</span> index) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//新建文件对象</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(rootPath + s);</span><br><span class="line">        <span class="comment">//按字节流方式读取文件--new FileInputStream(file)</span></span><br><span class="line">        <span class="comment">//new InputStreamReader(字节流对象,字符编码)=字符流对象</span></span><br><span class="line">        Reader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file), <span class="string">"GB2312"</span>);</span><br><span class="line">        <span class="comment">//将读取的字符流存入缓冲区,减少直接读取文件的次数,提高性能</span></span><br><span class="line">        <span class="keyword">BufferedReader</span> br = <span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);</span><br><span class="line">        <span class="keyword">String</span> <span class="built_in">line</span>=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">HashMap</span>&lt;Integer, <span class="keyword">String</span>&gt; index2Pattern = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;Integer, <span class="keyword">String</span>&gt;();</span><br><span class="line">        <span class="comment">//声明:按字符流读取文件,结果一般为string(常用)或者char,都是16位(java中)</span></span><br><span class="line">        <span class="comment">//缓冲区中按行读取,br.readLine()方法注意,</span></span><br><span class="line">        <span class="keyword">while</span> ((<span class="built_in">line</span>=br.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">String</span>[] fileSplit=<span class="built_in">line</span>.<span class="built_in">split</span>(<span class="string">":"</span>);</span><br><span class="line">            <span class="built_in">int</span> patternIndex = Integer.parseInt(fileSplit[<span class="number">0</span>].toString());</span><br><span class="line">            <span class="keyword">String</span> pattern = fileSplit[<span class="number">1</span>];</span><br><span class="line">            index2Pattern.put(patternIndex,pattern);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">String</span> StructQuery = index2Pattern.<span class="built_in">get</span>(index);</span><br><span class="line">        <span class="keyword">return</span> StructQuery;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
+            
+            
+<div style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #565a5f;
+    line-height: 2em;
+">
+        <div class="copyright-left">
+            <i class="fa fa-lightbulb"></i>
+           		 本文由 <a href="https://www.zhongxiaoping.cn/index.html">iVEGA</a> 创作，采用
+            <a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a> 进行许可。
+            可自由转载、引用，但需署名作者且注明文章出处 http://yoursite.com/2018/10/22/IO流系列之文件读取(一)/index.html <br>
+        </div>
+        <div style="clear:both;height:0px;"></div>
+</div>
+
         
         </div>
+        <span style="float:right">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    本文阅读量：<span id="busuanzi_value_page_pv"></span>次
+
+</span>
         <footer class="article-footer">
             <div class="share-container">
 
@@ -352,6 +384,8 @@
     
 
         </footer>
+        
+        
     </div>
     
         
@@ -376,10 +410,15 @@
 
 
     
+
 </article>
 
 
     
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
     
 
 </section>
@@ -555,18 +594,16 @@
             
         </div>
         <footer id="footer">
-     <div class="outer">
+<div class="outer">
         <div id="footer-info" class="inner">
             &copy; 2019 不负韶华不负己<br>
+               <!-- 首先引入统计用的js，然后编写相应的统计代码 -->
+               <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+               访问量<span id="busuanzi_value_site_pv"></span>次(◕ܫ◕)访客数<span id="busuanzi_value_site_uv"></span>人
+               <!-- 注释掉Powered by，Theme by的显示。-->
+               <!-- Powered by <a href="http://blog.kimzing.com/" target="_blank">Kim</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a> -->
         </div>
     </div>
-
-
-<div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-访问量 <span id="busuanzi_value_site_pv"></span> 次<span class="post-meta-divider">|</span>访客数<span id="busuanzi_value_site_uv"></span>人</div>
-
 
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
@@ -590,6 +627,21 @@ setInterval("createtime()",250);
 
 </footer>
         
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: 'z4tuSWjbVK2A9f5fL9X79TW3-gzGzoHsz',
+            app_key: 'MToHqxs5eJrVXM95jc5FAOgz',
+            placeholder: '输入问题,咱们共同交流,一起进步'
+        });
+    </script>
+
+
 
 
     
